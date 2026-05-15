@@ -14,7 +14,7 @@ export default function Footer() {
             © 2025 P2V Labs · Ahmedabad, India
           </p>
           <a
-            href="https://founders.p2vlabs.in"
+            href="https://founders.p2vlabs.in/founders"
             className="text-[10px] text-cream/45 hover:text-p2v transition-colors tracking-wider uppercase"
           >
             Founders

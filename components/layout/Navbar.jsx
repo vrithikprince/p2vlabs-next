@@ -21,7 +21,7 @@ const PRIMARY = [
   { id: 'packages', label: 'Services', path: '/packages' },
 ]
 
-const CLIENT_LOGIN_URL = 'https://clients.p2vlabs.in'
+const CLIENT_LOGIN_URL = 'https://clients.p2vlabs.in/login'
 
 export default function Navbar() {
   const [open, setOpen]       = useState(false)

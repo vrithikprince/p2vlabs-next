@@ -12,7 +12,7 @@ const ITEMS = [
   { id: 'home',  icon: 'home',   label: 'Home',  path: '/'         },
   { id: 'reel',  icon: 'film',   label: 'Reel',  path: '/reel'     },
   { id: 'about', icon: 'inbox',  label: 'About', path: '/about'    },
-  { id: 'login', icon: 'lock',   label: 'Login', path: 'https://clients.p2vlabs.in', external: true },
+  { id: 'login', icon: 'lock',   label: 'Login', path: 'https://clients.p2vlabs.in/login', external: true },
 ]
 
 export default function BottomNav() {
