@@ -1,0 +1,103 @@
+import { Playfair_Display, Inter } from 'next/font/google'
+import RootClient from '../components/layout/RootClient.jsx'
+import './globals.css'
+
+/**
+ * Next.js Font Optimization — self-hosts Playfair Display + Inter so we get a
+ * single woff2 per family with `font-display: swap`, instead of the Vite app's
+ * render-blocking <link rel="stylesheet"> from fonts.googleapis.com.
+ *
+ * Both fonts are exposed as CSS custom properties (--font-playfair, --font-inter)
+ * which the Tailwind theme + globals.css reference.
+ */
+const playfair = Playfair_Display({
+  subsets: ['latin'],
+  weight: ['400', '500', '700', '900'],
+  style:  ['normal', 'italic'],
+  variable: '--font-playfair',
+  display:  'swap',
+})
+
+const inter = Inter({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600'],
+  variable: '--font-inter',
+  display:  'swap',
+})
+
+export const metadata = {
+  metadataBase: new URL('https://www.p2vlabs.in'),
+  title: {
+    default: 'P2V Labs — Visual Content Agency Ahmedabad',
+    template: '%s | P2V Labs',
+  },
+  description:
+    'P2V Labs is a visual content agency based in Ahmedabad, Gujarat specialising in video production, product photography, food photography, corporate films, and social media content.',
+  keywords: [
+    'content agency Ahmedabad',
+    'video production Ahmedabad',
+    'product photography Ahmedabad',
+    'food photography Gujarat',
+    'corporate video Ahmedabad',
+    'reels agency Gujarat',
+    'photography studio Ahmedabad',
+  ],
+  authors: [{ name: 'P2V Labs' }],
+  creator: 'P2V Labs',
+  openGraph: {
+    type: 'website',
+    locale: 'en_IN',
+    url: 'https://www.p2vlabs.in',
+    siteName: 'P2V Labs',
+    title: 'P2V Labs — Visual Content Agency Ahmedabad',
+    description:
+      'Pixels · Purpose · Visuals — Data-driven visual content for businesses across Gujarat.',
+    images: [{
+      url: '/og-image.jpg',
+      width: 1200,
+      height: 630,
+      alt: 'P2V Labs — Visual Content Agency Ahmedabad',
+    }],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'P2V Labs — Visual Content Agency Ahmedabad',
+    description: 'Pixels · Purpose · Visuals',
+    images: ['/og-image.jpg'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: 'ADD_GOOGLE_SEARCH_CONSOLE_CODE_HERE',
+  },
+  icons: {
+    icon: '/icons/icon.svg',
+    apple: '/icons/icon.svg',
+  },
+}
+
+export const viewport = {
+  themeColor: '#F5F0E8',
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover',
+}
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
+      <body className="min-h-screen bg-cream">
+        <RootClient>{children}</RootClient>
+      </body>
+    </html>
+  )
+}

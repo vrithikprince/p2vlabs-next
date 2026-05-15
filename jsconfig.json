@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./*"]
+    },
+    "jsx": "preserve",
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "target": "es2022",
+    "allowJs": true,
+    "resolveJsonModule": true
+  },
+  "include": ["app/**/*", "components/**/*", "lib/**/*", "data/**/*", "utils/**/*"]
+}
