@@ -17,6 +17,8 @@ import Icon from '../ui/Icon.jsx'
  */
 const PRIMARY = [
   { id: 'reel',     label: 'The Reel', path: '/reel' },
+  { id: 'blog',     label: 'Journal',  path: '/blog' },
+  { id: 'vlog',     label: 'Films',    path: '/vlog' },
   { id: 'about',    label: 'About',    path: '/about' },
   { id: 'packages', label: 'Services', path: '/packages' },
 ]

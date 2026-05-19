@@ -1,0 +1,139 @@
+import Link from 'next/link'
+import { notFound } from 'next/navigation'
+import VlogPlayer from '../../../components/vlog/VlogPlayer.jsx'
+import Footer from '../../../components/layout/Footer.jsx'
+import {
+  getVlogPostBySlug,
+  getPublishedVlogSlugs,
+} from '../../../lib/cms.js'
+import {
+  durationToIso,
+  youtubeEmbed,
+  youtubeThumbnail,
+  youtubeWatch,
+} from '../../../lib/youtube.js'
+
+/** /vlog/[slug] — individual vlog page. */
+export const revalidate = 60
+export const dynamicParams = true
+
+export async function generateStaticParams() {
+  const slugs = await getPublishedVlogSlugs()
+  return slugs.map((slug) => ({ slug }))
+}
+
+export async function generateMetadata({ params }) {
+  const post = await getVlogPostBySlug(params.slug)
+  if (!post) return { title: 'Vlog not found' }
+
+  const title = post.meta_title || post.title
+  const description =
+    post.meta_description ||
+    (post.description ? post.description.slice(0, 160) : `Watch "${post.title}" on P2V Labs.`)
+  const url        = `https://www.p2vlabs.in/vlog/${post.slug}`
+  const thumb      = post.thumbnail_url || youtubeThumbnail(post.youtube_id, 'maxres')
+  const videoEmbed = youtubeEmbed(post.youtube_id)
+
+  return {
+    title,
+    description,
+    alternates: { canonical: `/vlog/${post.slug}` },
+    openGraph: {
+      title,
+      description,
+      url,
+      type: 'video.other',
+      images: thumb ? [{ url: thumb, alt: post.thumbnail_alt || post.title }] : undefined,
+      videos: videoEmbed ? [{ url: videoEmbed }] : undefined,
+    },
+    twitter: {
+      card:    'player',
+      title,
+      description,
+      images:  thumb ? [thumb] : undefined,
+    },
+  }
+}
+
+export default async function VlogPost({ params }) {
+  const post = await getVlogPostBySlug(params.slug)
+  if (!post) notFound()
+
+  const date = post.published_at
+    ? new Date(post.published_at).toLocaleDateString('en-IN', {
+        year: 'numeric', month: 'long', day: 'numeric',
+      })
+    : ''
+
+  const thumb = post.thumbnail_url || youtubeThumbnail(post.youtube_id, 'maxres')
+  const isoDuration = durationToIso(post.duration)
+
+  /* JSON-LD VideoObject — gives Google the structured data needed to
+     surface this page in Video search results. */
+  const jsonLd = {
+    '@context':     'https://schema.org',
+    '@type':        'VideoObject',
+    name:           post.title,
+    description:    post.description || post.meta_description || post.title,
+    thumbnailUrl:   thumb ? [thumb] : undefined,
+    uploadDate:     post.published_at || undefined,
+    duration:       isoDuration || undefined,
+    embedUrl:       youtubeEmbed(post.youtube_id) || undefined,
+    contentUrl:     youtubeWatch(post.youtube_id) || undefined,
+    publisher: {
+      '@type': 'Organization',
+      name:    'P2V Labs',
+      logo:    { '@type': 'ImageObject', url: 'https://www.p2vlabs.in/og-image.jpg' },
+    },
+  }
+
+  return (
+    <div className="pt-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
+      <article className="pb-20 px-5 md:px-10 lg:px-20 pt-12 md:pt-16">
+        <div className="max-w-5xl mx-auto">
+          <Link
+            href="/vlog"
+            className="text-[10px] tracking-[0.2em] uppercase text-charcoal/40 hover:text-p2v transition-colors"
+          >
+            ← The Reel Diary
+          </Link>
+
+          <p className="text-[10px] tracking-[0.3em] uppercase text-charcoal/45 mt-9 mb-4">
+            {date}
+            {post.author && <span className="text-charcoal/30"> · {post.author}</span>}
+            {post.duration && <span className="text-charcoal/30"> · {post.duration}</span>}
+          </p>
+
+          <h1 className="font-display font-bold text-[clamp(2rem,5vw,3.4rem)] leading-[1.08] tracking-tight text-charcoal mb-8">
+            {post.title}
+          </h1>
+
+          <VlogPlayer
+            youtubeId={post.youtube_id}
+            title={post.title}
+            thumbnailUrl={post.thumbnail_url}
+            thumbnailAlt={post.thumbnail_alt}
+          />
+
+          {post.description && (
+            <div className="mt-10 md:mt-12 max-w-3xl">
+              <p className="text-[10px] tracking-[0.3em] uppercase text-charcoal/40 mb-4">
+                About this film
+              </p>
+              <div className="text-charcoal/75 leading-relaxed text-base md:text-lg whitespace-pre-wrap">
+                {post.description}
+              </div>
+            </div>
+          )}
+        </div>
+      </article>
+
+      <Footer />
+    </div>
+  )
+}

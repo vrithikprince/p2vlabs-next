@@ -272,3 +272,96 @@ nav.glass-nav {
 .nav-link-inner { display: block; transition: none; }
 
 .magnetic { display: inline-block; transform: translate(0,0); }
+
+/* ─────────────────────────────────────────────
+   BLOG ARTICLE — public rendering of Tiptap HTML
+
+   The CMS Tiptap editor emits a constrained subset (paragraph, h2, h3,
+   bold, italic, link, lists, blockquote, image, code). These rules
+   should mirror the editor's own styles in p2v-labs so the post looks
+   identical to the founder's preview.
+───────────────────────────────────────────── */
+
+.blog-article {
+  font-family: 'Inter', system-ui, sans-serif;
+  font-size: 17px;
+  line-height: 1.75;
+  color: rgba(26, 26, 26, 0.88);
+}
+
+.blog-article > * + * { margin-top: 1em; }
+
+.blog-article h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(1.6rem, 3vw, 2rem);
+  line-height: 1.2;
+  margin-top: 2em;
+  margin-bottom: 0.4em;
+  color: #1a1a1a;
+}
+
+.blog-article h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(1.25rem, 2.4vw, 1.5rem);
+  line-height: 1.25;
+  margin-top: 1.7em;
+  margin-bottom: 0.35em;
+  color: #1a1a1a;
+}
+
+.blog-article p { margin: 1em 0; }
+
+.blog-article a,
+.blog-article .tiptap-link {
+  color: #c0392b;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(192, 57, 43, 0.5);
+}
+.blog-article a:hover,
+.blog-article .tiptap-link:hover {
+  text-decoration-color: #c0392b;
+}
+
+.blog-article ul,
+.blog-article ol {
+  padding-left: 1.5em;
+  margin: 1em 0;
+}
+.blog-article ul { list-style: disc; }
+.blog-article ol { list-style: decimal; }
+.blog-article li { margin: 0.3em 0; }
+.blog-article li::marker { color: #c0392b; }
+
+.blog-article blockquote {
+  border-left: 3px solid #1a1a1a;
+  padding: 0.2em 0 0.2em 1em;
+  margin: 1.3em 0;
+  font-style: italic;
+  color: rgba(26, 26, 26, 0.7);
+  background: rgba(26, 26, 26, 0.025);
+}
+.blog-article blockquote p { margin: 0.4em 0; }
+
+.blog-article img,
+.blog-article .tiptap-image {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.5em 0;
+  border: 1px solid rgba(26, 26, 26, 0.08);
+}
+
+.blog-article code {
+  background: rgba(26, 26, 26, 0.06);
+  padding: 0 5px;
+  border-radius: 2px;
+  font-family: 'SF Mono', Menlo, Consolas, monospace;
+  font-size: 0.9em;
+  color: #c0392b;
+}
+
+.blog-article strong { font-weight: 700; color: #1a1a1a; }
+.blog-article em     { font-style: italic; }

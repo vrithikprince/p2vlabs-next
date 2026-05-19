@@ -5,6 +5,8 @@ const nextConfig = {
       { protocol: 'https', hostname: '*.supabase.co' },
       { protocol: 'https', hostname: '*.r2.dev' },
       { protocol: 'https', hostname: 'picsum.photos' },
+      { protocol: 'https', hostname: 'i.ytimg.com' },   // YouTube vlog thumbnails
+      { protocol: 'https', hostname: 'img.youtube.com' },
     ],
   },
   async redirects() {
