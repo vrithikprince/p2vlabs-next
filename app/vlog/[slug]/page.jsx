@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import VlogPlayer from '../../../components/vlog/VlogPlayer.jsx'
+import PostCTA from '../../../components/blog/PostCTA.jsx'
 import Footer from '../../../components/layout/Footer.jsx'
 import {
   getVlogPostBySlug,
@@ -140,6 +141,7 @@ export default async function VlogPost({ params }) {
         )}
       </article>
 
+      <PostCTA kind="vlog" slug={post.slug} title={post.title} />
       <Footer />
     </div>
   )

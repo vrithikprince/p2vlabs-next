@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation'
 import BlogArticle from '../../../components/blog/BlogArticle.jsx'
+import PostCTA from '../../../components/blog/PostCTA.jsx'
 import Footer from '../../../components/layout/Footer.jsx'
 import { getBlogPostBySlug, getPublishedBlogSlugs } from '../../../lib/cms.js'
 
@@ -89,6 +90,7 @@ export default async function BlogPost({ params }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <BlogArticle post={post} />
+      <PostCTA kind="blog" slug={post.slug} title={post.title} />
       <Footer />
     </div>
   )

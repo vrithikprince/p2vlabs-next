@@ -8,6 +8,7 @@ import ShutterTransition from './ShutterTransition.jsx'
 import ScrollToTop from './ScrollToTop.jsx'
 import Navbar from './Navbar.jsx'
 import BottomNav from './BottomNav.jsx'
+import FloatingWhatsApp from './FloatingWhatsApp.jsx'
 import { LoaderContext } from './LoaderContext.jsx'
 
 /**
@@ -46,6 +47,7 @@ export default function RootClient({ children }) {
       <Navbar />
       <main>{children}</main>
       <BottomNav />
+      <FloatingWhatsApp />
     </LoaderContext.Provider>
   )
 }
