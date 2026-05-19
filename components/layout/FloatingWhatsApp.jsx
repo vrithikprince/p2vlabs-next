@@ -10,6 +10,12 @@ import { useEffect, useState } from 'react'
  * Hidden on the founders / clients / cms subdomains? Not needed here:
  * the Next.js app only serves the public marketing site (p2vlabs.in).
  * Subdomain routing is on the Vite app.
+ *
+ * Position:
+ *   - Mobile: bottom-20 (80px) so it clears the BottomNav (~56px) with
+ *     a 24px gap. Same right-5 inset as everywhere else.
+ *   - Desktop: bottom-7 right-7. No BottomNav on md+, so it sits where
+ *     you'd expect a chat CTA — bottom-right corner with breathing room.
  */
 export default function FloatingWhatsApp() {
   const [visible, setVisible] = useState(false)
@@ -25,7 +31,7 @@ export default function FloatingWhatsApp() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Chat with P2V Labs on WhatsApp"
-      className={`fixed z-40 bottom-5 right-5 md:bottom-7 md:right-7 w-14 h-14 rounded-full bg-p2v hover:bg-charcoal flex items-center justify-center transition-all duration-500 ${
+      className={`fixed z-40 bottom-20 right-5 md:bottom-7 md:right-7 w-14 h-14 rounded-full bg-p2v hover:bg-charcoal flex items-center justify-center transition-all duration-500 ${
         visible
           ? 'opacity-100 translate-y-0 pointer-events-auto'
           : 'opacity-0 translate-y-4 pointer-events-none'
