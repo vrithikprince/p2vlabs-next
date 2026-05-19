@@ -94,8 +94,11 @@ export default async function VlogPost({ params }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <article className="pb-20 px-5 md:px-10 lg:px-20 pt-12 md:pt-16">
-        <div className="max-w-5xl mx-auto">
+      <article className="pb-20">
+
+        {/* Header — same column width as the player + description, so
+            the whole page reads as a single editorial column. */}
+        <header className="px-5 md:px-10 pt-12 md:pt-16 max-w-3xl mx-auto">
           <Link
             href="/vlog"
             className="text-[10px] tracking-[0.2em] uppercase text-charcoal/40 hover:text-p2v transition-colors"
@@ -105,32 +108,36 @@ export default async function VlogPost({ params }) {
 
           <p className="text-[10px] tracking-[0.3em] uppercase text-charcoal/45 mt-9 mb-4">
             {date}
-            {post.author && <span className="text-charcoal/30"> · {post.author}</span>}
+            {post.author   && <span className="text-charcoal/30"> · {post.author}</span>}
             {post.duration && <span className="text-charcoal/30"> · {post.duration}</span>}
           </p>
 
-          <h1 className="font-display font-bold text-[clamp(2rem,5vw,3.4rem)] leading-[1.08] tracking-tight text-charcoal mb-8">
+          <h1 className="font-display font-bold text-[clamp(2rem,5vw,3.4rem)] leading-[1.08] tracking-tight text-charcoal">
             {post.title}
           </h1>
+        </header>
 
+        {/* Player */}
+        <div className="mt-10 md:mt-12 px-5 md:px-10 max-w-3xl mx-auto">
           <VlogPlayer
             youtubeId={post.youtube_id}
             title={post.title}
             thumbnailUrl={post.thumbnail_url}
             thumbnailAlt={post.thumbnail_alt}
           />
-
-          {post.description && (
-            <div className="mt-10 md:mt-12 max-w-3xl">
-              <p className="text-[10px] tracking-[0.3em] uppercase text-charcoal/40 mb-4">
-                About this film
-              </p>
-              <div className="text-charcoal/75 leading-relaxed text-base md:text-lg whitespace-pre-wrap">
-                {post.description}
-              </div>
-            </div>
-          )}
         </div>
+
+        {/* Description */}
+        {post.description && (
+          <div className="px-5 md:px-10 mt-12 md:mt-14 max-w-3xl mx-auto">
+            <p className="text-[10px] tracking-[0.3em] uppercase text-charcoal/40 mb-4">
+              About this film
+            </p>
+            <div className="text-charcoal/75 leading-relaxed text-base md:text-lg whitespace-pre-wrap">
+              {post.description}
+            </div>
+          </div>
+        )}
       </article>
 
       <Footer />

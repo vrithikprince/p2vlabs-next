@@ -44,7 +44,7 @@ export default function VlogPlayer({ youtubeId, title, thumbnailUrl, thumbnailAl
               src={thumb}
               alt={thumbnailAlt || title}
               fill
-              sizes="(max-width: 1280px) 100vw, 1024px"
+              sizes="(max-width: 768px) 100vw, 768px"
               className="object-cover opacity-90 group-hover:opacity-100 transition-opacity"
               priority
             />
