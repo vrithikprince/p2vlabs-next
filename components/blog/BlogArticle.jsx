@@ -46,9 +46,10 @@ export default function BlogArticle({ post }) {
         )}
       </header>
 
-      {/* Cover image */}
+      {/* Cover image — same column width as the header + body so the
+          whole article reads as a single-column editorial layout. */}
       {post.cover_image_url && (
-        <div className="mt-10 md:mt-12 px-5 md:px-10 max-w-5xl mx-auto">
+        <div className="mt-10 md:mt-12 px-5 md:px-10 max-w-3xl mx-auto">
           <div
             className="relative w-full overflow-hidden border border-charcoal/10"
             style={{ aspectRatio: '16/9', backgroundColor: '#E8E4DF' }}
@@ -57,7 +58,7 @@ export default function BlogArticle({ post }) {
               src={post.cover_image_url}
               alt={post.cover_image_alt || post.title}
               fill
-              sizes="(max-width: 1280px) 100vw, 1024px"
+              sizes="(max-width: 768px) 100vw, 768px"
               className="object-cover"
               priority
             />
