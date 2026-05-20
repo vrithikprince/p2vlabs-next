@@ -13,7 +13,7 @@ export async function generateMetadata() {
     alternates: { canonical: '/contact' },
     openGraph: {
       title: 'Contact P2V Labs',
-      url:   'https://www.p2vlabs.in/contact',
+      url:   '/contact',
     },
   }
 }

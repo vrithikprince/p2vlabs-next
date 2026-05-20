@@ -1,3 +1,13 @@
 {
-  "framework": "nextjs"
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "nextjs",
+
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.p2vlabs.in" }],
+      "destination": "https://p2vlabs.in/:path*",
+      "permanent": true
+    }
+  ]
 }

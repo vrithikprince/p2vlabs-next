@@ -1,6 +1,6 @@
 import { getPublishedBlogPosts, getPublishedVlogPosts } from '../lib/cms.js'
 
-const SITE = 'https://www.p2vlabs.in'
+const SITE = 'https://p2vlabs.in'
 
 /**
  * Sitemap. Static routes first; then a dynamic chunk for every

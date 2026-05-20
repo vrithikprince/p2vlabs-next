@@ -13,6 +13,7 @@ import {
   youtubeThumbnail,
   youtubeWatch,
 } from '../../../lib/youtube.js'
+import { buildPostMetadata, canonicalUrl, SITE_URL } from '../../../lib/seo.js'
 
 /** /vlog/[slug] — individual vlog page. */
 export const revalidate = 60
@@ -25,35 +26,21 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }) {
   const post = await getVlogPostBySlug(params.slug)
-  if (!post) return { title: 'Vlog not found' }
+  const base = buildPostMetadata({ kind: 'vlog', post })
 
-  const title = post.meta_title || post.title
-  const description =
-    post.meta_description ||
-    (post.description ? post.description.slice(0, 160) : `Watch "${post.title}" on P2V Labs.`)
-  const url        = `https://www.p2vlabs.in/vlog/${post.slug}`
-  const thumb      = post.thumbnail_url || youtubeThumbnail(post.youtube_id, 'maxres')
-  const videoEmbed = youtubeEmbed(post.youtube_id)
-
-  return {
-    title,
-    description,
-    alternates: { canonical: `/vlog/${post.slug}` },
-    openGraph: {
-      title,
-      description,
-      url,
-      type: 'video.other',
-      images: thumb ? [{ url: thumb, alt: post.thumbnail_alt || post.title }] : undefined,
-      videos: videoEmbed ? [{ url: videoEmbed }] : undefined,
-    },
-    twitter: {
-      card:    'player',
-      title,
-      description,
-      images:  thumb ? [thumb] : undefined,
-    },
+  /* VideoObject pages benefit from og:video for richer share cards;
+     buildPostMetadata doesn't add that (it's vlog-specific), so we
+     spread the helper's output and tack videos onto openGraph. */
+  if (post) {
+    const videoEmbed = youtubeEmbed(post.youtube_id)
+    if (videoEmbed) {
+      base.openGraph = {
+        ...base.openGraph,
+        videos: [{ url: videoEmbed }],
+      }
+    }
   }
+  return base
 }
 
 export default async function VlogPost({ params }) {
@@ -84,7 +71,11 @@ export default async function VlogPost({ params }) {
     publisher: {
       '@type': 'Organization',
       name:    'P2V Labs',
-      logo:    { '@type': 'ImageObject', url: 'https://www.p2vlabs.in/og-image.jpg' },
+      logo:    { '@type': 'ImageObject', url: `${SITE_URL}/og-image.jpg` },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id':   canonicalUrl(`/vlog/${post.slug}`),
     },
   }
 

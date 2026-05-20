@@ -1,5 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  /* Explicit so future-me doesn't wonder: no trailing slash on URLs.
+   * /foo/  → 308 → /foo. Keeps the canonical URL clean and matches the
+   * `canonicalUrl()` helper in lib/seo.js. */
+  trailingSlash: false,
   images: {
     remotePatterns: [
       { protocol: 'https', hostname: '*.supabase.co' },

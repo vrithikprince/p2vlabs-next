@@ -19,7 +19,7 @@ export async function generateMetadata() {
     alternates: { canonical: '/blog' },
     openGraph: {
       title: 'The Journal — P2V Labs',
-      url:   'https://www.p2vlabs.in/blog',
+      url:   '/blog',
       type:  'website',
     },
   }

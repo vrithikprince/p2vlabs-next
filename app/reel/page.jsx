@@ -20,7 +20,7 @@ export async function generateMetadata() {
     alternates: { canonical: '/reel' },
     openGraph: {
       title: 'The Reel — P2V Labs Portfolio',
-      url: 'https://www.p2vlabs.in/reel',
+      url: '/reel',
     },
   }
 }

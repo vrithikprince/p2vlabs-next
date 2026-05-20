@@ -1,5 +1,6 @@
 import { Playfair_Display, Inter } from 'next/font/google'
 import RootClient from '../components/layout/RootClient.jsx'
+import { SITE_URL, SITE_NAME, SITE_LOCALE } from '../lib/seo.js'
 import './globals.css'
 
 /**
@@ -26,11 +27,16 @@ const inter = Inter({
 })
 
 export const metadata = {
-  metadataBase: new URL('https://www.p2vlabs.in'),
+  /* metadataBase is the canonical host. Every relative URL in this
+   * file (canonicals, og:image, twitter:image) gets resolved against
+   * this. Non-www, https — matches the redirect direction in vercel.json
+   * + the SITE_URL constant in lib/seo.js. Change one, change all. */
+  metadataBase: new URL(SITE_URL),
   title: {
     default: 'P2V Labs — Visual Content Agency Ahmedabad',
     template: '%s | P2V Labs',
   },
+  alternates: { canonical: '/' },
   description:
     'P2V Labs is a visual content agency based in Ahmedabad, Gujarat specialising in video production, product photography, food photography, corporate films, and social media content.',
   keywords: [
@@ -46,14 +52,14 @@ export const metadata = {
   creator: 'P2V Labs',
   openGraph: {
     type: 'website',
-    locale: 'en_IN',
-    url: 'https://www.p2vlabs.in',
-    siteName: 'P2V Labs',
+    locale: SITE_LOCALE,
+    url: '/',                  /* resolved against metadataBase → SITE_URL */
+    siteName: SITE_NAME,
     title: 'P2V Labs — Visual Content Agency Ahmedabad',
     description:
       'Pixels · Purpose · Visuals — Data-driven visual content for businesses across Gujarat.',
     images: [{
-      url: '/og-image.jpg',
+      url: '/og-image.jpg',    /* resolved → https://p2vlabs.in/og-image.jpg */
       width: 1200,
       height: 630,
       alt: 'P2V Labs — Visual Content Agency Ahmedabad',

@@ -14,7 +14,7 @@ export async function generateMetadata() {
     alternates: { canonical: '/vlog' },
     openGraph: {
       title: 'The Reel Diary — P2V Labs',
-      url:   'https://www.p2vlabs.in/vlog',
+      url:   '/vlog',
       type:  'website',
     },
   }

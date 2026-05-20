@@ -20,7 +20,7 @@ const structuredData = {
   '@type': 'LocalBusiness',
   name: 'P2V Labs',
   description: 'Visual content agency specialising in video production, product photography, food photography, and social media content.',
-  url: 'https://www.p2vlabs.in',
+  url: 'https://p2vlabs.in',
   telephone: '+917048824616',
   email: 'hello@p2vlabs.in',
   address: {

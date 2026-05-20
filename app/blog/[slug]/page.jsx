@@ -3,6 +3,7 @@ import BlogArticle from '../../../components/blog/BlogArticle.jsx'
 import PostCTA from '../../../components/blog/PostCTA.jsx'
 import Footer from '../../../components/layout/Footer.jsx'
 import { getBlogPostBySlug, getPublishedBlogSlugs } from '../../../lib/cms.js'
+import { buildPostMetadata, canonicalUrl, SITE_URL } from '../../../lib/seo.js'
 
 /**
  * /blog/[slug] — individual blog post. ISR every 60s for newly-
@@ -19,37 +20,7 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }) {
   const post = await getBlogPostBySlug(params.slug)
-  if (!post) return { title: 'Post not found' }
-
-  const title       = post.meta_title       || post.title
-  const description = post.meta_description || post.excerpt || `Read "${post.title}" on the P2V Labs journal.`
-  const url         = `https://www.p2vlabs.in/blog/${post.slug}`
-
-  return {
-    title,
-    description,
-    alternates: { canonical: `/blog/${post.slug}` },
-    openGraph: {
-      title,
-      description,
-      url,
-      type: 'article',
-      publishedTime: post.published_at || undefined,
-      authors: post.author ? [post.author] : undefined,
-      images: post.cover_image_url ? [{
-        url:    post.cover_image_url,
-        alt:    post.cover_image_alt || post.title,
-        width:  1200,
-        height: 630,
-      }] : undefined,
-    },
-    twitter: {
-      card:        post.cover_image_url ? 'summary_large_image' : 'summary',
-      title,
-      description,
-      images:      post.cover_image_url ? [post.cover_image_url] : undefined,
-    },
-  }
+  return buildPostMetadata({ kind: 'blog', post })
 }
 
 export default async function BlogPost({ params }) {
@@ -57,7 +28,9 @@ export default async function BlogPost({ params }) {
   if (!post) notFound()
 
   /* JSON-LD Article schema — gives Google the structured data needed
-     for rich snippets (author + date + headline + cover image). */
+     for rich snippets (author + date + headline + cover image). All
+     URLs go through canonicalUrl() so they match the <link rel=canonical>
+     and the og:url emitted by buildPostMetadata above. */
   const jsonLd = {
     '@context':      'https://schema.org',
     '@type':         'Article',
@@ -74,12 +47,12 @@ export default async function BlogPost({ params }) {
       name:    'P2V Labs',
       logo: {
         '@type': 'ImageObject',
-        url:     'https://www.p2vlabs.in/og-image.jpg',
+        url:     `${SITE_URL}/og-image.jpg`,
       },
     },
     mainEntityOfPage: {
       '@type': 'WebPage',
-      '@id':   `https://www.p2vlabs.in/blog/${post.slug}`,
+      '@id':   canonicalUrl(`/blog/${post.slug}`),
     },
   }
 

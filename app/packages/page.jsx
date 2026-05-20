@@ -14,7 +14,7 @@ export async function generateMetadata() {
     alternates: { canonical: '/packages' },
     openGraph: {
       title: 'Packages & Services — P2V Labs',
-      url: 'https://www.p2vlabs.in/packages',
+      url: '/packages',
     },
   }
 }
