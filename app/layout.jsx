@@ -1,6 +1,6 @@
 import { Playfair_Display, Inter } from 'next/font/google'
 import RootClient from '../components/layout/RootClient.jsx'
-import { SITE_URL, SITE_NAME, SITE_LOCALE } from '../lib/seo.js'
+import { SITE_URL, SITE_NAME, SITE_LOCALE, organizationJsonLd } from '../lib/seo.js'
 import './globals.css'
 
 /**
@@ -102,6 +102,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
       <body className="min-h-screen bg-cream">
+        {/* Organization JSON-LD — every page carries the publisher entity.
+            Used by Google for the knowledge panel + as the canonical
+            publisher reference on Article schemas across the site. */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationJsonLd()) }}
+        />
         <RootClient>{children}</RootClient>
       </body>
     </html>

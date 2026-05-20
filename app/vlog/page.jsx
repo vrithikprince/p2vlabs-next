@@ -2,6 +2,12 @@ import VlogCard from '../../components/vlog/VlogCard.jsx'
 import DroppingSoon from '../../components/blog/DroppingSoon.jsx'
 import Footer from '../../components/layout/Footer.jsx'
 import { getPublishedVlogPosts } from '../../lib/cms.js'
+import { breadcrumbsJsonLd } from '../../lib/seo.js'
+
+const breadcrumbs = breadcrumbsJsonLd([
+  { name: 'Home',  path: '/' },
+  { name: 'Films', path: '/vlog' },
+])
 
 /** /vlog — index of published vlogs. ISR every 60s. */
 export const revalidate = 60
@@ -26,6 +32,10 @@ export default async function VlogIndex() {
   if (!posts.length) {
     return (
       <div className="pt-16">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
+        />
         <DroppingSoon kind="vlog" />
         <Footer />
       </div>
@@ -34,6 +44,10 @@ export default async function VlogIndex() {
 
   return (
     <div className="pt-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
+      />
       <section className="px-5 md:px-10 lg:px-20 pt-16 md:pt-20 pb-12">
         <div className="max-w-7xl mx-auto">
           <p className="text-[10px] tracking-[0.4em] uppercase text-charcoal/45 mb-5">

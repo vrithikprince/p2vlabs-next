@@ -2,6 +2,14 @@ import BlogCard from '../../components/blog/BlogCard.jsx'
 import DroppingSoon from '../../components/blog/DroppingSoon.jsx'
 import Footer from '../../components/layout/Footer.jsx'
 import { getPublishedBlogPosts } from '../../lib/cms.js'
+import { breadcrumbsJsonLd } from '../../lib/seo.js'
+
+/* BreadcrumbList — even on the index page, gives Google the trail so
+   the SERP can render "p2vlabs.in › Journal" instead of the raw URL. */
+const breadcrumbs = breadcrumbsJsonLd([
+  { name: 'Home',    path: '/' },
+  { name: 'Journal', path: '/blog' },
+])
 
 /**
  * /blog — index of published blog posts. ISR every 60s so freshly-
@@ -31,6 +39,10 @@ export default async function BlogIndex() {
   if (!posts.length) {
     return (
       <div className="pt-16">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
+        />
         <DroppingSoon kind="blog" />
         <Footer />
       </div>
@@ -39,6 +51,10 @@ export default async function BlogIndex() {
 
   return (
     <div className="pt-16">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
+      />
       <section className="px-5 md:px-10 lg:px-20 pt-16 md:pt-20 pb-12">
         <div className="max-w-7xl mx-auto">
           <p className="text-[10px] tracking-[0.4em] uppercase text-charcoal/45 mb-5">

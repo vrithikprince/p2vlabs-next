@@ -3,7 +3,7 @@ import BlogArticle from '../../../components/blog/BlogArticle.jsx'
 import PostCTA from '../../../components/blog/PostCTA.jsx'
 import Footer from '../../../components/layout/Footer.jsx'
 import { getBlogPostBySlug, getPublishedBlogSlugs } from '../../../lib/cms.js'
-import { buildPostMetadata, canonicalUrl, SITE_URL } from '../../../lib/seo.js'
+import { buildPostMetadata, canonicalUrl, SITE_URL, breadcrumbsJsonLd } from '../../../lib/seo.js'
 
 /**
  * /blog/[slug] — individual blog post. ISR every 60s for newly-
@@ -56,11 +56,23 @@ export default async function BlogPost({ params }) {
     },
   }
 
+  /* BreadcrumbList — gives Google the trail to render in SERPs
+     ("p2vlabs.in › Journal › <Post Title>") instead of the raw URL. */
+  const breadcrumbs = breadcrumbsJsonLd([
+    { name: 'Home',     path: '/' },
+    { name: 'Journal',  path: '/blog' },
+    { name: post.title, path: `/blog/${post.slug}` },
+  ])
+
   return (
     <div className="pt-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
       />
       <BlogArticle post={post} />
       <PostCTA kind="blog" slug={post.slug} title={post.title} />

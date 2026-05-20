@@ -6,6 +6,7 @@ import AboutSection from '../components/landing/AboutSection.jsx'
 import ContactSection from '../components/landing/ContactSection.jsx'
 import Footer from '../components/layout/Footer.jsx'
 import Rule from '../components/ui/Rule.jsx'
+import { websiteJsonLd, SOCIAL_LINKS } from '../lib/seo.js'
 
 /**
  * Landing — Static Site Generation. Rebuilt on deploy and re-validated hourly.
@@ -46,10 +47,10 @@ const structuredData = {
   ],
   priceRange: '₹₹',
   openingHours: 'Mo-Sa 09:00-19:00',
-  sameAs: [
-    'https://www.instagram.com/p2vlabs',
-    'https://www.linkedin.com/company/p2vlabs',
-  ],
+  /* sameAs is shared with the Organization schema in lib/seo.js — single
+     source of truth so adding a Facebook/LinkedIn link later only needs
+     one edit. */
+  sameAs: SOCIAL_LINKS,
   founder: [
     { '@type': 'Person', name: 'Vrithik Prince' },
     { '@type': 'Person', name: 'Payal Chetwani' },
@@ -57,12 +58,22 @@ const structuredData = {
   ],
 }
 
+/* WebSite JSON-LD — home page only (per Google's docs). The
+   SearchAction tells Google where the site search lives so the
+   Sitelinks Searchbox can eventually surface in SERPs for brand
+   queries. /search route below backs this. */
+const websiteData = websiteJsonLd({ withSearch: true })
+
 export default function HomePage() {
   return (
     <div className="pt-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteData) }}
       />
       <Hero />
       <Marquee />

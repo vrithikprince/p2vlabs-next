@@ -13,7 +13,7 @@ import {
   youtubeThumbnail,
   youtubeWatch,
 } from '../../../lib/youtube.js'
-import { buildPostMetadata, canonicalUrl, SITE_URL } from '../../../lib/seo.js'
+import { buildPostMetadata, canonicalUrl, SITE_URL, breadcrumbsJsonLd } from '../../../lib/seo.js'
 
 /** /vlog/[slug] — individual vlog page. */
 export const revalidate = 60
@@ -79,11 +79,22 @@ export default async function VlogPost({ params }) {
     },
   }
 
+  /* BreadcrumbList — SERP trail "p2vlabs.in › Films › <Vlog Title>". */
+  const breadcrumbs = breadcrumbsJsonLd([
+    { name: 'Home',     path: '/' },
+    { name: 'Films',    path: '/vlog' },
+    { name: post.title, path: `/vlog/${post.slug}` },
+  ])
+
   return (
     <div className="pt-16">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
       />
 
       <article className="pb-20">
