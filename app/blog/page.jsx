@@ -57,20 +57,20 @@ export default async function BlogIndex() {
       />
       <section className="px-5 md:px-10 lg:px-20 pt-16 md:pt-20 pb-12">
         <div className="max-w-7xl mx-auto">
-          <p className="text-[10px] tracking-[0.4em] uppercase text-bone/45 mb-5">
+          <p className="text-[10px] tracking-[0.4em] uppercase text-charcoal/45 mb-5">
             The P2V Journal
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-            <h1 className="font-display text-5xl md:text-6xl font-bold text-bone leading-tight">
+            <h1 className="font-display text-5xl md:text-6xl font-bold text-charcoal leading-tight">
               Writing on craft<br />
-              <em className="not-italic text-amber">+ commerce.</em>
+              <em className="not-italic text-p2v">+ commerce.</em>
             </h1>
-            <p className="text-bone/55 leading-relaxed self-end text-lg">
+            <p className="text-charcoal/55 leading-relaxed self-end text-lg">
               Long-form essays, production notes, and behind-the-frame breakdowns from the studio.
               Updated as we ship.
             </p>
           </div>
-          <div className="h-px bg-ink/10" />
+          <div className="h-px bg-charcoal/10" />
         </div>
       </section>
 

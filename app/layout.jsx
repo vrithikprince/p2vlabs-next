@@ -110,7 +110,7 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
-      <body className="min-h-screen bg-ink">
+      <body className="min-h-screen bg-cream">
         {/* Organization JSON-LD — every page carries the publisher entity.
             Used by Google for the knowledge panel + as the canonical
             publisher reference on Article schemas across the site. */}

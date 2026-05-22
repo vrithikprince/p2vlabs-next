@@ -25,19 +25,19 @@ export default function LeadFormModal({ open, onClose, source, defaultServices }
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-ink/85 flex items-start md:items-center justify-center p-3 md:p-8 overflow-y-auto"
+      className="fixed inset-0 z-50 bg-charcoal/85 flex items-start md:items-center justify-center p-3 md:p-8 overflow-y-auto"
       onClick={onClose}
     >
       <div
-        className="bg-ink w-full max-w-2xl my-auto"
+        className="bg-cream w-full max-w-2xl my-auto"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-start justify-between px-6 md:px-10 py-5 border-b border-bone/10">
+        <div className="flex items-start justify-between px-6 md:px-10 py-5 border-b border-charcoal/10">
           <div>
-            <p className="text-[10px] tracking-[0.3em] uppercase text-bone/45">
+            <p className="text-[10px] tracking-[0.3em] uppercase text-charcoal/45">
               Tell us about your project
             </p>
-            <h2 className="font-display text-xl md:text-2xl font-bold text-bone mt-1">
+            <h2 className="font-display text-xl md:text-2xl font-bold text-charcoal mt-1">
               Send a brief
             </h2>
           </div>
@@ -45,7 +45,7 @@ export default function LeadFormModal({ open, onClose, source, defaultServices }
             type="button"
             onClick={onClose}
             aria-label="Close"
-            className="w-8 h-8 flex items-center justify-center text-bone/40 hover:text-bone hover:bg-amber/5 transition-colors shrink-0"
+            className="w-8 h-8 flex items-center justify-center text-charcoal/40 hover:text-charcoal hover:bg-charcoal/5 transition-colors shrink-0"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               <line x1="18" y1="6" x2="6" y2="18" />

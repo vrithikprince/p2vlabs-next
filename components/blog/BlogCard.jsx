@@ -18,7 +18,7 @@ export default function BlogCard({ post }) {
       className="group block"
     >
       <div
-        className="relative w-full overflow-hidden border border-bone/10 group-hover:border-amber/30 transition-colors"
+        className="relative w-full overflow-hidden border border-charcoal/10 group-hover:border-p2v/30 transition-colors"
         style={{ aspectRatio: '16/10', backgroundColor: '#E8E4DF' }}
       >
         {post.cover_image_url ? (
@@ -31,20 +31,20 @@ export default function BlogCard({ post }) {
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center">
-            <span className="font-display text-bone/15 text-3xl">P2V</span>
+            <span className="font-display text-charcoal/15 text-3xl">P2V</span>
           </div>
         )}
       </div>
       <div className="pt-5">
-        <p className="text-[10px] tracking-[0.3em] uppercase text-bone/40 mb-2">
+        <p className="text-[10px] tracking-[0.3em] uppercase text-charcoal/40 mb-2">
           {date}
-          {post.author && <span className="text-bone/30"> · {post.author}</span>}
+          {post.author && <span className="text-charcoal/30"> · {post.author}</span>}
         </p>
-        <h2 className="font-display text-xl md:text-2xl font-bold text-bone leading-tight group-hover:text-amber transition-colors">
+        <h2 className="font-display text-xl md:text-2xl font-bold text-charcoal leading-tight group-hover:text-p2v transition-colors">
           {post.title}
         </h2>
         {post.excerpt && (
-          <p className="text-bone/55 text-sm leading-relaxed mt-2 line-clamp-2">
+          <p className="text-charcoal/55 text-sm leading-relaxed mt-2 line-clamp-2">
             {post.excerpt}
           </p>
         )}

@@ -95,12 +95,12 @@ export default function ReelClient({ videoItems, photoItems }) {
 
       <div className="px-5 md:px-10 lg:px-20 py-16 max-w-7xl mx-auto">
         <div className="mb-12">
-          <p className="text-[10px] tracking-[0.35em] uppercase text-bone/45 mb-5">Selected Work</p>
+          <p className="text-[10px] tracking-[0.35em] uppercase text-charcoal/45 mb-5">Selected Work</p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
-            <h1 className="font-display text-5xl md:text-6xl font-bold text-bone leading-tight clip-wrap">
+            <h1 className="font-display text-5xl md:text-6xl font-bold text-charcoal leading-tight clip-wrap">
               <span className="reel-page-title block">The Reel</span>
             </h1>
-            <p className="reel-page-desc text-bone/55 leading-relaxed self-end text-lg">
+            <p className="reel-page-desc text-charcoal/55 leading-relaxed self-end text-lg">
               A curated selection of work across video, photography, and social content —
               each piece built for a specific brand, platform, and purpose.
             </p>

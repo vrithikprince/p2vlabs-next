@@ -22,11 +22,11 @@ export default function BottomNav() {
     path === '/' ? pathname === '/' : pathname.startsWith(path)
 
   return (
-    <div className="fixed bottom-0 inset-x-0 z-50 md:hidden bg-ink/95 backdrop-blur-sm border-t border-bone/12">
+    <div className="fixed bottom-0 inset-x-0 z-50 md:hidden bg-cream/95 backdrop-blur-sm border-t border-charcoal/12">
       <div className="flex">
         {ITEMS.map(({ id, icon, label, path, external }) => {
           const cls = `flex-1 py-3 flex flex-col items-center gap-1 text-[10px] tracking-wider uppercase font-medium transition-colors ${
-            isActive(path) ? 'text-amber' : 'text-bone/45'
+            isActive(path) ? 'text-p2v' : 'text-charcoal/45'
           }`
           if (external) {
             return (

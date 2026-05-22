@@ -83,14 +83,14 @@ export default function Services() {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-16">
           <div className="lg:col-span-4">
-            <p className="text-[10px] tracking-[0.35em] uppercase text-bone/45 mb-5">What We Do</p>
-            <h2 className="font-display text-4xl md:text-5xl font-bold text-bone leading-tight">
+            <p className="text-[10px] tracking-[0.35em] uppercase text-charcoal/45 mb-5">What We Do</p>
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-charcoal leading-tight">
               <span className="clip-wrap"><span className="services-heading-line block">Our</span></span>
               <span className="clip-wrap"><span className="services-heading-line block">Services</span></span>
             </h2>
           </div>
           <div className="lg:col-span-8 flex items-end">
-            <p className="services-desc text-lg text-bone/55 max-w-2xl leading-relaxed will-anim">
+            <p className="services-desc text-lg text-charcoal/55 max-w-2xl leading-relaxed will-anim">
               From concept to delivery, we handle every frame. Our work spans brand films,
               photography, and social content — each piece crafted to perform and endure.
             </p>
@@ -122,36 +122,36 @@ export default function Services() {
                 <div className="flex flex-col md:flex-row" style={{ minHeight: 'clamp(240px,32vh,340px)' }}>
 
                   <div
-                    className="flex-shrink-0 flex flex-col items-center justify-center w-full md:w-52 lg:w-60 py-8 md:py-0 border-b md:border-b-0 md:border-r border-bone/8"
+                    className="flex-shrink-0 flex flex-col items-center justify-center w-full md:w-52 lg:w-60 py-8 md:py-0 border-b md:border-b-0 md:border-r border-charcoal/8"
                     style={{ background: s.accent }}
                   >
                     <Icon n={s.icon} s={34} c="rgba(26,26,26,0.45)" />
-                    <div className="w-6 h-px bg-ink/20 my-3" />
-                    <span className="text-[9px] tracking-[0.45em] uppercase text-bone/35 font-medium">{s.n}</span>
+                    <div className="w-6 h-px bg-charcoal/20 my-3" />
+                    <span className="text-[9px] tracking-[0.45em] uppercase text-charcoal/35 font-medium">{s.n}</span>
                   </div>
 
                   <div className="relative flex-1 overflow-hidden flex flex-col justify-center px-8 py-10 md:px-12 lg:px-16">
                     <span
-                      className="absolute right-2 bottom-0 font-display font-bold leading-none select-none pointer-events-none text-bone/[0.038]"
+                      className="absolute right-2 bottom-0 font-display font-bold leading-none select-none pointer-events-none text-charcoal/[0.038]"
                       style={{ fontSize: 'clamp(5rem,11vw,10rem)', lineHeight: 0.82 }}
                       aria-hidden="true"
                     >
                       {s.n}
                     </span>
-                    <p className="text-[9px] tracking-[0.4em] uppercase text-bone/30 mb-4 relative z-10">
+                    <p className="text-[9px] tracking-[0.4em] uppercase text-charcoal/30 mb-4 relative z-10">
                       Service — {s.n}
                     </p>
-                    <h3 className="font-display font-bold text-bone leading-tight mb-4 relative z-10"
+                    <h3 className="font-display font-bold text-charcoal leading-tight mb-4 relative z-10"
                         style={{ fontSize: 'clamp(1.7rem,3.2vw,2.8rem)' }}>
                       {s.title}
                     </h3>
-                    <p className="text-bone/50 leading-relaxed relative z-10 max-w-lg"
+                    <p className="text-charcoal/50 leading-relaxed relative z-10 max-w-lg"
                        style={{ fontSize: 'clamp(0.875rem,1.4vw,0.975rem)' }}>
                       {s.desc}
                     </p>
                     <div className="flex items-center gap-3 mt-6 relative z-10">
-                      <div className="w-8 h-px bg-amber" />
-                      <span className="text-[9px] tracking-[0.3em] uppercase font-medium text-amber">Get in Touch</span>
+                      <div className="w-8 h-px bg-p2v" />
+                      <span className="text-[9px] tracking-[0.3em] uppercase font-medium text-p2v">Get in Touch</span>
                       <Icon n="aur" s={13} c="#c0392b" />
                     </div>
                   </div>

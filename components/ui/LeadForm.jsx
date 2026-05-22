@@ -67,26 +67,26 @@ export default function LeadForm({ source = 'unknown', defaultServices = [], onS
   if (done) {
     return (
       <div className="text-center py-10 md:py-14">
-        <p className="text-[10px] tracking-[0.4em] uppercase text-bone/40 mb-4">
+        <p className="text-[10px] tracking-[0.4em] uppercase text-charcoal/40 mb-4">
           Brief received
         </p>
-        <p className="font-display text-3xl md:text-4xl font-bold text-bone mb-5">
+        <p className="font-display text-3xl md:text-4xl font-bold text-charcoal mb-5">
           Thanks{name ? `, ${name.split(' ')[0]}` : ''}.
         </p>
-        <p className="text-bone/55 max-w-md mx-auto leading-relaxed">
-          One of us will be in touch at <strong className="text-bone">{email}</strong> within 24 hours.
+        <p className="text-charcoal/55 max-w-md mx-auto leading-relaxed">
+          One of us will be in touch at <strong className="text-charcoal">{email}</strong> within 24 hours.
         </p>
       </div>
     )
   }
 
   const inputCls =
-    'w-full border border-bone/15 px-3 py-3 text-sm bg-transparent focus:outline-none focus:border-bone transition-colors placeholder-smoke/35'
+    'w-full border border-charcoal/15 px-3 py-3 text-sm bg-transparent focus:outline-none focus:border-charcoal transition-colors placeholder-charcoal/35'
   const chipCls = (active) =>
     `px-4 py-2 text-[10px] tracking-[0.15em] uppercase font-medium border transition-colors ${
       active
-        ? 'bg-bone text-ink border-bone'
-        : 'border-bone/18 text-bone/55 hover:border-bone/40 hover:text-bone'
+        ? 'bg-charcoal text-cream border-charcoal'
+        : 'border-charcoal/18 text-charcoal/55 hover:border-charcoal/40 hover:text-charcoal'
     }`
 
   return (
@@ -100,7 +100,7 @@ export default function LeadForm({ source = 'unknown', defaultServices = [], onS
       </div>
 
       <div>
-        <p className="text-[10px] tracking-[0.2em] uppercase text-bone/40 mb-3">What do you need?</p>
+        <p className="text-[10px] tracking-[0.2em] uppercase text-charcoal/40 mb-3">What do you need?</p>
         <div className="flex flex-wrap gap-2">
           {SERVICES.map((s) => (
             <button key={s.id} type="button" onClick={() => toggleService(s.id)} className={chipCls(services.includes(s.id))}>
@@ -111,7 +111,7 @@ export default function LeadForm({ source = 'unknown', defaultServices = [], onS
       </div>
 
       <div>
-        <p className="text-[10px] tracking-[0.2em] uppercase text-bone/40 mb-3">Budget range</p>
+        <p className="text-[10px] tracking-[0.2em] uppercase text-charcoal/40 mb-3">Budget range</p>
         <div className="flex flex-wrap gap-2">
           {BUDGETS.map((b) => (
             <button key={b.id} type="button" onClick={() => setBudget(b.id)} className={chipCls(budget === b.id)}>
@@ -122,7 +122,7 @@ export default function LeadForm({ source = 'unknown', defaultServices = [], onS
       </div>
 
       <div>
-        <p className="text-[10px] tracking-[0.2em] uppercase text-bone/40 mb-3">Timeline</p>
+        <p className="text-[10px] tracking-[0.2em] uppercase text-charcoal/40 mb-3">Timeline</p>
         <div className="flex flex-wrap gap-2">
           {TIMELINES.map((t) => (
             <button key={t.id} type="button" onClick={() => setTimeline(t.id)} className={chipCls(timeline === t.id)}>
@@ -133,26 +133,26 @@ export default function LeadForm({ source = 'unknown', defaultServices = [], onS
       </div>
 
       <div>
-        <p className="text-[10px] tracking-[0.2em] uppercase text-bone/40 mb-3">Tell us about your project</p>
+        <p className="text-[10px] tracking-[0.2em] uppercase text-charcoal/40 mb-3">Tell us about your project</p>
         <textarea
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           rows={5}
           maxLength={4000}
           placeholder="What are you shooting? What's the goal? Any references? The more we know, the better the first reply."
-          className="w-full border border-bone/15 px-3 py-3 text-sm bg-transparent focus:outline-none focus:border-bone transition-colors placeholder-smoke/35 leading-relaxed resize-y"
+          className="w-full border border-charcoal/15 px-3 py-3 text-sm bg-transparent focus:outline-none focus:border-charcoal transition-colors placeholder-charcoal/35 leading-relaxed resize-y"
         />
       </div>
 
       {error && (
-        <p className="text-amber text-sm">{error}</p>
+        <p className="text-p2v text-sm">{error}</p>
       )}
 
       <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
         <button
           type="submit"
           disabled={submitting || !name.trim() || !email.trim()}
-          className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-bone text-ink text-[10px] tracking-[0.2em] uppercase font-medium hover:bg-amber transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+          className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-p2v text-cream text-[10px] tracking-[0.2em] uppercase font-medium hover:bg-charcoal transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
         >
           {submitting ? 'Sending…' : 'Send Brief'}
           {!submitting && (
@@ -162,8 +162,8 @@ export default function LeadForm({ source = 'unknown', defaultServices = [], onS
             </svg>
           )}
         </button>
-        <p className="text-[11px] text-bone/40 leading-relaxed">
-          Or email <a href="mailto:hello@p2vlabs.in" className="text-bone underline underline-offset-2">hello@p2vlabs.in</a> directly.
+        <p className="text-[11px] text-charcoal/40 leading-relaxed">
+          Or email <a href="mailto:hello@p2vlabs.in" className="text-charcoal underline underline-offset-2">hello@p2vlabs.in</a> directly.
         </p>
       </div>
     </form>

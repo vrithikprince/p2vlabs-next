@@ -40,7 +40,7 @@ export default function FloatingWhatsApp() {
       aria-label="Chat with P2V Labs on WhatsApp"
       className={`fixed z-40 bottom-20 right-5 md:bottom-7 md:right-7
                   inline-flex items-center gap-3 px-5 py-3
-                  bg-bone text-ink hover:bg-amber
+                  bg-charcoal text-cream hover:bg-p2v
                   transition-[opacity,background-color] duration-500
                   ${visible
                     ? 'opacity-100 pointer-events-auto'

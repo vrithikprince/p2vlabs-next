@@ -1,6 +1,6 @@
 # P2V Labs — Design System
 
-> **Active palette:** After Hours (cinematic dark)
+> **Active palette:** Editorial Cream
 > **Last updated:** 2026-05-22
 > **Repo:** vrithikprince/p2vlabs-next
 
@@ -13,22 +13,17 @@ is fully self-contained: tokens, typography, components, references.
 
 ## Table of contents
 
-1. [Current — After Hours](#current--after-hours)
-2. [Previous — Editorial Cream](#previous--editorial-cream-2026-05-15--2026-05-22)
+1. [Current — Editorial Cream](#current--editorial-cream)
+2. [Previous — After Hours](#previous--after-hours-attempted-2026-05-22-reverted-2026-05-22)
 3. [Cross-system rules](#cross-system-rules)
 
 ---
 
-# Current — After Hours
+# Current — Editorial Cream
 
-Cinematic dark. The site primary surface is near-black; cream/bone is
-reserved for typography and the occasional inverted band. A single
-restrained chromatic accent (warm amber) appears in italics, rules,
-and decorative moments — never as the default CTA fill.
-
-The rationale: P2V Labs makes video + photography. Dark backgrounds
-let the work sit the way film sits in a cinema. Cream-default sites
-fight their own portfolio.
+Editorial / Loewe / A24-inspired. Warm cream primary surface, charcoal
+body, single saturated red accent. The brand mark uses red for
+emphasis — italic words ("Done *Right*"), CTA fills, decorative rules.
 
 ## Tokens
 
@@ -36,34 +31,35 @@ fight their own portfolio.
 
 | Token | Hex | Use |
 |---|---|---|
-| `ink` | `#0A0A0A` | Primary surface — page background, the default behind everything |
-| `pitch` | `#16140F` | Secondary surface — cards, the long-form blog reading band, modals |
-| `paper` | `#1A1813` | Tertiary surface — only for long-form body where reader fatigue matters (blog article body) |
-| `bone` | `#EAE5DA` | Primary text on dark; high-contrast CTA fill; logo wordmark |
-| `smoke` | `#9A9389` | Secondary text on dark — captions, labels, meta lines |
-| `mist` | `#6B655D` | Tertiary text — copyright, ultra-quiet metadata |
-| `amber` | `#D4A04E` | Accent — italic emphasis words ("Done *Right*"), rules, decorative dots, hover states. Never default CTA fill. |
-| `amber-deep` | `#A87A2E` | Hover state for `amber`-coloured elements |
-| `line` | `rgba(234,229,218,0.12)` | Border default — `bone` at 12% on dark |
-| `line-strong` | `rgba(234,229,218,0.25)` | Border emphasis — visible separators |
+| `cream` | `#F5F0E8` | Primary surface — page background |
+| `warm-white` | `#FAFAF7` | Slightly lighter card surface |
+| `charcoal` | `#1a1a1a` | Primary text, dark sections (Contact band, Footer), borders |
+| `p2v` | `#c0392b` | Brand red — CTA fills, italic emphasis, accent rules |
+| `brand.red-dark` | `#a93226` | p2v hover (rare — most hovers go to `charcoal`) |
+| `brand.red-light` | `#e74c3c` | p2v subtle variant |
+| `muted` | `#888888` | Subtitle / placeholder text |
+| `p2v-border` | `#E8E4DC` | Editorial card borders |
 
 ### Tailwind config
 
 ```js
 // tailwind.config.js → theme.extend.colors
 colors: {
-  ink:         '#0A0A0A',
-  pitch:       '#16140F',
-  paper:       '#1A1813',
-  bone:        '#EAE5DA',
-  smoke:       '#9A9389',
-  mist:        '#6B655D',
-  amber:       '#D4A04E',
-  'amber-deep': '#A87A2E',
+  cream:    '#F5F0E8',
+  charcoal: '#1a1a1a',
+  p2v:      '#c0392b',
+  brand: {
+    red:        '#c0392b',
+    'red-dark': '#a93226',
+    'red-light': '#e74c3c',
+  },
+  'warm-white': '#FAFAF7',
+  muted:        '#888888',
+  'p2v-border': '#E8E4DC',
 }
 ```
 
-Border opacities are applied inline (`border-bone/10`, `border-bone/25`)
+Border opacities are applied inline (`border-charcoal/12`, `border-charcoal/25`)
 rather than as named tokens — gives flexibility without proliferating
 tokens.
 
@@ -85,65 +81,61 @@ no render-blocking external request.
 | Blog post H1 | `font-display text-[clamp(2.2rem,5vw,3.6rem)] leading-[1.08]` |
 | Section H2 | `font-display text-4xl md:text-5xl font-bold leading-tight` |
 | Card H3 | `font-display text-xl md:text-2xl font-bold leading-tight` |
-| Editorial label | `text-[10px] tracking-[0.4em] uppercase text-smoke` |
-| Body paragraph | `text-base md:text-lg leading-relaxed text-bone/85` |
-| Secondary body | `text-charcoal/55` → now `text-smoke` |
+| Editorial label | `text-[10px] tracking-[0.4em] uppercase text-charcoal/45` |
+| Body paragraph | `text-base md:text-lg leading-relaxed text-charcoal/88` |
+| Secondary body | `text-charcoal/55` |
 
 ## Component patterns
 
 ### Surface hierarchy
 
-- **Page background**: `bg-ink` (everywhere by default — `<body>` carries it)
-- **Card / panel**: `bg-pitch border border-line` for elevated content
-- **Reading band**: `bg-paper` for the blog article body specifically — slightly lifted from `ink` to reduce eye fatigue on long-form reading
+- **Page background**: `bg-cream` (everywhere by default — `<body>` carries it)
+- **Card / panel**: `bg-cream border border-charcoal/10` or `bg-warm-white`
+- **Dark band moment** (Contact, Footer): `bg-charcoal text-cream`
 
 ### CTAs
 
-- **Primary**: `bg-bone text-ink hover:bg-amber transition-colors` —
-  classic luxury "white pill on black" with the warm amber hover for
-  cinematic flourish
-- **Secondary**: `border border-line-strong text-bone hover:border-bone hover:text-amber`
-- **Tertiary / link**: `text-bone underline decoration-line underline-offset-3 hover:decoration-amber`
+- **Primary**: `bg-p2v text-cream hover:bg-charcoal transition-colors` —
+  red filled pill that darkens to charcoal on hover.
+- **Secondary**: `border border-charcoal/20 text-charcoal hover:border-charcoal/50`
+- **Tertiary / link**: `text-charcoal/40 hover:text-p2v transition-colors`
 
 ### Accent moments
 
-Amber is reserved. It earns its colour. Use it for:
+Brand red (`p2v`) is the system's chromatic moment. Used for:
 
-- The italic emphasis word in a headline: `<em class="not-italic text-amber">Done Right.</em>`
-- The thin red-rule replacement under section headings: `<div class="w-8 h-px bg-amber" />`
-- The brand-red play button on VlogCard / VlogPlayer (now `bg-amber/85`)
-- The CTA hover state — `hover:bg-amber`
-- The Founders Day-1-arrival diamond in the Marquee — was `text-p2v`, now `text-amber`
-
-Never use amber for default body text, default borders, or unaccented surfaces.
+- The italic emphasis word in a headline: `<em class="not-italic text-p2v">Done Right.</em>`
+- The thin red rule under section headings: `<div class="w-8 h-px bg-p2v" />`
+- The play button on VlogCard / VlogPlayer (red filled circle)
+- Primary CTA fill: `bg-p2v text-cream`
+- Editorial italic links inside articles: `.tiptap-link { color: #c0392b }`
 
 ### Loader
 
-The liquid brand-reveal loader was originally white → crimson on charcoal.
-Under After Hours it reads as: ink bg → glass sweep → bone "P2V Labs"
-text settles → faint amber rule materialises below. Same GSAP timeline,
-new palette. (See `components/layout/Loader.jsx`.)
+The liquid brand-reveal loader: charcoal screen → glass sweeps across
+→ cream wash bleeds in behind it → "P2V Labs" white text bleeds into
+deep crimson via SVG turbulence/displacement filter. Settles to a
+cream page beneath. (See `components/layout/Loader.jsx` + `app/globals.css → #liquid-loader`.)
 
 ### Forms
 
-- Input field: `bg-transparent border border-line text-bone placeholder-smoke/60 focus:border-bone`
-- Chip (multi-select for service interest etc.): `border border-line text-smoke hover:border-line-strong hover:text-bone` (idle) → `bg-bone text-ink border-bone` (active)
-- Submit button: primary CTA pattern above
+- Input field: `bg-transparent border border-charcoal/15 text-charcoal placeholder-charcoal/35 focus:border-charcoal`
+- Chip (multi-select for service interest etc.): `border border-charcoal/18 text-charcoal/55 hover:border-charcoal/40 hover:text-charcoal` (idle) → `bg-charcoal text-cream border-charcoal` (active)
+- Submit button: primary CTA pattern above (`bg-p2v text-cream hover:bg-charcoal`)
 
 ### Photography & video
 
-Photography in the Reel + on blog covers naturally pops on dark
-backgrounds. **Do not** apply any dark-mode tint / filter to user
-photography — the dark surface is the matting. Borders around photos
-use `border-line` (1px, low opacity).
+Photography in the Reel + on blog covers needs to pop against the
+warm cream backdrop. Borders around photos use `border-charcoal/10`
+(1px, low opacity).
 
 ## Hard NO list
 
-- No bright primary fills (red, blue, green) — the brand is restrained, not loud.
-- No coloured shadows (`rgba(212,160,78,...)`) on floating elements — solid borders or pure dark shadows only.
-- No "Anthropic-warm-cream + red accent" combinations — that's the previous system, now retired.
-- No gradient buttons or glassmorphism (loader is the one exception, ported from previous system).
-- No light-mode sections inside the dark site — if a band needs visual separation, use `bg-pitch` not `bg-bone`.
+- No dark/purple-blue gradients.
+- No glassmorphism in product UI (loader is the one allowed exception).
+- No neon, no particle fields, no animated blobs.
+- No generic AI-SaaS aesthetic.
+- No mock data anywhere.
 
 ## File map (where colour lives)
 
@@ -156,81 +148,84 @@ use `border-line` (1px, low opacity).
 | Detail pages | `components/blog/*.jsx`, `components/vlog/*.jsx` | BlogArticle, BlogCard, VlogCard, VlogPlayer, DroppingSoon, PostCTA |
 | Forms | `components/ui/LeadForm.jsx`, `LeadFormModal.jsx` | Lead capture |
 | Reel | `components/reel/*.jsx`, `app/reel/page.jsx` | Portfolio grid |
-| SEO assets | `public/icon.png`, `apple-icon.png`, `og-image.jpg` | Square brand mark + OG share card — `ink` bg + `bone` text + `amber` accent |
+| SEO assets | `public/icon.png`, `apple-icon.png`, `og-image.jpg` | Square brand mark + OG share card — `p2v` red bg + `cream` text |
 
 ## Image generation specs
 
 When regenerating with PowerShell + System.Drawing:
 
-- **og-image.jpg** (1200×630): `bg = #0A0A0A` (ink), title "P2V Labs" centred in Georgia 140pt bold `#EAE5DA` (bone), subtitle "PIXELS · PURPOSE · VISUALS" 22pt Arial regular `#D4A04E` (amber) at ~75% opacity.
-- **icon.png** (192×192): `bg = #0A0A0A` (ink), "P2V" centred Georgia ~92pt bold `#EAE5DA` (bone). No subtitle (unreadable at 16×16).
+- **og-image.jpg** (1200×630): `bg = #c0392b` (p2v red), title "P2V Labs" centred in Georgia 140pt bold cream `rgb(245,240,232)`, subtitle "PIXELS · PURPOSE · VISUALS" 22pt Arial regular cream at ~86% opacity.
+- **icon.png** (192×192): `bg = #c0392b` (p2v red), "P2V" centred Georgia ~92pt bold cream. No subtitle (unreadable at 16×16).
 - **apple-icon.png** (180×180): same design as icon.png.
-
-Generation script lives in conversation history; rebuild with the
-PowerShell snippet using these hex values.
 
 ---
 
-# Previous — Editorial Cream (2026-05-15 → 2026-05-22)
+# Previous — After Hours (attempted 2026-05-22, reverted 2026-05-22)
 
-> **To revert:** give this section to a Claude session with the message
-> *"Switch the P2V Labs design system back to the Editorial Cream
+> **Why archived:** Shipped a cinematic-dark palette swap to differentiate
+> from the Anthropic-cream-and-red family the Editorial Cream system
+> shared. Reverted within hours — Vrithik didn't like the feel.
+>
+> **To re-apply:** give this section to a Claude session with the
+> message *"Switch the P2V Labs design system to the After Hours
 > palette spec'd in design.md. Update tailwind.config.js, globals.css,
 > every component file, and regenerate og-image.jpg + icon.png +
 > apple-icon.png with the colours below."*
 
-Editorial / Loewe / A24-inspired. Warm cream primary surface, charcoal
-body, single saturated red accent. Was retired because the
-`cream + red` combo read as Claude-adjacent (Anthropic uses the same
-warm cream + orange-red family).
+Cinematic dark. The site primary surface near-black; cream/bone
+reserved for typography and the occasional inverted band. A single
+restrained chromatic accent (warm amber) appears in italics, rules,
+and decorative moments — never as the default CTA fill.
 
 ## Tokens
 
 | Token | Hex | Use |
 |---|---|---|
-| `cream` | `#F5F0E8` | Primary surface — page bg |
-| `warm-white` | `#FAFAF7` | Slightly lighter card surface |
-| `charcoal` | `#1a1a1a` | Primary text, dark sections (Contact band, Footer), borders |
-| `p2v` | `#c0392b` | Brand red — CTAs, italic emphasis ("Done *Right.*"), accent rules |
-| `brand.red-dark` | `#a93226` | p2v hover |
-| `brand.red-light` | `#e74c3c` | p2v subtle variant |
-| `muted` | `#888888` | Subtitle / placeholder text |
-| `p2v-border` | `#E8E4DC` | Editorial card borders |
+| `ink` | `#0A0A0A` | Primary surface — page background |
+| `pitch` | `#16140F` | Secondary surface — cards, bands, modals |
+| `paper` | `#1A1813` | Tertiary surface — long-form reading body |
+| `bone` | `#EAE5DA` | Primary text on dark; high-contrast CTA fill; logo wordmark |
+| `smoke` | `#9A9389` | Secondary text on dark — captions, labels |
+| `mist` | `#6B655D` | Tertiary text — copyright, ultra-quiet metadata |
+| `amber` | `#D4A04E` | Accent — italic emphasis words, rules, hover states |
+| `amber-deep` | `#A87A2E` | Hover state for `amber`-coloured elements |
 
-### Tailwind config (revert reference)
+### Tailwind config (re-apply reference)
 
 ```js
 colors: {
-  cream:    '#F5F0E8',
-  charcoal: '#1a1a1a',
-  p2v:      '#c0392b',
-  brand: {
-    red:        '#c0392b',
-    'red-dark': '#a93226',
-    'red-light': '#e74c3c',
-  },
-  'warm-white': '#FAFAF7',
-  muted:        '#888888',
-  'p2v-border': '#E8E4DC',
+  ink:          '#0A0A0A',
+  pitch:        '#16140F',
+  paper:        '#1A1813',
+  bone:         '#EAE5DA',
+  smoke:        '#9A9389',
+  mist:         '#6B655D',
+  amber:        '#D4A04E',
+  'amber-deep': '#A87A2E',
 }
 ```
 
-## Component patterns (revert reference)
+## Component patterns (re-apply reference)
 
-- **Page bg**: `bg-cream`
-- **Body text**: `text-charcoal` (with `/55`, `/65`, `/85` opacities for hierarchy)
-- **Border**: `border-charcoal/10` to `border-charcoal/20`
-- **Primary CTA**: `bg-p2v text-cream hover:bg-charcoal`
-- **Secondary CTA**: `border border-charcoal/20 text-charcoal hover:border-charcoal/50`
-- **Italic emphasis**: `<em class="not-italic text-p2v">…</em>`
-- **Dark section** (Contact band, Footer): `bg-charcoal text-cream`
-- **Reading band**: same `bg-cream` as page (no separate reading surface)
-- **Editorial label**: `text-[10px] tracking-[0.4em] uppercase text-charcoal/45`
+- **Page bg**: `bg-ink`
+- **Body text on dark**: `text-bone` (with `/85`, `/65`, `/55` opacities for hierarchy) OR `text-smoke` for secondary
+- **Border**: `border-bone/12` to `border-bone/25`
+- **Primary CTA**: `bg-bone text-ink hover:bg-amber transition-colors` — luxury bone pill, amber hover
+- **Secondary CTA**: `border border-bone/30 text-bone hover:border-bone hover:text-amber`
+- **Italic emphasis**: `<em class="not-italic text-amber">…</em>`
+- **Dark band moment** (Contact, Footer): `bg-pitch` (slightly lifted from ink — subtle band)
+- **Reading band** (blog article body): `bg-paper` (slightly lifted from ink for reading comfort)
+- **Editorial label**: `text-[10px] tracking-[0.4em] uppercase text-smoke`
+- **Loader**: ink screen → glass sweep → bone "P2V Labs" base + amber bleed layer via the same SVG turbulence/displacement filter. Wash colour `pitch` (near-invisible lift, not the cream wash from Editorial Cream).
+- **Cursor**: amber dot + amber/55 ring (not red as in Editorial Cream)
+- **Shutter strips**: bone strips on ink page (inverted — they were dark strips on cream page in Editorial Cream)
+- **Scroll-to-top button**: bone pill, ink chevron, amber hover
 
-## Image generation (revert reference)
+## Image generation (re-apply reference)
 
-- og-image.jpg: `bg = #c0392b` (p2v red), title `#EAE5DA` bone, subtitle `rgba(234,229,218,0.86)`.
-- icon.png + apple-icon.png: `bg = #c0392b` (p2v red), "P2V" `#EAE5DA` bone.
+- **icon.png** (192×192): `bg = #0A0A0A` (ink), "P2V" centred Georgia 92pt bold `#EAE5DA` (bone). No subtitle.
+- **apple-icon.png** (180×180): same as icon.png.
+- **og-image.jpg** (1200×630): `bg = #0A0A0A` (ink), title "P2V Labs" Georgia 140pt bold `#EAE5DA` (bone), subtitle "PIXELS · PURPOSE · VISUALS" 22pt Arial `#D4A04E` (amber). Decorative amber rule under title at y=395px, x=540-660.
 
 ---
 

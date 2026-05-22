@@ -25,22 +25,22 @@ export default function BlogArticle({ post }) {
       <header className="px-5 md:px-10 pt-12 md:pt-16 max-w-3xl mx-auto">
         <Link
           href="/blog"
-          className="text-[10px] tracking-[0.2em] uppercase text-bone/40 hover:text-amber transition-colors"
+          className="text-[10px] tracking-[0.2em] uppercase text-charcoal/40 hover:text-p2v transition-colors"
         >
           ← The Journal
         </Link>
 
-        <p className="text-[10px] tracking-[0.3em] uppercase text-bone/45 mt-9 mb-4">
+        <p className="text-[10px] tracking-[0.3em] uppercase text-charcoal/45 mt-9 mb-4">
           {date}
-          {post.author && <span className="text-bone/30"> · {post.author}</span>}
+          {post.author && <span className="text-charcoal/30"> · {post.author}</span>}
         </p>
 
-        <h1 className="font-display font-bold text-[clamp(2.2rem,5vw,3.6rem)] leading-[1.08] tracking-tight text-bone mb-4">
+        <h1 className="font-display font-bold text-[clamp(2.2rem,5vw,3.6rem)] leading-[1.08] tracking-tight text-charcoal mb-4">
           {post.title}
         </h1>
 
         {post.excerpt && (
-          <p className="text-lg md:text-xl text-bone/60 leading-relaxed mb-2">
+          <p className="text-lg md:text-xl text-charcoal/60 leading-relaxed mb-2">
             {post.excerpt}
           </p>
         )}
@@ -51,7 +51,7 @@ export default function BlogArticle({ post }) {
       {post.cover_image_url && (
         <div className="mt-10 md:mt-12 px-5 md:px-10 max-w-3xl mx-auto">
           <div
-            className="relative w-full overflow-hidden border border-bone/10"
+            className="relative w-full overflow-hidden border border-charcoal/10"
             style={{ aspectRatio: '16/9', backgroundColor: '#E8E4DF' }}
           >
             <Image
@@ -74,7 +74,7 @@ export default function BlogArticle({ post }) {
             dangerouslySetInnerHTML={{ __html: post.content_html }}
           />
         ) : (
-          <p className="text-bone/40 italic">This post has no content yet.</p>
+          <p className="text-charcoal/40 italic">This post has no content yet.</p>
         )}
       </div>
 

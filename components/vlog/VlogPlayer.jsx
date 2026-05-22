@@ -21,7 +21,7 @@ export default function VlogPlayer({ youtubeId, title, thumbnailUrl, thumbnailAl
 
   return (
     <div
-      className="relative w-full overflow-hidden border border-bone/10 bg-pitch"
+      className="relative w-full overflow-hidden border border-charcoal/10 bg-charcoal"
       style={{ aspectRatio: '16/9' }}
     >
       {playing ? (
@@ -49,9 +49,9 @@ export default function VlogPlayer({ youtubeId, title, thumbnailUrl, thumbnailAl
               priority
             />
           )}
-          <div className="absolute inset-0 bg-ink/15 group-hover:bg-amber/5 transition-colors" />
+          <div className="absolute inset-0 bg-charcoal/15 group-hover:bg-charcoal/5 transition-colors" />
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-amber/85 backdrop-blur flex items-center justify-center group-hover:scale-110 group-hover:bg-amber transition-all shadow-2xl">
+            <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-p2v/85 backdrop-blur flex items-center justify-center group-hover:scale-110 group-hover:bg-p2v transition-all shadow-2xl">
               <Icon n="play" s={32} c="#F5F0E8" style={{ marginLeft: 4 }} />
             </div>
           </div>
