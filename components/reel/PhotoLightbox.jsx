@@ -29,7 +29,7 @@ export default function PhotoLightbox({ items, index, onClose, onChange }) {
   if (!item) return null
 
   return (
-    <div className="fixed inset-0 z-50 bg-charcoal/96 flex flex-col md:flex-row">
+    <div className="fixed inset-0 z-50 bg-ink/96 flex flex-col md:flex-row">
       <div
         className="flex-1 relative flex items-center justify-center p-4 md:p-10 min-h-[55vw] md:min-h-0"
         onClick={onClose}
@@ -37,7 +37,7 @@ export default function PhotoLightbox({ items, index, onClose, onChange }) {
         {index > 0 && (
           <button
             onClick={(e) => { e.stopPropagation(); onChange(index - 1) }}
-            className="absolute left-3 md:left-5 z-10 w-9 h-9 border border-cream/20 flex items-center justify-center text-cream hover:border-cream/50 hover:bg-cream/5 transition-colors"
+            className="absolute left-3 md:left-5 z-10 w-9 h-9 border border-bone/20 flex items-center justify-center text-bone hover:border-bone/50 hover:bg-ink/5 transition-colors"
             aria-label="Previous"
           >
             <Icon n="arrow" s={16} c="currentColor" style={{ transform: 'rotate(180deg)' }} />
@@ -57,32 +57,32 @@ export default function PhotoLightbox({ items, index, onClose, onChange }) {
         {index < items.length - 1 && (
           <button
             onClick={(e) => { e.stopPropagation(); onChange(index + 1) }}
-            className="absolute right-3 md:right-5 z-10 w-9 h-9 border border-cream/20 flex items-center justify-center text-cream hover:border-cream/50 hover:bg-cream/5 transition-colors"
+            className="absolute right-3 md:right-5 z-10 w-9 h-9 border border-bone/20 flex items-center justify-center text-bone hover:border-bone/50 hover:bg-ink/5 transition-colors"
             aria-label="Next"
           >
             <Icon n="arrow" s={16} c="currentColor" />
           </button>
         )}
 
-        <p className="absolute bottom-3 left-1/2 -translate-x-1/2 text-[9px] tracking-[0.3em] uppercase text-cream/30">
+        <p className="absolute bottom-3 left-1/2 -translate-x-1/2 text-[9px] tracking-[0.3em] uppercase text-bone/30">
           {index + 1} / {items.length}
         </p>
       </div>
 
-      <div className="md:w-72 bg-cream flex flex-col p-6 overflow-y-auto border-t border-charcoal/20 md:border-t-0 md:border-l">
+      <div className="md:w-72 bg-ink flex flex-col p-6 overflow-y-auto border-t border-bone/20 md:border-t-0 md:border-l">
         <div className="flex items-center justify-between mb-6">
           <Tag red>{item.subcategory}</Tag>
           <button
             onClick={onClose}
-            className="w-7 h-7 flex items-center justify-center text-charcoal/40 hover:text-charcoal transition-colors"
+            className="w-7 h-7 flex items-center justify-center text-bone/40 hover:text-bone transition-colors"
             aria-label="Close"
           >
             <Icon n="x" s={16} />
           </button>
         </div>
-        <h2 className="font-display text-xl font-bold text-charcoal leading-tight mb-1">{item.title}</h2>
-        <p className="text-xs text-charcoal/45 mb-4">{item.client} · {item.date}</p>
-        <p className="text-sm text-charcoal/60 leading-relaxed mb-5">{item.description}</p>
+        <h2 className="font-display text-xl font-bold text-bone leading-tight mb-1">{item.title}</h2>
+        <p className="text-xs text-bone/45 mb-4">{item.client} · {item.date}</p>
+        <p className="text-sm text-bone/60 leading-relaxed mb-5">{item.description}</p>
         <div className="flex flex-wrap gap-1.5 mt-auto">
           {item.tags.map((t) => <Tag key={t}>{t}</Tag>)}
         </div>

@@ -49,31 +49,31 @@ export default function ContactSection() {
   }, [])
 
   return (
-    <section ref={sectionRef} id="contact" className="py-24 px-5 md:px-10 lg:px-20 bg-charcoal">
+    <section ref={sectionRef} id="contact" className="py-24 px-5 md:px-10 lg:px-20 bg-pitch">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7">
-            <h2 className="contact-heading font-display text-4xl md:text-6xl font-bold text-cream leading-tight mb-6 will-anim">
+            <h2 className="contact-heading font-display text-4xl md:text-6xl font-bold text-bone leading-tight mb-6 will-anim">
               Ready to tell your<br />
-              <em className="not-italic text-p2v">story?</em>
+              <em className="not-italic text-amber">story?</em>
             </h2>
-            <p className="contact-desc text-cream/50 text-lg leading-relaxed max-w-xl will-anim">
+            <p className="contact-desc text-bone/50 text-lg leading-relaxed max-w-xl will-anim">
               We take on select projects each month to ensure every client gets our
               full attention. Let's talk about yours.
             </p>
           </div>
           <div className="lg:col-span-5 space-y-4">
             <a href="mailto:hello@p2vlabs.in"
-              className="contact-btn flex items-center justify-between px-6 py-4 bg-p2v text-cream hover:bg-p2v/90 transition-colors group will-anim">
+              className="contact-btn flex items-center justify-between px-6 py-4 bg-bone text-ink hover:bg-amber/90 transition-colors group will-anim">
               <span className="text-xs tracking-[0.15em] uppercase font-medium">Email Us</span>
               <Icon n="aur" s={17} />
             </a>
             <a href="https://wa.me/917048824616"
-              className="contact-btn flex items-center justify-between px-6 py-4 border border-cream/18 text-cream hover:border-cream/40 transition-colors will-anim">
+              className="contact-btn flex items-center justify-between px-6 py-4 border border-bone/18 text-bone hover:border-bone/40 transition-colors will-anim">
               <span className="text-xs tracking-[0.15em] uppercase font-medium">WhatsApp</span>
               <Icon n="arrow" s={17} />
             </a>
-            <p className="text-cream/25 text-xs pt-2">
+            <p className="text-bone/25 text-xs pt-2">
               hello@p2vlabs.in · Ahmedabad, Gujarat, India
             </p>
           </div>

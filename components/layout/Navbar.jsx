@@ -69,8 +69,8 @@ export default function Navbar() {
   }
 
   return (
-    <nav className={`fixed top-0 inset-x-0 z-50 border-b border-charcoal/10 transition-all duration-300 ${
-      compact ? 'glass-nav' : 'bg-cream/95 backdrop-blur-sm'
+    <nav className={`fixed top-0 inset-x-0 z-50 border-b border-bone/10 transition-all duration-300 ${
+      compact ? 'glass-nav' : 'bg-ink/95 backdrop-blur-sm'
     }`}>
       <div className={`max-w-7xl mx-auto px-5 md:px-10 flex items-center justify-between transition-all duration-300 ${
         compact ? 'h-16 md:h-12' : 'h-16'
@@ -89,17 +89,17 @@ export default function Navbar() {
               onMouseLeave={onLeave}
               className={`nav-dir-link relative text-xs tracking-[0.15em] uppercase font-medium pb-0.5 border-b transition-colors overflow-hidden ${
                 isActive(id, path)
-                  ? 'border-p2v text-p2v'
-                  : 'border-transparent text-charcoal/60 hover:text-charcoal hover:border-charcoal/30'
+                  ? 'border-amber text-amber'
+                  : 'border-transparent text-bone/60 hover:text-bone hover:border-bone/30'
               }`}
             >
               <span className="nav-text-out block">{label}</span>
               <span className="nav-text-in absolute inset-0 flex items-center justify-center opacity-0">{label}</span>
             </button>
           ))}
-          <div className="w-px h-4 bg-charcoal/15" />
+          <div className="w-px h-4 bg-ink/15" />
           <a href={CLIENT_LOGIN_URL}
-            className="text-xs tracking-[0.15em] uppercase px-5 py-2.5 bg-charcoal text-cream font-medium hover:bg-p2v transition-colors">
+            className="text-xs tracking-[0.15em] uppercase px-5 py-2.5 bg-bone text-ink font-medium hover:bg-amber transition-colors">
             Client Login
           </a>
         </div>
@@ -112,20 +112,20 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {open && (
-        <div className="md:hidden bg-cream border-t border-charcoal/10 px-5 py-6 space-y-1">
+        <div className="md:hidden bg-ink border-t border-bone/10 px-5 py-6 space-y-1">
           {PRIMARY.map(({ id, label, path }) => (
             <button
               key={id}
               onClick={() => go(path)}
-              className="block w-full text-left py-3 text-sm font-medium text-charcoal/70 hover:text-p2v transition-colors"
+              className="block w-full text-left py-3 text-sm font-medium text-bone/70 hover:text-amber transition-colors"
             >
               {label}
             </button>
           ))}
-          <div className="pt-3 mt-3 border-t border-charcoal/10">
+          <div className="pt-3 mt-3 border-t border-bone/10">
             <a href={CLIENT_LOGIN_URL}
               onClick={() => setOpen(false)}
-              className="block w-full mt-1 py-3 bg-charcoal text-cream text-xs tracking-[0.15em] uppercase font-medium hover:bg-p2v transition-colors text-center">
+              className="block w-full mt-1 py-3 bg-bone text-ink text-xs tracking-[0.15em] uppercase font-medium hover:bg-amber transition-colors text-center">
               Client Login
             </a>
           </div>

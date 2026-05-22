@@ -120,28 +120,28 @@ export default function VideoModal({ item, onClose }) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 md:p-8 bg-charcoal/92"
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 md:p-8 bg-ink/92"
          onClick={onClose}>
       <div
-        className={`w-full bg-cream shadow-2xl ${item.orientation === 'portrait' ? 'max-w-sm' : 'max-w-4xl'}`}
+        className={`w-full bg-ink shadow-2xl ${item.orientation === 'portrait' ? 'max-w-sm' : 'max-w-4xl'}`}
         onClick={(e) => e.stopPropagation()}
       >
 
-        <div className="flex items-center justify-between px-5 py-3.5 border-b border-charcoal/10">
+        <div className="flex items-center justify-between px-5 py-3.5 border-b border-bone/10">
           <div className="flex items-center gap-3">
-            <span className="text-[9px] tracking-[0.2em] uppercase text-p2v font-medium">{item.subcategory}</span>
-            <span className="text-charcoal/20">·</span>
-            <span className="text-[9px] tracking-[0.15em] uppercase text-charcoal/40">{item.date}</span>
+            <span className="text-[9px] tracking-[0.2em] uppercase text-amber font-medium">{item.subcategory}</span>
+            <span className="text-bone/20">·</span>
+            <span className="text-[9px] tracking-[0.15em] uppercase text-bone/40">{item.date}</span>
             {item.duration && (
               <>
-                <span className="text-charcoal/20">·</span>
-                <span className="text-[9px] tracking-[0.15em] uppercase text-charcoal/40">{item.duration}</span>
+                <span className="text-bone/20">·</span>
+                <span className="text-[9px] tracking-[0.15em] uppercase text-bone/40">{item.duration}</span>
               </>
             )}
           </div>
           <button
             onClick={onClose}
-            className="w-8 h-8 flex items-center justify-center text-charcoal/40 hover:text-charcoal hover:bg-charcoal/5 transition-colors"
+            className="w-8 h-8 flex items-center justify-center text-bone/40 hover:text-bone hover:bg-amber/5 transition-colors"
             aria-label="Close"
           >
             <Icon n="x" s={17} />
@@ -149,7 +149,7 @@ export default function VideoModal({ item, onClose }) {
         </div>
 
         <div
-          className="relative bg-charcoal select-none"
+          className="relative bg-pitch select-none"
           style={{ paddingBottom: item.orientation === 'portrait' ? '177.78%' : '56.25%' }}
           onMouseMove={resetHide}
           onMouseLeave={() => { if (playing) setCtrlShow(false) }}
@@ -165,7 +165,7 @@ export default function VideoModal({ item, onClose }) {
 
           {!playing && (
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              <div className="w-16 h-16 border-2 border-cream/60 flex items-center justify-center bg-charcoal/30">
+              <div className="w-16 h-16 border-2 border-bone/60 flex items-center justify-center bg-ink/30">
                 <Icon n="play" s={26} c="white" style={{ marginLeft: '4px', opacity: 0.9 }} />
               </div>
             </div>
@@ -176,11 +176,11 @@ export default function VideoModal({ item, onClose }) {
             style={{ opacity: ctrlShow ? 1 : 0, background: 'linear-gradient(transparent,rgba(0,0,0,0.75))' }}
           >
             <div className="px-3 pt-3 pb-1 cursor-pointer" onClick={seek}>
-              <div className="relative h-1 bg-cream/20">
-                <div className="absolute inset-y-0 left-0 bg-cream/30" style={{ width: `${buffered}%` }} />
+              <div className="relative h-1 bg-ink/20">
+                <div className="absolute inset-y-0 left-0 bg-ink/30" style={{ width: `${buffered}%` }} />
                 <div className="absolute inset-y-0 left-0" style={{ width: `${progress}%`, background: '#c0392b' }} />
                 <div
-                  className="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-p2v border-2 border-cream shadow"
+                  className="absolute top-1/2 -translate-y-1/2 w-3 h-3 rounded-full bg-amber border-2 border-bone shadow"
                   style={{ left: `calc(${progress}% - 6px)` }}
                 />
               </div>
@@ -188,7 +188,7 @@ export default function VideoModal({ item, onClose }) {
 
             <div className="flex items-center gap-2 px-3 pb-2.5 pt-1">
               <button onClick={togglePlay}
-                className="w-7 h-7 flex items-center justify-center text-cream hover:text-cream/70 transition-colors"
+                className="w-7 h-7 flex items-center justify-center text-bone hover:text-bone/70 transition-colors"
                 aria-label={playing ? 'Pause' : 'Play'}>
                 {playing ? (
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="white">
@@ -200,14 +200,14 @@ export default function VideoModal({ item, onClose }) {
                 )}
               </button>
 
-              <span className="text-[10px] text-cream/70 tabular-nums min-w-[70px]">
+              <span className="text-[10px] text-bone/70 tabular-nums min-w-[70px]">
                 {curTime} / {durTime}
               </span>
 
               <div className="flex-1" />
 
               <button onClick={toggleMute}
-                className="w-7 h-7 flex items-center justify-center text-cream hover:text-cream/70 transition-colors"
+                className="w-7 h-7 flex items-center justify-center text-bone hover:text-bone/70 transition-colors"
                 aria-label={muted ? 'Unmute' : 'Mute'}>
                 {muted || volume === 0 ? (
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
@@ -226,21 +226,21 @@ export default function VideoModal({ item, onClose }) {
                 type="range" min="0" max="1" step="0.05"
                 value={muted ? 0 : volume}
                 onChange={changeVol}
-                className="w-16 h-1 cursor-pointer accent-p2v"
+                className="w-16 h-1 cursor-pointer accent-amber"
                 aria-label="Volume"
               />
 
               <div className="relative">
                 <button onClick={() => setSpeedMenu(m => !m)}
-                  className="text-[10px] text-cream/70 hover:text-cream px-1.5 py-0.5 border border-cream/20 hover:border-cream/50 transition-colors tabular-nums">
+                  className="text-[10px] text-bone/70 hover:text-bone px-1.5 py-0.5 border border-bone/20 hover:border-bone/50 transition-colors tabular-nums">
                   {speed}×
                 </button>
                 {speedMenu && (
-                  <div className="absolute bottom-full right-0 mb-1 bg-charcoal border border-cream/15 py-1 min-w-[56px]">
+                  <div className="absolute bottom-full right-0 mb-1 bg-pitch border border-bone/15 py-1 min-w-[56px]">
                     {SPEEDS.map((s) => (
                       <button key={s} onClick={() => changeSpeed(s)}
                         className={`block w-full text-[10px] px-3 py-1 text-left tabular-nums transition-colors ${
-                          s === speed ? 'text-p2v' : 'text-cream/70 hover:text-cream'
+                          s === speed ? 'text-amber' : 'text-bone/70 hover:text-bone'
                         }`}>
                         {s}×
                       </button>
@@ -250,7 +250,7 @@ export default function VideoModal({ item, onClose }) {
               </div>
 
               <button onClick={goFullscreen}
-                className="w-7 h-7 flex items-center justify-center text-cream hover:text-cream/70 transition-colors"
+                className="w-7 h-7 flex items-center justify-center text-bone hover:text-bone/70 transition-colors"
                 aria-label="Fullscreen">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2">
                   <polyline points="15 3 21 3 21 9"/>
@@ -264,9 +264,9 @@ export default function VideoModal({ item, onClose }) {
         </div>
 
         <div className="p-5 md:p-7">
-          <h2 className="font-display text-2xl font-bold text-charcoal mb-1">{item.title}</h2>
-          <p className="text-sm text-charcoal/45 mb-4">{item.client}</p>
-          <p className="text-sm text-charcoal/60 leading-relaxed mb-5">{item.description}</p>
+          <h2 className="font-display text-2xl font-bold text-bone mb-1">{item.title}</h2>
+          <p className="text-sm text-bone/45 mb-4">{item.client}</p>
+          <p className="text-sm text-bone/60 leading-relaxed mb-5">{item.description}</p>
           <div className="flex flex-wrap gap-1.5">
             {item.tags.map((t) => <Tag key={t} red>{t}</Tag>)}
           </div>

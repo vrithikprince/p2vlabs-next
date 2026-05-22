@@ -89,39 +89,39 @@ export default function Hero() {
   return (
     <section ref={heroRef} className="hero-section min-h-[92vh] flex flex-col justify-center px-5 md:px-10 lg:px-20 py-20">
       <div className="max-w-7xl mx-auto w-full">
-        <p className="hero-tagline text-[10px] tracking-[0.4em] uppercase text-charcoal/45 mb-10 will-anim">
+        <p className="hero-tagline text-[10px] tracking-[0.4em] uppercase text-bone/45 mb-10 will-anim">
           Ahmedabad, India · Est. 2026
         </p>
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-end">
           <div className="lg:col-span-8">
-            <h1 className="hero-headline font-display font-bold text-[clamp(3rem,9vw,7.5rem)] leading-[1.05] tracking-tight text-charcoal will-anim">
+            <h1 className="hero-headline font-display font-bold text-[clamp(3rem,9vw,7.5rem)] leading-[1.05] tracking-tight text-bone will-anim">
               <span className="clip-wrap"><span className="hero-word block">Visual</span></span>
               <span className="clip-wrap"><span className="hero-word block">Storytelling</span></span>
-              <span className="clip-wrap"><em className="hero-word not-italic text-p2v block">Done Right.</em></span>
+              <span className="clip-wrap"><em className="hero-word not-italic text-amber block">Done Right.</em></span>
             </h1>
           </div>
 
           <div className="hero-tagline lg:col-span-4 space-y-5 lg:pb-3 will-anim">
-            <div className="border border-charcoal/15 p-6">
-              <p className="font-display text-lg italic text-charcoal/60 leading-snug">
+            <div className="border border-bone/15 p-6">
+              <p className="font-display text-lg italic text-bone/60 leading-snug">
                 "Pixels · Purpose · Visuals"
               </p>
-              <div className="mt-4 pt-4 border-t border-charcoal/10">
-                <p className="text-xs text-charcoal/40 leading-relaxed">
+              <div className="mt-4 pt-4 border-t border-bone/10">
+                <p className="text-xs text-bone/40 leading-relaxed">
                   We bridge data-driven strategy with cinematic craft — creating content that performs as well as it looks.
                 </p>
               </div>
             </div>
 
             <button onClick={() => router.push('/reel')}
-              className="hero-cta w-full flex items-center justify-between px-5 py-4 bg-p2v text-cream hover:bg-charcoal transition-colors group will-anim">
+              className="hero-cta w-full flex items-center justify-between px-5 py-4 bg-bone text-ink hover:bg-amber transition-colors group will-anim">
               <span className="text-xs tracking-[0.15em] uppercase font-medium">View Our Reel</span>
               <Icon n="aur" s={17} />
             </button>
 
             <button onClick={() => scrollTo('contact')}
-              className="hero-cta w-full flex items-center justify-between px-5 py-4 border border-charcoal/20 text-charcoal hover:border-charcoal/50 transition-colors group will-anim">
+              className="hero-cta w-full flex items-center justify-between px-5 py-4 border border-bone/20 text-bone hover:border-bone/50 transition-colors group will-anim">
               <span className="text-xs tracking-[0.15em] uppercase font-medium">Get In Touch</span>
               <Icon n="arrow" s={17} />
             </button>
@@ -130,8 +130,8 @@ export default function Hero() {
 
         {/* Scroll indicator */}
         <div className="scroll-indicator mt-16 flex items-center gap-4 will-anim">
-          <div className="w-8 h-px bg-charcoal/30" />
-          <p className="text-[10px] tracking-[0.3em] uppercase text-charcoal/35">Scroll to explore</p>
+          <div className="w-8 h-px bg-ink/30" />
+          <p className="text-[10px] tracking-[0.3em] uppercase text-bone/35">Scroll to explore</p>
         </div>
       </div>
     </section>

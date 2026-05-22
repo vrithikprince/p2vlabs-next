@@ -27,18 +27,18 @@ export default function PostCTA({ kind = 'blog', slug, title }) {
   return (
     <>
       <aside className="px-5 md:px-10 mt-16 md:mt-20 max-w-3xl mx-auto">
-        <div className="border border-charcoal/12 p-7 md:p-10 bg-charcoal/[0.025]">
+        <div className="border border-bone/12 p-7 md:p-10 bg-ink/[0.025]">
 
-          <p className="text-[10px] tracking-[0.4em] uppercase text-charcoal/45 mb-4">
+          <p className="text-[10px] tracking-[0.4em] uppercase text-bone/45 mb-4">
             {kind === 'vlog' ? 'Liked this film?' : 'Liked this read?'}
           </p>
 
-          <h2 className="font-display text-2xl md:text-3xl font-bold text-charcoal leading-tight mb-5">
+          <h2 className="font-display text-2xl md:text-3xl font-bold text-bone leading-tight mb-5">
             Got a project in mind?{' '}
-            <em className="not-italic text-p2v">We'd love to hear about it.</em>
+            <em className="not-italic text-amber">We'd love to hear about it.</em>
           </h2>
 
-          <p className="text-charcoal/60 leading-relaxed mb-7 max-w-lg">
+          <p className="text-bone/60 leading-relaxed mb-7 max-w-lg">
             We take on a small number of projects every month. The faster you brief us,
             the better we can plan around your timeline.
           </p>
@@ -47,7 +47,7 @@ export default function PostCTA({ kind = 'blog', slug, title }) {
             <button
               type="button"
               onClick={() => setOpen(true)}
-              className="inline-flex items-center justify-between gap-3 px-5 py-4 bg-p2v text-cream hover:bg-charcoal transition-colors"
+              className="inline-flex items-center justify-between gap-3 px-5 py-4 bg-bone text-ink hover:bg-amber transition-colors"
             >
               <span className="text-xs tracking-[0.15em] uppercase font-medium">Send a brief</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -60,7 +60,7 @@ export default function PostCTA({ kind = 'blog', slug, title }) {
               href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-between gap-3 px-5 py-4 border border-charcoal/20 text-charcoal hover:border-charcoal/50 transition-colors"
+              className="inline-flex items-center justify-between gap-3 px-5 py-4 border border-bone/20 text-bone hover:border-bone/50 transition-colors"
             >
               <span className="text-xs tracking-[0.15em] uppercase font-medium">WhatsApp us</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
@@ -71,7 +71,7 @@ export default function PostCTA({ kind = 'blog', slug, title }) {
 
             <a
               href="mailto:hello@p2vlabs.in"
-              className="inline-flex items-center justify-between gap-3 px-5 py-4 border border-charcoal/20 text-charcoal hover:border-charcoal/50 transition-colors"
+              className="inline-flex items-center justify-between gap-3 px-5 py-4 border border-bone/20 text-bone hover:border-bone/50 transition-colors"
             >
               <span className="text-xs tracking-[0.15em] uppercase font-medium">Email</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">

@@ -44,13 +44,13 @@ export default function Marquee() {
 
   const all = [...ITEMS, ...ITEMS]
   return (
-    <div className="overflow-hidden py-5 border-y border-charcoal/10 select-none"
+    <div className="overflow-hidden py-5 border-y border-bone/10 select-none"
          style={{ userSelect: 'none' }}>
       <div ref={trackRef} style={{ display: 'inline-flex', whiteSpace: 'nowrap', willChange: 'transform' }}>
         {all.map((t, i) => (
           <span key={i} style={{ display: 'inline-flex', alignItems: 'center', paddingRight: '3.5rem' }}>
-            <span className="text-[11px] tracking-[0.3em] uppercase font-medium text-charcoal/35">{t}</span>
-            <span className="ml-14 text-p2v" style={{ fontSize: '0.45rem', lineHeight: 1 }}>◆</span>
+            <span className="text-[11px] tracking-[0.3em] uppercase font-medium text-bone/35">{t}</span>
+            <span className="ml-14 text-amber" style={{ fontSize: '0.45rem', lineHeight: 1 }}>◆</span>
           </span>
         ))}
       </div>

@@ -7,17 +7,18 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        cream:    '#F5F0E8',
-        charcoal: '#1a1a1a',
-        p2v:      '#c0392b',
-        brand: {
-          red:        '#c0392b',
-          'red-dark': '#a93226',
-          'red-light': '#e74c3c',
-        },
-        'warm-white': '#FAFAF7',
-        muted:        '#888888',
-        'p2v-border': '#E8E4DC',
+        /* After Hours palette (active, see design.md).
+         * Cinematic dark. Primary surface ink, type in bone, single
+         * amber accent. Bone is the high-contrast CTA fill; amber is
+         * the hover/emphasis chroma. */
+        ink:          '#0A0A0A',  // primary surface (page bg)
+        pitch:        '#16140F',  // secondary surface (cards, bands, modals)
+        paper:        '#1A1813',  // tertiary surface (long-form reading body)
+        bone:         '#EAE5DA',  // primary text on dark; CTA fill; logo
+        smoke:        '#9A9389',  // secondary text on dark
+        mist:         '#6B655D',  // tertiary text - captions, copyright
+        amber:        '#D4A04E',  // accent - italic emphasis, rules, hover
+        'amber-deep': '#A87A2E',  // amber hover state
       },
       fontFamily: {
         display: ['var(--font-playfair)', 'Georgia', 'serif'],
