@@ -35,7 +35,7 @@ export default function AboutSection() {
   }, [])
 
   return (
-    <section ref={sectionRef} id="about" className="py-24 px-5 md:px-10 lg:px-20">
+    <section ref={sectionRef} id="about" className="py-16 lg:py-24 px-5 md:px-10 lg:px-20">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
 
@@ -51,9 +51,16 @@ export default function AboutSection() {
               it's built on insight. We combine analytical thinking with cinematic execution to
               create work that performs as well as it looks.
             </p>
-            <p className="about-para text-charcoal/55 leading-relaxed text-[15px] will-anim">
+            <p className="about-para text-charcoal/55 leading-relaxed mb-5 text-[15px] will-anim">
               Based in Ahmedabad, we work with brands across India — from heritage businesses to
               emerging startups — helping them tell stories that stick.
+            </p>
+            <p className="about-para text-charcoal/55 leading-relaxed text-[15px] will-anim">
+              Led by <span className="text-charcoal">Vrithik Prince</span>, who previously
+              co-founded a Surat creative agency working with 50+ F&amp;B, retail, and lifestyle
+              brands. That run drove 120% average engagement growth, shipped 1,500+ visuals and
+              300+ brand videos, and built a workflow 30% faster than industry peers. P2V Labs is
+              the next chapter — same craft, sharper focus.
             </p>
           </div>
 

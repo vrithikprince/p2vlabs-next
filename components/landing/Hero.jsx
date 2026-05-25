@@ -87,9 +87,9 @@ export default function Hero() {
   }, [])
 
   return (
-    <section ref={heroRef} className="hero-section min-h-[92vh] flex flex-col justify-center px-5 md:px-10 lg:px-20 py-20">
+    <section ref={heroRef} className="hero-section lg:min-h-[92vh] flex flex-col lg:justify-center px-5 md:px-10 lg:px-20 py-10 lg:py-20">
       <div className="max-w-7xl mx-auto w-full">
-        <p className="hero-tagline text-[10px] tracking-[0.4em] uppercase text-charcoal/45 mb-10 will-anim">
+        <p className="hero-tagline text-[10px] tracking-[0.4em] uppercase text-charcoal/45 mb-6 lg:mb-10 will-anim">
           Ahmedabad, India · Est. 2026
         </p>
 
@@ -129,7 +129,7 @@ export default function Hero() {
         </div>
 
         {/* Scroll indicator */}
-        <div className="scroll-indicator mt-16 flex items-center gap-4 will-anim">
+        <div className="scroll-indicator mt-8 lg:mt-16 flex items-center gap-4 will-anim">
           <div className="w-8 h-px bg-charcoal/30" />
           <p className="text-[10px] tracking-[0.3em] uppercase text-charcoal/35">Scroll to explore</p>
         </div>

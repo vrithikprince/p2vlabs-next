@@ -1,5 +1,7 @@
 import Hero from '../components/landing/Hero.jsx'
 import Marquee from '../components/layout/Marquee.jsx'
+import ProofBar from '../components/landing/ProofBar.jsx'
+import Positioning from '../components/landing/Positioning.jsx'
 import Services from '../components/landing/Services.jsx'
 import ReelPreview from '../components/landing/ReelPreview.jsx'
 import AboutSection from '../components/landing/AboutSection.jsx'
@@ -77,6 +79,10 @@ export default function HomePage() {
       />
       <Hero />
       <Marquee />
+      <ProofBar />
+      <Rule />
+      <Positioning />
+      <Rule />
       <Services />
       <Rule />
       <ReelPreview />

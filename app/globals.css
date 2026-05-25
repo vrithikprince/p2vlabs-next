@@ -257,24 +257,29 @@ nav.glass-nav {
 .sticky-card-wrap     { position: sticky; }
 
 #scroll-top-btn {
-  /* Mobile: sit above the FloatingWhatsApp (which is bottom-20 = 80px
-     + 56px tall = top edge at 136px). 9.5rem = 152px leaves 16px gap. */
+  /* Outlined cream pair to the solid-charcoal WhatsApp FAB. Both arrive
+     at brand red on hover, so the cluster reads as a deliberate pair. */
   position: fixed; bottom: 9.5rem; right: 1.25rem; z-index: 200;
-  width: 40px; height: 40px; background: #1a1a1a; color: #F5F0E8;
+  width: 44px; height: 44px;
+  background: #F5F0E8;
+  color: #1a1a1a;
+  border: 1px solid rgba(26,26,26,0.20);
   display: flex; align-items: center; justify-content: center;
   opacity: 0; transform: translateX(4rem);
-  transition: background 0.2s, opacity 0.3s, transform 0.38s cubic-bezier(0.34,1.56,0.64,1);
+  transition: background 0.2s, color 0.2s, border-color 0.2s,
+              opacity 0.3s, transform 0.38s cubic-bezier(0.34,1.56,0.64,1);
   pointer-events: none;
-  max-width: 40px; overflow: hidden;
+  max-width: 44px; overflow: hidden;
 }
-/* Desktop has no BottomNav and WhatsApp sits at bottom-7 (28px) +
-   56px tall = top at 84px. Back-to-Top at 5.5rem (88px) gives a clean
-   stack with a 4px gap. */
 @media (min-width: 768px) {
   #scroll-top-btn { bottom: 5.5rem; }
 }
 #scroll-top-btn.visible { opacity: 1; transform: translateX(0); pointer-events: all; }
-#scroll-top-btn:hover   { background: #c0392b; }
+#scroll-top-btn:hover {
+  background: #c0392b;
+  color: #F5F0E8;
+  border-color: #c0392b;
+}
 
 .nav-link-wrap  { overflow: hidden; display: inline-block; position: relative; }
 .nav-link-inner { display: block; transition: none; }

@@ -79,7 +79,7 @@ export default function Services() {
   }, [])
 
   return (
-    <section ref={sectionRef} id="services" className="py-24 px-5 md:px-10 lg:px-20">
+    <section ref={sectionRef} id="services" className="py-16 lg:py-24 px-5 md:px-10 lg:px-20">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 mb-16">
           <div className="lg:col-span-4">

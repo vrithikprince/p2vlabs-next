@@ -49,7 +49,7 @@ export default function ContactSection() {
   }, [])
 
   return (
-    <section ref={sectionRef} id="contact" className="py-24 px-5 md:px-10 lg:px-20 bg-charcoal">
+    <section ref={sectionRef} id="contact" className="py-16 lg:py-24 px-5 md:px-10 lg:px-20 bg-charcoal">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
           <div className="lg:col-span-7">
