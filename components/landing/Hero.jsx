@@ -25,7 +25,10 @@ export default function Hero() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      const D = loaderActive ? 4.10 : 0.05
+      /* Synced to the ink loader's exitAt (TAG_START 2.175 + TAG_DURATION
+         0.7 + 0.45 = 3.325), so hero entrance starts as the loader begins
+         dissolving. Near-zero on soft navigation when the loader didn't mount. */
+      const D = loaderActive ? 3.33 : 0.05
 
       /* Word-clip + blur entrance */
       const heroWords = heroRef.current.querySelectorAll('.hero-word')
