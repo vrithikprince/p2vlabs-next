@@ -86,16 +86,17 @@ export const metadata = {
     google: 'ADD_GOOGLE_SEARCH_CONSOLE_CODE_HERE',
   },
   icons: {
-    /* Modern browsers + Google Search Results pick the PNG. Square,
-     * multiple-of-48, brand red bg with cream "P2V" — readable when
-     * Google downscales it for the favicon column. The SVG stays in
-     * /public/icons/icon.svg as a vector fallback for crisp rendering
-     * on high-density displays. */
+    /* Brand-red square with cream "P2V" — readable when Google downscales
+     * it for the favicon column. favicon.ico (32+48) is the legacy +
+     * Google fallback at the root path; icon.png (512) is the PWA/raster
+     * source; the SVG is the crisp vector for modern browsers. All three
+     * regenerated from /public/icons/icon.svg via scripts/gen-favicons.mjs. */
     icon: [
-      { url: '/icon.png',           type: 'image/png', sizes: '192x192' },
+      { url: '/favicon.ico',        sizes: '32x32 48x48' },
+      { url: '/icon.png',           type: 'image/png', sizes: '512x512' },
       { url: '/icons/icon.svg',     type: 'image/svg+xml' },
     ],
-    shortcut: '/icon.png',          // legacy <link rel="shortcut icon">
+    shortcut: '/favicon.ico',       // legacy <link rel="shortcut icon">
     apple:    '/apple-icon.png',    // 180×180 iOS home-screen icon
   },
 }
