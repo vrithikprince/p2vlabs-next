@@ -12,15 +12,17 @@ import Icon from '../ui/Icon.jsx'
  * Vite version:
  *   - "Client Login" CTA points at clients.p2vlabs.in (private SPA subdomain)
  *     instead of an in-app /login route.
- *   - About + Services entries now route to standalone pages (/about, /packages)
+ *   - About + Packages entries route to standalone pages (/about, /packages)
  *     instead of in-page anchors — keeps SEO and editorial scroll in sync.
+ *     ("Packages" was previously labelled "Services" — same destination,
+ *      label changed for lead-gen clarity / pricing intent.)
  */
 const PRIMARY = [
   { id: 'reel',     label: 'The Reel', path: '/reel' },
   { id: 'blog',     label: 'Journal',  path: '/blog' },
   { id: 'vlog',     label: 'Films',    path: '/vlog' },
   { id: 'about',    label: 'About',    path: '/about' },
-  { id: 'packages', label: 'Services', path: '/packages' },
+  { id: 'packages', label: 'Packages', path: '/packages' },
 ]
 
 const CLIENT_LOGIN_URL = 'https://clients.p2vlabs.in/login'
