@@ -91,7 +91,11 @@ export default function FloatingWhatsApp() {
   return (
     <a
       ref={fabRef}
-      href="https://wa.me/917048824616?text=Hi%20P2V%20Labs%2C%20I%27d%20love%20to%20chat%20about%20a%20project."
+      /* Prefilled message qualifies the inbound up-front: signals brand-side
+         intent, opens pricing as a topic so the conversation gets to numbers
+         faster (shortens the sales cycle). Reads naturally enough that it
+         still feels like the visitor typed it. */
+      href="https://wa.me/917048824616?text=Hi%20P2V%20Labs%2C%20I%27d%20like%20to%20discuss%20a%20content%20project%20for%20my%20brand.%20Could%20you%20share%20your%20packages%20and%20starting%20prices%3F"
       target="_blank"
       rel="noopener noreferrer"
       aria-label={expanded ? 'Chat with P2V Labs on WhatsApp' : 'Expand WhatsApp button'}
