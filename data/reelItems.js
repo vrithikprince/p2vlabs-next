@@ -20,7 +20,7 @@ export const VIDEO_ITEMS = [
   /* Influencer Work */
   {
     id: 'v2', category: 'video', subcategory: 'Influencer Work',
-    title: 'Udaipur Day One', client: 'Confidential',
+    title: 'Udaipur Day One', client: 'Creator',
     description: "Day one in the City of Lakes — a cinematic horizontal edit following a creator through Udaipur's iconic ghats and rooftop cafés.",
     videoUrl:     SB_PUBLIC('reel/videos/udaipur-day-one.mp4'),
     thumbnailUrl: SB_PUBLIC('reel/thumbnails/udaipur-day-one.png'),
@@ -30,7 +30,7 @@ export const VIDEO_ITEMS = [
   },
   {
     id: 'v3', category: 'video', subcategory: 'Influencer Work',
-    title: 'Ambrai', client: 'Confidential',
+    title: 'Ambrai', client: 'Creator',
     description: 'Shot at the iconic Ambrai Ghat — golden hour on the water, the Aravalli skyline, and a creator story that belongs on a big screen.',
     videoUrl:     SB_PUBLIC('reel/videos/ambrai.mp4'),
     thumbnailUrl: SB_PUBLIC('reel/thumbnails/ambrai.png'),
@@ -40,7 +40,7 @@ export const VIDEO_ITEMS = [
   },
   {
     id: 'v4', category: 'video', subcategory: 'Influencer Work',
-    title: 'Udaipur', client: 'Confidential',
+    title: 'Udaipur', client: 'Creator',
     description: 'A vertical portrait of Udaipur — narrow lanes, lake reflections, and a creator in their element.',
     videoUrl:     SB_PUBLIC('reel/videos/udaipur.mp4'),
     thumbnailUrl: SB_PUBLIC('reel/thumbnails/udaipur.png'),
@@ -50,7 +50,7 @@ export const VIDEO_ITEMS = [
   },
   {
     id: 'v5', category: 'video', subcategory: 'Influencer Work',
-    title: 'Payal', client: 'Confidential',
+    title: 'Payal', client: 'Creator',
     description: 'A vertical creator film — intimate, editorial, built for Reels.',
     videoUrl:     SB_PUBLIC('reel/videos/payal.mp4'),
     thumbnailUrl: SB_PUBLIC('reel/thumbnails/payal.png'),

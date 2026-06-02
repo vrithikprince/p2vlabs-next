@@ -11,7 +11,7 @@ export default function Footer() {
         </span>
         <div className="flex items-center gap-6">
           <p className="text-cream/25 text-xs tracking-wide">
-            © 2025 P2V Labs · Ahmedabad, India
+            © 2026 P2V Labs · Ahmedabad, India
           </p>
           <a
             href="https://founders.p2vlabs.in/founders"

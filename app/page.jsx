@@ -25,7 +25,7 @@ const structuredData = {
   /* See Organization schema in lib/seo.js for the rationale —
      same alternates so Google fuses the LocalBusiness (homepage),
      Organization (site-wide), GBP, and IG handle into one entity. */
-  alternateName: ['Pixels to Visuals', 'p2v_labs'],
+  alternateName: ['Pixels · Purpose · Visuals', 'p2v_labs'],
   description: 'Visual content agency specialising in video production, product photography, food photography, and social media content.',
   url: 'https://p2vlabs.in',
   telephone: '+917048824616',

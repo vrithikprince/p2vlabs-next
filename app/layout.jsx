@@ -82,9 +82,6 @@ export const metadata = {
       'max-snippet': -1,
     },
   },
-  verification: {
-    google: 'ADD_GOOGLE_SEARCH_CONSOLE_CODE_HERE',
-  },
   icons: {
     /* Brand-red square with cream "P2V" — readable when Google downscales
      * it for the favicon column. favicon.ico (32+48) is the legacy +

@@ -13,7 +13,7 @@ import { gsap } from 'gsap'
  *      outlined ghost.
  *   3. The stroke layer fades out once the fill is in (otherwise the
  *      1.5px stroke would bloat the final letterforms).
- *   4. "Pixels to Visuals" soft-fades in below the name.
+ *   4. "Pixels · Purpose · Visuals" soft-fades in below the name.
  *   5. Whole loader fades out; onDone fires at the start of the fade so
  *      the hero renders behind the dissolving loader.
  */
@@ -135,7 +135,7 @@ export default function Loader({ onDone }) {
           className="ink-tag"
           style={{ opacity: 0, visibility: 'hidden' }}
         >
-          Pixels to Visuals
+          Pixels · Purpose · Visuals
         </div>
       </div>
     </div>
