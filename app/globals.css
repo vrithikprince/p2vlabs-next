@@ -148,6 +148,22 @@ body.cursor-click #cursor-dot  { width: 12px; height: 12px; }
 }
 
 /* ─────────────────────────────────────────────
+   FAQ ACCORDION
+
+   Native <details>/<summary> with the default disclosure triangle
+   suppressed across browsers. The +/- icon in FAQ.jsx is two crossed
+   bars; when [open], the vertical bar scales to zero so it collapses
+   into a minus. Pure CSS — no JS toggle needed.
+───────────────────────────────────────────── */
+
+.faq-item > summary { list-style: none; }
+.faq-item > summary::-webkit-details-marker { display: none; }
+
+.faq-item[open] .faq-vertical {
+  transform: translate(-50%, 0) scaleY(0);
+}
+
+/* ─────────────────────────────────────────────
    HERO SECTION
 ───────────────────────────────────────────── */
 

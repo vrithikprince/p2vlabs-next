@@ -5,6 +5,7 @@ import Positioning from '../components/landing/Positioning.jsx'
 import Services from '../components/landing/Services.jsx'
 import ReelPreview from '../components/landing/ReelPreview.jsx'
 import AboutSection from '../components/landing/AboutSection.jsx'
+import FAQ from '../components/landing/FAQ.jsx'
 import ContactSection from '../components/landing/ContactSection.jsx'
 import Footer from '../components/layout/Footer.jsx'
 import Rule from '../components/ui/Rule.jsx'
@@ -92,6 +93,8 @@ export default function HomePage() {
       <ReelPreview />
       <Rule />
       <AboutSection />
+      <Rule />
+      <FAQ />
       <Rule />
       <ContactSection />
       <Footer />

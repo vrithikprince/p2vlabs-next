@@ -1,6 +1,7 @@
 import Footer from '../../components/layout/Footer.jsx'
 import PageHeader from '../../components/layout/PageHeader.jsx'
 import PricingIllustration from '../../components/illustrations/PricingIllustration.jsx'
+import PortalMockup from '../../components/packages/PortalMockup.jsx'
 import Rule from '../../components/ui/Rule.jsx'
 import { SITE_URL } from '../../lib/seo.js'
 
@@ -273,6 +274,61 @@ export default function PackagesPage() {
             {RETAINER_PACKAGES.map((p) => (
               <PackageCard key={p.title} pkg={p} />
             ))}
+          </div>
+        </div>
+      </section>
+
+      <Rule />
+
+      {/* Premium portal differentiator — editorial mockup of clients.p2vlabs.in
+          to justify the ₹40K Premium tier. Sits between retainers and process
+          so the reader sees pricing, then sees what Premium uniquely buys. */}
+      <section className="py-16 lg:py-24 px-5 md:px-10 lg:px-20">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
+            <div className="lg:col-span-4">
+              <p className="text-[10px] tracking-[0.35em] uppercase text-charcoal/45 mb-4">
+                Inside Premium
+              </p>
+              <h2 className="font-display text-3xl lg:text-4xl font-bold text-charcoal leading-tight mb-5">
+                A private portal.
+                <br />
+                <em className="not-italic text-p2v">Not a Drive folder.</em>
+              </h2>
+              <p className="text-charcoal/60 leading-relaxed text-[15px] mb-8">
+                Premium retainers get a dedicated workspace on
+                clients.p2vlabs.in. Every shoot, every deliverable, every
+                approval lives in one place — no version sprawl, no chasing
+                files in WhatsApp threads.
+              </p>
+              <ul className="space-y-3 border-t border-charcoal/15 pt-6">
+                <li className="flex items-start gap-3 text-[14px] text-charcoal/70 leading-relaxed">
+                  <span className="text-p2v flex-shrink-0">→</span>
+                  <span>
+                    <em className="not-italic text-charcoal font-medium">Asset library.</em>{' '}
+                    High-res downloads, available anytime.
+                  </span>
+                </li>
+                <li className="flex items-start gap-3 text-[14px] text-charcoal/70 leading-relaxed">
+                  <span className="text-p2v flex-shrink-0">→</span>
+                  <span>
+                    <em className="not-italic text-charcoal font-medium">One-click approvals.</em>{' '}
+                    Review and sign-off in seconds, synced to WhatsApp.
+                  </span>
+                </li>
+                <li className="flex items-start gap-3 text-[14px] text-charcoal/70 leading-relaxed">
+                  <span className="text-p2v flex-shrink-0">→</span>
+                  <span>
+                    <em className="not-italic text-charcoal font-medium">Single source of truth.</em>{' '}
+                    Shoot schedule, revisions, and status in one view.
+                  </span>
+                </li>
+              </ul>
+            </div>
+
+            <div className="lg:col-span-8">
+              <PortalMockup />
+            </div>
           </div>
         </div>
       </section>
