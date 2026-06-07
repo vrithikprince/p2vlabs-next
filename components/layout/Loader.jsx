@@ -84,7 +84,13 @@ export default function Loader({ onDone }) {
     tl.to(wrap, { autoAlpha: 0, duration: 0.75, ease: 'power2.inOut' }, exitAt)
     tl.call(() => { if (wrap) wrap.style.display = 'none' }, null, exitAt + 0.85)
 
-    return () => tl.kill()
+    return () => {
+      tl.kill()
+      /* Reset body overflow in case the loader unmounts before phase 5
+         runs (e.g. RootClient flipped `loaded` to true via sessionStorage
+         on a re-mount). Otherwise the body stays scroll-locked. */
+      document.body.style.overflow = ''
+    }
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
