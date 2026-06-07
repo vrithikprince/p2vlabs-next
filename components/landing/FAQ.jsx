@@ -24,6 +24,10 @@ import { useState } from 'react'
 
 const FAQS = [
   {
+    q: 'What does P2V stand for?',
+    a: 'P2V stands for Pixels to Visuals — the journey every brand takes with us, from raw pixels captured on set to finished visuals that build recognition and drive results. The name reflects how we think about content: every frame has a purpose, every visual has a destination. P2V Labs is based in Ahmedabad and works with brands across Gujarat and India.',
+  },
+  {
     q: 'What does P2V Labs do?',
     a: 'P2V Labs is a visual content agency based in Ahmedabad. We produce brand films, food and product photography, social reels, and corporate video for businesses across Gujarat and India. Most of our work sits in restaurants, D2C brands, and founder-led businesses that need a steady supply of content that actually moves the needle on Instagram, Zomato, and YouTube.',
   },
