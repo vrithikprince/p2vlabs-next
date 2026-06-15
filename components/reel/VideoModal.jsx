@@ -120,14 +120,28 @@ export default function VideoModal({ item, onClose }) {
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-3 md:p-8 bg-charcoal/92"
-         onClick={onClose}>
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 md:p-8 bg-charcoal/35 backdrop-blur-xl"
+      onClick={onClose}
+    >
+      {/* Floating close — sits in the top-right of the viewport, on top
+          of the blurred backdrop. e.stopPropagation prevents the outer
+          onClick from also firing (would double-close, harmless but
+          cleaner this way). */}
+      <button
+        onClick={(e) => { e.stopPropagation(); onClose() }}
+        className="fixed top-5 right-5 md:top-7 md:right-7 z-[60] w-11 h-11 flex items-center justify-center bg-cream/95 text-charcoal hover:bg-p2v hover:text-cream border border-charcoal/15 backdrop-blur-sm transition-colors shadow-lg"
+        aria-label="Close"
+      >
+        <Icon n="x" s={20} />
+      </button>
+
       <div
         className={`w-full bg-cream shadow-2xl ${item.orientation === 'portrait' ? 'max-w-sm' : 'max-w-4xl'}`}
         onClick={(e) => e.stopPropagation()}
       >
 
-        <div className="flex items-center justify-between px-5 py-3.5 border-b border-charcoal/10">
+        <div className="flex items-center px-5 py-3.5 border-b border-charcoal/10">
           <div className="flex items-center gap-3">
             <span className="text-[9px] tracking-[0.2em] uppercase text-p2v font-medium">{item.subcategory}</span>
             <span className="text-charcoal/20">·</span>
@@ -139,13 +153,6 @@ export default function VideoModal({ item, onClose }) {
               </>
             )}
           </div>
-          <button
-            onClick={onClose}
-            className="w-8 h-8 flex items-center justify-center text-charcoal/40 hover:text-charcoal hover:bg-charcoal/5 transition-colors"
-            aria-label="Close"
-          >
-            <Icon n="x" s={17} />
-          </button>
         </div>
 
         <div
