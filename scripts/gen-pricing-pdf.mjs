@@ -493,27 +493,52 @@ function renderProcessAndContact() {
       lineGap: 2,
     })
 
-    y += 100
+    y += 92
     hairline(MARGIN, y - 12, PAGE_W - MARGIN, y - 12)
   })
 
-  /* Closing CTA block */
-  const ctaY = y + 30
+  /* ── Proof bar — four hard numbers that close the sale. Sits between
+        the process and the CTA so the buyer sees "here's how we work"
+        → "here's the receipt" → "here's the ask". Without this the
+        bottom half of the page was just whitespace. */
+  const proofY = y + 32
+  const stats = [
+    { num: '150+', label: 'Restaurant shoots' },
+    { num: '5M+',  label: 'Views across client reels' },
+    { num: '90%',  label: 'Plan renewal rate' },
+    { num: '7d',   label: 'Avg delivery turnaround' },
+  ]
+  const statColW = (PAGE_W - MARGIN * 2) / stats.length
+  hairline(MARGIN, proofY, PAGE_W - MARGIN, proofY, { opacity: 0.20 })
+  stats.forEach((s, i) => {
+    const x = MARGIN + i * statColW
+    doc.fillColor(RED, 1).font('serif-bold').fontSize(30)
+    doc.text(s.num, x, proofY + 18, { width: statColW, align: 'center' })
+    doc.fillColor(CHARCOAL, 0.5).font('sans-bold').fontSize(7)
+    doc.text(s.label.toUpperCase(), x, proofY + 60, {
+      width: statColW, align: 'center', characterSpacing: 1.8,
+    })
+  })
+  hairline(MARGIN, proofY + 92, PAGE_W - MARGIN, proofY + 92, { opacity: 0.20 })
+
+  /* Closing CTA — sits just below the proof bar, no longer floating in
+     empty space. */
+  const ctaY = proofY + 124
   eyebrow('Not sure which fits?', MARGIN, ctaY, { color: RED, opacity: 1, size: 8.5 })
   headline('Send the brief.', MARGIN, ctaY + 18, { size: 26 })
   headline('We\'ll shape the rest.', MARGIN, ctaY + 48, { size: 26, italic: true, color: RED })
 
-  /* Contact line */
-  const contactY = PAGE_H - 110
+  /* Contact line — pinned to the bottom of the page. */
+  const contactY = PAGE_H - 100
   hairline(MARGIN, contactY, PAGE_W - MARGIN, contactY)
   doc.fillColor(CHARCOAL, 0.85).font('serif-bold').fontSize(13)
-  doc.text('hello@p2vlabs.in   ·   +91 70488 24616', MARGIN, contactY + 18)
+  doc.text('hello@p2vlabs.in   ·   +91 70488 24616', MARGIN, contactY + 16)
   doc.fillColor(CHARCOAL, 0.5).font('sans').fontSize(9)
-  doc.text('www.p2vlabs.in   ·   Studio in Ahmedabad, India', MARGIN, contactY + 42)
+  doc.text('www.p2vlabs.in   ·   Studio in Ahmedabad, India', MARGIN, contactY + 38)
 
-  /* Footer mark */
+  /* Brand mark — italic red, bottom-right. */
   doc.fillColor(RED, 0.85).font('serif-bi').fontSize(11)
-  doc.text('P2V Labs', MARGIN, PAGE_H - 40, {
+  doc.text('P2V Labs', MARGIN, PAGE_H - 35, {
     width: PAGE_W - MARGIN * 2, align: 'right',
   })
 }
@@ -523,8 +548,8 @@ function renderProcessAndContact() {
 ───────────────────────────────────────────── */
 
 renderCover()
-renderProjectPackages()
-renderBundledPlans()
+renderBundledPlans()       // Monthly Plans first — primary commerce surface
+renderProjectPackages()    // One-off shoots second — secondary path
 renderProcessAndContact()
 
 doc.end()

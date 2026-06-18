@@ -37,19 +37,19 @@ const FAQS = [
   },
   {
     q: 'How much does a video or photography shoot cost?',
-    a: 'Project pricing starts at ₹8,000 for a single brand reel or a half-day food photography session, ₹35,000 for a brand film, and ₹25,000 for monthly social content retainers. Final quotes scale with scope, deliverables, and shoot complexity — full breakdown lives on our packages page.',
+    a: 'Project pricing starts at ₹8,000 for a single brand reel or a half-day food photography session, ₹35,000 for a brand film, and ₹20,000 a month for our entry-tier content plan (Plan A). Final quotes scale with scope, deliverables, and shoot complexity — full breakdown lives on our packages page.',
   },
   {
     q: 'How long does a project take from brief to delivery?',
-    a: 'Reels and photography projects deliver in 5–7 working days from the shoot date. Brand films take 2–3 weeks depending on script complexity and post-production. Monthly retainers run on a fixed cadence — one production day per cycle with deliverables rolling out across the month.',
+    a: 'Reels and photography projects deliver in 5–7 working days from the shoot date. Brand films take 2–3 weeks depending on script complexity and post-production. Monthly plans run on a fixed cadence — one production day per cycle with deliverables rolling out across the month.',
   },
   {
     q: 'Do you work with restaurants and food brands?',
-    a: 'Yes — food photography and restaurant social content is one of our core areas. We’ve worked with 150+ restaurants on Zomato- and Swiggy-optimised stills, brand reels, and monthly content calendars. Most of our retainer roster is food and beverage, so the workflow, lighting, and turnaround is built around that pace.',
+    a: 'Yes — food photography and restaurant social content is one of our core areas. We’ve worked with 150+ restaurants on Zomato- and Swiggy-optimised stills, brand reels, and monthly content calendars. Most of our monthly-plan roster is food and beverage, so the workflow, lighting, and turnaround is built around that pace.',
   },
   {
-    q: 'What’s included in a monthly content retainer?',
-    a: 'A standard retainer covers 10–12 deliverables per month — a mix of stills and 2–3 reels — produced on a single shoot day with a working content calendar. Premium retainers add strategy, a higher reel volume, analytics, and a private client portal at clients.p2vlabs.in for approvals and asset downloads.',
+    q: 'What’s included in a monthly content plan?',
+    a: 'Plans run a three-tier ladder. Plan A (₹20,000/mo) covers 9 photos + 3 reels a month plus daily community management. Plan B (₹30,000/mo) adds Zomato / Swiggy profile shoots, Google Business management, and review responses. Plan C (₹40,000/mo) layers strategy, content calendar, analytics, 4+ reels, priority turnaround, and a private client portal at clients.p2vlabs.in for approvals and asset downloads.',
   },
 ]
 

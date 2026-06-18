@@ -10,8 +10,8 @@ import { SITE_URL } from '../../lib/seo.js'
  *
  * Structure:
  *   1. Hero intro (eyebrow + headline + framing copy)
- *   2. Project-based packages (Food Photography, Brand Reel, Brand Film)
- *   3. Monthly plans (Plan A / B / C — bundled content + reputation tiers)
+ *   2. Monthly plans (Plan A / B / C — bundled content + reputation tiers)
+ *   3. Project-based packages (Food Photography, Brand Reel, Brand Film)
  *   4. Plan C portal differentiator (editorial mockup)
  *   5. Process — three-step "how we work"
  *   6. Charcoal CTA section ("Not sure which fits?")
@@ -255,34 +255,10 @@ export default function PackagesPage() {
         <PricingIllustration />
       </PageHeader>
 
-      {/* Project-based packages */}
+      {/* Monthly plans — primary commerce surface. Lead with the
+          recurring revenue offer; one-off shoots follow as a secondary
+          path for prospects who aren't ready for a monthly commitment. */}
       <section className="py-12 lg:py-20 px-5 md:px-10 lg:px-20">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-12">
-            <p className="text-[10px] tracking-[0.35em] uppercase text-charcoal/45 mb-4">
-              Project-based
-            </p>
-            <h2 className="font-display text-3xl lg:text-4xl font-bold text-charcoal leading-tight max-w-2xl">
-              One-off shoots, one-off films.
-            </h2>
-            <p className="mt-4 text-charcoal/50 italic text-sm lg:text-base max-w-2xl leading-relaxed">
-              Starting figures — scope shapes the final quote. Every project includes
-              production, post, and revisions within scope.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {PROJECT_PACKAGES.map((p) => (
-              <PackageCard key={p.title} pkg={p} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <Rule />
-
-      {/* Monthly plans — bundled A/B/C ladder. Replaces the older two-tier
-          retainer + à la carte add-on pricing. */}
-      <section className="py-16 lg:py-24 px-5 md:px-10 lg:px-20">
         <div className="max-w-7xl mx-auto">
           <div className="mb-12">
             <p className="text-[10px] tracking-[0.35em] uppercase text-charcoal/45 mb-4">
@@ -298,6 +274,31 @@ export default function PackagesPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {MONTHLY_PLANS.map((p) => (
+              <PackageCard key={p.title} pkg={p} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <Rule />
+
+      {/* Project-based packages — secondary path for one-off shoots. */}
+      <section className="py-16 lg:py-24 px-5 md:px-10 lg:px-20">
+        <div className="max-w-7xl mx-auto">
+          <div className="mb-12">
+            <p className="text-[10px] tracking-[0.35em] uppercase text-charcoal/45 mb-4">
+              Project-based
+            </p>
+            <h2 className="font-display text-3xl lg:text-4xl font-bold text-charcoal leading-tight max-w-2xl">
+              One-off shoots, one-off films.
+            </h2>
+            <p className="mt-4 text-charcoal/50 italic text-sm lg:text-base max-w-2xl leading-relaxed">
+              Starting figures — scope shapes the final quote. Every project includes
+              production, post, and revisions within scope.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {PROJECT_PACKAGES.map((p) => (
               <PackageCard key={p.title} pkg={p} />
             ))}
           </div>

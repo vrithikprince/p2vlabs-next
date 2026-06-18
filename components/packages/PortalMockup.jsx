@@ -1,7 +1,7 @@
 /**
  * PortalMockup — editorial-styled mockup of clients.p2vlabs.in.
  *
- * Mounted on /packages to justify the Premium Retainer tier. Built with
+ * Mounted on /packages to justify the Plan C tier. Built with
  * the same vocabulary as the rest of the site:
  *   - 1px hairlines on charcoal/10–15
  *   - Two opacity tiers (charcoal/40 for labels, charcoal/70 for body)
@@ -12,7 +12,7 @@
  * uncluttered. Sample data is intentionally restaurant-shaped (Saffron
  * Kitchen, Diwali specials) so the mockup reads as "this is what your
  * portal would look like" to the primary persona — local restaurant
- * owners on monthly retainers.
+ * owners on monthly plans.
  */
 export default function PortalMockup() {
   return (
@@ -46,7 +46,7 @@ export default function PortalMockup() {
             </p>
           </div>
           <p className="text-[9px] tracking-[0.25em] uppercase text-charcoal/40 mt-1">
-            Premium · November
+            Plan C · November
           </p>
         </div>
 
