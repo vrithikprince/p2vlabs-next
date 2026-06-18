@@ -11,9 +11,10 @@ import { SITE_URL } from '../../lib/seo.js'
  * Structure:
  *   1. Hero intro (eyebrow + headline + framing copy)
  *   2. Project-based packages (Food Photography, Brand Reel, Brand Film)
- *   3. Monthly retainers (Standard, Premium)
- *   4. Process — three-step "how we work"
- *   5. Charcoal CTA section ("Not sure which fits?")
+ *   3. Monthly plans (Plan A / B / C — bundled content + reputation tiers)
+ *   4. Plan C portal differentiator (editorial mockup)
+ *   5. Process — three-step "how we work"
+ *   6. Charcoal CTA section ("Not sure which fits?")
  *
  * Each package CTA opens WhatsApp with a *package-specific* prefilled
  * message — qualifies the inbound so the conversation starts on the
@@ -79,38 +80,58 @@ const PROJECT_PACKAGES = [
   },
 ]
 
-const RETAINER_PACKAGES = [
+/* Bundled monthly plans — replace the two-tier retainer + à la carte add-on
+   pricing. Each plan stacks the previous one's deliverables (Plan B includes
+   Plan A, Plan C includes Plan B) so the buyer's decision is a clean A/B/C
+   ladder. Mirrors the same data in scripts/gen-pricing-pdf.mjs. */
+const MONTHLY_PLANS = [
   {
-    category: 'Social Content',
-    title: 'Standard Retainer',
-    price: 25000,
-    priceLabel: 'From ₹25,000',
+    category: 'Plan A',
+    title: 'Social Presence',
+    price: 20000,
+    priceLabel: 'From ₹20,000',
     cadence: '/ month',
-    blurb: 'A steady monthly cadence of stills and reels — built around one shoot day and a working content calendar.',
+    blurb: 'A reliable monthly cadence of content + community management for restaurants finding their voice.',
     bullets: [
-      '10–12 deliverables per month',
-      'Mix of stills + 2–3 reels',
-      'Single shoot day, monthly calendar',
-      'Edits and revisions within scope',
+      '9 photos + 3 reels per month',
+      '3–4 stories per week from shoot content',
+      'Daily comment & DM replies (business hours)',
     ],
-    bestFor: 'Restaurants or brands needing reliable cadence',
-    wa: 'Hi P2V Labs, I’d like to discuss the Standard monthly retainer. Could we explore details?',
+    bestFor: 'Restaurants establishing a consistent feed',
+    wa: 'Hi P2V Labs, I’d like to discuss Plan A — Social Presence. Could we explore details?',
   },
   {
-    category: 'Social Content + Strategy',
-    title: 'Premium Retainer',
+    category: 'Plan B',
+    title: 'Social + Reputation',
+    price: 30000,
+    priceLabel: 'From ₹30,000',
+    cadence: '/ month',
+    blurb: 'Everything in Plan A, plus your Zomato / Swiggy footprint and Google Business presence — actively managed.',
+    bullets: [
+      'Everything in Plan A',
+      'Zomato / Swiggy profile shoot & optimisation',
+      'Google Business Profile management',
+      'Review responses (Google + Zomato + Swiggy)',
+    ],
+    bestFor: 'Established brands ready to own search + reviews',
+    wa: 'Hi P2V Labs, I’d like to discuss Plan B — Social + Reputation. When can we talk?',
+  },
+  {
+    category: 'Plan C',
+    title: 'Full Growth Retainer',
     price: 40000,
     priceLabel: 'From ₹40,000',
     cadence: '/ month',
-    blurb: 'Strategy plus production. For brands scaling content output and treating their feed like a channel, not a checklist.',
+    blurb: 'Everything in Plan B, plus strategy, content calendar, analytics, and priority turnaround — content as a growth channel.',
     bullets: [
-      'Everything in Standard',
+      'Everything in Plan B',
+      'Strategy + content calendar + analytics',
       '4+ reels per month with concepts',
-      'Strategy, posting cadence, analytics',
       'Priority turnaround on requests',
+      'Private client portal access',
     ],
-    bestFor: 'Scaling brands · Multi-location restaurants · Series launches',
-    wa: 'Hi P2V Labs, I’d like to discuss the Premium monthly retainer for my brand. Could we plan a strategy call?',
+    bestFor: 'Scaling brands treating content as a growth channel',
+    wa: 'Hi P2V Labs, I’d like to discuss Plan C — Full Growth Retainer. Could we plan a strategy call?',
   },
 ]
 
@@ -124,12 +145,12 @@ export async function generateMetadata() {
   return {
     title: 'Packages & Pricing — P2V Labs Ahmedabad',
     description:
-      'Transparent starting prices for food photography (from ₹8,000), brand reels (from ₹8,000), brand films (from ₹35,000), and monthly social retainers (from ₹25,000). P2V Labs — content built to perform for Ahmedabad brands.',
+      'Transparent starting prices for food photography (from ₹8,000), brand reels (from ₹8,000), brand films (from ₹35,000), and monthly content + reputation plans (from ₹20,000). P2V Labs — content built to perform for Ahmedabad brands.',
     alternates: { canonical: '/packages' },
     openGraph: {
       title: 'Packages & Pricing — P2V Labs',
       description:
-        'Food photography, brand reels, brand films, monthly retainers — transparent starting prices for Ahmedabad brands.',
+        'Food photography, brand reels, brand films, monthly content + reputation plans — transparent starting prices for Ahmedabad brands.',
       url: '/packages',
     },
   }
@@ -140,7 +161,7 @@ export async function generateMetadata() {
    would imply a fixed cost. */
 const buildOffersJsonLd = () => ({
   '@context': 'https://schema.org',
-  '@graph': [...PROJECT_PACKAGES, ...RETAINER_PACKAGES].map((p) => ({
+  '@graph': [...PROJECT_PACKAGES, ...MONTHLY_PLANS].map((p) => ({
     '@type': 'Service',
     name: p.title,
     serviceType: p.category,
@@ -259,19 +280,24 @@ export default function PackagesPage() {
 
       <Rule />
 
-      {/* Monthly retainers */}
+      {/* Monthly plans — bundled A/B/C ladder. Replaces the older two-tier
+          retainer + à la carte add-on pricing. */}
       <section className="py-16 lg:py-24 px-5 md:px-10 lg:px-20">
         <div className="max-w-7xl mx-auto">
           <div className="mb-12">
             <p className="text-[10px] tracking-[0.35em] uppercase text-charcoal/45 mb-4">
-              Monthly retainers
+              Monthly plans
             </p>
             <h2 className="font-display text-3xl lg:text-4xl font-bold text-charcoal leading-tight max-w-2xl">
-              Treat your feed like a channel.
+              Three ways to grow.
             </h2>
+            <p className="mt-4 text-charcoal/50 italic text-sm lg:text-base max-w-2xl leading-relaxed">
+              Pick one bundle a month — content cadence, reputation, and
+              strategy scale together as you climb tiers.
+            </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {RETAINER_PACKAGES.map((p) => (
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {MONTHLY_PLANS.map((p) => (
               <PackageCard key={p.title} pkg={p} />
             ))}
           </div>
@@ -280,15 +306,15 @@ export default function PackagesPage() {
 
       <Rule />
 
-      {/* Premium portal differentiator — editorial mockup of clients.p2vlabs.in
-          to justify the ₹40K Premium tier. Sits between retainers and process
-          so the reader sees pricing, then sees what Premium uniquely buys. */}
+      {/* Plan C differentiator — editorial mockup of clients.p2vlabs.in to
+          justify the ₹40K top tier. Sits between the plans and the process
+          so the reader sees pricing, then sees what Plan C uniquely buys. */}
       <section className="py-16 lg:py-24 px-5 md:px-10 lg:px-20">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
             <div className="lg:col-span-4">
               <p className="text-[10px] tracking-[0.35em] uppercase text-charcoal/45 mb-4">
-                Inside Premium
+                Inside Plan C
               </p>
               <h2 className="font-display text-3xl lg:text-4xl font-bold text-charcoal leading-tight mb-5">
                 A private portal.
@@ -296,7 +322,7 @@ export default function PackagesPage() {
                 <em className="not-italic text-p2v">Not a Drive folder.</em>
               </h2>
               <p className="text-charcoal/60 leading-relaxed text-[15px] mb-8">
-                Premium retainers get a dedicated workspace on
+                Plan C clients get a dedicated workspace on
                 clients.p2vlabs.in. Every shoot, every deliverable, every
                 approval lives in one place — no version sprawl, no chasing
                 files in WhatsApp threads.
