@@ -391,6 +391,55 @@ function renderBundledPlans() {
     const x = MARGIN + i * (colW + GUTTER)
     renderPlanCard(plan, x, y, colW, maxBulletBlock)
   })
+
+  /* "Off-menu" CTA — fills the bottom of the page (which was previously
+     empty) and gives prospects a clear out for hybrid / custom scopes
+     that don't fit any of the three bundles. Charcoal block to contrast
+     visually with the cream plan cards above. */
+  renderHybridCTA()
+}
+
+function renderHybridCTA() {
+  const blockH = 160
+  const y = PAGE_H - 50 - blockH - 10  // bottom-anchored, small breath above the margin
+
+  /* Charcoal block, full content width. */
+  doc.save()
+  doc.rect(MARGIN, y, PAGE_W - MARGIN * 2, blockH).fill(CHARCOAL)
+  doc.restore()
+
+  const innerPad = 36
+  const innerX = MARGIN + innerPad
+  const innerW = PAGE_W - MARGIN * 2 - innerPad * 2
+
+  /* Eyebrow — red on charcoal */
+  doc.fillColor(RED, 1).font('sans-bold').fontSize(8)
+  doc.text('NOT QUITE A FIT?', innerX, y + 26, {
+    characterSpacing: 3, width: innerW, align: 'center',
+  })
+
+  /* Headline — cream serif, with italic red tail on a second line */
+  doc.fillColor(CREAM, 0.95).font('serif-bold').fontSize(24)
+  doc.text('Something else in mind.', innerX, y + 46, {
+    width: innerW, align: 'center',
+  })
+  doc.fillColor(RED, 1).font('serif-bi').fontSize(22)
+  doc.text("Let's shape it together.", innerX, y + 78, {
+    width: innerW, align: 'center',
+  })
+
+  /* Contact line in cream, smaller */
+  doc.fillColor(CREAM, 0.65).font('sans').fontSize(10)
+  doc.text(
+    'Hybrid scopes, multi-month campaigns, off-menu deliverables — same-day reply on WhatsApp.',
+    innerX, y + 112, { width: innerW, align: 'center', lineGap: 2 }
+  )
+
+  /* Contact handles */
+  doc.fillColor(CREAM, 0.95).font('serif-bold').fontSize(12)
+  doc.text('hello@p2vlabs.in   ·   +91 70488 24616', innerX, y + 134, {
+    width: innerW, align: 'center',
+  })
 }
 
 const BULLET_GAP = 6              // vertical gap between bullets
@@ -528,17 +577,22 @@ function renderProcessAndContact() {
   headline('Send the brief.', MARGIN, ctaY + 18, { size: 26 })
   headline('We\'ll shape the rest.', MARGIN, ctaY + 48, { size: 26, italic: true, color: RED })
 
-  /* Contact line — pinned to the bottom of the page. */
-  const contactY = PAGE_H - 100
+  /* Contact line — pinned near the bottom. The standalone "P2V Labs"
+     brand mark that used to sit beneath this was positioned past
+     PDFKit's bottom margin (PAGE_H - 35 ≈ 806pt vs content-bottom 791pt),
+     which triggered auto-pagination and produced a phantom blank
+     5th page. Removed — the contact line already brands the page. */
+  const contactY = PAGE_H - 110
   hairline(MARGIN, contactY, PAGE_W - MARGIN, contactY)
   doc.fillColor(CHARCOAL, 0.85).font('serif-bold').fontSize(13)
   doc.text('hello@p2vlabs.in   ·   +91 70488 24616', MARGIN, contactY + 16)
   doc.fillColor(CHARCOAL, 0.5).font('sans').fontSize(9)
   doc.text('www.p2vlabs.in   ·   Studio in Ahmedabad, India', MARGIN, contactY + 38)
 
-  /* Brand mark — italic red, bottom-right. */
-  doc.fillColor(RED, 0.85).font('serif-bi').fontSize(11)
-  doc.text('P2V Labs', MARGIN, PAGE_H - 35, {
+  /* Italic brand mark on the same hairline-anchored line, right-aligned,
+     well within the bottom margin. */
+  doc.fillColor(RED, 0.9).font('serif-bi').fontSize(13)
+  doc.text('P2V Labs', MARGIN, contactY + 16, {
     width: PAGE_W - MARGIN * 2, align: 'right',
   })
 }
