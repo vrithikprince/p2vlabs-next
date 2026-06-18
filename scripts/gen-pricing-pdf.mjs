@@ -172,8 +172,12 @@ doc.pipe(fs.createWriteStream(OUTPUT_PATH))
 ───────────────────────────────────────────── */
 
 function cream() {
+  /* Explicit fillOpacity(1) — same reason as renderHybridCTA below.
+     Without it, fill() inherits whatever alpha the previous text call
+     left in state, and the cream page background renders washed out. */
   doc.save()
-  doc.rect(0, 0, PAGE_W, PAGE_H).fill(CREAM)
+  doc.fillOpacity(1).fillColor(CREAM)
+  doc.rect(0, 0, PAGE_W, PAGE_H).fill()
   doc.restore()
 }
 
@@ -403,9 +407,14 @@ function renderHybridCTA() {
   const blockH = 160
   const y = PAGE_H - 50 - blockH - 10  // bottom-anchored, small breath above the margin
 
-  /* Charcoal block, full content width. */
+  /* Charcoal block, full content width. PDFKit's `fill('#hex')` updates
+     the fill colour but does NOT reset fillOpacity, so the last opacity
+     set by a text call (typically ~0.4 for an eyebrow) leaks through and
+     the rect renders as washed-out medium gray. We restore full alpha
+     explicitly before painting. */
   doc.save()
-  doc.rect(MARGIN, y, PAGE_W - MARGIN * 2, blockH).fill(CHARCOAL)
+  doc.fillOpacity(1).fillColor(CHARCOAL)
+  doc.rect(MARGIN, y, PAGE_W - MARGIN * 2, blockH).fill()
   doc.restore()
 
   const innerPad = 36
