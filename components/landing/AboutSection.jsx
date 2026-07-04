@@ -8,7 +8,6 @@ gsap.registerPlugin(ScrollTrigger)
 const FOUNDERS = [
   { name: 'Vrithik',                role: 'Founder',     detail: 'Creative direction, cinematography, and visual strategy. The eye behind every frame.' },
   { name: 'Payal Chetwani',         role: 'Co-Founder',  detail: 'Production operations, client relations, and project management. The backbone of every shoot.' },
-  { name: 'Palash Karamchandani',   role: 'Co-Founder',  detail: 'Post-production, motion graphics, and digital content. The craft in the edit room.' },
 ]
 
 export default function AboutSection() {

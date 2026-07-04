@@ -61,7 +61,6 @@ const structuredData = {
   founder: [
     { '@type': 'Person', name: 'Vrithik Prince' },
     { '@type': 'Person', name: 'Payal Chetwani' },
-    { '@type': 'Person', name: 'Palash Karamchandani' },
   ],
 }
 

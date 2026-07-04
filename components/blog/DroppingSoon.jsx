@@ -71,7 +71,7 @@ export default function DroppingSoon({ kind = 'blog' }) {
                   </p>
                   <p className="text-xs text-charcoal/50 leading-relaxed mt-1">
                     {isBlog
-                      ? 'Vrithik, Payal, and Palash on craft, the business of content, and why we built the studio.'
+                      ? 'Vrithik and Payal on craft, the business of content, and why we built the studio.'
                       : 'Set diaries, gear walkthroughs, and unedited on-location footage from active projects.'}
                   </p>
                 </div>

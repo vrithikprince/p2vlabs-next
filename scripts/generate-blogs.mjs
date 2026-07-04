@@ -86,13 +86,13 @@ const TOPICS = [
     n: 3,
     title: 'How We Direct a Brand Film: From One-Line Brief to Final Cut',
     slug: 'how-we-direct-a-brand-film',
-    author: 'Palash Karamchandani',
+    author: 'Vrithik Prince',
     publishAt: '2026-04-28T11:00:00+05:30',
     imageSearchTerms: ['film set production', 'cinema camera director', 'film slate clapperboard'],
     primaryKeywords: ['brand film', 'video production Ahmedabad', 'corporate film'],
     angle:
-      'Process post from the director\'s chair. Walk through how a one-line brief from a client becomes a 90-second brand film — what we ask in the first call, how we build the treatment, how we scout location, how we cast (or don\'t), what changes between storyboard and shoot day, how grading shifts a film\'s feel. Technical but accessible. Director voice (Palash) — first-person craft, on-set specifics.',
-    voice: 'director',
+      'Process post from the director\'s chair. Walk through how a one-line brief from a client becomes a 90-second brand film — what we ask in the first call, how we build the treatment, how we scout location, how we cast (or don\'t), what changes between storyboard and shoot day, how grading shifts a film\'s feel. Technical but accessible. Founder voice — first-person craft, on-set specifics.',
+    voice: 'founder',
   },
   {
     n: 4,
@@ -122,13 +122,13 @@ const TOPICS = [
     n: 6,
     title: 'What 150+ Restaurant Shoots Taught Us About Food Photography in Ahmedabad',
     slug: 'lessons-from-150-restaurant-shoots-in-ahmedabad',
-    author: 'Palash Karamchandani',
+    author: 'Payal Chetwani',
     publishAt: '2026-05-24T14:00:00+05:30',
     imageSearchTerms: ['Indian thali food photography', 'restaurant food plate', 'food styling photography'],
     primaryKeywords: ['food photography Ahmedabad', 'restaurant photography', 'Zomato photos'],
     angle:
-      'Lessons learned from 150+ restaurant shoots — light, timing (golden hour vs noon), what plates work for camera vs eye, what condiments to keep out of frame, why styling matters more than camera, the wide vs tight ratio that wins on Zomato. Photographer/director voice (Palash). Mention specific dish types common in Gujarat (thali, dhokla, pizza, dosa) without listing client names.',
-    voice: 'director',
+      'Lessons learned from 150+ restaurant shoots — light, timing (golden hour vs noon), what plates work for camera vs eye, what condiments to keep out of frame, why styling matters more than camera, the wide vs tight ratio that wins on Zomato. Operations/systems voice (Payal) — the repeatable playbook across 150+ shoots. Mention specific dish types common in Gujarat (thali, dhokla, pizza, dosa) without listing client names.',
+    voice: 'ops',
   },
   {
     n: 7,
@@ -188,8 +188,7 @@ const TOPICS = [
 const GEMINI_MODEL = 'gemini-2.5-flash'
 
 const VOICE_GUIDES = {
-  founder: 'Voice: Vrithik Prince, founder. Directional, opinionated, business-aware. Uses "we" when speaking for the agency. Comfortable taking positions. Writes for other founders/marketers.',
-  director: 'Voice: Palash Karamchandani, director/cinematographer. Craft-focused, technical specifics from on-set, uses "I" when describing personal craft. Anchors abstract claims with concrete shoot-day moments.',
+  founder: 'Voice: Vrithik Prince, founder. Directional, opinionated, business-aware. Uses "we" when speaking for the agency. Comfortable taking positions. Writes for other founders/marketers. Also carries craft/on-set specifics when the topic is production — first-person about the shoot.',
   ops: 'Voice: Payal Chetwani, operations + client lead. Process-thinking, calm, systems-oriented. References client situations anonymously. Avoids hype words; favours specifics and frameworks.',
 }
 
@@ -209,7 +208,7 @@ PRIMARY SEO KEYWORDS to weave in NATURALLY (not stuffed): ${t.primaryKeywords.jo
 
 P2V LABS CONTEXT (you must respect these facts):
 - Visual content agency based in Ahmedabad, Gujarat, India.
-- Founders: Vrithik Prince, Payal Chetwani, Palash Karamchandani.
+- Founders: Vrithik Prince, Payal Chetwani.
 - Services: brand films, social reels, food/product photography, monthly retainers, brand visual systems.
 - 150+ restaurant shoots, 5M+ views across client reels, 90%+ retainer renewal rate.
 - Studio aesthetic is editorial, restrained — think Loewe/A24, not Times Square neon.
