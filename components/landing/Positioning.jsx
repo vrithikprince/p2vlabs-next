@@ -6,7 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 /**
- * Positioning — the buyer's-language block that earns the next scroll.
+ * Positioning - the buyer's-language block that earns the next scroll.
  *
  * Lives between the ProofBar and Services. The numbers above answer "is
  * this real?"; this section answers "do they understand what I'm dealing
@@ -59,7 +59,7 @@ export default function Positioning() {
               Restaurants and brands come to us because their photos disappear on
               Zomato, their reels stall under a thousand views, and their feed
               isn't doing the selling. We shoot, direct, and edit to a standard
-              that performs — and clients keep coming back because the numbers
+              that performs - and clients keep coming back because the numbers
               show up after we ship.
             </p>
           </div>

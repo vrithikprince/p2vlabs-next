@@ -101,7 +101,7 @@ export default function ReelClient({ videoItems, photoItems }) {
               <span className="reel-page-title block">The Reel</span>
             </h1>
             <p className="reel-page-desc text-charcoal/55 leading-relaxed self-end text-lg">
-              A curated selection of work across video, photography, and social content —
+              A curated selection of work across video, photography, and social content -
               each piece built for a specific brand, platform, and purpose.
             </p>
           </div>

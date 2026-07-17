@@ -1,5 +1,5 @@
 /**
- * Inline SVG icon set — preserved exactly from the original `I` component.
+ * Inline SVG icon set - preserved exactly from the original `I` component.
  * Usage: <Icon n="film" s={20} c="#1a1a1a" />
  */
 export default function Icon({ n, s = 20, c = 'currentColor', ...rest }) {

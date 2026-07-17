@@ -11,7 +11,7 @@ const breadcrumbs = breadcrumbsJsonLd([
   { name: 'Films', path: '/vlog' },
 ])
 
-/** /vlog — index of published vlogs. ISR every 60s. */
+/** /vlog - index of published vlogs. ISR every 60s. */
 export const revalidate = 60
 
 export async function generateMetadata() {
@@ -21,7 +21,7 @@ export async function generateMetadata() {
       'Behind-the-scenes films, director cuts, and founder commentary from P2V Labs.',
     alternates: { canonical: '/vlog' },
     openGraph: {
-      title: 'The Reel Diary — P2V Labs',
+      title: 'The Reel Diary - P2V Labs',
       url:   '/vlog',
       type:  'website',
     },

@@ -30,7 +30,7 @@ export default function PhotoLightbox({ items, index, onClose, onChange }) {
 
   return (
     <div className="fixed inset-0 z-50 bg-charcoal/35 backdrop-blur-xl flex flex-col md:flex-row">
-      {/* Floating close — top-right of the viewport, above everything. */}
+      {/* Floating close - top-right of the viewport, above everything. */}
       <button
         onClick={onClose}
         className="fixed top-5 right-5 md:top-7 md:right-7 z-[60] w-11 h-11 flex items-center justify-center bg-cream/95 text-charcoal hover:bg-p2v hover:text-cream border border-charcoal/15 backdrop-blur-sm transition-colors shadow-lg"

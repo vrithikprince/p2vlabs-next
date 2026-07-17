@@ -38,7 +38,7 @@ export default function DroppingSoon({ kind = 'blog' }) {
               href="/reel"
               className="inline-flex items-center gap-2 text-[10px] tracking-[0.2em] uppercase text-charcoal/55 hover:text-p2v transition-colors"
             >
-              <span>While you wait — see the reel</span>
+              <span>While you wait - see the reel</span>
               <Icon n="arrow" s={14} c="currentColor" />
             </Link>
           </div>
@@ -58,7 +58,7 @@ export default function DroppingSoon({ kind = 'blog' }) {
                   </p>
                   <p className="text-xs text-charcoal/50 leading-relaxed mt-1">
                     {isBlog
-                      ? 'How specific shoots came together — lens choices, light setups, editing decisions.'
+                      ? 'How specific shoots came together - lens choices, light setups, editing decisions.'
                       : 'Selected long-form films released here first, then on YouTube.'}
                   </p>
                 </div>

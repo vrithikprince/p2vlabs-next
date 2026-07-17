@@ -1,5 +1,5 @@
 /**
- * generate-blogs.mjs — one-shot blog generator + publisher.
+ * generate-blogs.mjs - one-shot blog generator + publisher.
  *
  * Reads:
  *   - d:/P2VLabs/google_key_for_blogs/.env  → Gemini API key (api_key)
@@ -55,7 +55,7 @@ if (!SUPABASE_URL || !SUPABASE_KEY) throw new Error('Missing Supabase env')
 const sb = createClient(SUPABASE_URL, SUPABASE_KEY)
 
 /* ─────────────────────────────────────────────
-   TOPICS — locked plan
+   TOPICS - locked plan
 ───────────────────────────────────────────── */
 const TOPICS = [
   {
@@ -67,7 +67,7 @@ const TOPICS = [
     imageSearchTerms: ['photography studio interior', 'film camera lens', 'creative studio workspace'],
     primaryKeywords: ['P2V', 'P2V Labs', 'p2vlabs', 'Pixels to Visuals'],
     angle:
-      'Brand etymology + philosophy post. Explains the name "P2V" = Pixels to Visuals — every project moves a brand from raw captured pixels to finished visuals that earn attention. Use the etymology to talk about the agency\'s philosophy: every frame has a purpose. Mention Ahmedabad once naturally. Founder voice (Vrithik).',
+      'Brand etymology + philosophy post. Explains the name "P2V" = Pixels to Visuals - every project moves a brand from raw captured pixels to finished visuals that earn attention. Use the etymology to talk about the agency\'s philosophy: every frame has a purpose. Mention Ahmedabad once naturally. Founder voice (Vrithik).',
     voice: 'founder',
   },
   {
@@ -79,7 +79,7 @@ const TOPICS = [
     imageSearchTerms: ['Ahmedabad city skyline', 'modern office workspace', 'creative team meeting'],
     primaryKeywords: ['social media agency Ahmedabad', 'content agency Ahmedabad', 'Ahmedabad'],
     angle:
-      'Practical buyer\'s guide. Five+ specific things to check before signing: portfolio depth, reporting cadence, in-house vs freelancer pool, whether they handle production OR just management, how they price (per-post vs retainer). Anchor to Ahmedabad market — name neighborhoods like SG Road, Bodakdev, CG Road if relevant. Mention common red flags (agency that posts your content but never measures, agencies that promise virality).',
+      'Practical buyer\'s guide. Five+ specific things to check before signing: portfolio depth, reporting cadence, in-house vs freelancer pool, whether they handle production OR just management, how they price (per-post vs retainer). Anchor to Ahmedabad market - name neighborhoods like SG Road, Bodakdev, CG Road if relevant. Mention common red flags (agency that posts your content but never measures, agencies that promise virality).',
     voice: 'founder',
   },
   {
@@ -91,7 +91,7 @@ const TOPICS = [
     imageSearchTerms: ['film set production', 'cinema camera director', 'film slate clapperboard'],
     primaryKeywords: ['brand film', 'video production Ahmedabad', 'corporate film'],
     angle:
-      'Process post from the director\'s chair. Walk through how a one-line brief from a client becomes a 90-second brand film — what we ask in the first call, how we build the treatment, how we scout location, how we cast (or don\'t), what changes between storyboard and shoot day, how grading shifts a film\'s feel. Technical but accessible. Founder voice — first-person craft, on-set specifics.',
+      'Process post from the director\'s chair. Walk through how a one-line brief from a client becomes a 90-second brand film - what we ask in the first call, how we build the treatment, how we scout location, how we cast (or don\'t), what changes between storyboard and shoot day, how grading shifts a film\'s feel. Technical but accessible. Founder voice - first-person craft, on-set specifics.',
     voice: 'founder',
   },
   {
@@ -115,7 +115,7 @@ const TOPICS = [
     imageSearchTerms: ['workspace desk laptop notebook', 'office desk planner', 'calm office workspace'],
     primaryKeywords: ['client management', 'creative agency', 'content agency'],
     angle:
-      'Operations essay on what makes client relationships in a creative shop actually work — communication cadence, the difference between under-promising and over-explaining, why approvals get stuck, the value of a single source of truth (a portal, a Notion, a thread). Anonymise specific clients but include real moments. Operations voice (Payal) — process-thinking, calm.',
+      'Operations essay on what makes client relationships in a creative shop actually work - communication cadence, the difference between under-promising and over-explaining, why approvals get stuck, the value of a single source of truth (a portal, a Notion, a thread). Anonymise specific clients but include real moments. Operations voice (Payal) - process-thinking, calm.',
     voice: 'ops',
   },
   {
@@ -127,7 +127,7 @@ const TOPICS = [
     imageSearchTerms: ['Indian thali food photography', 'restaurant food plate', 'food styling photography'],
     primaryKeywords: ['food photography Ahmedabad', 'restaurant photography', 'Zomato photos'],
     angle:
-      'Lessons learned from 150+ restaurant shoots — light, timing (golden hour vs noon), what plates work for camera vs eye, what condiments to keep out of frame, why styling matters more than camera, the wide vs tight ratio that wins on Zomato. Operations/systems voice (Payal) — the repeatable playbook across 150+ shoots. Mention specific dish types common in Gujarat (thali, dhokla, pizza, dosa) without listing client names.',
+      'Lessons learned from 150+ restaurant shoots - light, timing (golden hour vs noon), what plates work for camera vs eye, what condiments to keep out of frame, why styling matters more than camera, the wide vs tight ratio that wins on Zomato. Operations/systems voice (Payal) - the repeatable playbook across 150+ shoots. Mention specific dish types common in Gujarat (thali, dhokla, pizza, dosa) without listing client names.',
     voice: 'ops',
   },
   {
@@ -144,14 +144,14 @@ const TOPICS = [
   },
   {
     n: 8,
-    title: 'Why Your Instagram Feed Looks Generic — and the Visual System That Fixes It',
+    title: 'Why Your Instagram Feed Looks Generic - and the Visual System That Fixes It',
     slug: 'why-your-instagram-feed-looks-generic',
     author: 'Payal Chetwani',
     publishAt: '2026-06-04T09:00:00+05:30',
     imageSearchTerms: ['smartphone Instagram app', 'phone social media grid', 'social media smartphone'],
     primaryKeywords: ['Instagram aesthetic', 'brand identity', 'visual system'],
     angle:
-      'Pattern essay on why most Indian brand Instagram feeds look interchangeable — same gradients, same stock-templated reels, same emoji-heavy captions. The fix is a visual system: a fixed palette, a typographic anchor, a recurring grid logic, recurring formats (founder POV reels, BTS, customer voice). Show how the system gives variety without breaking identity. Operations/systems voice (Payal).',
+      'Pattern essay on why most Indian brand Instagram feeds look interchangeable - same gradients, same stock-templated reels, same emoji-heavy captions. The fix is a visual system: a fixed palette, a typographic anchor, a recurring grid logic, recurring formats (founder POV reels, BTS, customer voice). Show how the system gives variety without breaking identity. Operations/systems voice (Payal).',
     voice: 'ops',
   },
   {
@@ -163,7 +163,7 @@ const TOPICS = [
     imageSearchTerms: ['Indian rupee banknotes', 'business calculator desk', 'office Ahmedabad'],
     primaryKeywords: ['content marketing Ahmedabad', 'video production cost', 'agency pricing'],
     angle:
-      'Pricing transparency essay. The 8K reel vs 80K reel comparison — what changes in scope, light, time, post. Why a 8K reel for a restaurant is often the right call (and when it isn\'t). Anchor specific budget bands: starter (8K-25K/month), mid (25K-75K/month), brand-film (35K-2L per project). Mention that the *unseen* cost of cheap content is the months a brand wastes on assets that don\'t move. Founder voice.',
+      'Pricing transparency essay. The 8K reel vs 80K reel comparison - what changes in scope, light, time, post. Why a 8K reel for a restaurant is often the right call (and when it isn\'t). Anchor specific budget bands: starter (8K-25K/month), mid (25K-75K/month), brand-film (35K-2L per project). Mention that the *unseen* cost of cheap content is the months a brand wastes on assets that don\'t move. Founder voice.',
     voice: 'founder',
   },
   {
@@ -175,20 +175,20 @@ const TOPICS = [
     imageSearchTerms: ['Ahmedabad architecture historic', 'Sabarmati riverfront Ahmedabad', 'Ahmedabad street'],
     primaryKeywords: ['P2V Labs Ahmedabad', 'content agency Ahmedabad', 'Ahmedabad'],
     angle:
-      'Personal post about the choice of city. Why we picked Ahmedabad over Mumbai/Bangalore — proximity to underserved local brands, cost structure that lets us shoot more for less, and a creative scene that\'s finding its voice. Walk through what shooting in Ahmedabad gives clients (faster turnaround, on-site presence, cheaper logistics) vs Mumbai. Founder voice. Ends with a soft positioning note that we\'re building from here for the long term.',
+      'Personal post about the choice of city. Why we picked Ahmedabad over Mumbai/Bangalore - proximity to underserved local brands, cost structure that lets us shoot more for less, and a creative scene that\'s finding its voice. Walk through what shooting in Ahmedabad gives clients (faster turnaround, on-site presence, cheaper logistics) vs Mumbai. Founder voice. Ends with a soft positioning note that we\'re building from here for the long term.',
     voice: 'founder',
   },
 ]
 
 /* ─────────────────────────────────────────────
-   GEMINI — generate body content as JSON
+   GEMINI - generate body content as JSON
 ───────────────────────────────────────────── */
 /* Using gemini-2.5-flash (production, fast) instead of gemini-3-flash-preview.
    The preview model was returning >2 min on the full blog prompt. */
 const GEMINI_MODEL = 'gemini-2.5-flash'
 
 const VOICE_GUIDES = {
-  founder: 'Voice: Vrithik Prince, founder. Directional, opinionated, business-aware. Uses "we" when speaking for the agency. Comfortable taking positions. Writes for other founders/marketers. Also carries craft/on-set specifics when the topic is production — first-person about the shoot.',
+  founder: 'Voice: Vrithik Prince, founder. Directional, opinionated, business-aware. Uses "we" when speaking for the agency. Comfortable taking positions. Writes for other founders/marketers. Also carries craft/on-set specifics when the topic is production - first-person about the shoot.',
   ops: 'Voice: Payal Chetwani, operations + client lead. Process-thinking, calm, systems-oriented. References client situations anonymously. Avoids hype words; favours specifics and frameworks.',
 }
 
@@ -211,7 +211,7 @@ P2V LABS CONTEXT (you must respect these facts):
 - Founders: Vrithik Prince, Payal Chetwani.
 - Services: brand films, social reels, food/product photography, monthly retainers, brand visual systems.
 - 150+ restaurant shoots, 5M+ views across client reels, 90%+ retainer renewal rate.
-- Studio aesthetic is editorial, restrained — think Loewe/A24, not Times Square neon.
+- Studio aesthetic is editorial, restrained - think Loewe/A24, not Times Square neon.
 - Pricing starts at ₹8,000 for reels/food shoots, ₹35,000 for brand films, ₹25,000/month for retainers.
 - Client portal lives at clients.p2vlabs.in.
 
@@ -221,12 +221,15 @@ STRUCTURE the post:
 - 4-7 H2 sections with <h2> tags. Each H2 is a real subhead, not a question.
 - Within sections, mix paragraphs and one or two <ul><li> lists where useful.
 - One short <blockquote> somewhere mid-article for emphasis.
-- End with a 1-2 sentence close (no formal "Conclusion" header — let it land).
+- End with a 1-2 sentence close (no formal "Conclusion" header - let it land).
 - No "Introduction" or "Conclusion" headings. Editorial prose, not blog-spam structure.
+
+PUNCTUATION (strict):
+- NEVER use em-dashes or en-dashes anywhere in the excerpt, meta, or body. They read as AI-generated. Where you would reach for one, use a comma, a colon, parentheses, a period, or a spaced hyphen " - " instead.
 
 ALLOWED HTML (Tiptap subset): <p>, <h2>, <h3>, <strong>, <em>, <a href="">, <ul>, <ol>, <li>, <blockquote>. Nothing else. No <div>, <span>, <h1>, <img>, <script>.
 
-OUTPUT FORMAT — DO NOT use JSON. Use these exact delimiter markers, with NO commentary, no markdown fences, nothing else:
+OUTPUT FORMAT - DO NOT use JSON. Use these exact delimiter markers, with NO commentary, no markdown fences, nothing else:
 
 ===EXCERPT===
 <60-100 word excerpt that sells the click. Distinct from the lede; can paraphrase.>
@@ -249,7 +252,7 @@ async function generateContent(t) {
           temperature: 0.82,
           topP: 0.95,
           maxOutputTokens: 7500,
-          /* No responseMimeType — we use delimiter-based output, so the
+          /* No responseMimeType - we use delimiter-based output, so the
              model emits plain text with markers we extract by regex.
              JSON mode was failing because Gemini frequently mis-escapes
              nested double quotes inside HTML strings. */
@@ -274,14 +277,14 @@ async function generateContent(t) {
 
   if (!excerpt || !meta_description || !content_html) {
     throw new Error(
-      `Missing delimiter section — got excerpt:${!!excerpt} meta:${!!meta_description} body:${!!content_html}`
+      `Missing delimiter section - got excerpt:${!!excerpt} meta:${!!meta_description} body:${!!content_html}`
     )
   }
   return { excerpt, meta_description, content_html }
 }
 
 /* ─────────────────────────────────────────────
-   COVER — typographic SVG cover, rendered to PNG via sharp.
+   COVER - typographic SVG cover, rendered to PNG via sharp.
 
    Cream background, large Playfair (fallback Georgia) title, charcoal
    text, single red hairline accent, "THE P2V JOURNAL" eyebrow, author
@@ -292,7 +295,7 @@ const COVER_W = 1600
 const COVER_H = 900
 
 /* Estimate average glyph width relative to font size for serif display
-   text. Playfair is roughly 0.52em average — varies by character but
+   text. Playfair is roughly 0.52em average - varies by character but
    close enough for our wrapping pass. */
 const GLYPH_RATIO = 0.52
 
@@ -328,7 +331,7 @@ function buildCoverSvg(t) {
   const PAD_X = 130
   const CONTENT_W = COVER_W - PAD_X * 2
 
-  /* Title sizing — bump up for short titles, shrink for long ones. */
+  /* Title sizing - bump up for short titles, shrink for long ones. */
   const titleLen = t.title.length
   let fontSize = 96
   if (titleLen > 60) fontSize = 78
@@ -407,15 +410,15 @@ async function fetchAndUploadCover(t) {
   const url = `${SUPABASE_URL}/storage/v1/object/public/blog/${filename}`
   return {
     url,
-    alt: `${t.title} — The P2V Journal`,
+    alt: `${t.title} - The P2V Journal`,
   }
 }
 
 /* ─────────────────────────────────────────────
-   PUBLISH — insert blog_posts row
+   PUBLISH - insert blog_posts row
 ───────────────────────────────────────────── */
 async function publish(t, dryRun) {
-  /* Skip if slug already exists — keeps the script idempotent. */
+  /* Skip if slug already exists - keeps the script idempotent. */
   const { data: existing } = await sb
     .from('blog_posts')
     .select('id, slug')
@@ -423,7 +426,7 @@ async function publish(t, dryRun) {
     .maybeSingle()
 
   if (existing) {
-    console.log(`  [${t.n}] SKIP — slug already exists: ${t.slug}`)
+    console.log(`  [${t.n}] SKIP - slug already exists: ${t.slug}`)
     return
   }
 
@@ -452,7 +455,7 @@ async function publish(t, dryRun) {
   }
 
   if (dryRun) {
-    console.log(`  [${t.n}] DRY-RUN — would insert:`)
+    console.log(`  [${t.n}] DRY-RUN - would insert:`)
     console.log({
       ...row,
       content_html: row.content_html.slice(0, 200) + `…[${row.content_html.length} chars]`,

@@ -6,7 +6,7 @@ import JournalIllustration from '../../components/illustrations/JournalIllustrat
 import { getPublishedBlogPosts } from '../../lib/cms.js'
 import { breadcrumbsJsonLd } from '../../lib/seo.js'
 
-/* BreadcrumbList — even on the index page, gives Google the trail so
+/* BreadcrumbList - even on the index page, gives Google the trail so
    the SERP can render "p2vlabs.in › Journal" instead of the raw URL. */
 const breadcrumbs = breadcrumbsJsonLd([
   { name: 'Home',    path: '/' },
@@ -14,7 +14,7 @@ const breadcrumbs = breadcrumbsJsonLd([
 ])
 
 /**
- * /blog — index of published blog posts. ISR every 60s so freshly-
+ * /blog - index of published blog posts. ISR every 60s so freshly-
  * published posts appear on the public site within ~1 minute of the
  * founder hitting Publish in the CMS, without paying the server-render
  * cost on every request.
@@ -28,7 +28,7 @@ export async function generateMetadata() {
       'Essays, production notes, and behind-the-frame breakdowns from the P2V Labs studio in Ahmedabad.',
     alternates: { canonical: '/blog' },
     openGraph: {
-      title: 'The Journal — P2V Labs',
+      title: 'The Journal - P2V Labs',
       url:   '/blog',
       type:  'website',
     },

@@ -4,7 +4,7 @@ import { SITE_URL, SITE_NAME, SITE_LOCALE, organizationJsonLd } from '../lib/seo
 import './globals.css'
 
 /**
- * Next.js Font Optimization — self-hosts Playfair Display + Inter so we get a
+ * Next.js Font Optimization - self-hosts Playfair Display + Inter so we get a
  * single woff2 per family with `font-display: swap`, instead of the Vite app's
  * render-blocking <link rel="stylesheet"> from fonts.googleapis.com.
  *
@@ -29,11 +29,11 @@ const inter = Inter({
 export const metadata = {
   /* metadataBase is the canonical host. Every relative URL in this
    * file (canonicals, og:image, twitter:image) gets resolved against
-   * this. Non-www, https — matches the redirect direction in vercel.json
+   * this. Non-www, https - matches the redirect direction in vercel.json
    * + the SITE_URL constant in lib/seo.js. Change one, change all. */
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'P2V Labs — Visual Content Agency Ahmedabad',
+    default: 'P2V Labs - Visual Content Agency Ahmedabad',
     template: '%s | P2V Labs',
   },
   alternates: { canonical: '/' },
@@ -55,19 +55,19 @@ export const metadata = {
     locale: SITE_LOCALE,
     url: '/',                  /* resolved against metadataBase → SITE_URL */
     siteName: SITE_NAME,
-    title: 'P2V Labs — Visual Content Agency Ahmedabad',
+    title: 'P2V Labs - Visual Content Agency Ahmedabad',
     description:
-      'Pixels · Purpose · Visuals — Data-driven visual content for businesses across Gujarat.',
+      'Pixels · Purpose · Visuals - Data-driven visual content for businesses across Gujarat.',
     images: [{
       url: '/og-image.jpg',    /* resolved → https://p2vlabs.in/og-image.jpg */
       width: 1200,
       height: 630,
-      alt: 'P2V Labs — Visual Content Agency Ahmedabad',
+      alt: 'P2V Labs - Visual Content Agency Ahmedabad',
     }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'P2V Labs — Visual Content Agency Ahmedabad',
+    title: 'P2V Labs - Visual Content Agency Ahmedabad',
     description: 'Pixels · Purpose · Visuals',
     images: ['/og-image.jpg'],
   },
@@ -83,7 +83,7 @@ export const metadata = {
     },
   },
   icons: {
-    /* Brand-red square with cream "P2V" — readable when Google downscales
+    /* Brand-red square with cream "P2V" - readable when Google downscales
      * it for the favicon column. favicon.ico (32+48) is the legacy +
      * Google fallback at the root path; icon.png (512) is the PWA/raster
      * source; the SVG is the crisp vector for modern browsers. All three
@@ -109,7 +109,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
       <body className="min-h-screen bg-cream">
-        {/* Organization JSON-LD — every page carries the publisher entity.
+        {/* Organization JSON-LD - every page carries the publisher entity.
             Used by Google for the knowledge panel + as the canonical
             publisher reference on Article schemas across the site. */}
         <script

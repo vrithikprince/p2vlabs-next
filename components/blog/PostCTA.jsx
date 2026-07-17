@@ -20,7 +20,7 @@ export default function PostCTA({ kind = 'blog', slug, title }) {
   /* Pre-fill the WhatsApp message with the post title so the founder's
      phone shows what triggered the click. URL-encoded inline. */
   const waText = encodeURIComponent(
-    `Hi P2V Labs — I just read "${title || 'your latest post'}" on p2vlabs.in. I'd love to chat about a project.`
+    `Hi P2V Labs - I just read "${title || 'your latest post'}" on p2vlabs.in. I'd love to chat about a project.`
   )
   const waUrl = `https://wa.me/917048824616?text=${waText}`
 

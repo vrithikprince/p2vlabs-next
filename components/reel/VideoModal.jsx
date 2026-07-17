@@ -7,7 +7,7 @@ import Tag from '../ui/Tag.jsx'
 const SPEEDS = [0.5, 0.75, 1, 1.25, 1.5, 2]
 
 /**
- * Full custom video player — preserved 1:1 from the Vite app.
+ * Full custom video player - preserved 1:1 from the Vite app.
  * Features: play/pause, seek bar with buffer indicator, volume + mute,
  * playback speed (0.5×–2×), fullscreen, auto-hide controls after 3s, ESC close.
  */
@@ -124,7 +124,7 @@ export default function VideoModal({ item, onClose }) {
       className="fixed inset-0 z-50 flex items-center justify-center p-3 md:p-8 bg-charcoal/35 backdrop-blur-xl"
       onClick={onClose}
     >
-      {/* Floating close — sits in the top-right of the viewport, on top
+      {/* Floating close - sits in the top-right of the viewport, on top
           of the blurred backdrop. e.stopPropagation prevents the outer
           onClick from also firing (would double-close, harmless but
           cleaner this way). */}

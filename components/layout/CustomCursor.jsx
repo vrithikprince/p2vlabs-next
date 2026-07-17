@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 
 /**
- * Desktop-only custom cursor — small dot + lerping ring.
+ * Desktop-only custom cursor - small dot + lerping ring.
  * Adds `cursor-hover` / `cursor-click` body classes for hover/click states.
  * Skipped entirely on touch devices via the (hover: hover) media query.
  */

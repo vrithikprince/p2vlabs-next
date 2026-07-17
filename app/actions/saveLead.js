@@ -3,7 +3,7 @@
 import { createServerClient } from '../../lib/supabase.js'
 
 /**
- * Server action — persists a new lead row to public.leads. Called from
+ * Server action - persists a new lead row to public.leads. Called from
  * the LeadForm client component. Returns { ok, error? } so the form can
  * render success/error inline.
  *
@@ -52,7 +52,7 @@ export async function saveLead(input) {
       return {
         ok: false,
         error:
-          'Sorry — something went wrong saving your message. Please email hello@p2vlabs.in directly.',
+          'Sorry - something went wrong saving your message. Please email hello@p2vlabs.in directly.',
       }
     }
     return { ok: true }
@@ -61,7 +61,7 @@ export async function saveLead(input) {
     return {
       ok: false,
       error:
-        'Sorry — something went wrong saving your message. Please email hello@p2vlabs.in directly.',
+        'Sorry - something went wrong saving your message. Please email hello@p2vlabs.in directly.',
     }
   }
 }

@@ -14,7 +14,7 @@ import { LoaderContext } from './LoaderContext.jsx'
 /**
  * Client wrapper around the entire app. Mirrors the Vite app's Layout.jsx:
  *
- *   - Owns `loaded` state — true once the ink loader's exit timeline finishes.
+ *   - Owns `loaded` state - true once the ink loader's exit timeline finishes.
  *     Persisted to sessionStorage so the loader doesn't replay if RootClient
  *     happens to remount during a soft route change (the symptom: clicking
  *     "View Our Reel" replayed the full 3.3s handwriting animation).
@@ -25,7 +25,7 @@ import { LoaderContext } from './LoaderContext.jsx'
 const LOADER_DONE_KEY = 'p2v-loader-done'
 
 export default function RootClient({ children }) {
-  /* Initial state stays `false` so SSR and client first-paint match —
+  /* Initial state stays `false` so SSR and client first-paint match -
      prevents hydration mismatch. The sessionStorage check happens in the
      effect below, immediately after mount. */
   const [loaded,        setLoaded]   = useState(false)
@@ -36,7 +36,7 @@ export default function RootClient({ children }) {
   /* On mount, if the loader has already played in this tab/session, flip
      `loaded` to true synchronously. The Loader's own GSAP timeline lives
      in a child useEffect that runs *before* this parent effect, but it
-     fires off async tweens — by the time the first frame renders, we've
+     fires off async tweens - by the time the first frame renders, we've
      already unmounted the Loader, so visually it's a no-op. */
   useEffect(() => {
     try {
@@ -45,7 +45,7 @@ export default function RootClient({ children }) {
       }
     } catch {
       /* Some privacy modes throw on sessionStorage access. Fall through
-         and let the loader play — better than a hard error. */
+         and let the loader play - better than a hard error. */
     }
   }, [])
 

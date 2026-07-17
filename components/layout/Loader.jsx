@@ -9,7 +9,7 @@ import { gsap } from 'gsap'
  *      stroked SVG <text>. The browser computes glyph outlines as paths,
  *      so as the clip exposes them they appear to be drawn in.
  *   2. A solid-fill copy of the text fades in on top, so the inked
- *      letters end up as proper Playfair Display crimson — not just an
+ *      letters end up as proper Playfair Display crimson - not just an
  *      outlined ghost.
  *   3. The stroke layer fades out once the fill is in (otherwise the
  *      1.5px stroke would bloat the final letterforms).
@@ -45,14 +45,14 @@ export default function Loader({ onDone }) {
     const FILL_DURATION  = 0.85
     const FILL_END       = FILL_START + FILL_DURATION            // 2.025
 
-    /* Phase 1 — outline reveals left to right (the "writing"). */
+    /* Phase 1 - outline reveals left to right (the "writing"). */
     tl.to(outline, {
       clipPath: 'inset(0 0% 0 0)',
       duration: WRITE_DURATION,
       ease: 'power2.inOut',
     }, WRITE_START)
 
-    /* Phase 2 — fill fades in to "ink" the letters solid. Starts before
+    /* Phase 2 - fill fades in to "ink" the letters solid. Starts before
        the write completes so the trail of the pen blends into solid. */
     tl.to(fill, {
       fillOpacity: 1,
@@ -60,14 +60,14 @@ export default function Loader({ onDone }) {
       ease: 'power2.out',
     }, FILL_START)
 
-    /* Phase 3 — outline fades so the final letterforms aren't bloated. */
+    /* Phase 3 - outline fades so the final letterforms aren't bloated. */
     tl.to(outline, {
       autoAlpha: 0,
       duration: 0.45,
       ease: 'power2.inOut',
     }, WRITE_START + WRITE_DURATION + 0.05)
 
-    /* Phase 4 — tag fades in only AFTER the fill is fully in, with a
+    /* Phase 4 - tag fades in only AFTER the fill is fully in, with a
        short beat so the name reads as "settled" before the tag arrives. */
     const TAG_START    = FILL_END + 0.15                          // 2.175
     const TAG_DURATION = 0.7
@@ -77,7 +77,7 @@ export default function Loader({ onDone }) {
       ease: 'power2.out',
     }, TAG_START)
 
-    /* Phase 5 — onDone at start of fade-out so the hero renders behind
+    /* Phase 5 - onDone at start of fade-out so the hero renders behind
        the dissolving loader rather than popping in afterwards. */
     const exitAt = TAG_START + TAG_DURATION + 0.45                // 3.325
     tl.call(() => { document.body.style.overflow = ''; onDone?.() }, null, exitAt)
@@ -103,7 +103,7 @@ export default function Loader({ onDone }) {
           aria-label="P2V Labs"
           preserveAspectRatio="xMidYMid meet"
         >
-          {/* Filled layer — appears after the stroke draws. Initial
+          {/* Filled layer - appears after the stroke draws. Initial
               fill-opacity=0 inline so the first paint is invisible;
               otherwise React renders the default fill-opacity (1)
               before useEffect can run gsap.set, causing a flash of
@@ -119,7 +119,7 @@ export default function Loader({ onDone }) {
           >
             P2V Labs
           </text>
-          {/* Outline layer — stroked, clip-path-revealed left to right.
+          {/* Outline layer - stroked, clip-path-revealed left to right.
               Initial clip-path inline for the same reason as above. */}
           <text
             ref={outlineRef}

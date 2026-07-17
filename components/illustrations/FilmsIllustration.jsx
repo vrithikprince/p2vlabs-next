@@ -1,14 +1,14 @@
 /**
- * FilmsIllustration — header mark for /vlog (The P2V Reel Diary).
+ * FilmsIllustration - header mark for /vlog (The P2V Reel Diary).
  *
  * Side-profile cinema camera:
  *   - Top handle with two short connector posts
  *   - Boxy main body with hairline detail (dials / markings)
- *   - Lens housing protruding from the left — concentric circles
+ *   - Lens housing protruding from the left - concentric circles
  *     with a brand-red core (the "eye")
  *   - Thin baseline under the body suggesting a tripod mount
  *
- * One red accent (lens center) — deliberately understated, reads as a
+ * One red accent (lens center) - deliberately understated, reads as a
  * piece of gear photographed for a magazine spread, not an app icon.
  */
 export default function FilmsIllustration() {
@@ -32,12 +32,12 @@ export default function FilmsIllustration() {
       {/* Main body */}
       <rect x="50" y="40" width="125" height="78" stroke={stroke} strokeWidth="1.2" />
 
-      {/* Lens housing — protrudes from the left side of the body */}
+      {/* Lens housing - protrudes from the left side of the body */}
       <circle cx="40" cy="79" r="22" stroke={stroke} strokeWidth="1.2" />
       <circle cx="40" cy="79" r="13" stroke={strokeMuted} strokeWidth="1" />
       <circle cx="40" cy="79" r="4"  fill={red} />
 
-      {/* Body detail — implied dials / labels */}
+      {/* Body detail - implied dials / labels */}
       <g stroke={strokeMuted} strokeWidth="0.8">
         <line x1="95"  y1="55" x2="160" y2="55" />
         <line x1="95"  y1="68" x2="148" y2="68" />

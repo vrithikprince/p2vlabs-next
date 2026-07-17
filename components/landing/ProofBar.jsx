@@ -6,7 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 gsap.registerPlugin(ScrollTrigger)
 
 /**
- * ProofBar — quiet horizontal strip of four impact figures.
+ * ProofBar - quiet horizontal strip of four impact figures.
  *
  * Sits just after the marquee. Editorial restraint, not a hero-style flex:
  * eyebrow at left, four stats in serif on a single row at desktop, two-up
@@ -46,7 +46,7 @@ export default function ProofBar() {
       id="proof-bar"
       className="relative overflow-hidden py-14 lg:py-20 px-5 md:px-10 lg:px-20"
     >
-      {/* Backdrop washes — invisible-ish color clouds so the glass cards
+      {/* Backdrop washes - invisible-ish color clouds so the glass cards
           have something to refract. Without these, backdrop-filter on a
           flat cream section produces no visible effect. */}
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">

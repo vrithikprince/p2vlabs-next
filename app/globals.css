@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 /* ─────────────────────────────────────────────
-   BASE — preserved verbatim from the Vite app's
+   BASE - preserved verbatim from the Vite app's
    src/styles/index.css. Identical visuals.
 ───────────────────────────────────────────── */
 
@@ -105,7 +105,7 @@ body.cursor-click #cursor-dot  { width: 12px; height: 12px; }
    Cream backdrop. "P2V Labs" reveals left-to-right via a clip-path
    sweep on a stroked SVG <text> (the "writing"), then a solid-fill
    copy fades in on top so the final letterforms are proper Playfair
-   crimson — not an outlined ghost. "Pixels · Purpose · Visuals" soft-fades in
+   crimson - not an outlined ghost. "Pixels · Purpose · Visuals" soft-fades in
    below. GSAP drives the timing (see Loader.jsx).
 ───────────────────────────────────────────── */
 
@@ -153,7 +153,7 @@ body.cursor-click #cursor-dot  { width: 12px; height: 12px; }
    Native <details>/<summary> with the default disclosure triangle
    suppressed across browsers. The +/- icon in FAQ.jsx is two crossed
    bars; when [open], the vertical bar scales to zero so it collapses
-   into a minus. Pure CSS — no JS toggle needed.
+   into a minus. Pure CSS - no JS toggle needed.
 ───────────────────────────────────────────── */
 
 .faq-item > summary { list-style: none; }
@@ -242,7 +242,7 @@ nav.glass-nav {
 .magnetic { display: inline-block; transform: translate(0,0); }
 
 /* ─────────────────────────────────────────────
-   BLOG ARTICLE — public rendering of Tiptap HTML
+   BLOG ARTICLE - public rendering of Tiptap HTML
 
    The CMS Tiptap editor emits a constrained subset (paragraph, h2, h3,
    bold, italic, link, lists, blockquote, image, code). These rules

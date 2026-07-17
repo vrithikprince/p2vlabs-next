@@ -15,7 +15,7 @@ import {
 } from '../../../lib/youtube.js'
 import { buildPostMetadata, canonicalUrl, SITE_URL, breadcrumbsJsonLd } from '../../../lib/seo.js'
 
-/** /vlog/[slug] — individual vlog page. */
+/** /vlog/[slug] - individual vlog page. */
 export const revalidate = 60
 export const dynamicParams = true
 
@@ -56,7 +56,7 @@ export default async function VlogPost({ params }) {
   const thumb = post.thumbnail_url || youtubeThumbnail(post.youtube_id, 'maxres')
   const isoDuration = durationToIso(post.duration)
 
-  /* JSON-LD VideoObject — gives Google the structured data needed to
+  /* JSON-LD VideoObject - gives Google the structured data needed to
      surface this page in Video search results. */
   const jsonLd = {
     '@context':     'https://schema.org',
@@ -79,7 +79,7 @@ export default async function VlogPost({ params }) {
     },
   }
 
-  /* BreadcrumbList — SERP trail "p2vlabs.in › Films › <Vlog Title>". */
+  /* BreadcrumbList - SERP trail "p2vlabs.in › Films › <Vlog Title>". */
   const breadcrumbs = breadcrumbsJsonLd([
     { name: 'Home',     path: '/' },
     { name: 'Films',    path: '/vlog' },
@@ -99,7 +99,7 @@ export default async function VlogPost({ params }) {
 
       <article className="pb-20">
 
-        {/* Header — same column width as the player + description, so
+        {/* Header - same column width as the player + description, so
             the whole page reads as a single editorial column. */}
         <header className="px-5 md:px-10 pt-12 md:pt-16 max-w-3xl mx-auto">
           <Link

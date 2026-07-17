@@ -5,11 +5,11 @@ import ReelClient from '../../components/reel/ReelClient.jsx'
 import Footer from '../../components/layout/Footer.jsx'
 
 const WA_REEL = 'https://wa.me/917048824616?text=' + encodeURIComponent(
-  'Hi P2V Labs, I just saw your reel. I’d like to discuss creating something similar for my brand — could you share the next steps?'
+  'Hi P2V Labs, I just saw your reel. I’d like to discuss creating something similar for my brand - could you share the next steps?'
 )
 
 /**
- * /reel — Incremental Static Regeneration.
+ * /reel - Incremental Static Regeneration.
  *
  * The Vite app fetched reel items in a client effect with a silent fallback to
  * bundled VIDEO_ITEMS / PHOTO_ITEMS. We keep the same contract but resolve it
@@ -20,12 +20,12 @@ export const revalidate = 3600
 
 export async function generateMetadata() {
   return {
-    title: 'Our Work — The Reel',
+    title: 'Our Work - The Reel',
     description:
-      'Explore P2V Labs portfolio — cinematic brand reels, product photography, food photography, and corporate films created for businesses across Ahmedabad and Gujarat.',
+      'Explore P2V Labs portfolio - cinematic brand reels, product photography, food photography, and corporate films created for businesses across Ahmedabad and Gujarat.',
     alternates: { canonical: '/reel' },
     openGraph: {
-      title: 'The Reel — P2V Labs Portfolio',
+      title: 'The Reel - P2V Labs Portfolio',
       url: '/reel',
     },
   }
@@ -82,7 +82,7 @@ export default async function ReelPage() {
     <>
       <ReelClient videoItems={videos} photoItems={photos} />
 
-      {/* Closing CTA — highest-intent moment on the site is right after
+      {/* Closing CTA - highest-intent moment on the site is right after
           someone watches the portfolio. Charcoal section matches the
           /packages closing CTA so the page chrome reads as one system. */}
       <section className="py-16 lg:py-24 px-5 md:px-10 lg:px-20 bg-charcoal">
@@ -99,7 +99,7 @@ export default async function ReelPage() {
             <em className="not-italic text-p2v">could be yours.</em>
           </h2>
           <p className="text-cream/60 leading-relaxed text-[15px] max-w-xl mx-auto mb-10">
-            Tell us about your brand, your dishes, your story — we'll shape a
+            Tell us about your brand, your dishes, your story - we'll shape a
             quote against what you actually need.
           </p>
 

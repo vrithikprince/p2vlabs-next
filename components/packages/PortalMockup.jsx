@@ -1,17 +1,17 @@
 /**
- * PortalMockup — editorial-styled mockup of clients.p2vlabs.in.
+ * PortalMockup - editorial-styled mockup of clients.p2vlabs.in.
  *
  * Mounted on /packages to justify the Plan C tier. Built with
  * the same vocabulary as the rest of the site:
  *   - 1px hairlines on charcoal/10–15
  *   - Two opacity tiers (charcoal/40 for labels, charcoal/70 for body)
- *   - Exactly one red accent — the deliverable awaiting approval, which
+ *   - Exactly one red accent - the deliverable awaiting approval, which
  *     is also the most "load-bearing" action in the real portal
  *
  * Floating notification on the left is hidden below lg: to keep mobile
  * uncluttered. Sample data is intentionally restaurant-shaped (Saffron
  * Kitchen, Diwali specials) so the mockup reads as "this is what your
- * portal would look like" to the primary persona — local restaurant
+ * portal would look like" to the primary persona - local restaurant
  * owners on monthly plans.
  */
 export default function PortalMockup() {
@@ -22,7 +22,7 @@ export default function PortalMockup() {
         className="bg-white border border-charcoal/15"
         style={{ boxShadow: '0 12px 36px rgba(26,26,26,0.08)' }}
       >
-        {/* Browser chrome — three dots + URL, no other UI */}
+        {/* Browser chrome - three dots + URL, no other UI */}
         <div className="flex items-center px-4 py-3 border-b border-charcoal/10 bg-cream">
           <div className="flex gap-1.5">
             <span className="w-2.5 h-2.5 rounded-full bg-charcoal/15" />
@@ -35,7 +35,7 @@ export default function PortalMockup() {
           <span className="w-14" />
         </div>
 
-        {/* Header — welcome row */}
+        {/* Header - welcome row */}
         <div className="flex items-start justify-between px-6 md:px-8 py-6 border-b border-charcoal/10">
           <div>
             <p className="text-[9px] tracking-[0.3em] uppercase text-charcoal/40 mb-1.5">
@@ -50,7 +50,7 @@ export default function PortalMockup() {
           </p>
         </div>
 
-        {/* Stats — 3 columns with internal hairlines */}
+        {/* Stats - 3 columns with internal hairlines */}
         <div className="grid grid-cols-3 border-b border-charcoal/10">
           <div className="px-6 md:px-8 py-5 border-r border-charcoal/10">
             <p className="text-[9px] tracking-[0.25em] uppercase text-charcoal/40 mb-2.5">
@@ -84,7 +84,7 @@ export default function PortalMockup() {
                   Reel · 04
                 </span>
                 <span className="text-[13px] text-charcoal/75 truncate">
-                  Diwali specials — table-top
+                  Diwali specials - table-top
                 </span>
               </div>
               <span className="text-[9px] tracking-[0.25em] uppercase text-p2v flex-shrink-0 ml-3">
@@ -110,7 +110,7 @@ export default function PortalMockup() {
                   Stills · 08
                 </span>
                 <span className="text-[13px] text-charcoal/75 truncate">
-                  Tasting menu — winter
+                  Tasting menu - winter
                 </span>
               </div>
               <span className="text-[9px] tracking-[0.25em] uppercase text-charcoal/40 flex-shrink-0 ml-3">
@@ -123,7 +123,7 @@ export default function PortalMockup() {
                   Reel · 02
                 </span>
                 <span className="text-[13px] text-charcoal/75 truncate">
-                  Founder note — paneer story
+                  Founder note - paneer story
                 </span>
               </div>
               <span className="text-[9px] tracking-[0.25em] uppercase text-charcoal/40 flex-shrink-0 ml-3">
@@ -134,7 +134,7 @@ export default function PortalMockup() {
         </div>
       </div>
 
-      {/* Floating notification — desktop only. Sits slightly to the left
+      {/* Floating notification - desktop only. Sits slightly to the left
           of the window with a hairline border so it reads as a separate
           surface, not a glassy chip. Mirrors the inspiration screenshot's
           "auto-sent" callout but treated editorially. */}
@@ -146,7 +146,7 @@ export default function PortalMockup() {
           WhatsApp · approval received
         </p>
         <p className="text-[12px] text-charcoal/75 leading-snug">
-          <em className="not-italic text-p2v">Reel 03</em> — Behind the kitchen
+          <em className="not-italic text-p2v">Reel 03</em> - Behind the kitchen
         </p>
       </div>
     </div>

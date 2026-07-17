@@ -7,14 +7,14 @@ import Logo from '../ui/Logo.jsx'
 import Icon from '../ui/Icon.jsx'
 
 /**
- * Public-site navbar. Same visual design as the Vite app — directional hover
+ * Public-site navbar. Same visual design as the Vite app - directional hover
  * effect, scroll-aware compact glass state, mobile menu. Differences from the
  * Vite version:
  *   - "Client Login" CTA points at clients.p2vlabs.in (private SPA subdomain)
  *     instead of an in-app /login route.
  *   - About + Packages entries route to standalone pages (/about, /packages)
- *     instead of in-page anchors — keeps SEO and editorial scroll in sync.
- *     ("Packages" was previously labelled "Services" — same destination,
+ *     instead of in-page anchors - keeps SEO and editorial scroll in sync.
+ *     ("Packages" was previously labelled "Services" - same destination,
  *      label changed for lead-gen clarity / pricing intent.)
  */
 const PRIMARY = [

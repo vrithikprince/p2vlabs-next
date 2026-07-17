@@ -4,7 +4,7 @@ import VlogCard from '../../components/vlog/VlogCard.jsx'
 import { searchPublishedContent } from '../../lib/cms.js'
 
 /**
- * /search?q=… — server-rendered search across published blog + vlog
+ * /search?q=… - server-rendered search across published blog + vlog
  * posts. Backs the SearchAction declared in WebSite JSON-LD on the
  * home page, so Google's eventual Sitelinks Searchbox has a real URL
  * to send queries to. Also useful as a direct site feature.
@@ -14,7 +14,7 @@ import { searchPublishedContent } from '../../lib/cms.js'
  * outbound links to the actual posts still pass authority.
  *
  * `dynamic = 'force-dynamic'` because the response depends entirely
- * on the query string — no caching, no ISR.
+ * on the query string - no caching, no ISR.
  */
 export const dynamic = 'force-dynamic'
 
@@ -48,7 +48,7 @@ export default async function SearchPage({ searchParams }) {
             <em className="not-italic text-p2v">looking for?</em>
           </h1>
 
-          {/* Plain HTML form, GET method — matches the SearchAction
+          {/* Plain HTML form, GET method - matches the SearchAction
               urlTemplate. No client JS needed; the form submission
               becomes /search?q=… which the server re-renders. */}
           <form method="GET" action="/search" className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-3 mb-12">

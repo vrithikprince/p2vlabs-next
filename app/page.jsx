@@ -12,7 +12,7 @@ import Rule from '../components/ui/Rule.jsx'
 import { websiteJsonLd, SOCIAL_LINKS } from '../lib/seo.js'
 
 /**
- * Landing — Static Site Generation. Rebuilt on deploy and re-validated hourly.
+ * Landing - Static Site Generation. Rebuilt on deploy and re-validated hourly.
  * The full editorial scroll lives here (Hero → Marquee → Services → ReelPreview
  * → About → Contact → Footer); each /about, /contact, /packages route also
  * exposes the same section under its own URL for direct linking + SEO.
@@ -23,7 +23,7 @@ const structuredData = {
   '@context': 'https://schema.org',
   '@type': 'LocalBusiness',
   name: 'P2V Labs',
-  /* See Organization schema in lib/seo.js for the rationale —
+  /* See Organization schema in lib/seo.js for the rationale -
      same alternates so Google fuses the LocalBusiness (homepage),
      Organization (site-wide), GBP, and IG handle into one entity. */
   alternateName: ['Pixels · Purpose · Visuals', 'p2v_labs'],
@@ -54,7 +54,7 @@ const structuredData = {
   ],
   priceRange: '₹₹',
   openingHours: 'Mo-Sa 09:00-19:00',
-  /* sameAs is shared with the Organization schema in lib/seo.js — single
+  /* sameAs is shared with the Organization schema in lib/seo.js - single
      source of truth so adding a Facebook/LinkedIn link later only needs
      one edit. */
   sameAs: SOCIAL_LINKS,
@@ -64,7 +64,7 @@ const structuredData = {
   ],
 }
 
-/* WebSite JSON-LD — home page only (per Google's docs). The
+/* WebSite JSON-LD - home page only (per Google's docs). The
    SearchAction tells Google where the site search lives so the
    Sitelinks Searchbox can eventually surface in SERPs for brand
    queries. /search route below backs this. */

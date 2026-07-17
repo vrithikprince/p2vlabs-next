@@ -1,8 +1,8 @@
 /**
- * PricingIllustration — header mark for /packages.
+ * PricingIllustration - header mark for /packages.
  *
  * Four ascending tiers anchored to a common baseline. Reads as
- * "options at scale" — the floor is the same for all, scope varies up.
+ * "options at scale" - the floor is the same for all, scope varies up.
  * Third tier is filled brand red (the focal anchor; would correspond to
  * the "you choose here" buyer moment). Hairline weight (1.2px) and
  * single-red accent match the existing illustration language used in
@@ -24,22 +24,22 @@ export default function PricingIllustration() {
       fill="none"
       aria-hidden="true"
     >
-      {/* Common baseline — the "floor" all tiers share. */}
+      {/* Common baseline - the "floor" all tiers share. */}
       <line x1="0" y1="138" x2="200" y2="138" stroke={baseline} strokeWidth="1" />
 
-      {/* Tier 1 — smallest scope */}
+      {/* Tier 1 - smallest scope */}
       <rect x="18"  y="100" width="32" height="38"  stroke={stroke} strokeWidth="1.2" />
 
       {/* Tier 2 */}
       <rect x="62"  y="72"  width="32" height="66"  stroke={stroke} strokeWidth="1.2" />
 
-      {/* Tier 3 — focal, brand red */}
+      {/* Tier 3 - focal, brand red */}
       <rect x="106" y="42"  width="32" height="96"  fill={red} />
 
-      {/* Tier 4 — largest scope */}
+      {/* Tier 4 - largest scope */}
       <rect x="150" y="14"  width="32" height="124" stroke={stroke} strokeWidth="1.2" />
 
-      {/* Dashed ascending guideline — the implicit progression connecting
+      {/* Dashed ascending guideline - the implicit progression connecting
           the tops of each tier. Subtle enough to read as ornament, not
           a chart axis. */}
       <polyline
@@ -50,7 +50,7 @@ export default function PricingIllustration() {
         strokeDasharray="2 3"
       />
 
-      {/* Small dots at each tier top — punctuates the progression. */}
+      {/* Small dots at each tier top - punctuates the progression. */}
       <circle cx="34"  cy="100" r="1.5" fill={stroke} />
       <circle cx="78"  cy="72"  r="1.5" fill={stroke} />
       <circle cx="122" cy="42"  r="2"   fill={red} />

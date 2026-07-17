@@ -2,11 +2,11 @@
 import { useState } from 'react'
 
 /**
- * FAQ — frequently asked questions block for the homepage.
+ * FAQ - frequently asked questions block for the homepage.
  *
  * Two jobs:
  *   1. Address common buyer hesitations (cost, turnaround, scope) before
- *      they hit ContactSection — shorter sales cycles.
+ *      they hit ContactSection - shorter sales cycles.
  *   2. SEO. FAQPage JSON-LD on a landing page is one of the few schema
  *      types Google still renders as rich results for service businesses,
  *      and the long-tail Q&A text earns "near me / how much / how long"
@@ -15,7 +15,7 @@ import { useState } from 'react'
  * "Show more" pattern: only the first INITIAL_VISIBLE FAQs render visibly
  * on first paint to keep the landing page lean. The rest are still in the
  * DOM (hidden via a class), so crawlers see all six questions in the HTML.
- * JSON-LD always includes the full set regardless of UI state — that's
+ * JSON-LD always includes the full set regardless of UI state - that's
  * what Google uses for the FAQ rich-result eligibility check.
  *
  * Accordion uses native <details>/<summary> so the per-question toggle is
@@ -25,7 +25,7 @@ import { useState } from 'react'
 const FAQS = [
   {
     q: 'What does P2V stand for?',
-    a: 'P2V stands for Pixels to Visuals — the journey every brand takes with us, from raw pixels captured on set to finished visuals that build recognition and drive results. The name reflects how we think about content: every frame has a purpose, every visual has a destination. P2V Labs is based in Ahmedabad and works with brands across Gujarat and India.',
+    a: 'P2V stands for Pixels to Visuals - the journey every brand takes with us, from raw pixels captured on set to finished visuals that build recognition and drive results. The name reflects how we think about content: every frame has a purpose, every visual has a destination. P2V Labs is based in Ahmedabad and works with brands across Gujarat and India.',
   },
   {
     q: 'What does P2V Labs do?',
@@ -33,19 +33,19 @@ const FAQS = [
   },
   {
     q: 'Where are you based, and do you travel for shoots?',
-    a: 'We’re based in Ahmedabad and work across Gujarat as our home turf. For brand films, founder narratives, and pan-India campaigns, we travel — Mumbai, Bangalore, Delhi, and destination shoots have all happened. Travel and accommodation are quoted separately so you only pay for what the shoot actually needs.',
+    a: 'We’re based in Ahmedabad and work across Gujarat as our home turf. For brand films, founder narratives, and pan-India campaigns, we travel - Mumbai, Bangalore, Delhi, and destination shoots have all happened. Travel and accommodation are quoted separately so you only pay for what the shoot actually needs.',
   },
   {
     q: 'How much does a video or photography shoot cost?',
-    a: 'Project pricing starts at ₹8,000 for a single brand reel or a half-day food photography session, ₹35,000 for a brand film, and ₹20,000 a month for our entry-tier content plan (Plan A). Final quotes scale with scope, deliverables, and shoot complexity — full breakdown lives on our packages page.',
+    a: 'Project pricing starts at ₹8,000 for a single brand reel or a half-day food photography session, ₹35,000 for a brand film, and ₹20,000 a month for our entry-tier content plan (Plan A). Final quotes scale with scope, deliverables, and shoot complexity - full breakdown lives on our packages page.',
   },
   {
     q: 'How long does a project take from brief to delivery?',
-    a: 'Reels and photography projects deliver in 5–7 working days from the shoot date. Brand films take 2–3 weeks depending on script complexity and post-production. Monthly plans run on a fixed cadence — one production day per cycle with deliverables rolling out across the month.',
+    a: 'Reels and photography projects deliver in 5–7 working days from the shoot date. Brand films take 2–3 weeks depending on script complexity and post-production. Monthly plans run on a fixed cadence - one production day per cycle with deliverables rolling out across the month.',
   },
   {
     q: 'Do you work with restaurants and food brands?',
-    a: 'Yes — food photography and restaurant social content is one of our core areas. We’ve worked with 150+ restaurants on Zomato- and Swiggy-optimised stills, brand reels, and monthly content calendars. Most of our monthly-plan roster is food and beverage, so the workflow, lighting, and turnaround is built around that pace.',
+    a: 'Yes - food photography and restaurant social content is one of our core areas. We’ve worked with 150+ restaurants on Zomato- and Swiggy-optimised stills, brand reels, and monthly content calendars. Most of our monthly-plan roster is food and beverage, so the workflow, lighting, and turnaround is built around that pace.',
   },
   {
     q: 'What’s included in a monthly content plan?',
@@ -135,7 +135,7 @@ export default function FAQ() {
           })}
         </ul>
 
-        {/* Show-more control. Disappears once expanded — there's no
+        {/* Show-more control. Disappears once expanded - there's no
             "Show less" because the page already scrolls long; collapsing
             mid-page would make the user lose their scroll position. */}
         {!showAll && remaining > 0 && (

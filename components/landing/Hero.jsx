@@ -9,7 +9,7 @@ import { useLoader } from '../layout/LoaderContext.jsx'
 gsap.registerPlugin(ScrollTrigger)
 
 /**
- * Hero — clean editorial layout. Word-clip entrance with blur ramp + scroll
+ * Hero - clean editorial layout. Word-clip entrance with blur ramp + scroll
  * parallax + magnetic CTAs. Entrance delay is loader-aware: 4.10s on hard
  * page load (so the liquid loader can complete), ~0s on soft navigation.
  */
@@ -112,7 +112,7 @@ export default function Hero() {
               </p>
               <div className="mt-4 pt-4 border-t border-charcoal/10">
                 <p className="text-xs text-charcoal/40 leading-relaxed">
-                  We bridge data-driven strategy with cinematic craft — creating content that performs as well as it looks.
+                  We bridge data-driven strategy with cinematic craft - creating content that performs as well as it looks.
                 </p>
               </div>
             </div>

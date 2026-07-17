@@ -6,18 +6,18 @@ import Rule from '../../components/ui/Rule.jsx'
 import { SITE_URL } from '../../lib/seo.js'
 
 /**
- * /packages — pricing page. SSG, no revalidation (pricing changes are deploys).
+ * /packages - pricing page. SSG, no revalidation (pricing changes are deploys).
  *
  * Structure:
  *   1. Hero intro (eyebrow + headline + framing copy)
- *   2. Monthly plans (Plan A / B / C — bundled content + reputation tiers)
+ *   2. Monthly plans (Plan A / B / C - bundled content + reputation tiers)
  *   3. Project-based packages (Food Photography, Brand Reel, Brand Film)
  *   4. Plan C portal differentiator (editorial mockup)
- *   5. Process — three-step "how we work"
+ *   5. Process - three-step "how we work"
  *   6. Charcoal CTA section ("Not sure which fits?")
  *
  * Each package CTA opens WhatsApp with a *package-specific* prefilled
- * message — qualifies the inbound so the conversation starts on the
+ * message - qualifies the inbound so the conversation starts on the
  * right package instead of "what are your prices?".
  *
  * Service + Offer JSON-LD on the page so Google can pick up pricing in
@@ -52,7 +52,7 @@ const PROJECT_PACKAGES = [
     price: 8000,
     priceLabel: 'From ₹8,000',
     cadence: '/ reel',
-    blurb: 'A single 15–30 second reel — scripted, shot, and cut to convert scroll into engagement.',
+    blurb: 'A single 15–30 second reel - scripted, shot, and cut to convert scroll into engagement.',
     bullets: [
       'Concept, script, and storyboard',
       'Half-day shoot',
@@ -80,7 +80,7 @@ const PROJECT_PACKAGES = [
   },
 ]
 
-/* Bundled monthly plans — replace the two-tier retainer + à la carte add-on
+/* Bundled monthly plans - replace the two-tier retainer + à la carte add-on
    pricing. Each plan stacks the previous one's deliverables (Plan B includes
    Plan A, Plan C includes Plan B) so the buyer's decision is a clean A/B/C
    ladder. Mirrors the same data in scripts/gen-pricing-pdf.mjs. */
@@ -98,7 +98,7 @@ const MONTHLY_PLANS = [
       'Daily comment & DM replies (business hours)',
     ],
     bestFor: 'Restaurants establishing a consistent feed',
-    wa: 'Hi P2V Labs, I’d like to discuss Plan A — Social Presence. Could we explore details?',
+    wa: 'Hi P2V Labs, I’d like to discuss Plan A - Social Presence. Could we explore details?',
   },
   {
     category: 'Plan B',
@@ -106,7 +106,7 @@ const MONTHLY_PLANS = [
     price: 30000,
     priceLabel: 'From ₹30,000',
     cadence: '/ month',
-    blurb: 'Everything in Plan A, plus your Zomato / Swiggy footprint and Google Business presence — actively managed.',
+    blurb: 'Everything in Plan A, plus your Zomato / Swiggy footprint and Google Business presence - actively managed.',
     bullets: [
       'Everything in Plan A',
       'Zomato / Swiggy profile shoot & optimisation',
@@ -114,7 +114,7 @@ const MONTHLY_PLANS = [
       'Review responses (Google + Zomato + Swiggy)',
     ],
     bestFor: 'Established brands ready to own search + reviews',
-    wa: 'Hi P2V Labs, I’d like to discuss Plan B — Social + Reputation. When can we talk?',
+    wa: 'Hi P2V Labs, I’d like to discuss Plan B - Social + Reputation. When can we talk?',
   },
   {
     category: 'Plan C',
@@ -122,7 +122,7 @@ const MONTHLY_PLANS = [
     price: 40000,
     priceLabel: 'From ₹40,000',
     cadence: '/ month',
-    blurb: 'Everything in Plan B, plus strategy, content calendar, analytics, and priority turnaround — content as a growth channel.',
+    blurb: 'Everything in Plan B, plus strategy, content calendar, analytics, and priority turnaround - content as a growth channel.',
     bullets: [
       'Everything in Plan B',
       'Strategy + content calendar + analytics',
@@ -131,33 +131,33 @@ const MONTHLY_PLANS = [
       'Private client portal access',
     ],
     bestFor: 'Scaling brands treating content as a growth channel',
-    wa: 'Hi P2V Labs, I’d like to discuss Plan C — Full Growth Retainer. Could we plan a strategy call?',
+    wa: 'Hi P2V Labs, I’d like to discuss Plan C - Full Growth Retainer. Could we plan a strategy call?',
   },
 ]
 
 const PROCESS = [
   { n: '01', title: 'Brief',   detail: 'A short call (or WhatsApp) to align on scope, deliverables, and timelines.' },
-  { n: '02', title: 'Shoot',   detail: 'Production day at your venue — set up, capture, on-the-spot review. Tight, fast, deliberate.' },
+  { n: '02', title: 'Shoot',   detail: 'Production day at your venue - set up, capture, on-the-spot review. Tight, fast, deliberate.' },
   { n: '03', title: 'Deliver', detail: 'Edited files in 5–7 working days. Two rounds of revisions within the scope.' },
 ]
 
 export async function generateMetadata() {
   return {
-    title: 'Packages & Pricing — P2V Labs Ahmedabad',
+    title: 'Packages & Pricing - P2V Labs Ahmedabad',
     description:
-      'Transparent starting prices for food photography (from ₹8,000), brand reels (from ₹8,000), brand films (from ₹35,000), and monthly content + reputation plans (from ₹20,000). P2V Labs — content built to perform for Ahmedabad brands.',
+      'Transparent starting prices for food photography (from ₹8,000), brand reels (from ₹8,000), brand films (from ₹35,000), and monthly content + reputation plans (from ₹20,000). P2V Labs - content built to perform for Ahmedabad brands.',
     alternates: { canonical: '/packages' },
     openGraph: {
-      title: 'Packages & Pricing — P2V Labs',
+      title: 'Packages & Pricing - P2V Labs',
       description:
-        'Food photography, brand reels, brand films, monthly content + reputation plans — transparent starting prices for Ahmedabad brands.',
+        'Food photography, brand reels, brand films, monthly content + reputation plans - transparent starting prices for Ahmedabad brands.',
       url: '/packages',
     },
   }
 }
 
 /* Service + Offer JSON-LD so Google can surface starting prices in
-   rich results. minPrice signals "starting from" — using `price` alone
+   rich results. minPrice signals "starting from" - using `price` alone
    would imply a fixed cost. */
 const buildOffersJsonLd = () => ({
   '@context': 'https://schema.org',
@@ -255,7 +255,7 @@ export default function PackagesPage() {
         <PricingIllustration />
       </PageHeader>
 
-      {/* Monthly plans — primary commerce surface. Lead with the
+      {/* Monthly plans - primary commerce surface. Lead with the
           recurring revenue offer; one-off shoots follow as a secondary
           path for prospects who aren't ready for a monthly commitment. */}
       <section className="py-12 lg:py-20 px-5 md:px-10 lg:px-20">
@@ -268,7 +268,7 @@ export default function PackagesPage() {
               Three ways to grow.
             </h2>
             <p className="mt-4 text-charcoal/50 italic text-sm lg:text-base max-w-2xl leading-relaxed">
-              Pick one bundle a month — content cadence, reputation, and
+              Pick one bundle a month - content cadence, reputation, and
               strategy scale together as you climb tiers.
             </p>
           </div>
@@ -282,7 +282,7 @@ export default function PackagesPage() {
 
       <Rule />
 
-      {/* Project-based packages — secondary path for one-off shoots. */}
+      {/* Project-based packages - secondary path for one-off shoots. */}
       <section className="py-16 lg:py-24 px-5 md:px-10 lg:px-20">
         <div className="max-w-7xl mx-auto">
           <div className="mb-12">
@@ -293,7 +293,7 @@ export default function PackagesPage() {
               One-off shoots, one-off films.
             </h2>
             <p className="mt-4 text-charcoal/50 italic text-sm lg:text-base max-w-2xl leading-relaxed">
-              Starting figures — scope shapes the final quote. Every project includes
+              Starting figures - scope shapes the final quote. Every project includes
               production, post, and revisions within scope.
             </p>
           </div>
@@ -307,7 +307,7 @@ export default function PackagesPage() {
 
       <Rule />
 
-      {/* Plan C differentiator — editorial mockup of clients.p2vlabs.in to
+      {/* Plan C differentiator - editorial mockup of clients.p2vlabs.in to
           justify the ₹40K top tier. Sits between the plans and the process
           so the reader sees pricing, then sees what Plan C uniquely buys. */}
       <section className="py-16 lg:py-24 px-5 md:px-10 lg:px-20">
@@ -325,7 +325,7 @@ export default function PackagesPage() {
               <p className="text-charcoal/60 leading-relaxed text-[15px] mb-8">
                 Plan C clients get a dedicated workspace on
                 clients.p2vlabs.in. Every shoot, every deliverable, every
-                approval lives in one place — no version sprawl, no chasing
+                approval lives in one place - no version sprawl, no chasing
                 files in WhatsApp threads.
               </p>
               <ul className="space-y-3 border-t border-charcoal/15 pt-6">
@@ -391,7 +391,7 @@ export default function PackagesPage() {
         </div>
       </section>
 
-      {/* Closing CTA — charcoal section for emphasis */}
+      {/* Closing CTA - charcoal section for emphasis */}
       <section className="py-16 lg:py-24 px-5 md:px-10 lg:px-20 bg-charcoal">
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-[10px] tracking-[0.4em] uppercase text-cream/40 mb-6">
@@ -403,7 +403,7 @@ export default function PackagesPage() {
             <em className="not-italic text-p2v">We'll shape the rest.</em>
           </h2>
           <p className="text-cream/60 leading-relaxed text-[15px] max-w-xl mx-auto mb-10">
-            Hybrid scopes, multi-deliverable projects, brand systems — talk to us
+            Hybrid scopes, multi-deliverable projects, brand systems - talk to us
             and we'll quote against what you actually need.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">

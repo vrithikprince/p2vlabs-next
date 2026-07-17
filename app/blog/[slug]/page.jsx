@@ -6,7 +6,7 @@ import { getBlogPostBySlug, getPublishedBlogSlugs } from '../../../lib/cms.js'
 import { buildPostMetadata, canonicalUrl, SITE_URL, breadcrumbsJsonLd } from '../../../lib/seo.js'
 
 /**
- * /blog/[slug] — individual blog post. ISR every 60s for newly-
+ * /blog/[slug] - individual blog post. ISR every 60s for newly-
  * published / edited posts; `generateStaticParams` prebuilds every
  * known published slug at build time.
  */
@@ -27,7 +27,7 @@ export default async function BlogPost({ params }) {
   const post = await getBlogPostBySlug(params.slug)
   if (!post) notFound()
 
-  /* JSON-LD Article schema — gives Google the structured data needed
+  /* JSON-LD Article schema - gives Google the structured data needed
      for rich snippets (author + date + headline + cover image). All
      URLs go through canonicalUrl() so they match the <link rel=canonical>
      and the og:url emitted by buildPostMetadata above. */
@@ -56,7 +56,7 @@ export default async function BlogPost({ params }) {
     },
   }
 
-  /* BreadcrumbList — gives Google the trail to render in SERPs
+  /* BreadcrumbList - gives Google the trail to render in SERPs
      ("p2vlabs.in › Journal › <Post Title>") instead of the raw URL. */
   const breadcrumbs = breadcrumbsJsonLd([
     { name: 'Home',     path: '/' },

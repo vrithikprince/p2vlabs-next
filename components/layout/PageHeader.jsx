@@ -5,12 +5,12 @@
  *
  * Design rules:
  *   - Kicker (tiny tracked caps) for the section name.
- *   - Title is modest — clamp(2rem, 4.5vw, 3rem). Hero-scale typography
+ *   - Title is modest - clamp(2rem, 4.5vw, 3rem). Hero-scale typography
  *     (60–80px) is reserved for the landing page. Editorial section
  *     headers stay around 32–48px so the page content gets the weight.
  *   - Italic accent in brand red sits on its own line via <br>, the same
  *     two-line rhythm used across the site (hero, Positioning block).
- *   - No side-paragraph — long framing copy belongs further down,
+ *   - No side-paragraph - long framing copy belongs further down,
  *     contextually next to whatever it's framing.
  *   - One hairline at the foot of the header anchors the block visually.
  */
@@ -41,7 +41,7 @@ export default function PageHeader({ kicker, title, italic, tagline, children })
               </p>
             )}
           </div>
-          {/* Illustration slot — hidden below lg so the mobile header stays
+          {/* Illustration slot - hidden below lg so the mobile header stays
               clean. Page passes its own SVG via children. */}
           {children && (
             <div className="hidden lg:flex lg:col-span-4 justify-end items-end">

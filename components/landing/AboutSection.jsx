@@ -46,20 +46,20 @@ export default function AboutSection() {
               <span className="clip-wrap"><em className="about-heading-line not-italic text-p2v block">Craft.</em></span>
             </h2>
             <p className="about-para text-charcoal/55 leading-relaxed mb-5 text-[15px] will-anim">
-              P2V Labs was founded on a simple belief: great visual content isn't just beautiful —
+              P2V Labs was founded on a simple belief: great visual content isn't just beautiful -
               it's built on insight. We combine analytical thinking with cinematic execution to
               create work that performs as well as it looks.
             </p>
             <p className="about-para text-charcoal/55 leading-relaxed mb-5 text-[15px] will-anim">
-              Based in Ahmedabad, we work with brands across India — from heritage businesses to
-              emerging startups — helping them tell stories that stick.
+              Based in Ahmedabad, we work with brands across India - from heritage businesses to
+              emerging startups - helping them tell stories that stick.
             </p>
             <p className="about-para text-charcoal/55 leading-relaxed text-[15px] will-anim">
               Led by <span className="text-charcoal">Vrithik Prince</span>, who previously
               co-founded a Surat creative agency working with 50+ F&amp;B, retail, and lifestyle
               brands. That run drove 120% average engagement growth, shipped 1,500+ visuals and
               300+ brand videos, and built a workflow 30% faster than industry peers. P2V Labs is
-              the next chapter — same craft, sharper focus.
+              the next chapter - same craft, sharper focus.
             </p>
           </div>
 

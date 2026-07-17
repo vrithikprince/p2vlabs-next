@@ -92,7 +92,7 @@ export default function Services() {
           <div className="lg:col-span-8 flex items-end">
             <p className="services-desc text-lg text-charcoal/55 max-w-2xl leading-relaxed will-anim">
               From concept to delivery, we handle every frame. Our work spans brand films,
-              photography, and social content — each piece crafted to perform and endure.
+              photography, and social content - each piece crafted to perform and endure.
             </p>
           </div>
         </div>
@@ -139,7 +139,7 @@ export default function Services() {
                       {s.n}
                     </span>
                     <p className="text-[9px] tracking-[0.4em] uppercase text-charcoal/30 mb-4 relative z-10">
-                      Service — {s.n}
+                      Service - {s.n}
                     </p>
                     <h3 className="font-display font-bold text-charcoal leading-tight mb-4 relative z-10"
                         style={{ fontSize: 'clamp(1.7rem,3.2vw,2.8rem)' }}>
