@@ -52,15 +52,20 @@ export default function ReelPreview() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="reel-preview-section py-24 px-5 md:px-10 lg:px-20">
+    <section ref={sectionRef} className="reel-preview-section bg-white py-16 lg:py-24 px-5 md:px-10 lg:px-20">
       <div className="max-w-7xl mx-auto">
         <div className="reel-preview-header flex items-end justify-between mb-12 will-anim">
           <div>
-            <p className="text-[10px] tracking-[0.35em] uppercase text-charcoal/45 mb-4">Selected Work</p>
-            <h2 className="font-display text-4xl md:text-5xl font-bold text-charcoal">The Reel</h2>
+            {/* black dot: this section's heading carries no colour accent,
+                same as Services/About */}
+            <p className="flex items-center gap-2 text-[13px] font-semibold tracking-[0.08em] uppercase text-amp-caption mb-5">
+              <span className="w-1.5 h-1.5 rounded-full bg-black" />
+              Selected Work
+            </p>
+            <h2 className="font-plex text-4xl md:text-5xl font-semibold text-black tracking-[-0.01em]">The Reel</h2>
           </div>
           <button onClick={() => router.push('/reel')}
-            className="hidden md:flex items-center gap-2 text-xs tracking-[0.15em] uppercase text-charcoal/50 hover:text-p2v transition-colors">
+            className="hidden md:flex items-center gap-2 text-xs tracking-[0.15em] uppercase text-amp-caption hover:text-amp-navy transition-colors">
             <span>View All</span>
             <Icon n="aur" s={15} />
           </button>
@@ -72,7 +77,7 @@ export default function ReelPreview() {
                  className="reel-preview-card group cursor-pointer will-anim"
                  onClick={() => router.push('/reel')}>
               <div
-                className={`relative overflow-hidden border border-charcoal/8 group-hover:border-p2v/25 transition-all ${
+                className={`relative overflow-hidden border border-black/8 group-hover:border-amp-navy/25 transition-all ${
                   i === 1 ? 'h-52' : 'h-72'
                 }`}
                 style={{ backgroundColor: categoryBg[item.category] || '#E8E4DF' }}
@@ -87,33 +92,33 @@ export default function ReelPreview() {
                     }}
                   />
                 )}
-                <div className="absolute inset-[10px] border border-charcoal/8 group-hover:border-p2v/15 transition-colors" />
+                <div className="absolute inset-[10px] border border-black/8 group-hover:border-amp-navy/15 transition-colors" />
                 {!(item.thumbnailUrl || item.imageUrl) && (
                   <div className="absolute inset-0 flex items-center justify-center">
                     <div className="text-center">
-                      <div className="w-10 h-10 border border-charcoal/15 flex items-center justify-center mx-auto mb-3 group-hover:border-p2v/30 transition-colors">
-                        <Icon n={item.category === 'photo' ? 'camera' : 'film'} s={18} c="#1a1a1a" className="opacity-25" />
+                      <div className="w-10 h-10 border border-black/15 flex items-center justify-center mx-auto mb-3 group-hover:border-amp-navy/30 transition-colors">
+                        <Icon n={item.category === 'photo' ? 'camera' : 'film'} s={18} c="#000000" className="opacity-25" />
                       </div>
                     </div>
                   </div>
                 )}
                 <div className="absolute bottom-0 inset-x-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity">
-                  <div className="bg-cream/95 px-3 py-2.5">
-                    <p className="font-display text-sm font-semibold text-charcoal">{item.title}</p>
-                    <p className="text-[11px] text-charcoal/55 mt-0.5">{item.client}</p>
+                  <div className="bg-white/95 px-3 py-2.5">
+                    <p className="font-plex text-sm font-semibold text-black">{item.title}</p>
+                    <p className="text-[11px] text-amp-caption mt-0.5">{item.client}</p>
                   </div>
                 </div>
                 <div className="absolute top-3 right-3">
-                  <span className="text-[9px] tracking-[0.15em] uppercase bg-cream/70 text-charcoal/60 px-2 py-1">
+                  <span className="text-[9px] tracking-[0.15em] uppercase bg-white/70 text-amp-caption px-2 py-1">
                     {item.date}
                   </span>
                 </div>
               </div>
               <div className="pt-3">
                 <div className="flex items-baseline justify-between">
-                  <p className="font-display font-semibold text-charcoal text-base">{item.title}</p>
+                  <p className="font-plex font-semibold text-black text-base">{item.title}</p>
                 </div>
-                <p className="text-xs text-charcoal/45 mt-0.5">{item.client}</p>
+                <p className="text-xs text-amp-caption mt-0.5">{item.client}</p>
               </div>
             </div>
           ))}
@@ -121,7 +126,7 @@ export default function ReelPreview() {
 
         <div className="mt-8 md:hidden">
           <button onClick={() => router.push('/reel')}
-            className="w-full py-3 border border-charcoal/18 text-xs tracking-[0.15em] uppercase text-charcoal/60 hover:border-p2v hover:text-p2v transition-colors">
+            className="w-full h-14 rounded-full border border-amp-hairline text-xs tracking-[0.15em] uppercase text-black hover:border-amp-navy hover:text-amp-navy transition-colors">
             View All Work
           </button>
         </div>

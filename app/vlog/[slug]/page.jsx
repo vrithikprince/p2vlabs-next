@@ -2,7 +2,6 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import VlogPlayer from '../../../components/vlog/VlogPlayer.jsx'
 import PostCTA from '../../../components/blog/PostCTA.jsx'
-import Footer from '../../../components/layout/Footer.jsx'
 import {
   getVlogPostBySlug,
   getPublishedVlogSlugs,
@@ -97,25 +96,25 @@ export default async function VlogPost({ params }) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
       />
 
-      <article className="pb-20">
+      <article className="font-plex bg-white pb-20">
 
         {/* Header - same column width as the player + description, so
             the whole page reads as a single editorial column. */}
         <header className="px-5 md:px-10 pt-12 md:pt-16 max-w-3xl mx-auto">
           <Link
             href="/vlog"
-            className="text-[10px] tracking-[0.2em] uppercase text-charcoal/40 hover:text-p2v transition-colors"
+            className="text-[13px] font-semibold tracking-[0.08em] uppercase text-amp-caption hover:text-amp-navy transition-colors"
           >
             ← The Reel Diary
           </Link>
 
-          <p className="text-[10px] tracking-[0.3em] uppercase text-charcoal/45 mt-9 mb-4">
+          <p className="text-[11px] font-medium tracking-[0.12em] uppercase text-amp-caption mt-9 mb-4">
             {date}
-            {post.author   && <span className="text-charcoal/30"> · {post.author}</span>}
-            {post.duration && <span className="text-charcoal/30"> · {post.duration}</span>}
+            {post.author   && <span className="text-amp-caption/70"> · {post.author}</span>}
+            {post.duration && <span className="text-amp-caption/70"> · {post.duration}</span>}
           </p>
 
-          <h1 className="font-display font-bold text-[clamp(2rem,5vw,3.4rem)] leading-[1.08] tracking-tight text-charcoal">
+          <h1 className="font-plex font-semibold text-[clamp(2rem,5vw,3.4rem)] leading-[1.08] tracking-tight text-black">
             {post.title}
           </h1>
         </header>
@@ -133,10 +132,13 @@ export default async function VlogPost({ params }) {
         {/* Description */}
         {post.description && (
           <div className="px-5 md:px-10 mt-12 md:mt-14 max-w-3xl mx-auto">
-            <p className="text-[10px] tracking-[0.3em] uppercase text-charcoal/40 mb-4">
+            {/* Eyebrow + dot, the homepage idiom; navy is this page's one
+                accent, same as the player's play badge. */}
+            <p className="flex items-center gap-2 text-[13px] font-semibold tracking-[0.08em] uppercase text-amp-caption mb-4">
+              <span className="w-1.5 h-1.5 rounded-full bg-amp-navy" />
               About this film
             </p>
-            <div className="text-charcoal/75 leading-relaxed text-base md:text-lg whitespace-pre-wrap">
+            <div className="text-amp-body leading-relaxed text-base md:text-lg whitespace-pre-wrap">
               {post.description}
             </div>
           </div>
@@ -144,7 +146,6 @@ export default async function VlogPost({ params }) {
       </article>
 
       <PostCTA kind="vlog" slug={post.slug} title={post.title} />
-      <Footer />
     </div>
   )
 }

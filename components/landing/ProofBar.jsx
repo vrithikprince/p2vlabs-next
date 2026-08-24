@@ -16,11 +16,13 @@ gsap.registerPlugin(ScrollTrigger)
  * Numbers are the founder-verified P2V Labs figures, not the prior-agency
  * track record (that lives in AboutSection).
  */
+/* Tailwind needs the literal class name in source to generate it, so the
+   rotating accent is a full className per stat, not an interpolated key. */
 const STATS = [
-  { figure: '5M+',   label: 'Views generated for restaurant clients' },
-  { figure: '7–10%', label: 'Average engagement rate on social' },
-  { figure: '150+',  label: 'Restaurants & cafés photographed across Surat' },
-  { figure: '90%+',  label: 'Clients return for more' },
+  { figure: '5M+',   label: 'Views generated for restaurant clients', accentClass: 'bg-amp-navy' },
+  { figure: '7-10%', label: 'Average engagement rate on social', accentClass: 'bg-amp-violet' },
+  { figure: '150+',  label: 'Restaurants & cafés photographed across Surat', accentClass: 'bg-amp-periwinkle' },
+  { figure: '90%+',  label: 'Clients return for more', accentClass: 'bg-amp-navy' },
 ]
 
 export default function ProofBar() {
@@ -44,18 +46,21 @@ export default function ProofBar() {
     <section
       ref={sectionRef}
       id="proof-bar"
-      className="relative overflow-hidden py-14 lg:py-20 px-5 md:px-10 lg:px-20"
+      className="relative overflow-hidden bg-white py-16 lg:py-24 px-5 md:px-10 lg:px-20"
     >
       {/* Backdrop washes - invisible-ish color clouds so the glass cards
           have something to refract. Without these, backdrop-filter on a
-          flat cream section produces no visible effect. */}
+          flat white section produces no visible effect. Periwinkle/violet
+          tints instead of the old red - cobalt itself stays reserved for
+          the hero's headline word, so these decorative blobs pull from
+          the secondary-accent pair instead. */}
       <div className="pointer-events-none absolute inset-0" aria-hidden="true">
         <div
           className="absolute"
           style={{
             top: '8%', left: '12%',
             width: 'clamp(280px,32vw,520px)', height: 'clamp(280px,32vw,520px)',
-            background: 'radial-gradient(circle, rgba(192,57,43,0.22), rgba(192,57,43,0) 70%)',
+            background: 'radial-gradient(circle, rgba(105,128,255,0.18), rgba(105,128,255,0) 70%)',
             filter: 'blur(40px)',
           }}
         />
@@ -64,7 +69,7 @@ export default function ProofBar() {
           style={{
             bottom: '6%', right: '8%',
             width: 'clamp(320px,36vw,580px)', height: 'clamp(320px,36vw,580px)',
-            background: 'radial-gradient(circle, rgba(26,26,26,0.14), rgba(26,26,26,0) 70%)',
+            background: 'radial-gradient(circle, rgba(0,0,0,0.08), rgba(0,0,0,0) 70%)',
             filter: 'blur(50px)',
           }}
         />
@@ -73,38 +78,39 @@ export default function ProofBar() {
           style={{
             top: '40%', left: '48%',
             width: 'clamp(220px,24vw,380px)', height: 'clamp(220px,24vw,380px)',
-            background: 'radial-gradient(circle, rgba(192,57,43,0.12), rgba(192,57,43,0) 70%)',
+            background: 'radial-gradient(circle, rgba(162,115,255,0.14), rgba(162,115,255,0) 70%)',
             filter: 'blur(45px)',
           }}
         />
       </div>
 
       <div className="relative max-w-7xl mx-auto">
-        <p className="proof-eyebrow text-[10px] tracking-[0.35em] uppercase text-charcoal/45 mb-10 will-anim">
+        <p className="proof-eyebrow flex items-center gap-2 text-[13px] font-semibold tracking-[0.08em] uppercase text-amp-caption mb-10 will-anim">
+          <span className="w-1.5 h-1.5 rounded-full bg-black" />
           What the work has delivered
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:gap-6">
           {STATS.map((s) => (
             <div key={s.figure} className="proof-stat will-anim">
               <div
-                className="proof-card h-full p-7 lg:p-8 transition-transform duration-300 hover:-translate-y-1"
+                className="proof-card h-full p-7 lg:p-8 rounded-[18px] transition-transform duration-300 hover:-translate-y-1"
                 style={{
-                  background: 'rgba(245, 240, 232, 0.45)',
+                  background: 'rgba(255, 255, 255, 0.55)',
                   backdropFilter: 'blur(22px) saturate(1.5)',
                   WebkitBackdropFilter: 'blur(22px) saturate(1.5)',
-                  border: '1px solid rgba(255, 255, 255, 0.55)',
+                  border: '1px solid rgba(213, 217, 224, 0.9)',
                   boxShadow:
                     'inset 0 1px 0 rgba(255,255,255,0.65), 0 10px 32px rgba(26,26,26,0.07)',
                 }}
               >
                 <p
-                  className="font-display font-bold text-charcoal leading-none mb-5"
-                  style={{ fontSize: 'clamp(2.4rem,5vw,3.6rem)' }}
+                  className="font-plex font-semibold text-black leading-none tracking-[-0.01em] mb-5"
+                  style={{ fontSize: 'clamp(2.2rem,4.5vw,3.2rem)' }}
                 >
                   {s.figure}
                 </p>
-                <div className="w-8 h-px bg-p2v mb-5" />
-                <p className="text-[11px] tracking-[0.18em] uppercase text-charcoal/55 leading-relaxed">
+                <div className={`w-8 h-px ${s.accentClass} mb-5`} />
+                <p className="text-[11px] tracking-[0.18em] uppercase text-amp-body leading-relaxed">
                   {s.label}
                 </p>
               </div>

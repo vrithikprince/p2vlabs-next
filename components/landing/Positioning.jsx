@@ -38,29 +38,37 @@ export default function Positioning() {
   }, [])
 
   return (
-    <section ref={sectionRef} id="positioning" className="py-16 lg:py-24 px-5 md:px-10 lg:px-20">
+    <section ref={sectionRef} id="positioning" className="bg-white py-16 lg:py-24 px-5 md:px-10 lg:px-20">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-end">
           <div className="lg:col-span-7">
-            <p className="positioning-eyebrow text-[10px] tracking-[0.35em] uppercase text-charcoal/45 mb-6 will-anim">
+            {/* dot picks up the section's own accent (the violet closing
+                line below), same rule LeadCapture follows */}
+            <p className="positioning-eyebrow flex items-center gap-2 text-[13px] font-semibold tracking-[0.08em] uppercase text-amp-caption mb-5 will-anim">
+              <span className="w-1.5 h-1.5 rounded-full bg-amp-violet" />
               The brief
             </p>
             <h2
-              className="font-display font-bold text-charcoal leading-[1.05] tracking-tight"
+              className="font-plex font-semibold text-black leading-[1.05] tracking-[-0.01em]"
               style={{ fontSize: 'clamp(2.25rem,5.5vw,4.25rem)' }}
             >
               <span className="clip-wrap"><span className="positioning-headline-line block">Most brand content</span></span>
               <span className="clip-wrap"><span className="positioning-headline-line block">blends in.</span></span>
-              <span className="clip-wrap"><em className="positioning-headline-line not-italic text-p2v block">Yours shouldn't.</em></span>
+              {/* Violet, not cobalt - cobalt stays reserved for the hero's
+                  rotating word specifically. Violet is otherwise unused as
+                  a text colour on the page (it's only lived on tiles and
+                  chips so far), so it stays a distinct, one-off moment
+                  rather than a second "everywhere" accent. */}
+              <span className="clip-wrap"><em className="positioning-headline-line not-italic text-amp-violet block">Yours shouldn't.</em></span>
             </h2>
           </div>
           <div className="lg:col-span-5">
-            <p className="positioning-body text-charcoal/60 leading-relaxed text-[15px] md:text-base max-w-xl will-anim">
+            <p className="positioning-body text-amp-body leading-relaxed text-[15px] md:text-base max-w-xl will-anim">
               Restaurants and brands come to us because their photos disappear on
               Zomato, their reels stall under a thousand views, and their feed
               isn't doing the selling. We shoot, direct, and edit to a standard
-              that performs - and clients keep coming back because the numbers
-              show up after we ship.
+              that performs, then back it with GenAI-assisted content and
+              AI-visibility work so the results don't stop after we ship.
             </p>
           </div>
         </div>

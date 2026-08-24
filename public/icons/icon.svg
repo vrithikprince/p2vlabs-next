@@ -1,4 +1,26 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-  <rect width="512" height="512" fill="#c0392b"/>
-  <text x="256" y="338" font-family="Georgia, 'Times New Roman', serif" font-size="224" font-weight="700" text-anchor="middle" fill="#F5F0E8" letter-spacing="-8">P2V</text>
+  <!--
+    Favicon source. After editing, regenerate the rasters by installing sharp
+    and png-to-ico (with the npm no-save flag) and running
+    scripts/gen-favicons.mjs. Note: no double hyphens anywhere in this
+    comment - librsvg rejects them and the render fails with a parse error.
+
+    Near-black tile with a violet "2", echoing the loader and the nav logo
+    rather than the old red/cream serif mark. Dark tile (not white) because a
+    white favicon vanishes into a light browser tab strip; #1a1f23 is the same
+    ink the primary CTAs use, so the tab reads as the same brand object.
+
+    Text uses a plain sans stack, not IBM Plex: this is rasterised by librsvg
+    from whatever fonts the machine has, and Plex is a webfont that will not be
+    present. Across three glyphs at 16-32px that difference is not perceptible;
+    weight and spacing are what carry.
+  -->
+  <rect width="512" height="512" rx="112" fill="#1a1f23"/>
+  <text
+    x="256" y="332"
+    font-family="'Segoe UI', Arial, Helvetica, sans-serif"
+    font-size="208" font-weight="600"
+    text-anchor="middle" letter-spacing="-6">
+    <tspan fill="#ffffff">P</tspan><tspan fill="#a273ff">2</tspan><tspan fill="#ffffff">V</tspan>
+  </text>
 </svg>

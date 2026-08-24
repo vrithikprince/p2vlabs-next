@@ -12,6 +12,10 @@ import LeadFormModal from '../ui/LeadFormModal.jsx'
  *
  * `source` is stamped on the resulting Supabase lead row so we can
  * attribute conversions back to specific posts in analytics.
+ *
+ * Amp design system: rounded-[16px] surface panel, one near-black pill
+ * for the primary action and outline pills for the two fallbacks. Navy
+ * appears once, on the eyebrow dot.
  */
 export default function PostCTA({ kind = 'blog', slug, title }) {
   const [open, setOpen] = useState(false)
@@ -26,19 +30,22 @@ export default function PostCTA({ kind = 'blog', slug, title }) {
 
   return (
     <>
-      <aside className="px-5 md:px-10 mt-16 md:mt-20 max-w-3xl mx-auto">
-        <div className="border border-charcoal/12 p-7 md:p-10 bg-charcoal/[0.025]">
+      <aside className="font-plex px-5 md:px-10 mt-16 md:mt-20 max-w-3xl mx-auto">
+        <div className="rounded-[16px] border border-amp-hairline bg-amp-surface p-7 md:p-10">
 
-          <p className="text-[10px] tracking-[0.4em] uppercase text-charcoal/45 mb-4">
+          <p className="flex items-center gap-2 text-[13px] font-semibold tracking-[0.08em] uppercase text-amp-caption mb-4">
+            <span className="w-1.5 h-1.5 rounded-full bg-amp-navy" />
             {kind === 'vlog' ? 'Liked this film?' : 'Liked this read?'}
           </p>
 
-          <h2 className="font-display text-2xl md:text-3xl font-bold text-charcoal leading-tight mb-5">
+          {/* Second sentence used to sit in brand red; amp headings stay
+              monochrome, so the sentence break carries the emphasis. */}
+          <h2 className="font-plex text-2xl md:text-3xl font-semibold text-black leading-tight tracking-[-0.01em] mb-5">
             Got a project in mind?{' '}
-            <em className="not-italic text-p2v">We'd love to hear about it.</em>
+            <em className="not-italic text-black">We'd love to hear about it.</em>
           </h2>
 
-          <p className="text-charcoal/60 leading-relaxed mb-7 max-w-lg">
+          <p className="text-amp-body leading-relaxed mb-7 max-w-lg">
             We take on a small number of projects every month. The faster you brief us,
             the better we can plan around your timeline.
           </p>
@@ -47,9 +54,9 @@ export default function PostCTA({ kind = 'blog', slug, title }) {
             <button
               type="button"
               onClick={() => setOpen(true)}
-              className="inline-flex items-center justify-between gap-3 px-5 py-4 bg-p2v text-cream hover:bg-charcoal transition-colors"
+              className="inline-flex items-center justify-between gap-3 h-14 px-6 rounded-full bg-amp-ink-pill text-white hover:bg-black transition-colors"
             >
-              <span className="text-xs tracking-[0.15em] uppercase font-medium">Send a brief</span>
+              <span className="text-[15px] font-semibold">Send a brief</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="7" y1="17" x2="17" y2="7" />
                 <polyline points="7 7 17 7 17 17" />
@@ -60,9 +67,9 @@ export default function PostCTA({ kind = 'blog', slug, title }) {
               href={waUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center justify-between gap-3 px-5 py-4 border border-charcoal/20 text-charcoal hover:border-charcoal/50 transition-colors"
+              className="inline-flex items-center justify-between gap-3 h-14 px-6 rounded-full border border-amp-hairline bg-white text-black hover:border-black/40 transition-colors"
             >
-              <span className="text-xs tracking-[0.15em] uppercase font-medium">WhatsApp us</span>
+              <span className="text-[15px] font-semibold">WhatsApp us</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="5" y1="12" x2="19" y2="12" />
                 <polyline points="12 5 19 12 12 19" />
@@ -71,9 +78,9 @@ export default function PostCTA({ kind = 'blog', slug, title }) {
 
             <a
               href="mailto:hello@p2vlabs.in"
-              className="inline-flex items-center justify-between gap-3 px-5 py-4 border border-charcoal/20 text-charcoal hover:border-charcoal/50 transition-colors"
+              className="inline-flex items-center justify-between gap-3 h-14 px-6 rounded-full border border-amp-hairline bg-white text-black hover:border-black/40 transition-colors"
             >
-              <span className="text-xs tracking-[0.15em] uppercase font-medium">Email</span>
+              <span className="text-[15px] font-semibold">Email</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="5" y1="12" x2="19" y2="12" />
                 <polyline points="12 5 19 12 12 19" />

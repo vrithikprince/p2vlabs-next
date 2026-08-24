@@ -2,8 +2,9 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 /**
- * Editorial card for a blog post on /blog. Cover image (or muted
- * placeholder) on top, title + excerpt + date below.
+ * Card for a blog post on /blog. Cover image (or muted placeholder) on
+ * top, title + excerpt + date below. Amp system: rounded-[16px] tile on
+ * a hairline border, monochrome type, navy as the only hover accent.
  */
 export default function BlogCard({ post }) {
   const date = post.published_at
@@ -15,11 +16,13 @@ export default function BlogCard({ post }) {
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className="group block"
+      className="group block font-plex"
     >
+      {/* Placeholder tint is amp-surface (#f2f4f8), inline because the
+          aspect-ratio next to it has to be inline anyway. */}
       <div
-        className="relative w-full overflow-hidden border border-charcoal/10 group-hover:border-p2v/30 transition-colors"
-        style={{ aspectRatio: '16/10', backgroundColor: '#E8E4DF' }}
+        className="relative w-full overflow-hidden rounded-[16px] border border-amp-hairline group-hover:border-amp-navy/40 transition-colors"
+        style={{ aspectRatio: '16/10', backgroundColor: '#f2f4f8' }}
       >
         {post.cover_image_url ? (
           <Image
@@ -31,20 +34,20 @@ export default function BlogCard({ post }) {
           />
         ) : (
           <div className="absolute inset-0 flex items-center justify-center">
-            <span className="font-display text-charcoal/15 text-3xl">P2V</span>
+            <span className="font-plex font-semibold text-black/15 text-3xl">P2V</span>
           </div>
         )}
       </div>
       <div className="pt-5">
-        <p className="text-[10px] tracking-[0.3em] uppercase text-charcoal/40 mb-2">
+        <p className="text-[11px] font-medium tracking-[0.12em] uppercase text-amp-caption mb-2">
           {date}
-          {post.author && <span className="text-charcoal/30"> · {post.author}</span>}
+          {post.author && <span className="text-amp-caption/70"> · {post.author}</span>}
         </p>
-        <h2 className="font-display text-xl md:text-2xl font-bold text-charcoal leading-tight group-hover:text-p2v transition-colors">
+        <h2 className="font-plex text-xl md:text-2xl font-semibold text-black leading-tight tracking-[-0.01em] group-hover:text-amp-navy transition-colors">
           {post.title}
         </h2>
         {post.excerpt && (
-          <p className="text-charcoal/55 text-sm leading-relaxed mt-2 line-clamp-2">
+          <p className="text-amp-body text-sm leading-relaxed mt-2 line-clamp-2">
             {post.excerpt}
           </p>
         )}

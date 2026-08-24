@@ -5,14 +5,15 @@
  *   - Two facing pages with a thin spine
  *   - Text-lines on both pages (left page fuller - "already written";
  *     right page partial - "still being written")
- *   - The shortest right-page line is brand red - reads as the active
- *     entry / current draft, and carries the one-red-accent rule shared
- *     across the site's illustration language.
+ *   - The shortest right-page line is the one accent - reads as the
+ *     active entry / current draft. amp-violet, to match the eyebrow dot
+ *     in the PageHeader this sits in (same rule as FilmsIllustration:
+ *     exactly one accent per mark, borrowed from its header).
  */
 export default function JournalIllustration() {
-  const stroke      = 'rgba(26,26,26,0.40)'
-  const strokeMuted = 'rgba(26,26,26,0.22)'
-  const red         = '#c0392b'
+  const stroke      = 'rgba(26,31,35,0.40)'
+  const strokeMuted = 'rgba(26,31,35,0.22)'
+  const accent      = '#a273ff'
 
   return (
     <svg
@@ -47,7 +48,7 @@ export default function JournalIllustration() {
       </g>
 
       {/* Active entry - the line currently being written */}
-      <line x1="110" y1="84" x2="138" y2="84" stroke={red} strokeWidth="1.2" />
+      <line x1="110" y1="84" x2="138" y2="84" stroke={accent} strokeWidth="1.2" />
     </svg>
   )
 }

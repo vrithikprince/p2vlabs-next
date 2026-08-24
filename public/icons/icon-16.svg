@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!--
+    Small-size favicon variant, used ONLY for the 16px entry in favicon.ico.
+
+    The full "P2V" mark is legible down to about 32px and turns to mush at 16
+    (three glyphs across 16 device pixels is roughly five pixels each, below
+    what any letterform survives). An .ico can carry different artwork per
+    size, so the tab-strip size gets a two glyph mark instead: "P2" keeps both
+    a readable letterform and the violet accent, which is the faster
+    recognition cue at that scale than any of the letters are.
+
+    Heavier weight and tighter tracking than icon.svg on purpose - thin strokes
+    are the first thing to disappear when downsampling.
+  -->
+  <rect width="512" height="512" rx="112" fill="#1a1f23"/>
+  <text
+    x="256" y="356"
+    font-family="'Segoe UI', Arial, Helvetica, sans-serif"
+    font-size="300" font-weight="700"
+    text-anchor="middle" letter-spacing="-14">
+    <tspan fill="#ffffff">P</tspan><tspan fill="#a273ff">2</tspan>
+  </text>
+</svg>

@@ -25,19 +25,22 @@ export default function LeadFormModal({ open, onClose, source, defaultServices }
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-charcoal/85 flex items-start md:items-center justify-center p-3 md:p-8 overflow-y-auto"
+      className="fixed inset-0 z-50 bg-amp-ink-pill/85 flex items-start md:items-center justify-center p-3 md:p-8 overflow-y-auto"
       onClick={onClose}
     >
+      {/* White card on the dimmed ground - 16px corners, the amp card
+          radius, so the modal matches the tiles used across the site. */}
       <div
-        className="bg-cream w-full max-w-2xl my-auto"
+        className="font-plex bg-white rounded-[16px] shadow-[0_28px_70px_-20px_rgba(26,26,26,0.45)] w-full max-w-2xl my-auto"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-start justify-between px-6 md:px-10 py-5 border-b border-charcoal/10">
+        <div className="flex items-start justify-between px-6 md:px-10 py-5 border-b border-amp-hairline">
           <div>
-            <p className="text-[10px] tracking-[0.3em] uppercase text-charcoal/45">
+            <p className="flex items-center gap-2 text-[13px] font-semibold tracking-[0.08em] uppercase text-amp-caption">
+              <span className="w-1.5 h-1.5 rounded-full bg-amp-navy" />
               Tell us about your project
             </p>
-            <h2 className="font-display text-xl md:text-2xl font-bold text-charcoal mt-1">
+            <h2 className="font-plex text-xl md:text-2xl font-semibold tracking-[-0.01em] text-black mt-1">
               Send a brief
             </h2>
           </div>
@@ -45,7 +48,7 @@ export default function LeadFormModal({ open, onClose, source, defaultServices }
             type="button"
             onClick={onClose}
             aria-label="Close"
-            className="w-8 h-8 flex items-center justify-center text-charcoal/40 hover:text-charcoal hover:bg-charcoal/5 transition-colors shrink-0"
+            className="w-8 h-8 rounded-md flex items-center justify-center text-amp-caption hover:text-black hover:bg-amp-surface transition-colors shrink-0"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
               <line x1="18" y1="6" x2="6" y2="18" />

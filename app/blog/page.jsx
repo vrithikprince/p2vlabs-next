@@ -1,6 +1,5 @@
 import BlogCard from '../../components/blog/BlogCard.jsx'
 import DroppingSoon from '../../components/blog/DroppingSoon.jsx'
-import Footer from '../../components/layout/Footer.jsx'
 import PageHeader from '../../components/layout/PageHeader.jsx'
 import JournalIllustration from '../../components/illustrations/JournalIllustration.jsx'
 import { getPublishedBlogPosts } from '../../lib/cms.js'
@@ -46,7 +45,6 @@ export default async function BlogIndex() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
         />
         <DroppingSoon kind="blog" />
-        <Footer />
       </div>
     )
   }
@@ -73,7 +71,6 @@ export default async function BlogIndex() {
         </div>
       </section>
 
-      <Footer />
     </div>
   )
 }

@@ -22,9 +22,9 @@ export default function ReelGrid({
         <div className={photos.length ? 'mb-20' : ''}>
           {showBoth && (
             <div className="flex items-center gap-5 mb-10">
-              <p className="text-[10px] tracking-[0.35em] uppercase text-charcoal/40 shrink-0">Video Work</p>
-              <div className="flex-1 border-t border-charcoal/10" />
-              <span className="text-[10px] text-charcoal/28 shrink-0">
+              <p className="text-[13px] font-semibold tracking-[0.08em] uppercase text-amp-caption shrink-0">Video Work</p>
+              <div className="flex-1 border-t border-amp-hairline" />
+              <span className="text-[12px] text-amp-caption shrink-0">
                 {videos.length} film{videos.length !== 1 ? 's' : ''}
               </span>
             </div>
@@ -47,16 +47,16 @@ export default function ReelGrid({
         <div>
           {showBoth && (
             <div className="flex items-center gap-5 mb-10">
-              <p className="text-[10px] tracking-[0.35em] uppercase text-charcoal/40 shrink-0">Photography</p>
-              <div className="flex-1 border-t border-charcoal/10" />
-              <span className="text-[10px] text-charcoal/28 shrink-0">
+              <p className="text-[13px] font-semibold tracking-[0.08em] uppercase text-amp-caption shrink-0">Photography</p>
+              <div className="flex-1 border-t border-amp-hairline" />
+              <span className="text-[12px] text-amp-caption shrink-0">
                 {photos.length} image{photos.length !== 1 ? 's' : ''}
               </span>
             </div>
           )}
 
           {isFood ? (
-            <div className="border-t border-charcoal/10">
+            <div className="border-t border-amp-hairline">
               {photos.map((item, i) => (
                 <ReelCard
                   key={item.id}

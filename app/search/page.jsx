@@ -1,4 +1,3 @@
-import Footer from '../../components/layout/Footer.jsx'
 import BlogCard from '../../components/blog/BlogCard.jsx'
 import VlogCard from '../../components/vlog/VlogCard.jsx'
 import { searchPublishedContent } from '../../lib/cms.js'
@@ -37,15 +36,22 @@ export default async function SearchPage({ searchParams }) {
 
   return (
     <div className="pt-16">
-      <section className="px-5 md:px-10 lg:px-20 pt-16 md:pt-20 pb-12">
+      {/* font-plex on every section here - BlogCard/VlogCard already set it
+          on their own roots, so without it the search chrome (eyebrows,
+          lede, empty state) rendered in the base Inter while the results
+          under it were Plex. */}
+      <section className="font-plex px-5 md:px-10 lg:px-20 pt-16 md:pt-20 pb-12">
         <div className="max-w-3xl mx-auto">
 
-          <p className="text-[10px] tracking-[0.4em] uppercase text-charcoal/45 mb-5">
+          {/* Navy is this page's single accent - it carries the eyebrow
+              dots and the echoed query, nothing else. */}
+          <p className="flex items-center gap-2 text-[13px] font-semibold tracking-[0.08em] uppercase text-amp-caption mb-5">
+            <span className="w-1.5 h-1.5 rounded-full bg-amp-navy" />
             Search
           </p>
-          <h1 className="font-display text-4xl md:text-5xl font-bold text-charcoal leading-tight mb-8">
+          <h1 className="font-plex text-4xl md:text-5xl font-semibold text-black leading-tight tracking-[-0.01em] mb-8">
             What are you<br />
-            <em className="not-italic text-p2v">looking for?</em>
+            <em className="not-italic text-black">looking for?</em>
           </h1>
 
           {/* Plain HTML form, GET method - matches the SearchAction
@@ -59,49 +65,53 @@ export default async function SearchPage({ searchParams }) {
               placeholder="Search the journal and films…"
               autoFocus={!q}
               maxLength={120}
-              className="border border-charcoal/15 px-4 py-3 text-base bg-transparent focus:outline-none focus:border-charcoal transition-colors placeholder-charcoal/35"
+              className="rounded-md border border-amp-hairline px-4 py-3 text-base bg-transparent focus:outline-none focus:border-black transition-colors placeholder-amp-caption/70"
             />
+            {/* Near-black fill, never an accent colour - the amp system keeps
+                its accents off calls to action. rounded-md rather than a full
+                pill so it stays paired with the input beside it. */}
             <button
               type="submit"
-              className="px-6 py-3 bg-charcoal text-cream text-[10px] tracking-[0.2em] uppercase font-medium hover:bg-p2v transition-colors"
+              className="px-6 py-3 rounded-md bg-amp-ink-pill text-white text-sm font-semibold hover:bg-black transition-colors"
             >
               Search
             </button>
           </form>
 
           {!q && (
-            <p className="text-charcoal/55 leading-relaxed">
+            <p className="text-amp-body leading-relaxed">
               Browse published essays from the journal and films from the reel diary.
               Search matches titles, excerpts, and descriptions.
             </p>
           )}
 
           {q && total === 0 && (
-            <div className="border border-charcoal/12 p-7 md:p-10 bg-charcoal/[0.02]">
-              <p className="font-display text-2xl md:text-3xl font-bold text-charcoal leading-tight mb-3">
-                Nothing matches <em className="not-italic text-p2v">"{q}"</em>.
+            <div className="rounded-[16px] border border-amp-hairline p-7 md:p-10 bg-amp-surface">
+              <p className="font-plex text-2xl md:text-3xl font-semibold text-black leading-tight tracking-[-0.01em] mb-3">
+                Nothing matches <em className="not-italic text-amp-navy">"{q}"</em>.
               </p>
-              <p className="text-charcoal/55 leading-relaxed">
+              <p className="text-amp-body leading-relaxed">
                 Try a different query, or browse{' '}
-                <a href="/blog" className="text-charcoal underline underline-offset-2">the Journal</a>
+                <a href="/blog" className="text-black underline underline-offset-2">the Journal</a>
                 {' '}or{' '}
-                <a href="/vlog" className="text-charcoal underline underline-offset-2">the Reel Diary</a>.
+                <a href="/vlog" className="text-black underline underline-offset-2">the Reel Diary</a>.
               </p>
             </div>
           )}
 
           {q && total > 0 && (
-            <p className="text-[10px] tracking-[0.3em] uppercase text-charcoal/50">
-              {total} result{total !== 1 ? 's' : ''} for <em className="not-italic text-charcoal/75">"{q}"</em>
+            <p className="text-[13px] font-semibold tracking-[0.08em] uppercase text-amp-caption">
+              {total} result{total !== 1 ? 's' : ''} for <em className="not-italic text-amp-navy">"{q}"</em>
             </p>
           )}
         </div>
       </section>
 
       {q && blogs.length > 0 && (
-        <section className="px-5 md:px-10 lg:px-20 pb-16">
+        <section className="font-plex px-5 md:px-10 lg:px-20 pb-16">
           <div className="max-w-7xl mx-auto">
-            <p className="text-[10px] tracking-[0.35em] uppercase text-charcoal/40 mb-7">
+            <p className="flex items-center gap-2 text-[13px] font-semibold tracking-[0.08em] uppercase text-amp-caption mb-7">
+              <span className="w-1.5 h-1.5 rounded-full bg-amp-navy" />
               Articles
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-12">
@@ -111,10 +121,14 @@ export default async function SearchPage({ searchParams }) {
         </section>
       )}
 
+      {/* same pb as the Articles block above - these two are structurally
+          identical, and either can be the last thing on the page, so the
+          foot of /search shouldn't shift depending on which one matched. */}
       {q && vlogs.length > 0 && (
-        <section className="px-5 md:px-10 lg:px-20 pb-20">
+        <section className="font-plex px-5 md:px-10 lg:px-20 pb-16">
           <div className="max-w-7xl mx-auto">
-            <p className="text-[10px] tracking-[0.35em] uppercase text-charcoal/40 mb-7">
+            <p className="flex items-center gap-2 text-[13px] font-semibold tracking-[0.08em] uppercase text-amp-caption mb-7">
+              <span className="w-1.5 h-1.5 rounded-full bg-amp-navy" />
               Films
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 md:gap-12">
@@ -124,7 +138,6 @@ export default async function SearchPage({ searchParams }) {
         </section>
       )}
 
-      <Footer />
     </div>
   )
 }

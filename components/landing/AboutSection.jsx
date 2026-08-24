@@ -34,28 +34,31 @@ export default function AboutSection() {
   }, [])
 
   return (
-    <section ref={sectionRef} id="about" className="py-16 lg:py-24 px-5 md:px-10 lg:px-20">
+    <section ref={sectionRef} id="about" className="bg-white py-16 lg:py-24 px-5 md:px-10 lg:px-20">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
 
           <div className="lg:col-span-5 about-sticky-col">
-            <p className="text-[10px] tracking-[0.35em] uppercase text-charcoal/45 mb-5">The Studio</p>
-            <h2 className="font-display text-4xl md:text-5xl font-bold text-charcoal leading-tight mb-8">
+            <p className="flex items-center gap-2 text-[13px] font-semibold tracking-[0.08em] uppercase text-amp-caption mb-5">
+              <span className="w-1.5 h-1.5 rounded-full bg-black" />
+              The Studio
+            </p>
+            <h2 className="font-plex text-4xl md:text-5xl font-semibold text-black leading-tight tracking-[-0.01em] mb-8">
               <span className="clip-wrap"><span className="about-heading-line block">Where Data</span></span>
               <span className="clip-wrap"><span className="about-heading-line block">Meets Visual</span></span>
-              <span className="clip-wrap"><em className="about-heading-line not-italic text-p2v block">Craft.</em></span>
+              <span className="clip-wrap"><em className="about-heading-line not-italic text-black block">Craft.</em></span>
             </h2>
-            <p className="about-para text-charcoal/55 leading-relaxed mb-5 text-[15px] will-anim">
+            <p className="about-para text-amp-body leading-relaxed mb-5 text-[15px] will-anim">
               P2V Labs was founded on a simple belief: great visual content isn't just beautiful -
               it's built on insight. We combine analytical thinking with cinematic execution to
               create work that performs as well as it looks.
             </p>
-            <p className="about-para text-charcoal/55 leading-relaxed mb-5 text-[15px] will-anim">
+            <p className="about-para text-amp-body leading-relaxed mb-5 text-[15px] will-anim">
               Based in Ahmedabad, we work with brands across India - from heritage businesses to
               emerging startups - helping them tell stories that stick.
             </p>
-            <p className="about-para text-charcoal/55 leading-relaxed text-[15px] will-anim">
-              Led by <span className="text-charcoal">Vrithik Prince</span>, who previously
+            <p className="about-para text-amp-body leading-relaxed text-[15px] will-anim">
+              Led by <span className="text-black">Vrithik Prince</span>, who previously
               co-founded a Surat creative agency working with 50+ F&amp;B, retail, and lifestyle
               brands. That run drove 120% average engagement growth, shipped 1,500+ visuals and
               300+ brand videos, and built a workflow 30% faster than industry peers. P2V Labs is
@@ -64,22 +67,25 @@ export default function AboutSection() {
           </div>
 
           <div className="lg:col-span-7">
-            <p className="text-[10px] tracking-[0.35em] uppercase text-charcoal/45 mb-8">Founded By</p>
+            <p className="flex items-center gap-2 text-[13px] font-semibold tracking-[0.08em] uppercase text-amp-caption mb-8">
+              <span className="w-1.5 h-1.5 rounded-full bg-black" />
+              Founded By
+            </p>
             <div className="founders-list">
               {FOUNDERS.map((f, i) => (
-                <div key={f.name} className="founder-row py-7 border-b border-charcoal/10 first:border-t will-anim">
+                <div key={f.name} className="founder-row py-7 border-b border-amp-hairline first:border-t will-anim">
                   <div className="grid grid-cols-12 gap-4">
                     <div className="col-span-2 md:col-span-1 pt-1">
-                      <span className="font-display text-lg font-bold text-p2v/25">
+                      <span className="font-plex text-lg font-semibold text-amp-caption/60">
                         {String(i + 1).padStart(2, '0')}
                       </span>
                     </div>
                     <div className="col-span-10 md:col-span-11">
                       <div className="flex flex-wrap items-baseline gap-2 mb-1.5">
-                        <h3 className="font-display text-xl font-bold text-charcoal">{f.name}</h3>
-                        <span className="text-[10px] tracking-[0.15em] uppercase text-charcoal/40">{f.role}</span>
+                        <h3 className="font-plex text-xl font-semibold text-black">{f.name}</h3>
+                        <span className="text-[10px] tracking-[0.15em] uppercase text-amp-caption">{f.role}</span>
                       </div>
-                      <p className="text-sm text-charcoal/55 leading-relaxed">{f.detail}</p>
+                      <p className="text-sm text-amp-body leading-relaxed">{f.detail}</p>
                     </div>
                   </div>
                 </div>

@@ -1,6 +1,5 @@
 import VlogCard from '../../components/vlog/VlogCard.jsx'
 import DroppingSoon from '../../components/blog/DroppingSoon.jsx'
-import Footer from '../../components/layout/Footer.jsx'
 import PageHeader from '../../components/layout/PageHeader.jsx'
 import FilmsIllustration from '../../components/illustrations/FilmsIllustration.jsx'
 import { getPublishedVlogPosts } from '../../lib/cms.js'
@@ -39,7 +38,6 @@ export default async function VlogIndex() {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs) }}
         />
         <DroppingSoon kind="vlog" />
-        <Footer />
       </div>
     )
   }
@@ -66,7 +64,6 @@ export default async function VlogIndex() {
         </div>
       </section>
 
-      <Footer />
     </div>
   )
 }

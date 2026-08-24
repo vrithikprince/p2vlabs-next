@@ -9,6 +9,8 @@ import ScrollToTop from './ScrollToTop.jsx'
 import Navbar from './Navbar.jsx'
 import BottomNav from './BottomNav.jsx'
 import FloatingWhatsApp from './FloatingWhatsApp.jsx'
+import ContactSection from '../landing/ContactSection.jsx'
+import Footer from './Footer.jsx'
 import { LoaderContext } from './LoaderContext.jsx'
 
 /**
@@ -74,7 +76,37 @@ export default function RootClient({ children }) {
       <ShutterTransition trigger={transitionKey} />
       <ScrollToTop />
       <Navbar />
-      <main>{children}</main>
+      {/* relative + z-10 makes this an explicit, positive-z-index sibling
+          of #footer-portal-root (see app/layout.jsx) - Footer's fixed
+          reveal panel sits at z-0, so this always paints over it. Two
+          explicitly-positioned siblings compared by z-index is the one
+          stacking case every engine gets right; relying on "negative
+          z-index sinks below static content" did not hold up in practice
+          on a page this dense with GSAP-driven layers.
+
+          The closing CTA and the Footer live HERE rather than in each
+          page for two reasons:
+
+          1. Every page gets the same ending - the CTA band and the big
+             wordmark reveal - without ten copies to keep in sync.
+          2. It is what makes the reveal work at all. z-10 only controls
+             ORDER, not coverage: the fixed panel still shows through any
+             transparent pixel above it. The homepage looked fine only
+             because every one of its sections happens to set bg-white,
+             while /blog rendered on a bare `pt-16` wrapper and the
+             wordmark bled straight through the post grid.
+             So page content gets an explicit opaque wrapper, and the
+             Footer's transparent spacer sits OUTSIDE it as a sibling -
+             the one region the panel is allowed to show through.
+             Painting <main> itself would have covered the panel
+             everywhere and killed the reveal instead of fixing it. */}
+      <main className="relative z-10">
+        <div className="bg-white">{children}</div>
+        {/* /contact already opens with this exact block - a second copy
+            would ask the same question twice on one page. */}
+        {pathname !== '/contact' && <ContactSection />}
+        <Footer />
+      </main>
       <BottomNav />
       <FloatingWhatsApp />
     </LoaderContext.Provider>

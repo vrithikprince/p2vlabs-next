@@ -19,42 +19,44 @@
     overflow-x: clip;
   }
   body {
-    @apply bg-cream text-charcoal antialiased;
+    @apply bg-white text-black antialiased;
     font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
     overflow-x: hidden;
     overflow-x: clip;
   }
   ::-webkit-scrollbar       { width: 3px; }
-  ::-webkit-scrollbar-track { background: #F5F0E8; }
-  ::-webkit-scrollbar-thumb { background: #c0392b; }
+  ::-webkit-scrollbar-track { background: #f2f4f8; }
+  ::-webkit-scrollbar-thumb { background: #1a1f23; }
   input, textarea, select   { font-family: var(--font-inter), 'Inter', system-ui, sans-serif; }
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus {
-    -webkit-box-shadow: 0 0 0px 1000px #F5F0E8 inset;
-    -webkit-text-fill-color: #1a1a1a;
+    -webkit-box-shadow: 0 0 0px 1000px #ffffff inset;
+    -webkit-text-fill-color: #000000;
   }
 }
 
 @layer components {
-  .font-display { font-family: var(--font-playfair), 'Playfair Display', Georgia, serif; }
 
+  /* Near-black pill, never a brand-colour fill - the amp system reserves its
+     accents for emphasis text and tiles, not for calls to action. */
   .btn-primary {
-    @apply bg-p2v text-cream px-6 py-3 font-medium tracking-wide uppercase text-sm
-           hover:bg-charcoal transition-colors duration-200;
+    @apply bg-amp-ink-pill text-white px-7 h-14 inline-flex items-center rounded-full
+           font-semibold text-base hover:bg-black transition-colors duration-200;
   }
   .btn-secondary {
-    @apply border border-charcoal text-charcoal px-6 py-3 font-medium tracking-wide
-           uppercase text-sm hover:bg-charcoal hover:text-cream transition-colors duration-200;
+    @apply border border-amp-hairline text-black px-6 h-14 inline-flex items-center
+           rounded-full font-semibold text-base hover:border-black/40
+           transition-colors duration-200;
   }
   .section-label {
-    @apply text-xs font-medium tracking-widest uppercase text-charcoal/45;
+    @apply text-[13px] font-semibold tracking-[0.08em] uppercase text-amp-caption;
   }
   .card-editorial {
-    @apply bg-white border p-6 transition-colors duration-200;
-    border-color: #E8E4DC;
+    @apply bg-white border p-6 rounded-[16px] transition-colors duration-200;
+    border-color: #d5d9e0;
   }
-  .card-editorial:hover { border-color: #1a1a1a; }
+  .card-editorial:hover { border-color: #9fa5ad; }
 }
 
 /* ─────────────────────────────────────────────
@@ -79,39 +81,69 @@
 .tabs-scroll::-webkit-scrollbar  { display: none; }
 
 /* ─────────────────────────────────────────────
+   HERO CAPABILITY LOOP (CapabilityLoop.jsx)
+───────────────────────────────────────────── */
+
+/* Edge fade for the capability loop moved to two solid white-gradient
+   overlay divs in CapabilityLoop.jsx itself (not a mask-image on this
+   class) - masking made card TEXT partially transparent, which read as
+   letters missing rather than a smooth fade. No rule needed here now. */
+
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes loop-caret-blink { 0%, 50% { opacity: 1; } 51%, 100% { opacity: 0; } }
+  .loop-caret { animation: loop-caret-blink 1s step-end infinite; }
+
+  @keyframes loop-shimmer-pulse { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
+  .loop-shimmer { animation: loop-shimmer-pulse 1.6s ease-in-out infinite; }
+
+  @keyframes loop-node-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(162,115,255,0.35); }
+    50%      { box-shadow: 0 0 0 5px rgba(162,115,255,0); }
+  }
+  .loop-pulse { animation: loop-node-pulse 1.8s ease-out infinite; }
+}
+
+/* ─────────────────────────────────────────────
    CUSTOM CURSOR
 ───────────────────────────────────────────── */
 
+/* Cursor moved off brand red onto the ink/periwinkle pair: on a white canvas a
+   red dot was the loudest thing on screen at all times, which is the opposite
+   of what a cursor should be. Ink dot reads as a precise point; the ring picks
+   up periwinkle so the hover state still has a moment of colour. */
 body.has-custom-cursor * { cursor: none !important; }
 #cursor-dot {
   position: fixed; top: 0; left: 0; z-index: 9999;
-  width: 7px; height: 7px; background: #c0392b; border-radius: 50%;
+  width: 7px; height: 7px; background: #1a1f23; border-radius: 50%;
   pointer-events: none; transform: translate(-200vw,-200vh);
   transition: width 0.2s, height 0.2s;
 }
 #cursor-ring {
   position: fixed; top: 0; left: 0; z-index: 9998;
   width: 34px; height: 34px;
-  border: 1.5px solid rgba(192,57,43,0.45); border-radius: 50%;
+  border: 1.5px solid rgba(105,128,255,0.5); border-radius: 50%;
   pointer-events: none; transform: translate(-200vw,-200vh);
   transition: width 0.25s ease, height 0.25s ease, border-color 0.25s;
 }
-body.cursor-hover #cursor-ring { width: 56px; height: 56px; border-color: rgba(192,57,43,0.7); }
+body.cursor-hover #cursor-ring { width: 56px; height: 56px; border-color: rgba(105,128,255,0.85); }
 body.cursor-click #cursor-dot  { width: 12px; height: 12px; }
 
 /* ─────────────────────────────────────────────
-   INK / HANDWRITING LOADER
+   BRAND LOADER
 
-   Cream backdrop. "P2V Labs" reveals left-to-right via a clip-path
-   sweep on a stroked SVG <text> (the "writing"), then a solid-fill
-   copy fades in on top so the final letterforms are proper Playfair
-   crimson - not an outlined ghost. "Pixels · Purpose · Visuals" soft-fades in
-   below. GSAP drives the timing (see Loader.jsx).
+   White backdrop. "PV" arrives closed-up, the "2" drops in and wedges the
+   letters apart, then "Labs" fades in. Per-glyph spans (not the old SVG
+   <text> + clip-path sweep, which could only reveal the wordmark
+   left-to-right). GSAP drives the timing - see Loader.jsx.
+
+   Type matches the Logo component exactly: Plex semibold, black mark with a
+   periwinkle "Labs", so the loader resolves into the same wordmark the nav
+   then shows rather than a different-looking one.
 ───────────────────────────────────────────── */
 
 #ink-loader {
   position: fixed; inset: 0; z-index: 11000;
-  background: #F5F0E8;
+  background: #ffffff;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -125,26 +157,65 @@ body.cursor-click #cursor-dot  { width: 12px; height: 12px; }
   text-align: center;
 }
 
-.ink-svg {
-  width: clamp(260px, 60vw, 580px);
-  height: auto;
-  overflow: visible;
+.ink-word {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  font-family: var(--font-plex), 'IBM Plex Sans', Arial, system-ui, sans-serif;
+  font-weight: 600;
+  font-size: clamp(2.75rem, 10vw, 7rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  color: #000000;
+  /* the 2 drops in from above; without this it is visible before it enters */
+  overflow: hidden;
+  padding-top: 0.12em;
+  /* Layout safety for the split:
+     - flex + nowrap means "Labs" can never wrap onto a second line at the
+       moment it fades in, at any viewport width.
+     - nothing here animates a LAYOUT property. The split is transform-only
+       (P and V are translated, never repositioned) and "Labs" is always in
+       flow at opacity 0, so the box never changes width and there is no
+       reflow to jank on. That is deliberate, not incidental. */
+  white-space: nowrap;
+  flex-wrap: nowrap;
+  max-width: 100%;
 }
 
-.ink-text {
-  font-family: var(--font-playfair), 'Playfair Display', Georgia, serif;
-  font-weight: 700;
-  font-size: 140px;
-  letter-spacing: -2.5;
+/* inline-block so transforms apply; will-change because every one of these
+   is transformed on the critical first-paint path.
+
+   opacity:0 is set HERE, in CSS, not in JS. The loader is server-rendered,
+   so the markup paints before React hydrates - hiding these in a layout
+   effect still left the fully-assembled "P2V Labs" visible for ~120ms and
+   then snapped it back to the start of the animation. GSAP overwrites these
+   with inline opacity as soon as the timeline runs. */
+.ink-char,
+.ink-labs,
+.ink-tag {
+  opacity: 0;
+}
+
+.ink-char,
+.ink-labs {
+  display: inline-block;
+  will-change: transform, opacity;
+}
+
+.ink-labs {
+  margin-left: 0.26em;
+  color: #6980ff;
 }
 
 .ink-tag {
-  margin-top: 18px;
-  font-family: var(--font-inter), 'Inter', system-ui, sans-serif;
+  margin-top: 20px;
+  font-family: var(--font-plex), 'IBM Plex Sans', Arial, system-ui, sans-serif;
   font-size: clamp(0.65rem, 1.1vw, 0.78rem);
-  letter-spacing: 0.42em;
+  font-weight: 600;
+  letter-spacing: 0.34em;
   text-transform: uppercase;
-  color: rgba(26, 26, 26, 0.55);
+  color: #565656;
+  will-change: transform, opacity;
 }
 
 /* ─────────────────────────────────────────────
@@ -175,7 +246,7 @@ body.cursor-click #cursor-dot  { width: 12px; height: 12px; }
 
 .shutter-strip {
   position: fixed; top: 0; bottom: 0; z-index: 9000;
-  background: #1a1a1a; transform: scaleY(0);
+  background: #1a1f23; transform: scaleY(0);
   transform-origin: bottom; pointer-events: none;
   width: 20%;
 }
@@ -196,29 +267,38 @@ nav { transition: box-shadow 0.35s ease; }
 }
 
 .glass {
-  background: rgba(245,240,232,0.55) !important;
+  background: rgba(255,255,255,0.55) !important;
   backdrop-filter: blur(22px) saturate(1.6) !important;
   -webkit-backdrop-filter: blur(22px) saturate(1.6) !important;
-  border: 1px solid rgba(26,26,26,0.08) !important;
+  border: 1px solid rgba(255,255,255,0.6) !important;
 }
 nav.glass-nav {
-  background: rgba(245,240,232,0.72) !important;
+  background: rgba(255,255,255,0.72) !important;
   backdrop-filter: blur(24px) saturate(1.8) !important;
   -webkit-backdrop-filter: blur(24px) saturate(1.8) !important;
-  box-shadow: 0 1px 0 rgba(26,26,26,0.08), 0 4px 24px rgba(26,26,26,0.05);
+  box-shadow: 0 1px 0 rgba(213,217,224,0.9), 0 4px 24px rgba(26,26,26,0.05);
 }
 
 .sticky-cards-section { padding-bottom: 0; }
 .sticky-card-wrap     { position: sticky; }
 
 #scroll-top-btn {
-  /* Outlined cream pair to the solid-charcoal WhatsApp FAB. Both arrive
-     at brand red on hover, so the cluster reads as a deliberate pair. */
+  /* Circular white control stacked above the rounded-full WhatsApp FAB, so the
+     two floating buttons read as one deliberate pair rather than two widgets.
+     On a white page a white surface needs help separating: the #d5d9e0 hairline
+     plus a soft shadow do that, and the light blur borrows the glass-nav
+     treatment so it stays legible when it floats over imagery. */
   position: fixed; bottom: 9.5rem; right: 1.25rem; z-index: 200;
   width: 44px; height: 44px;
-  background: #F5F0E8;
-  color: #1a1a1a;
-  border: 1px solid rgba(26,26,26,0.20);
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(20px) saturate(1.6);
+  -webkit-backdrop-filter: blur(20px) saturate(1.6);
+  color: #000;
+  border: 1px solid #d5d9e0;
+  border-radius: 9999px;
+  /* shadow is intentionally identical in both states - the transition list is
+     behavioural and must not grow a box-shadow entry. */
+  box-shadow: 0 4px 16px rgba(26,31,35,0.10);
   display: flex; align-items: center; justify-content: center;
   opacity: 0; transform: translateX(4rem);
   transition: background 0.2s, color 0.2s, border-color 0.2s,
@@ -231,9 +311,11 @@ nav.glass-nav {
 }
 #scroll-top-btn.visible { opacity: 1; transform: translateX(0); pointer-events: all; }
 #scroll-top-btn:hover {
-  background: #c0392b;
-  color: #F5F0E8;
-  border-color: #c0392b;
+  /* same near-black fill every primary CTA uses on hover, so a utility control
+     never introduces a colour the rest of the page does not already own. */
+  background: #1a1f23;
+  color: #fff;
+  border-color: #1a1f23;
 }
 
 .nav-link-wrap  { overflow: hidden; display: inline-block; position: relative; }
@@ -254,43 +336,51 @@ nav.glass-nav {
   font-family: 'Inter', system-ui, sans-serif;
   font-size: 17px;
   line-height: 1.75;
-  color: rgba(26, 26, 26, 0.88);
+  color: #333333;
 }
 
 .blog-article > * + * { margin-top: 1em; }
 
+/* Plex semibold, not Playfair bold - CMS prose headings have to match the
+   Plex/600 headings the rest of the site now uses, or an article reads as a
+   page from the old site pasted inside the new one. */
 .blog-article h2 {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-weight: 700;
+  font-family: var(--font-plex), 'IBM Plex Sans', Arial, system-ui, sans-serif;
+  font-weight: 600;
   font-size: clamp(1.6rem, 3vw, 2rem);
   line-height: 1.2;
+  letter-spacing: -0.01em;
   margin-top: 2em;
   margin-bottom: 0.4em;
-  color: #1a1a1a;
+  color: #000000;
 }
 
 .blog-article h3 {
-  font-family: 'Playfair Display', Georgia, serif;
-  font-weight: 700;
+  font-family: var(--font-plex), 'IBM Plex Sans', Arial, system-ui, sans-serif;
+  font-weight: 600;
   font-size: clamp(1.25rem, 2.4vw, 1.5rem);
   line-height: 1.25;
+  letter-spacing: -0.01em;
   margin-top: 1.7em;
   margin-bottom: 0.35em;
-  color: #1a1a1a;
+  color: #000000;
 }
 
 .blog-article p { margin: 1em 0; }
 
+/* Navy rather than periwinkle for prose links: periwinkle on white is about
+   3.9:1, under the 4.5:1 needed for body-size text. Navy clears 16:1 and the
+   underline carries the "this is a link" signal. */
 .blog-article a,
 .blog-article .tiptap-link {
-  color: #c0392b;
+  color: #001a4f;
   text-decoration: underline;
   text-underline-offset: 3px;
-  text-decoration-color: rgba(192, 57, 43, 0.5);
+  text-decoration-color: rgba(0, 26, 79, 0.45);
 }
 .blog-article a:hover,
 .blog-article .tiptap-link:hover {
-  text-decoration-color: #c0392b;
+  text-decoration-color: #001a4f;
 }
 
 .blog-article ul,
@@ -301,15 +391,15 @@ nav.glass-nav {
 .blog-article ul { list-style: disc; }
 .blog-article ol { list-style: decimal; }
 .blog-article li { margin: 0.3em 0; }
-.blog-article li::marker { color: #c0392b; }
+.blog-article li::marker { color: #001a4f; }
 
 .blog-article blockquote {
-  border-left: 3px solid #1a1a1a;
+  border-left: 3px solid #1a1f23;
   padding: 0.2em 0 0.2em 1em;
   margin: 1.3em 0;
   font-style: italic;
-  color: rgba(26, 26, 26, 0.7);
-  background: rgba(26, 26, 26, 0.025);
+  color: #565656;
+  background: #f2f4f8;
 }
 .blog-article blockquote p { margin: 0.4em 0; }
 
@@ -319,17 +409,20 @@ nav.glass-nav {
   max-width: 100%;
   height: auto;
   margin: 1.5em 0;
-  border: 1px solid rgba(26, 26, 26, 0.08);
+  border-radius: 16px;
+  border: 1px solid #d5d9e0;
 }
 
 .blog-article code {
-  background: rgba(26, 26, 26, 0.06);
+  background: #f2f4f8;
   padding: 0 5px;
-  border-radius: 2px;
+  border-radius: 6px;
   font-family: 'SF Mono', Menlo, Consolas, monospace;
   font-size: 0.9em;
-  color: #c0392b;
+  color: #001a4f;
 }
 
-.blog-article strong { font-weight: 700; color: #1a1a1a; }
+/* 600 not 700 - the system caps emphasis at semibold, and inline <strong>
+   at 700 inside 400 prose was heavier than any heading on the page. */
+.blog-article strong { font-weight: 600; color: #000000; }
 .blog-article em     { font-style: italic; }

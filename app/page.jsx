@@ -6,16 +6,16 @@ import Services from '../components/landing/Services.jsx'
 import ReelPreview from '../components/landing/ReelPreview.jsx'
 import AboutSection from '../components/landing/AboutSection.jsx'
 import FAQ from '../components/landing/FAQ.jsx'
-import ContactSection from '../components/landing/ContactSection.jsx'
-import Footer from '../components/layout/Footer.jsx'
+import LeadCapture from '../components/landing/LeadCapture.jsx'
 import Rule from '../components/ui/Rule.jsx'
 import { websiteJsonLd, SOCIAL_LINKS } from '../lib/seo.js'
 
 /**
  * Landing - Static Site Generation. Rebuilt on deploy and re-validated hourly.
- * The full editorial scroll lives here (Hero → Marquee → Services → ReelPreview
- * → About → Contact → Footer); each /about, /contact, /packages route also
- * exposes the same section under its own URL for direct linking + SEO.
+ * The full editorial scroll lives here (Hero → Marquee → ProofBar → Positioning
+ * → Services → ReelPreview → About → FAQ → LeadCapture); the closing CTA +
+ * footer are global. Each /about, /contact, /packages route also exposes the
+ * same section under its own URL for direct linking + SEO.
  */
 export const revalidate = 3600
 
@@ -25,8 +25,10 @@ const structuredData = {
   name: 'P2V Labs',
   /* See Organization schema in lib/seo.js for the rationale -
      same alternates so Google fuses the LocalBusiness (homepage),
-     Organization (site-wide), GBP, and IG handle into one entity. */
-  alternateName: ['Pixels · Purpose · Visuals', 'p2v_labs'],
+     Organization (site-wide), GBP, and IG handle into one entity.
+     One-word 'p2vlabs' / 'P2Vlabs' aliases resolve the joined-spelling
+     brand query (which otherwise collides with "Physical-to-Virtual"). */
+  alternateName: ['p2vlabs', 'P2Vlabs', 'p2v_labs', 'Pixels · Purpose · Visuals'],
   description: 'Visual content agency specialising in video production, product photography, food photography, and social media content.',
   url: 'https://p2vlabs.in',
   telephone: '+917048824616',
@@ -95,8 +97,11 @@ export default function HomePage() {
       <Rule />
       <FAQ />
       <Rule />
-      <ContactSection />
-      <Footer />
+      {/* Sits after the FAQ on purpose: objections answered first, then the
+          ask. The closing ContactSection CTA and the Footer are rendered
+          centrally for every route in RootClient, so they are deliberately
+          absent here - see the comment there for why. */}
+      <LeadCapture />
     </div>
   )
 }

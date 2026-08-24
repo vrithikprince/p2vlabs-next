@@ -1,28 +1,32 @@
-import { Playfair_Display, Inter } from 'next/font/google'
+import { Inter, IBM_Plex_Sans } from 'next/font/google'
 import RootClient from '../components/layout/RootClient.jsx'
 import { SITE_URL, SITE_NAME, SITE_LOCALE, organizationJsonLd } from '../lib/seo.js'
 import './globals.css'
 
 /**
- * Next.js Font Optimization - self-hosts Playfair Display + Inter so we get a
- * single woff2 per family with `font-display: swap`, instead of the Vite app's
- * render-blocking <link rel="stylesheet"> from fonts.googleapis.com.
+ * Next.js Font Optimization - self-hosts each family as a single woff2 with
+ * `font-display: swap`, instead of a render-blocking <link rel="stylesheet">
+ * from fonts.googleapis.com. Each is exposed as a CSS custom property that
+ * the Tailwind theme and globals.css reference.
  *
- * Both fonts are exposed as CSS custom properties (--font-playfair, --font-inter)
- * which the Tailwind theme + globals.css reference.
+ * Playfair Display was dropped when the site moved to the amp system: after
+ * the migration nothing rendered in it, but it was still being downloaded on
+ * every page load - a whole webfont's worth of bytes for zero glyphs.
  */
-const playfair = Playfair_Display({
-  subsets: ['latin'],
-  weight: ['400', '500', '700', '900'],
-  style:  ['normal', 'italic'],
-  variable: '--font-playfair',
-  display:  'swap',
-})
-
 const inter = Inter({
   subsets: ['latin'],
   weight: ['300', '400', '500', '600'],
   variable: '--font-inter',
+  display:  'swap',
+})
+
+/* IBM Plex Sans - the display/UI family across the amp system. Amplitude's
+ * own marketing site loads this as its body/label family (Gellix is the
+ * licensed face it renders; Plex is the documented open substitute). */
+const plexSans = IBM_Plex_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-plex',
   display:  'swap',
 })
 
@@ -83,13 +87,19 @@ export const metadata = {
     },
   },
   icons: {
-    /* Brand-red square with cream "P2V" - readable when Google downscales
-     * it for the favicon column. favicon.ico (32+48) is the legacy +
-     * Google fallback at the root path; icon.png (512) is the PWA/raster
-     * source; the SVG is the crisp vector for modern browsers. All three
-     * regenerated from /public/icons/icon.svg via scripts/gen-favicons.mjs. */
+    /* Near-black tile, white "P2V" with a violet "2" - the same mark the
+     * loader resolves into and the nav logo shows, so the tab matches the
+     * site. Dark rather than white because a white tile disappears into a
+     * light browser tab strip.
+     *
+     * favicon.ico (16+32+48) is the legacy + Google fallback at the root
+     * path; icon.png (512) is the PWA/raster source; the SVG is the crisp
+     * vector for modern browsers. The 16px entry is drawn from a SEPARATE
+     * source (icons/icon-16.svg, a two glyph "P2") because the full three
+     * glyph mark is unreadable at that size - see gen-favicons.mjs.
+     * Regenerate all of them with: node scripts/gen-favicons.mjs */
     icon: [
-      { url: '/favicon.ico',        sizes: '32x32 48x48' },
+      { url: '/favicon.ico',        sizes: '16x16 32x32 48x48' },
       { url: '/icon.png',           type: 'image/png', sizes: '512x512' },
       { url: '/icons/icon.svg',     type: 'image/svg+xml' },
     ],
@@ -99,7 +109,9 @@ export const metadata = {
 }
 
 export const viewport = {
-  themeColor: '#F5F0E8',
+  /* matches the new white canvas - this paints the mobile browser chrome, so
+     leaving it cream put a warm bar above a white page on Android/iOS. */
+  themeColor: '#ffffff',
   width: 'device-width',
   initialScale: 1,
   viewportFit: 'cover',
@@ -107,8 +119,16 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
-      <body className="min-h-screen bg-cream">
+    <html lang="en" className={`${inter.variable} ${plexSans.variable}`}>
+      <body className="min-h-screen bg-white">
+        {/* Footer portal target - deliberately the first node in <body>,
+            before everything RootClient renders. Footer.jsx portals its
+            fixed reveal panel in here so it's earliest in DOM order; every
+            other element on the page (default z-index: auto) then paints
+            over it naturally on scroll, without relying on negative
+            z-index (unreliable on a page full of GSAP-driven transforms,
+            which each create their own stacking context). */}
+        <div id="footer-portal-root" />
         {/* Organization JSON-LD - every page carries the publisher entity.
             Used by Google for the knowledge panel + as the canonical
             publisher reference on Article schemas across the site. */}

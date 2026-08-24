@@ -1,5 +1,5 @@
 /**
- * gen-pricing-pdf.mjs — generates a brand-aligned pricing PDF for P2V Labs.
+ * gen-pricing-pdf.mjs - generates a brand-aligned pricing PDF for P2V Labs.
  *
  * Mirrors the /packages page on www.p2vlabs.in and adds aggregator + online-
  * presence add-ons that aren't currently on the site. Run as:
@@ -20,13 +20,13 @@ import fs from 'node:fs'
 
 const OUTPUT_PATH = 'D:/P2VLabs-Pricing.pdf'
 
-/* Brand palette — same hex values as the site. */
+/* Brand palette - same hex values as the site. */
 const CREAM     = '#F5F0E8'
 const CHARCOAL  = '#1a1a1a'
 const RED       = '#c0392b'
 const HAIRLINE  = '#1a1a1a'  // used with opacity
 
-/* Fonts — pulled from Windows system fonts so we don't ship TTFs in the
+/* Fonts - pulled from Windows system fonts so we don't ship TTFs in the
    repo. Georgia covers the editorial serif role (Playfair Display fallback
    on the site is exactly Georgia) and has the rupee glyph in W10+ builds.
    Arial handles sans labels / body. PDFKit's built-in Times + Helvetica
@@ -48,7 +48,7 @@ const PAGE_H = 841.89  // A4 height in pts
 const MARGIN = 50
 
 /* ─────────────────────────────────────────────
-   DATA — mirrors /packages page, plus add-ons.
+   DATA - mirrors /packages page, plus add-ons.
 ───────────────────────────────────────────── */
 
 const PROJECT_PACKAGES = [
@@ -71,7 +71,7 @@ const PROJECT_PACKAGES = [
     title: 'Brand Reel',
     priceLabel: '₹8,000',
     cadence: '/ reel',
-    blurb: 'A single 15–30 second reel — scripted, shot, and cut to convert scroll into engagement.',
+    blurb: 'A single 15-30 second reel - scripted, shot, and cut to convert scroll into engagement.',
     bullets: [
       'Concept, script, and storyboard',
       'Half-day shoot',
@@ -85,9 +85,9 @@ const PROJECT_PACKAGES = [
     title: 'Brand Film',
     priceLabel: '₹35,000',
     cadence: '/ film',
-    blurb: 'A 1–2 minute hero film for your website, pitch deck, or ads. Cinematic, intentional, made to last.',
+    blurb: 'A 1-2 minute hero film for your website, pitch deck, or ads. Cinematic, intentional, made to last.',
     bullets: [
-      '1–2 min film, full concept development',
+      '1-2 min film, full concept development',
       'Multi-day shoot with scripted scenes',
       'Edit, colour grade, sound, motion',
       'Master + cutdowns for socials',
@@ -96,7 +96,7 @@ const PROJECT_PACKAGES = [
   },
 ]
 
-/* Bundled monthly plans — replace the older "Retainers + à la carte add-ons"
+/* Bundled monthly plans - replace the older "Retainers + à la carte add-ons"
    pricing. Each plan stacks the previous one's deliverables, so the buyer's
    decision becomes a clean A/B/C ladder instead of mix-and-match. */
 const MONTHLY_PLANS = [
@@ -108,7 +108,7 @@ const MONTHLY_PLANS = [
     tagline: 'A reliable monthly cadence of content + community.',
     bullets: [
       '9 photos + 3 reels per month',
-      '3–4 stories per week from shoot content',
+      '3-4 stories per week from shoot content',
       'Daily comment & DM replies (business hours)',
     ],
     bestFor: 'Restaurants establishing a consistent feed',
@@ -152,7 +152,7 @@ const doc = new PDFDocument({
   size: 'A4',
   margins: { top: MARGIN, bottom: MARGIN, left: MARGIN, right: MARGIN },
   info: {
-    Title: 'P2V Labs — Pricing',
+    Title: 'P2V Labs - Pricing',
     Author: 'P2V Labs',
     Subject: 'Pricing guide for video, photography, and content retainers',
     Keywords: 'p2v labs, pricing, content agency, ahmedabad, video, photography',
@@ -172,7 +172,7 @@ doc.pipe(fs.createWriteStream(OUTPUT_PATH))
 ───────────────────────────────────────────── */
 
 function cream() {
-  /* Explicit fillOpacity(1) — same reason as renderHybridCTA below.
+  /* Explicit fillOpacity(1) - same reason as renderHybridCTA below.
      Without it, fill() inherits whatever alpha the previous text call
      left in state, and the cream page background renders washed out. */
   doc.save()
@@ -251,13 +251,13 @@ function renderCover() {
   eyebrow('P2V LABS', MARGIN, MARGIN + 50, { opacity: 0.7, size: 9 })
   eyebrow('Pixels · Purpose · Visuals', MARGIN, MARGIN + 65, { opacity: 0.4, size: 7.5 })
 
-  /* Date — top-right */
+  /* Date - top-right */
   eyebrow('Pricing · June 2026', MARGIN, MARGIN + 50, {
     opacity: 0.4, size: 8,
     textOpts: { width: PAGE_W - MARGIN * 2, align: 'right' },
   })
 
-  /* Center block — big editorial headline */
+  /* Center block - big editorial headline */
   const headlineY = 280
   eyebrow('Pricing', MARGIN, headlineY, { color: RED, opacity: 1, size: 9 })
   headline('Transparent', MARGIN, headlineY + 22, { size: 64 })
@@ -265,7 +265,7 @@ function renderCover() {
   headline('Scope shapes', MARGIN, headlineY + 160, { size: 38, italic: true, color: RED })
   headline('the rest.', MARGIN, headlineY + 200, { size: 38, italic: true, color: RED })
 
-  /* Bottom — talk-to-us block */
+  /* Bottom - talk-to-us block */
   const ctaY = PAGE_H - 150
   hairline(MARGIN, ctaY, PAGE_W - MARGIN, ctaY)
   eyebrow('Talk to us', MARGIN, ctaY + 18, { opacity: 0.4, size: 7.5 })
@@ -276,7 +276,7 @@ function renderCover() {
 }
 
 /* ─────────────────────────────────────────────
-   PACKAGE ROW — re-used across pages
+   PACKAGE ROW - re-used across pages
 ───────────────────────────────────────────── */
 
 function renderPackage(pkg, y) {
@@ -285,7 +285,7 @@ function renderPackage(pkg, y) {
   doc.fillColor(CHARCOAL, 1).font('serif-bold').fontSize(24)
   doc.text(pkg.title, MARGIN, y + 14)
 
-  /* Price — top right */
+  /* Price - top right */
   priceTag(pkg.priceLabel, pkg.cadence, PAGE_W - MARGIN - 180, y)
 
   /* Blurb */
@@ -331,7 +331,7 @@ function renderPackage(pkg, y) {
 }
 
 /* ─────────────────────────────────────────────
-   SECTION HEADER — used at the top of pages 2-5
+   SECTION HEADER - used at the top of pages 2-5
 ───────────────────────────────────────────── */
 
 function renderSectionHeader(eyebrowText, headlineText, italicTail, y = MARGIN + 10) {
@@ -359,7 +359,7 @@ function renderProjectPackages() {
 }
 
 /* ─────────────────────────────────────────────
-   PAGE: BUNDLED MONTHLY PLANS — A/B/C side by side
+   PAGE: BUNDLED MONTHLY PLANS - A/B/C side by side
 ───────────────────────────────────────────── */
 
 function renderBundledPlans() {
@@ -371,7 +371,7 @@ function renderBundledPlans() {
   /* Intro sub-line */
   doc.fillColor(CHARCOAL, 0.55).font('sans').fontSize(10.5)
   doc.text(
-    'Pick one bundle a month — content cadence, reputation, and strategy scale together as you climb tiers.',
+    'Pick one bundle a month - content cadence, reputation, and strategy scale together as you climb tiers.',
     MARGIN, y,
     { width: PAGE_W - MARGIN * 2, lineGap: 2 }
   )
@@ -385,7 +385,7 @@ function renderBundledPlans() {
   /* Pre-compute the tallest bullet block across all three plans so the
      footers (hairline + Best for) line up horizontally across columns.
      Bullets that wrap to two lines use more vertical space than ones
-     that don't — without this we'd get staggered footers. */
+     that don't - without this we'd get staggered footers. */
   const bulletInnerW = colW - 14
   const maxBulletBlock = Math.max(
     ...MONTHLY_PLANS.map((p) => measureBulletBlock(p.bullets, bulletInnerW))
@@ -396,7 +396,7 @@ function renderBundledPlans() {
     renderPlanCard(plan, x, y, colW, maxBulletBlock)
   })
 
-  /* "Off-menu" CTA — fills the bottom of the page (which was previously
+  /* "Off-menu" CTA - fills the bottom of the page (which was previously
      empty) and gives prospects a clear out for hybrid / custom scopes
      that don't fit any of the three bundles. Charcoal block to contrast
      visually with the cream plan cards above. */
@@ -421,13 +421,13 @@ function renderHybridCTA() {
   const innerX = MARGIN + innerPad
   const innerW = PAGE_W - MARGIN * 2 - innerPad * 2
 
-  /* Eyebrow — red on charcoal */
+  /* Eyebrow - red on charcoal */
   doc.fillColor(RED, 1).font('sans-bold').fontSize(8)
   doc.text('NOT QUITE A FIT?', innerX, y + 26, {
     characterSpacing: 3, width: innerW, align: 'center',
   })
 
-  /* Headline — cream serif, with italic red tail on a second line */
+  /* Headline - cream serif, with italic red tail on a second line */
   doc.fillColor(CREAM, 0.95).font('serif-bold').fontSize(24)
   doc.text('Something else in mind.', innerX, y + 46, {
     width: innerW, align: 'center',
@@ -440,7 +440,7 @@ function renderHybridCTA() {
   /* Contact line in cream, smaller */
   doc.fillColor(CREAM, 0.65).font('sans').fontSize(10)
   doc.text(
-    'Hybrid scopes, multi-month campaigns, off-menu deliverables — same-day reply on WhatsApp.',
+    'Hybrid scopes, multi-month campaigns, off-menu deliverables - same-day reply on WhatsApp.',
     innerX, y + 112, { width: innerW, align: 'center', lineGap: 2 }
   )
 
@@ -462,7 +462,7 @@ function measureBulletBlock(bullets, w) {
 }
 
 function renderPlanCard(plan, x, y, w, alignedBulletBlockH) {
-  /* Top hairline — visually separates each plan column from the section
+  /* Top hairline - visually separates each plan column from the section
      header above and signals "this is a card". */
   hairline(x, y, x + w, y, { opacity: 0.22, width: 1 })
 
@@ -470,25 +470,25 @@ function renderPlanCard(plan, x, y, w, alignedBulletBlockH) {
   doc.fillColor(RED, 1).font('sans-bold').fontSize(8.5)
   doc.text(plan.letter.toUpperCase(), x, y + 16, { characterSpacing: 3 })
 
-  /* Plan name — large serif. Tier name is the heading. */
+  /* Plan name - large serif. Tier name is the heading. */
   doc.fillColor(CHARCOAL, 1).font('serif-bold').fontSize(17)
   doc.text(plan.name, x, y + 34, { width: w, lineGap: 1 })
 
-  /* Price block — large red, cadence small charcoal. */
+  /* Price block - large red, cadence small charcoal. */
   doc.fillColor(RED, 1).font('serif-bold').fontSize(24)
   doc.text(plan.priceLabel, x, y + 88)
   const priceW = doc.widthOfString(plan.priceLabel)
   doc.fillColor(CHARCOAL, 0.5).font('sans').fontSize(9.5)
   doc.text(plan.cadence, x + priceW + 4, y + 103)
 
-  /* Hairline under price — separates "what it costs" from "what's in it". */
+  /* Hairline under price - separates "what it costs" from "what's in it". */
   hairline(x, y + 132, x + w, y + 132, { opacity: 0.10 })
 
-  /* Tagline — italic serif. */
+  /* Tagline - italic serif. */
   doc.fillColor(CHARCOAL, 0.65).font('serif-italic').fontSize(10)
   doc.text(plan.tagline, x, y + 146, { width: w, lineGap: 2 })
 
-  /* Bullets — stacked dynamically based on actual rendered height
+  /* Bullets - stacked dynamically based on actual rendered height
      (some wrap to 2 lines). */
   const bulletStart = y + 196
   let cy = bulletStart
@@ -501,7 +501,7 @@ function renderPlanCard(plan, x, y, w, alignedBulletBlockH) {
     cy += Math.max(bh, BULLET_LINE_HEIGHT) + BULLET_GAP
   })
 
-  /* Best-for footer — positioned using the SHARED tallest bullet block
+  /* Best-for footer - positioned using the SHARED tallest bullet block
      so all three columns' footers align horizontally even when the
      plans have different bullet counts / wrap behaviour. */
   const footerY = bulletStart + alignedBulletBlockH + 14
@@ -529,16 +529,16 @@ function renderProcessAndContact() {
     },
     {
       n: '02', title: 'Shoot',
-      detail: 'Production day at your venue — set up, capture, on-the-spot review. Tight, fast, deliberate. We bring lighting, crew, and direction; you bring access and the brief.',
+      detail: 'Production day at your venue - set up, capture, on-the-spot review. Tight, fast, deliberate. We bring lighting, crew, and direction; you bring access and the brief.',
     },
     {
       n: '03', title: 'Deliver',
-      detail: 'Edited files in 5–7 working days. Two rounds of revisions within the scope. Final assets land in your private portal at clients.p2vlabs.in.',
+      detail: 'Edited files in 5-7 working days. Two rounds of revisions within the scope. Final assets land in your private portal at clients.p2vlabs.in.',
     },
   ]
 
   steps.forEach((s) => {
-    /* Number — large faded */
+    /* Number - large faded */
     doc.fillColor(RED, 0.4).font('serif-bold').fontSize(36)
     doc.text(s.n, MARGIN, y)
 
@@ -555,7 +555,7 @@ function renderProcessAndContact() {
     hairline(MARGIN, y - 12, PAGE_W - MARGIN, y - 12)
   })
 
-  /* ── Proof bar — four hard numbers that close the sale. Sits between
+  /* ── Proof bar - four hard numbers that close the sale. Sits between
         the process and the CTA so the buyer sees "here's how we work"
         → "here's the receipt" → "here's the ask". Without this the
         bottom half of the page was just whitespace. */
@@ -579,18 +579,18 @@ function renderProcessAndContact() {
   })
   hairline(MARGIN, proofY + 92, PAGE_W - MARGIN, proofY + 92, { opacity: 0.20 })
 
-  /* Closing CTA — sits just below the proof bar, no longer floating in
+  /* Closing CTA - sits just below the proof bar, no longer floating in
      empty space. */
   const ctaY = proofY + 124
   eyebrow('Not sure which fits?', MARGIN, ctaY, { color: RED, opacity: 1, size: 8.5 })
   headline('Send the brief.', MARGIN, ctaY + 18, { size: 26 })
   headline('We\'ll shape the rest.', MARGIN, ctaY + 48, { size: 26, italic: true, color: RED })
 
-  /* Contact line — pinned near the bottom. The standalone "P2V Labs"
+  /* Contact line - pinned near the bottom. The standalone "P2V Labs"
      brand mark that used to sit beneath this was positioned past
      PDFKit's bottom margin (PAGE_H - 35 ≈ 806pt vs content-bottom 791pt),
      which triggered auto-pagination and produced a phantom blank
-     5th page. Removed — the contact line already brands the page. */
+     5th page. Removed - the contact line already brands the page. */
   const contactY = PAGE_H - 110
   hairline(MARGIN, contactY, PAGE_W - MARGIN, contactY)
   doc.fillColor(CHARCOAL, 0.85).font('serif-bold').fontSize(13)
@@ -611,8 +611,8 @@ function renderProcessAndContact() {
 ───────────────────────────────────────────── */
 
 renderCover()
-renderBundledPlans()       // Monthly Plans first — primary commerce surface
-renderProjectPackages()    // One-off shoots second — secondary path
+renderBundledPlans()       // Monthly Plans first - primary commerce surface
+renderProjectPackages()    // One-off shoots second - secondary path
 renderProcessAndContact()
 
 doc.end()

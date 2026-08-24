@@ -22,11 +22,13 @@ export default function BottomNav() {
     path === '/' ? pathname === '/' : pathname.startsWith(path)
 
   return (
-    <div className="fixed bottom-0 inset-x-0 z-50 md:hidden bg-cream/95 backdrop-blur-sm border-t border-charcoal/12">
+    <div className="fixed bottom-0 inset-x-0 z-50 md:hidden bg-white/95 backdrop-blur-sm border-t border-amp-hairline">
       <div className="flex">
         {ITEMS.map(({ id, icon, label, path, external }) => {
-          const cls = `flex-1 py-3 flex flex-col items-center gap-1 text-[10px] tracking-wider uppercase font-medium transition-colors ${
-            isActive(path) ? 'text-p2v' : 'text-charcoal/45'
+          // active reads as pure black rather than an accent colour: the amplitude
+          // palette keeps cobalt reserved for the hero, so contrast alone carries state
+          const cls = `flex-1 py-3 flex flex-col items-center gap-1 font-plex text-[10px] tracking-wider uppercase font-medium transition-colors ${
+            isActive(path) ? 'text-black' : 'text-amp-caption'
           }`
           if (external) {
             return (

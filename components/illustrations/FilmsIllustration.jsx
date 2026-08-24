@@ -5,16 +5,20 @@
  *   - Top handle with two short connector posts
  *   - Boxy main body with hairline detail (dials / markings)
  *   - Lens housing protruding from the left - concentric circles
- *     with a brand-red core (the "eye")
+ *     with a violet core (the "eye")
  *   - Thin baseline under the body suggesting a tripod mount
  *
- * One red accent (lens center) - deliberately understated, reads as a
- * piece of gear photographed for a magazine spread, not an app icon.
+ * One accent (lens center), amp-violet to match the eyebrow dot in the
+ * PageHeader it sits beside - deliberately understated, reads as a piece
+ * of gear photographed for a magazine spread, not an app icon.
  */
 export default function FilmsIllustration() {
-  const stroke      = 'rgba(26,26,26,0.40)'
-  const strokeMuted = 'rgba(26,26,26,0.22)'
-  const red         = '#c0392b'
+  /* Ink is amp-ink-pill (#1a1f23) at low alpha, same as the Journal and
+     Pricing marks - this used to be the legacy charcoal (#1a1a1a), which
+     read very slightly warmer than every other line on the page. */
+  const stroke      = 'rgba(26,31,35,0.40)'
+  const strokeMuted = 'rgba(26,31,35,0.22)'
+  const accent      = '#a273ff'
 
   return (
     <svg
@@ -35,7 +39,7 @@ export default function FilmsIllustration() {
       {/* Lens housing - protrudes from the left side of the body */}
       <circle cx="40" cy="79" r="22" stroke={stroke} strokeWidth="1.2" />
       <circle cx="40" cy="79" r="13" stroke={strokeMuted} strokeWidth="1" />
-      <circle cx="40" cy="79" r="4"  fill={red} />
+      <circle cx="40" cy="79" r="4"  fill={accent} />
 
       {/* Body detail - implied dials / labels */}
       <g stroke={strokeMuted} strokeWidth="0.8">

@@ -1,4 +1,3 @@
-import Footer from '../../components/layout/Footer.jsx'
 import PageHeader from '../../components/layout/PageHeader.jsx'
 import PricingIllustration from '../../components/illustrations/PricingIllustration.jsx'
 import PortalMockup from '../../components/packages/PortalMockup.jsx'
@@ -14,7 +13,14 @@ import { SITE_URL } from '../../lib/seo.js'
  *   3. Project-based packages (Food Photography, Brand Reel, Brand Film)
  *   4. Plan C portal differentiator (editorial mockup)
  *   5. Process - three-step "how we work"
- *   6. Charcoal CTA section ("Not sure which fits?")
+ *   6. Dark ink CTA section ("Not sure which fits?")
+ *
+ * Amp design system: white canvas painted on the page wrapper (the global
+ * body ground is not the amp ground), IBM Plex Sans throughout, hairline
+ * cards. Accents are rare - navy carries the Plan C thread (featured tier
+ * card + the portal section that justifies it), periwinkle marks the
+ * process numerals. Every other tier stays monochrome; that contrast IS
+ * the hierarchy signal, so nothing else on the page may take a colour.
  *
  * Each package CTA opens WhatsApp with a *package-specific* prefilled
  * message - qualifies the inbound so the conversation starts on the
@@ -52,7 +58,7 @@ const PROJECT_PACKAGES = [
     price: 8000,
     priceLabel: 'From ₹8,000',
     cadence: '/ reel',
-    blurb: 'A single 15–30 second reel - scripted, shot, and cut to convert scroll into engagement.',
+    blurb: 'A single 15-30 second reel - scripted, shot, and cut to convert scroll into engagement.',
     bullets: [
       'Concept, script, and storyboard',
       'Half-day shoot',
@@ -68,9 +74,9 @@ const PROJECT_PACKAGES = [
     price: 35000,
     priceLabel: 'From ₹35,000',
     cadence: '/ film',
-    blurb: 'A 1–2 minute hero film for your website, pitch deck, or ads. Cinematic, intentional, made to last.',
+    blurb: 'A 1-2 minute hero film for your website, pitch deck, or ads. Cinematic, intentional, made to last.',
     bullets: [
-      '1–2 min film, full concept development',
+      '1-2 min film, full concept development',
       'Multi-day shoot with scripted scenes',
       'Edit, colour grade, sound, motion',
       'Master + cutdowns for socials',
@@ -94,7 +100,7 @@ const MONTHLY_PLANS = [
     blurb: 'A reliable monthly cadence of content + community management for restaurants finding their voice.',
     bullets: [
       '9 photos + 3 reels per month',
-      '3–4 stories per week from shoot content',
+      '3-4 stories per week from shoot content',
       'Daily comment & DM replies (business hours)',
     ],
     bestFor: 'Restaurants establishing a consistent feed',
@@ -138,7 +144,7 @@ const MONTHLY_PLANS = [
 const PROCESS = [
   { n: '01', title: 'Brief',   detail: 'A short call (or WhatsApp) to align on scope, deliverables, and timelines.' },
   { n: '02', title: 'Shoot',   detail: 'Production day at your venue - set up, capture, on-the-spot review. Tight, fast, deliberate.' },
-  { n: '03', title: 'Deliver', detail: 'Edited files in 5–7 working days. Two rounds of revisions within the scope.' },
+  { n: '03', title: 'Deliver', detail: 'Edited files in 5-7 working days. Two rounds of revisions within the scope.' },
 ]
 
 export async function generateMetadata() {
@@ -180,54 +186,58 @@ const buildOffersJsonLd = () => ({
   })),
 })
 
-function PackageCard({ pkg }) {
+/* `featured` is purely a styling flag - the recommended tier gets the
+   plan ladder's accent (navy hairline, navy figures, elevation) and every
+   other card stays flat monochrome. Colour is doing the ranking here, so
+   only ever one card in a grid may be featured. Navy is the ladder's
+   accent only; the process section below carries its own (periwinkle). */
+function PackageCard({ pkg, featured = false }) {
   return (
     <div
-      className="flex flex-col h-full p-7 lg:p-9 border border-charcoal/10 transition-transform duration-300 hover:-translate-y-1"
-      style={{
-        background: '#FDFCFA',
-        boxShadow:
-          'inset 0 1px 0 rgba(255,255,255,0.7), 0 8px 28px rgba(26,26,26,0.06)',
-      }}
+      className={`flex flex-col h-full p-7 lg:p-9 rounded-[16px] bg-white border transition-transform duration-300 hover:-translate-y-1 ${
+        featured
+          ? 'border-amp-navy/30 shadow-[0_16px_40px_-16px_rgba(0,26,79,0.18)]'
+          : 'border-amp-hairline'
+      }`}
     >
-      <p className="text-[10px] tracking-[0.35em] uppercase text-charcoal/45 mb-4">
+      <p className={`text-[11px] font-semibold tracking-[0.08em] uppercase mb-4 ${featured ? 'text-amp-navy' : 'text-amp-caption'}`}>
         {pkg.category}
       </p>
-      <h3 className="font-display text-2xl lg:text-3xl font-bold text-charcoal leading-tight mb-3">
+      <h3 className="font-plex text-2xl lg:text-3xl font-semibold text-black leading-tight tracking-[-0.01em] mb-3">
         {pkg.title}
       </h3>
-      <p className="text-[14px] text-charcoal/60 leading-relaxed mb-6">
+      <p className="text-[14px] text-amp-body leading-relaxed mb-6">
         {pkg.blurb}
       </p>
 
       <div className="flex items-baseline gap-2 mb-6">
-        <span className="text-[9px] tracking-[0.3em] uppercase text-charcoal/40">From</span>
-        <span className="font-display text-3xl lg:text-4xl font-bold text-p2v leading-none">
+        <span className="text-[10px] font-semibold tracking-[0.08em] uppercase text-amp-caption">From</span>
+        <span className={`font-plex text-3xl lg:text-4xl font-semibold leading-none tracking-[-0.01em] ${featured ? 'text-amp-navy' : 'text-black'}`}>
           ₹{pkg.price.toLocaleString('en-IN')}
         </span>
-        <span className="text-[11px] text-charcoal/45">{pkg.cadence}</span>
+        <span className="text-[11px] text-amp-caption">{pkg.cadence}</span>
       </div>
 
       <ul className="space-y-2.5 mb-7 flex-1">
         {pkg.bullets.map((b) => (
-          <li key={b} className="flex gap-2.5 text-[14px] text-charcoal/70 leading-relaxed">
-            <span className="text-p2v leading-relaxed flex-shrink-0">→</span>
+          <li key={b} className="flex gap-2.5 text-[14px] text-amp-body leading-relaxed">
+            <span className={`leading-relaxed flex-shrink-0 ${featured ? 'text-amp-navy' : 'text-amp-caption'}`}>→</span>
             <span>{b}</span>
           </li>
         ))}
       </ul>
 
-      <div className="pt-5 mt-auto border-t border-charcoal/10">
-        <p className="text-[11px] tracking-[0.1em] uppercase text-charcoal/40 mb-4">
-          Best for: <span className="text-charcoal/60 normal-case tracking-normal">{pkg.bestFor}</span>
+      <div className="pt-5 mt-auto border-t border-amp-hairline">
+        <p className="text-[11px] font-semibold tracking-[0.08em] uppercase text-amp-caption mb-4">
+          Best for: <span className="text-amp-body font-normal normal-case tracking-normal">{pkg.bestFor}</span>
         </p>
         <a
           href={waLink(pkg.wa)}
           target="_blank"
           rel="noopener noreferrer"
-          className="w-full flex items-center justify-between px-5 py-3 bg-charcoal text-cream hover:bg-p2v transition-colors"
+          className="w-full flex items-center justify-between px-5 py-3 rounded-full bg-amp-ink-pill text-white hover:bg-black transition-colors"
         >
-          <span className="text-[10px] tracking-[0.2em] uppercase font-medium">Discuss this package</span>
+          <span className="text-[13px] font-semibold">Discuss this package</span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
                stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
             <line x1="7" y1="17" x2="17" y2="7" />
@@ -241,7 +251,7 @@ function PackageCard({ pkg }) {
 
 export default function PackagesPage() {
   return (
-    <div className="pt-16">
+    <div className="pt-16 bg-white">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(buildOffersJsonLd()) }}
@@ -261,20 +271,24 @@ export default function PackagesPage() {
       <section className="py-12 lg:py-20 px-5 md:px-10 lg:px-20">
         <div className="max-w-7xl mx-auto">
           <div className="mb-12">
-            <p className="text-[10px] tracking-[0.35em] uppercase text-charcoal/45 mb-4">
+            <p className="flex items-center gap-2 text-[13px] font-semibold tracking-[0.08em] uppercase text-amp-caption mb-5">
+              <span className="w-1.5 h-1.5 rounded-full bg-amp-navy" />
               Monthly plans
             </p>
-            <h2 className="font-display text-3xl lg:text-4xl font-bold text-charcoal leading-tight max-w-2xl">
+            <h2 className="font-plex text-3xl lg:text-4xl font-semibold text-black leading-[1.08] tracking-[-0.01em] max-w-2xl">
               Three ways to grow.
             </h2>
-            <p className="mt-4 text-charcoal/50 italic text-sm lg:text-base max-w-2xl leading-relaxed">
+            <p className="mt-4 text-amp-body text-sm lg:text-base max-w-2xl leading-relaxed">
               Pick one bundle a month - content cadence, reputation, and
               strategy scale together as you climb tiers.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Plan C is the recommended tier and the only accented card in
+                the ladder - it is also the one the portal section below
+                exists to justify. */}
             {MONTHLY_PLANS.map((p) => (
-              <PackageCard key={p.title} pkg={p} />
+              <PackageCard key={p.title} pkg={p} featured={p.category === 'Plan C'} />
             ))}
           </div>
         </div>
@@ -286,13 +300,16 @@ export default function PackagesPage() {
       <section className="py-16 lg:py-24 px-5 md:px-10 lg:px-20">
         <div className="max-w-7xl mx-auto">
           <div className="mb-12">
-            <p className="text-[10px] tracking-[0.35em] uppercase text-charcoal/45 mb-4">
+            {/* No featured card here - one-off packages are alternatives,
+                not a ladder, so the whole grid stays monochrome. */}
+            <p className="flex items-center gap-2 text-[13px] font-semibold tracking-[0.08em] uppercase text-amp-caption mb-5">
+              <span className="w-1.5 h-1.5 rounded-full bg-black" />
               Project-based
             </p>
-            <h2 className="font-display text-3xl lg:text-4xl font-bold text-charcoal leading-tight max-w-2xl">
+            <h2 className="font-plex text-3xl lg:text-4xl font-semibold text-black leading-[1.08] tracking-[-0.01em] max-w-2xl">
               One-off shoots, one-off films.
             </h2>
-            <p className="mt-4 text-charcoal/50 italic text-sm lg:text-base max-w-2xl leading-relaxed">
+            <p className="mt-4 text-amp-body text-sm lg:text-base max-w-2xl leading-relaxed">
               Starting figures - scope shapes the final quote. Every project includes
               production, post, and revisions within scope.
             </p>
@@ -314,39 +331,42 @@ export default function PackagesPage() {
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
             <div className="lg:col-span-4">
-              <p className="text-[10px] tracking-[0.35em] uppercase text-charcoal/45 mb-4">
+              {/* Same navy as the featured Plan C card above, so the tier
+                  and its differentiator read as one thread. */}
+              <p className="flex items-center gap-2 text-[13px] font-semibold tracking-[0.08em] uppercase text-amp-caption mb-5">
+                <span className="w-1.5 h-1.5 rounded-full bg-amp-navy" />
                 Inside Plan C
               </p>
-              <h2 className="font-display text-3xl lg:text-4xl font-bold text-charcoal leading-tight mb-5">
+              <h2 className="font-plex text-3xl lg:text-4xl font-semibold text-black leading-[1.08] tracking-[-0.01em] mb-5">
                 A private portal.
                 <br />
-                <em className="not-italic text-p2v">Not a Drive folder.</em>
+                <em className="not-italic text-black">Not a Drive folder.</em>
               </h2>
-              <p className="text-charcoal/60 leading-relaxed text-[15px] mb-8">
+              <p className="text-amp-body leading-relaxed text-[15px] mb-8">
                 Plan C clients get a dedicated workspace on
                 clients.p2vlabs.in. Every shoot, every deliverable, every
                 approval lives in one place - no version sprawl, no chasing
                 files in WhatsApp threads.
               </p>
-              <ul className="space-y-3 border-t border-charcoal/15 pt-6">
-                <li className="flex items-start gap-3 text-[14px] text-charcoal/70 leading-relaxed">
-                  <span className="text-p2v flex-shrink-0">→</span>
+              <ul className="space-y-3 border-t border-amp-hairline pt-6">
+                <li className="flex items-start gap-3 text-[14px] text-amp-body leading-relaxed">
+                  <span className="text-amp-navy flex-shrink-0">→</span>
                   <span>
-                    <em className="not-italic text-charcoal font-medium">Asset library.</em>{' '}
+                    <em className="not-italic text-black font-semibold">Asset library.</em>{' '}
                     High-res downloads, available anytime.
                   </span>
                 </li>
-                <li className="flex items-start gap-3 text-[14px] text-charcoal/70 leading-relaxed">
-                  <span className="text-p2v flex-shrink-0">→</span>
+                <li className="flex items-start gap-3 text-[14px] text-amp-body leading-relaxed">
+                  <span className="text-amp-navy flex-shrink-0">→</span>
                   <span>
-                    <em className="not-italic text-charcoal font-medium">One-click approvals.</em>{' '}
+                    <em className="not-italic text-black font-semibold">One-click approvals.</em>{' '}
                     Review and sign-off in seconds, synced to WhatsApp.
                   </span>
                 </li>
-                <li className="flex items-start gap-3 text-[14px] text-charcoal/70 leading-relaxed">
-                  <span className="text-p2v flex-shrink-0">→</span>
+                <li className="flex items-start gap-3 text-[14px] text-amp-body leading-relaxed">
+                  <span className="text-amp-navy flex-shrink-0">→</span>
                   <span>
-                    <em className="not-italic text-charcoal font-medium">Single source of truth.</em>{' '}
+                    <em className="not-italic text-black font-semibold">Single source of truth.</em>{' '}
                     Shoot schedule, revisions, and status in one view.
                   </span>
                 </li>
@@ -366,23 +386,26 @@ export default function PackagesPage() {
       <section className="py-16 lg:py-24 px-5 md:px-10 lg:px-20">
         <div className="max-w-7xl mx-auto">
           <div className="mb-12">
-            <p className="text-[10px] tracking-[0.35em] uppercase text-charcoal/45 mb-4">
+            <p className="flex items-center gap-2 text-[13px] font-semibold tracking-[0.08em] uppercase text-amp-caption mb-5">
+              <span className="w-1.5 h-1.5 rounded-full bg-amp-periwinkle" />
               How we work
             </p>
-            <h2 className="font-display text-3xl lg:text-4xl font-bold text-charcoal leading-tight max-w-2xl">
+            <h2 className="font-plex text-3xl lg:text-4xl font-semibold text-black leading-[1.08] tracking-[-0.01em] max-w-2xl">
               Brief. Shoot. Deliver.
             </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
             {PROCESS.map((step) => (
-              <div key={step.n} className="border-t border-charcoal/15 pt-6">
-                <p className="font-display text-3xl font-bold text-p2v/30 mb-3 leading-none">
+              <div key={step.n} className="border-t border-amp-hairline pt-6">
+                {/* Periwinkle is this section's own accent - kept off navy so
+                    the process steps never read as a fourth pricing tier. */}
+                <p className="font-plex text-3xl font-semibold text-amp-periwinkle mb-3 leading-none tracking-[-0.01em]">
                   {step.n}
                 </p>
-                <h3 className="font-display text-xl font-bold text-charcoal mb-3">
+                <h3 className="font-plex text-xl font-semibold text-black mb-3">
                   {step.title}
                 </h3>
-                <p className="text-[14px] text-charcoal/60 leading-relaxed">
+                <p className="text-[14px] text-amp-body leading-relaxed">
                   {step.detail}
                 </p>
               </div>
@@ -391,29 +414,34 @@ export default function PackagesPage() {
         </div>
       </section>
 
-      {/* Closing CTA - charcoal section for emphasis */}
-      <section className="py-16 lg:py-24 px-5 md:px-10 lg:px-20 bg-charcoal">
+      {/* Closing CTA - dark ink section for emphasis. Deliberately the one
+          fully monochrome block on the page: the accents already did their
+          work above, and the inversion is emphasis enough here. */}
+      <section className="py-16 lg:py-24 px-5 md:px-10 lg:px-20 bg-amp-ink-pill">
         <div className="max-w-4xl mx-auto text-center">
-          <p className="text-[10px] tracking-[0.4em] uppercase text-cream/40 mb-6">
+          <p className="flex items-center justify-center gap-2 text-[13px] font-semibold tracking-[0.08em] uppercase text-white/55 mb-6">
+            <span className="w-1.5 h-1.5 rounded-full bg-white/40" />
             Not sure which fits?
           </p>
-          <h2 className="font-display text-3xl lg:text-5xl font-bold text-cream leading-tight mb-8">
+          <h2 className="font-plex text-3xl lg:text-5xl font-semibold text-white leading-[1.08] tracking-[-0.01em] mb-8">
             Send the brief.
             <br />
-            <em className="not-italic text-p2v">We'll shape the rest.</em>
+            <em className="not-italic text-white">We'll shape the rest.</em>
           </h2>
-          <p className="text-cream/60 leading-relaxed text-[15px] max-w-xl mx-auto mb-10">
+          <p className="text-white/70 leading-relaxed text-[15px] max-w-xl mx-auto mb-10">
             Hybrid scopes, multi-deliverable projects, brand systems - talk to us
             and we'll quote against what you actually need.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
+            {/* primary CTA, inverted - on the ink ground the near-black pill
+                would vanish, so white carries the fill instead. */}
             <a
               href={waLink('Hi P2V Labs, I’d like to discuss a project that doesn’t quite fit your standard packages. Can we talk?')}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex-1 flex items-center justify-between px-6 py-4 bg-p2v text-cream hover:bg-cream hover:text-charcoal transition-colors"
+              className="flex-1 flex items-center justify-between px-6 py-4 rounded-full bg-white text-black hover:bg-white/90 transition-colors"
             >
-              <span className="text-xs tracking-[0.15em] uppercase font-medium">WhatsApp</span>
+              <span className="text-[14px] font-semibold">WhatsApp</span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
                    stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="7" y1="17" x2="17" y2="7" />
@@ -422,9 +450,9 @@ export default function PackagesPage() {
             </a>
             <a
               href="mailto:hello@p2vlabs.in?subject=Project%20inquiry"
-              className="flex-1 flex items-center justify-between px-6 py-4 border border-cream/25 text-cream hover:border-cream transition-colors"
+              className="flex-1 flex items-center justify-between px-6 py-4 rounded-full border border-white/25 text-white hover:border-white transition-colors"
             >
-              <span className="text-xs tracking-[0.15em] uppercase font-medium">Email</span>
+              <span className="text-[14px] font-semibold">Email</span>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
                    stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                 <line x1="7" y1="17" x2="17" y2="7" />
@@ -435,7 +463,6 @@ export default function PackagesPage() {
         </div>
       </section>
 
-      <Footer />
     </div>
   )
 }

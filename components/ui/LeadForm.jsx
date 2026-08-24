@@ -11,8 +11,8 @@ const SERVICES = [
 
 const BUDGETS = [
   { id: 'under-50k', label: 'Under ₹50K' },
-  { id: '50k-1l',    label: '₹50K – ₹1L' },
-  { id: '1l-3l',     label: '₹1L – ₹3L' },
+  { id: '50k-1l',    label: '₹50K - ₹1L' },
+  { id: '1l-3l',     label: '₹1L - ₹3L' },
   { id: '3l-plus',   label: '₹3L+' },
   { id: 'discuss',   label: 'Open to discuss' },
 ]
@@ -20,7 +20,7 @@ const BUDGETS = [
 const TIMELINES = [
   { id: 'asap',         label: 'ASAP' },
   { id: 'within-month', label: 'Within a month' },
-  { id: '1-3-months',   label: '1–3 months' },
+  { id: '1-3-months',   label: '1-3 months' },
   { id: 'flexible',     label: 'Flexible' },
 ]
 
@@ -66,31 +66,36 @@ export default function LeadForm({ source = 'unknown', defaultServices = [], onS
 
   if (done) {
     return (
-      <div className="text-center py-10 md:py-14">
-        <p className="text-[10px] tracking-[0.4em] uppercase text-charcoal/40 mb-4">
+      <div className="font-plex text-center py-10 md:py-14">
+        <p className="flex items-center justify-center gap-2 text-[13px] font-semibold tracking-[0.08em] uppercase text-amp-caption mb-4">
+          <span className="w-1.5 h-1.5 rounded-full bg-amp-navy" />
           Brief received
         </p>
-        <p className="font-display text-3xl md:text-4xl font-bold text-charcoal mb-5">
+        <p className="text-3xl md:text-4xl font-semibold tracking-[-0.01em] text-black mb-5">
           Thanks{name ? `, ${name.split(' ')[0]}` : ''}.
         </p>
-        <p className="text-charcoal/55 max-w-md mx-auto leading-relaxed">
-          One of us will be in touch at <strong className="text-charcoal">{email}</strong> within 24 hours.
+        <p className="text-amp-body max-w-md mx-auto leading-relaxed">
+          One of us will be in touch at <strong className="text-black font-semibold">{email}</strong> within 24 hours.
         </p>
       </div>
     )
   }
 
   const inputCls =
-    'w-full border border-charcoal/15 px-3 py-3 text-sm bg-transparent focus:outline-none focus:border-charcoal transition-colors placeholder-charcoal/35'
+    'w-full rounded-md border border-amp-hairline px-3.5 py-3 text-sm bg-transparent focus:outline-none focus:border-black transition-colors placeholder-amp-caption/70'
+  /* Selectable chips: active reads as the near-black pill used for every
+     primary action in the amp system, inactive as a plain hairline
+     outline - so "chosen" is a fill, never a colour. */
   const chipCls = (active) =>
-    `px-4 py-2 text-[10px] tracking-[0.15em] uppercase font-medium border transition-colors ${
+    `px-4 py-2 rounded-md text-[13px] font-medium border transition-colors ${
       active
-        ? 'bg-charcoal text-cream border-charcoal'
-        : 'border-charcoal/18 text-charcoal/55 hover:border-charcoal/40 hover:text-charcoal'
+        ? 'bg-amp-ink-pill text-white border-amp-ink-pill'
+        : 'border-amp-hairline text-amp-body hover:border-black/40 hover:text-black'
     }`
+  const groupLabelCls = 'text-[13px] font-semibold tracking-[0.08em] uppercase text-amp-caption mb-3'
 
   return (
-    <form onSubmit={onSubmit} className="space-y-7">
+    <form onSubmit={onSubmit} className="font-plex space-y-7">
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <input  type="text"  value={name}     onChange={(e) => setName(e.target.value)}     placeholder="Your name *"        required maxLength={120} className={inputCls} />
@@ -100,7 +105,7 @@ export default function LeadForm({ source = 'unknown', defaultServices = [], onS
       </div>
 
       <div>
-        <p className="text-[10px] tracking-[0.2em] uppercase text-charcoal/40 mb-3">What do you need?</p>
+        <p className={groupLabelCls}>What do you need?</p>
         <div className="flex flex-wrap gap-2">
           {SERVICES.map((s) => (
             <button key={s.id} type="button" onClick={() => toggleService(s.id)} className={chipCls(services.includes(s.id))}>
@@ -111,7 +116,7 @@ export default function LeadForm({ source = 'unknown', defaultServices = [], onS
       </div>
 
       <div>
-        <p className="text-[10px] tracking-[0.2em] uppercase text-charcoal/40 mb-3">Budget range</p>
+        <p className={groupLabelCls}>Budget range</p>
         <div className="flex flex-wrap gap-2">
           {BUDGETS.map((b) => (
             <button key={b.id} type="button" onClick={() => setBudget(b.id)} className={chipCls(budget === b.id)}>
@@ -122,7 +127,7 @@ export default function LeadForm({ source = 'unknown', defaultServices = [], onS
       </div>
 
       <div>
-        <p className="text-[10px] tracking-[0.2em] uppercase text-charcoal/40 mb-3">Timeline</p>
+        <p className={groupLabelCls}>Timeline</p>
         <div className="flex flex-wrap gap-2">
           {TIMELINES.map((t) => (
             <button key={t.id} type="button" onClick={() => setTimeline(t.id)} className={chipCls(timeline === t.id)}>
@@ -133,26 +138,28 @@ export default function LeadForm({ source = 'unknown', defaultServices = [], onS
       </div>
 
       <div>
-        <p className="text-[10px] tracking-[0.2em] uppercase text-charcoal/40 mb-3">Tell us about your project</p>
+        <p className={groupLabelCls}>Tell us about your project</p>
         <textarea
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           rows={5}
           maxLength={4000}
           placeholder="What are you shooting? What's the goal? Any references? The more we know, the better the first reply."
-          className="w-full border border-charcoal/15 px-3 py-3 text-sm bg-transparent focus:outline-none focus:border-charcoal transition-colors placeholder-charcoal/35 leading-relaxed resize-y"
+          className="w-full rounded-md border border-amp-hairline px-3.5 py-3 text-sm bg-transparent focus:outline-none focus:border-black transition-colors placeholder-amp-caption/70 leading-relaxed resize-y"
         />
       </div>
 
+      {/* Validation/save failure stays semantically red - error is not a
+          brand accent, so it never picks up one of the amp accent hues. */}
       {error && (
-        <p className="text-p2v text-sm">{error}</p>
+        <p className="text-[#b3261e] text-sm">{error}</p>
       )}
 
       <div className="flex flex-col sm:flex-row gap-3 sm:items-center">
         <button
           type="submit"
           disabled={submitting || !name.trim() || !email.trim()}
-          className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-p2v text-cream text-[10px] tracking-[0.2em] uppercase font-medium hover:bg-charcoal transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+          className="inline-flex items-center justify-center gap-3 h-14 px-7 rounded-full bg-amp-ink-pill text-white text-base font-semibold hover:bg-black transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
         >
           {submitting ? 'Sending…' : 'Send Brief'}
           {!submitting && (
@@ -162,8 +169,8 @@ export default function LeadForm({ source = 'unknown', defaultServices = [], onS
             </svg>
           )}
         </button>
-        <p className="text-[11px] text-charcoal/40 leading-relaxed">
-          Or email <a href="mailto:hello@p2vlabs.in" className="text-charcoal underline underline-offset-2">hello@p2vlabs.in</a> directly.
+        <p className="text-[12px] text-amp-caption leading-relaxed">
+          Or email <a href="mailto:hello@p2vlabs.in" className="text-black underline underline-offset-2">hello@p2vlabs.in</a> directly.
         </p>
       </div>
     </form>

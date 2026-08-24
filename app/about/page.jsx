@@ -1,5 +1,4 @@
 import AboutSection from '../../components/landing/AboutSection.jsx'
-import Footer from '../../components/layout/Footer.jsx'
 
 /** /about - SSG. Only rebuilds on deploy. */
 export const revalidate = false
@@ -21,7 +20,6 @@ export default function AboutPage() {
   return (
     <div className="pt-16">
       <AboutSection />
-      <Footer />
     </div>
   )
 }

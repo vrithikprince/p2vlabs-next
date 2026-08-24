@@ -14,6 +14,11 @@ import Icon from '../ui/Icon.jsx'
  * Why: avoids loading YouTube's ~600 KB player + setting tracking
  * cookies until the user actually engages. Better Core Web Vitals and
  * privacy.
+ *
+ * Amp system: rounded-[16px] tile on a hairline border, sitting in the
+ * same column slot the blog article's cover image occupies. The play
+ * button is the page's one accent moment - navy, matching the vlog card
+ * and the rest of the /vlog chrome.
  */
 export default function VlogPlayer({ youtubeId, title, thumbnailUrl, thumbnailAlt }) {
   const [playing, setPlaying] = useState(false)
@@ -21,7 +26,7 @@ export default function VlogPlayer({ youtubeId, title, thumbnailUrl, thumbnailAl
 
   return (
     <div
-      className="relative w-full overflow-hidden border border-charcoal/10 bg-charcoal"
+      className="relative w-full overflow-hidden rounded-[16px] border border-amp-hairline bg-amp-ink-pill"
       style={{ aspectRatio: '16/9' }}
     >
       {playing ? (
@@ -49,10 +54,10 @@ export default function VlogPlayer({ youtubeId, title, thumbnailUrl, thumbnailAl
               priority
             />
           )}
-          <div className="absolute inset-0 bg-charcoal/15 group-hover:bg-charcoal/5 transition-colors" />
+          <div className="absolute inset-0 bg-amp-ink-pill/15 group-hover:bg-amp-ink-pill/5 transition-colors" />
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-p2v/85 backdrop-blur flex items-center justify-center group-hover:scale-110 group-hover:bg-p2v transition-all shadow-2xl">
-              <Icon n="play" s={32} c="#F5F0E8" style={{ marginLeft: 4 }} />
+            <div className="w-20 h-20 md:w-24 md:h-24 rounded-full bg-amp-navy/85 backdrop-blur flex items-center justify-center group-hover:scale-110 group-hover:bg-amp-navy transition-all shadow-2xl">
+              <Icon n="play" s={32} c="#FFFFFF" style={{ marginLeft: 4 }} />
             </div>
           </div>
         </button>

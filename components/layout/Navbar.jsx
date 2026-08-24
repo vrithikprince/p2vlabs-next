@@ -7,9 +7,11 @@ import Logo from '../ui/Logo.jsx'
 import Icon from '../ui/Icon.jsx'
 
 /**
- * Public-site navbar. Same visual design as the Vite app - directional hover
- * effect, scroll-aware compact glass state, mobile menu. Differences from the
- * Vite version:
+ * Public-site navbar. Same behaviour as the Vite app - directional hover
+ * effect, scroll-aware compact glass state, mobile menu - but the type is on
+ * the amp system now (font-plex, sentence case, ~15px/500) rather than the old
+ * editorial small-caps idiom, so the chrome reads as one piece with the hero.
+ * Differences from the Vite version:
  *   - "Client Login" CTA points at clients.p2vlabs.in (private SPA subdomain)
  *     instead of an in-app /login route.
  *   - About + Packages entries route to standalone pages (/about, /packages)
@@ -71,8 +73,15 @@ export default function Navbar() {
   }
 
   return (
-    <nav className={`fixed top-0 inset-x-0 z-50 border-b border-charcoal/10 transition-all duration-300 ${
-      compact ? 'glass-nav' : 'bg-cream/95 backdrop-blur-sm'
+    /* font-plex sits on the root so the mobile sheet inherits it too - one
+       declaration instead of one per link.
+       The border width stays on in both states (so nothing shifts by a pixel
+       on scroll) but its colour goes transparent while compact: .glass-nav
+       paints its own `0 1px 0 rgba(213,217,224,.9)` rule, and stacking that
+       under the amp-hairline border read as a 2px line the moment you
+       scrolled. One hairline in both states, same #d5d9e0 either way. */
+    <nav className={`font-plex fixed top-0 inset-x-0 z-50 border-b transition-all duration-300 ${
+      compact ? 'glass-nav border-transparent' : 'bg-white/95 backdrop-blur-sm border-amp-hairline'
     }`}>
       <div className={`max-w-7xl mx-auto px-5 md:px-10 flex items-center justify-between transition-all duration-300 ${
         compact ? 'h-16 md:h-12' : 'h-16'
@@ -84,24 +93,30 @@ export default function Navbar() {
         {/* Desktop */}
         <div className="hidden md:flex items-center gap-7">
           {PRIMARY.map(({ id, label, path }) => (
+            /* type stays on the button, never on the two label spans - the
+               directional swap only reads right while .nav-text-in and
+               .nav-text-out measure identically. */
             <button
               key={id}
               onClick={() => go(path)}
               onMouseEnter={onEnter}
               onMouseLeave={onLeave}
-              className={`nav-dir-link relative text-xs tracking-[0.15em] uppercase font-medium pb-0.5 border-b transition-colors overflow-hidden ${
+              className={`nav-dir-link relative text-[15px] font-medium pb-0.5 border-b transition-colors overflow-hidden ${
                 isActive(id, path)
-                  ? 'border-p2v text-p2v'
-                  : 'border-transparent text-charcoal/60 hover:text-charcoal hover:border-charcoal/30'
+                  ? 'border-black text-black'
+                  : 'border-transparent text-amp-caption hover:text-black hover:border-black/30'
               }`}
             >
               <span className="nav-text-out block">{label}</span>
               <span className="nav-text-in absolute inset-0 flex items-center justify-center opacity-0">{label}</span>
             </button>
           ))}
-          <div className="w-px h-4 bg-charcoal/15" />
+          <div className="w-px h-4 bg-amp-hairline-strong" />
+          {/* pill shape + ink fill are already on-system; only the label idiom
+              changes, a notch smaller and heavier than the links so it still
+              reads as the CTA without shouting in caps. */}
           <a href={CLIENT_LOGIN_URL}
-            className="text-xs tracking-[0.15em] uppercase px-5 py-2.5 bg-charcoal text-cream font-medium hover:bg-p2v transition-colors">
+            className="text-sm font-semibold px-5 py-2.5 rounded-full bg-amp-ink-pill text-white hover:bg-black transition-colors">
             Client Login
           </a>
         </div>
@@ -114,20 +129,20 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {open && (
-        <div className="md:hidden bg-cream border-t border-charcoal/10 px-5 py-6 space-y-1">
+        <div className="md:hidden bg-white border-t border-amp-hairline px-5 py-6 space-y-1">
           {PRIMARY.map(({ id, label, path }) => (
             <button
               key={id}
               onClick={() => go(path)}
-              className="block w-full text-left py-3 text-sm font-medium text-charcoal/70 hover:text-p2v transition-colors"
+              className="block w-full text-left py-3 text-[15px] font-medium text-amp-caption hover:text-black transition-colors"
             >
               {label}
             </button>
           ))}
-          <div className="pt-3 mt-3 border-t border-charcoal/10">
+          <div className="pt-3 mt-3 border-t border-amp-hairline">
             <a href={CLIENT_LOGIN_URL}
               onClick={() => setOpen(false)}
-              className="block w-full mt-1 py-3 bg-charcoal text-cream text-xs tracking-[0.15em] uppercase font-medium hover:bg-p2v transition-colors text-center">
+              className="block w-full mt-1 py-3 rounded-full bg-amp-ink-pill text-white text-sm font-semibold hover:bg-black transition-colors text-center">
               Client Login
             </a>
           </div>
