@@ -70,7 +70,7 @@ export default async function VlogPost({ params }) {
     publisher: {
       '@type': 'Organization',
       name:    'P2V Labs',
-      logo:    { '@type': 'ImageObject', url: `${SITE_URL}/og-image.jpg` },
+      logo:    { '@type': 'ImageObject', url: `${SITE_URL}/icon.png` },
     },
     mainEntityOfPage: {
       '@type': 'WebPage',

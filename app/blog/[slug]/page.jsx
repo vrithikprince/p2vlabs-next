@@ -46,7 +46,7 @@ export default async function BlogPost({ params }) {
       name:    'P2V Labs',
       logo: {
         '@type': 'ImageObject',
-        url:     `${SITE_URL}/og-image.jpg`,
+        url:     `${SITE_URL}/icon.png`,
       },
     },
     mainEntityOfPage: {
