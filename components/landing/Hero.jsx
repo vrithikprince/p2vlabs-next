@@ -18,8 +18,8 @@ const ROTATOR_WORDS = ['found.', 'recommended by AI.', 'booked.', 'retained.']
    headline on wide screens, an inline strip everywhere else. Sharing one
    source stops the two from drifting apart.
 
-   `side` + FLANK_OFFSET position each chip against the TEXT COLUMN rather
-   than the viewport (see the markup), `top` is its vertical slot, and the
+   `side` picks which flank a chip sits on (see the FLOAT_MQ block for how that
+   resolves to a position at each width), `top` is its vertical slot, and the
    float/depth values give each one its own drift so the cluster never bobs
    in lockstep. */
 const CHIPS = [
@@ -29,16 +29,38 @@ const CHIPS = [
   { id: 'ret',   side: 'right', top: '30%', tone: 'light', badge: '90%',    short: 'Clients return', long: 'Clients return for more',  amp: 11, dur: 3.4, rot: -2,   depth: 18 },
 ]
 
-/* Half the text column (max-w-4xl = 896px) plus a 16px gutter. A chip's inner
-   edge lands exactly here, so it sits just outside the column at EVERY width
-   and cannot overlap the headline by construction. */
-const FLANK_OFFSET = 'calc(50% + 464px)'
+/* How far a chip's INNER edge sits from the centre line. All numbers measured
+   with Playwright against the real page, 1100 -> 2560:
 
-/* Below this the flanking chips have nowhere to go: 896px of column plus a
-   ~184px chip and breathing room on each side needs about 1360px. Under it
-   they are replaced by the inline strip. Kept in one place because the CSS
-   and the GSAP gate below have to agree. */
-const FLOAT_MQ = '(min-width: 1360px)'
+     widest headline LINE    679px  - constant at every width, because the
+                                      wrap never changes. A fixed constraint.
+     widest chip             201px
+     min offset (clear text) 679/2 + 16 = 356px
+     max offset (stay on screen, allowing ~15px for a scrollbar)
+                             50vw - 201 - 24 ~= 50vw - 224px
+     preferred offset        464px = half the max-w-4xl column (896/2) + a
+                             16px gutter, so on a wide monitor the chips stay
+                             tied to the content instead of drifting to the
+                             far edges
+
+   clamp() picks whichever applies, which makes one continuous curve: pinned
+   near the viewport edge at 1150, easing outward as the window grows, locked
+   to the column from ~1376 up. No breakpoint, so no jump anywhere.
+
+   This replaced a flat 464px gated at 1360px. 464 was derived from the column
+   BOX rather than the 679px of actual text, so it hid the chips outright on
+   every 1280- and 1366-wide laptop - most of them - to protect ~210px of
+   headroom that was never needed. A two-regime version of this fix was tried
+   first and rejected: edge-pinning below the breakpoint converges only for
+   the WIDEST chip, so the narrower right-hand ones jumped ~45px at the
+   boundary. */
+const FLANK_OFFSET = 'calc(50% + clamp(356px, 50vw - 224px, 464px))'
+
+/* Below this the chips cannot clear the headline at all, and the inline strip
+   in the text column takes over. Repeated as a Tailwind `min-[1150px]:`
+   variant in the markup - Tailwind scans source statically, so it cannot be
+   interpolated from here. Change one, change both. */
+const FLOAT_MQ = '(min-width: 1150px)'
 
 /**
  * Hero - full Amplitude-inspired design system (see tailwind.config.js's
@@ -331,7 +353,7 @@ export default function Hero() {
             doing on phones (three of four overlapped at 390px). Sits below
             the CTAs rather than above the headline so it costs no
             above-the-fold height on a phone. */}
-        <ul className="hero-tagline min-[1360px]:hidden mt-8 flex flex-wrap items-center justify-center gap-2 will-anim">
+        <ul className="hero-tagline min-[1150px]:hidden mt-8 flex flex-wrap items-center justify-center gap-2 will-anim">
           {CHIPS.map((c) => (
             <li
               key={c.id}
@@ -348,25 +370,21 @@ export default function Hero() {
         </ul>
       </div>
 
-      {/* Floating proof chips.
+      {/* Floating proof chips. See the FLOAT_MQ block up top for the measured
+          geometry; the short version is that these used to sit at viewport
+          percentages (left-[15%]) while the headline is a centred column, so
+          narrowing the window slid them under the text - at 1440 two of four
+          overlapped, at 1280 three of four.
 
-          Positioned against the TEXT COLUMN, not the viewport. They used to
-          sit at viewport percentages (left-[15%]) while the headline is a
-          fixed 896px centred column - so as the window narrowed the chips
-          slid underneath the text instead of staying beside it. Measured: at
-          1440 two of four overlapped the headline, at 1280 three of four;
-          only 1920 ever looked right. FLANK_OFFSET pins each chip's inner
-          edge exactly 16px outside the column at every width, so overlap is
-          impossible by construction rather than by tuning.
-
-          They also need room to exist at all, hence FLOAT_MQ. Below it the
-          same four facts render as the inline strip up in the text column -
-          which is what closes the old 1024-1280 dead zone, where a wide
-          desktop window was being served tiny edge-pinned mobile chips. */}
+          Now: pinned to the viewport edge from 1150px, handed off to the
+          column (464px from centre) at 1360px where there is finally room for
+          it. Overlap is prevented by construction in both regimes rather than
+          by tuning. Below 1150px the same four facts render as the inline
+          strip up in the text column. */}
       {CHIPS.map((c) => (
         <div
           key={c.id}
-          className={`hero-chip select-none hidden min-[1360px]:flex absolute items-center rounded-full backdrop-blur-md ${
+          className={`hero-chip select-none hidden min-[1150px]:flex absolute items-center rounded-full backdrop-blur-md ${
             c.tone === 'dark'
               ? 'bg-amp-ink-pill/85 border border-white/10 shadow-[0_10px_30px_-8px_rgba(26,31,35,0.35)]'
               : 'bg-white/60 border border-white/70 shadow-[0_10px_30px_-8px_rgba(26,31,35,0.18)]'
