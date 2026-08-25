@@ -178,6 +178,68 @@ const TOPICS = [
       'Personal post about the choice of city. Why we picked Ahmedabad over Mumbai/Bangalore - proximity to underserved local brands, cost structure that lets us shoot more for less, and a creative scene that\'s finding its voice. Walk through what shooting in Ahmedabad gives clients (faster turnaround, on-site presence, cheaper logistics) vs Mumbai. Founder voice. Ends with a soft positioning note that we\'re building from here for the long term.',
     voice: 'founder',
   },
+
+  /* ── GenAI series (added 2026-08-25) ──────────────────────────────
+     Positions P2V Labs on the GenAI / AI-visibility front alongside the
+     production work, which the site now sells but had no written proof
+     of. All founder voice, all Vrithik, and dated across the last few
+     weeks rather than all at once so the run reads as a cadence rather
+     than a content dump.
+
+     The angles lean on things we have actually done - our own site
+     ranking, being cited in AI answers, the automations we run
+     internally. That is deliberate: an agency writing speculatively
+     about AI is noise, an agency writing about what it shipped is
+     evidence. It is also what makes these citable by the AI answers
+     they are about. */
+  {
+    n: 11,
+    title: 'How We Got P2V Labs Recommended by ChatGPT (and What Actually Moved It)',
+    slug: 'how-we-got-recommended-by-chatgpt',
+    author: 'Vrithik Prince',
+    publishAt: '2026-08-04T10:00:00+05:30',
+    imageSearchTerms: ['artificial intelligence interface', 'search engine screen', 'laptop analytics dashboard'],
+    primaryKeywords: ['AEO', 'answer engine optimisation', 'cited by ChatGPT', 'AI search visibility'],
+    angle:
+      'First-person case study, our own site as the subject. A client told us he found us because ChatGPT suggested us, and we went and worked out why. Cover what actually contributes: unambiguous entity data (Organization and LocalBusiness schema, consistent name and aliases, matching NAP), FAQ content shaped as real question and answer pairs rather than marketing prose, and third-party corroboration so a model sees more than one source agreeing. Be honest that some of it is not fully attributable and that nobody can promise an AI citation. Explain the difference between SEO and AEO plainly for a business owner. Founder voice, specific, no hype.',
+    voice: 'founder',
+  },
+  {
+    n: 12,
+    title: 'AEO vs SEO: What Changes When Your Buyer Asks an AI Instead of Google',
+    slug: 'aeo-vs-seo-what-actually-changes',
+    author: 'Vrithik Prince',
+    publishAt: '2026-08-11T09:45:00+05:30',
+    imageSearchTerms: ['search results screen', 'digital marketing analytics', 'person using laptop search'],
+    primaryKeywords: ['AEO vs SEO', 'answer engine optimisation', 'AI search', 'SEO Ahmedabad'],
+    angle:
+      'Explainer for a non-technical business owner. Classic SEO competes for a click on a list of ten blue links; an answer engine returns one synthesised answer and cites a handful of sources, so the game shifts from ranking to being quotable. Practical implications: write content that answers a specific question in a self-contained way, keep structured data clean so the entity is unambiguous, get corroborated on sources outside your own domain, and accept that you will see fewer clicks per impression but better qualified ones. Say clearly that AEO does not replace SEO - the same content work feeds both. Use real query examples a restaurant or D2C brand in Ahmedabad might get asked.',
+    voice: 'founder',
+  },
+  {
+    n: 13,
+    title: 'The GenAI Workflows We Actually Run (and the Ones We Threw Away)',
+    slug: 'the-genai-workflows-we-actually-run',
+    author: 'Vrithik Prince',
+    publishAt: '2026-08-18T11:15:00+05:30',
+    imageSearchTerms: ['automation workflow diagram', 'developer workspace code', 'team working laptops'],
+    primaryKeywords: ['GenAI workflows', 'AI automation for business', 'content automation', 'GenAI development'],
+    angle:
+      'Honest operations post. What GenAI genuinely earns its place doing inside a two-person studio: first-draft captions and metadata that a human then rewrites, shot-list scaffolding, transcript to timestamped highlights, lead-response drafting, repetitive admin. Then the failures - anything client-facing generated end to end read as generic and had to be scrapped, and fully automated posting removed the judgement that made the work good. The rule we landed on: automate the setup and the cleanup, never the taste. Practical enough that a restaurant owner or D2C founder can copy one of the workflows. Founder voice, concrete, unglamorous.',
+    voice: 'founder',
+  },
+  {
+    n: 14,
+    title: 'GenAI for Small Businesses in Ahmedabad: Where It Pays Off and Where It Wastes Money',
+    slug: 'genai-for-small-businesses-in-ahmedabad',
+    author: 'Vrithik Prince',
+    publishAt: '2026-08-22T10:30:00+05:30',
+    imageSearchTerms: ['small business owner laptop', 'Ahmedabad shop storefront', 'restaurant owner working'],
+    primaryKeywords: ['GenAI for small business', 'AI automation Ahmedabad', 'AI for restaurants', 'GenAI development Ahmedabad'],
+    angle:
+      'Buyer-facing guide aimed at local restaurant, retail and D2C owners who keep being sold AI. Where it genuinely pays: responding to enquiries faster, drafting the boring half of a content calendar, turning one shoot into many formats, handling review replies. Where it wastes money: fully generated visuals for a brand that sells on craft, chatbots nobody maintains, tools bought before the process exists. Give a simple test for whether a task should be automated at all - is it repetitive, is it low-judgement, and would a human still check it. Mention that we build these for clients without turning the post into a pitch. Founder voice, plain language, Ahmedabad specifics.',
+    voice: 'founder',
+  },
 ]
 
 /* ─────────────────────────────────────────────
@@ -286,17 +348,23 @@ async function generateContent(t) {
 /* ─────────────────────────────────────────────
    COVER - typographic SVG cover, rendered to PNG via sharp.
 
-   Cream background, large Playfair (fallback Georgia) title, charcoal
-   text, single red hairline accent, "THE P2V JOURNAL" eyebrow, author
+   White canvas, large sans title in black, caption-grey supporting text,
+   a single violet hairline accent, "THE P2V JOURNAL" eyebrow, author
    byline + brand mark at the bottom. Editorial, brand-aligned, unique
    per post, no licensing risk.
+
+   Repainted for the amp design system: it was cream / Playfair / brand
+   red, which would have made every newly generated cover clash with the
+   site it sits on. A plain sans stack rather than Plex on purpose -
+   librsvg rasterises this from system fonts, and Plex is a webfont it
+   will not have.
 ───────────────────────────────────────────── */
 const COVER_W = 1600
 const COVER_H = 900
 
-/* Estimate average glyph width relative to font size for serif display
-   text. Playfair is roughly 0.52em average - varies by character but
-   close enough for our wrapping pass. */
+/* Estimate average glyph width relative to font size, for the manual
+   wrapping pass. ~0.52em held for Playfair and holds for the sans stack
+   that replaced it, so the wrap points did not need retuning. */
 const GLYPH_RATIO = 0.52
 
 function wrapTitle(title, fontSize, maxWidth) {
@@ -352,21 +420,21 @@ function buildCoverSvg(t) {
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="${COVER_W}" height="${COVER_H}" viewBox="0 0 ${COVER_W} ${COVER_H}">
-  <rect width="${COVER_W}" height="${COVER_H}" fill="#F5F0E8"/>
+  <rect width="${COVER_W}" height="${COVER_H}" fill="#ffffff"/>
 
   <!-- Hairline accent -->
-  <line x1="${PAD_X}" y1="160" x2="${PAD_X + 110}" y2="160" stroke="#c0392b" stroke-width="2"/>
+  <line x1="${PAD_X}" y1="160" x2="${PAD_X + 110}" y2="160" stroke="#a273ff" stroke-width="2"/>
 
   <!-- Eyebrow -->
-  <text x="${PAD_X}" y="200" fill="#1a1a1a" fill-opacity="0.45"
+  <text x="${PAD_X}" y="200" fill="#565656"
         font-family="Inter, Helvetica, Arial, sans-serif" font-size="22"
         font-weight="500" letter-spacing="7">
     THE P2V JOURNAL
   </text>
 
   <!-- Title (manually wrapped) -->
-  <g font-family="Playfair Display, Georgia, 'Times New Roman', serif"
-     font-weight="700" fill="#1a1a1a" font-size="${fontSize}">
+  <g font-family="Segoe UI, Arial, Helvetica, sans-serif"
+     font-weight="600" fill="#000000" font-size="${fontSize}">
 ${lines
   .map(
     (line, i) =>
@@ -376,21 +444,21 @@ ${lines
   </g>
 
   <!-- Author + date (bottom-left) -->
-  <text x="${PAD_X}" y="${COVER_H - 100}" fill="#1a1a1a" fill-opacity="0.55"
+  <text x="${PAD_X}" y="${COVER_H - 100}" fill="#565656"
         font-family="Inter, Helvetica, Arial, sans-serif" font-size="22" letter-spacing="4">
     ${escapeXml(t.author.toUpperCase())}  ·  ${escapeXml(dateStr.toUpperCase())}
   </text>
 
   <!-- P2V Labs mark (bottom-right) -->
   <text x="${COVER_W - PAD_X}" y="${COVER_H - 100}" text-anchor="end"
-        fill="#c0392b" font-family="Playfair Display, Georgia, serif"
-        font-style="italic" font-weight="700" font-size="28">
+        fill="#a273ff" font-family="Segoe UI, Arial, Helvetica, sans-serif"
+        font-weight="600" font-size="28">
     P2V Labs
   </text>
 
   <!-- Bottom hairline -->
   <line x1="${PAD_X}" y1="${COVER_H - 70}" x2="${COVER_W - PAD_X}" y2="${COVER_H - 70}"
-        stroke="#1a1a1a" stroke-opacity="0.12" stroke-width="1"/>
+        stroke="#d5d9e0" stroke-width="1"/>
 </svg>`
 }
 
@@ -418,16 +486,29 @@ async function fetchAndUploadCover(t) {
    PUBLISH - insert blog_posts row
 ───────────────────────────────────────────── */
 async function publish(t, dryRun) {
-  /* Skip if slug already exists - keeps the script idempotent. */
-  const { data: existing } = await sb
+  /* Skip if this post already exists.
+     Matching on slug ALONE is not enough and once cost us six duplicate
+     posts on the live site: several of these were re-slugged after
+     publication (TOPICS still says `how-we-direct-a-brand-film`, the live
+     row is `how-we-direct-a-brand-film-from-one-line-brief-to-final-cut`),
+     so the slug lookup missed and the script cheerfully regenerated and
+     republished them. Title is the stable identity here, so check both. */
+  const { data: bySlug } = await sb
     .from('blog_posts')
     .select('id, slug')
     .eq('slug', t.slug)
     .maybeSingle()
 
+  const { data: byTitle } = await sb
+    .from('blog_posts')
+    .select('id, slug')
+    .eq('title', t.title)
+    .maybeSingle()
+
+  const existing = bySlug || byTitle
   if (existing) {
-    console.log(`  [${t.n}] SKIP - slug already exists: ${t.slug}`)
-    return
+    console.log(`  [${t.n}] SKIP - already published as: ${existing.slug}`)
+    return false
   }
 
   console.log(`  [${t.n}] generating content…`)
@@ -480,9 +561,19 @@ const targets = onlyN ? TOPICS.filter((t) => t.n === onlyN) : TOPICS
 
 console.log(`Generating ${targets.length} post(s)${dryRun ? ' (DRY RUN)' : ''}…\n`)
 
+/* Gemini's free tier caps generate_content at 20 requests per minute, and a
+   full run blew straight through it - five topics failed back to back with
+   "retry in ~57s". Space the calls out. Only sleeps between actual
+   generations; skipped topics fall through immediately. */
+const GEN_GAP_MS = 8000
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms))
+
+let generated = 0
 for (const t of targets) {
   try {
-    await publish(t, dryRun)
+    if (generated > 0) await sleep(GEN_GAP_MS)
+    const didGenerate = await publish(t, dryRun)
+    if (didGenerate !== false) generated += 1
   } catch (e) {
     console.error(`  [${t.n}] ✗ FAILED: ${e.message}`)
   }

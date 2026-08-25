@@ -14,6 +14,32 @@ gsap.registerPlugin(ScrollTrigger, Draggable, InertiaPlugin)
    wraps awkwardly at the clamp() minimum. */
 const ROTATOR_WORDS = ['found.', 'recommended by AI.', 'booked.', 'retained.']
 
+/* The proof chips, defined once and rendered two ways - floating beside the
+   headline on wide screens, an inline strip everywhere else. Sharing one
+   source stops the two from drifting apart.
+
+   `side` + FLANK_OFFSET position each chip against the TEXT COLUMN rather
+   than the viewport (see the markup), `top` is its vertical slot, and the
+   float/depth values give each one its own drift so the cluster never bobs
+   in lockstep. */
+const CHIPS = [
+  { id: 'genai', side: 'left',  top: '5%',  tone: 'light', badge: '⚡', short: 'GenAI-assisted', long: 'GenAI-assisted, on-brand', amp: 8,  dur: 2.9, rot: 2.5,  depth: 9  },
+  { id: 'ai',    side: 'right', top: '13%', tone: 'dark',  badge: '✦', short: 'Cited by AI',    long: 'Cited by ChatGPT',         amp: 7,  dur: 2.4, rot: 2,    depth: 22 },
+  { id: 'rank',  side: 'left',  top: '30%', tone: 'light', badge: '#1',     short: 'Top ranking',    long: 'Ranking for brand search', amp: 10, dur: 3.1, rot: -2.5, depth: 12 },
+  { id: 'ret',   side: 'right', top: '30%', tone: 'light', badge: '90%',    short: 'Clients return', long: 'Clients return for more',  amp: 11, dur: 3.4, rot: -2,   depth: 18 },
+]
+
+/* Half the text column (max-w-4xl = 896px) plus a 16px gutter. A chip's inner
+   edge lands exactly here, so it sits just outside the column at EVERY width
+   and cannot overlap the headline by construction. */
+const FLANK_OFFSET = 'calc(50% + 464px)'
+
+/* Below this the flanking chips have nowhere to go: 896px of column plus a
+   ~184px chip and breathing room on each side needs about 1360px. Under it
+   they are replaced by the inline strip. Kept in one place because the CSS
+   and the GSAP gate below have to agree. */
+const FLOAT_MQ = '(min-width: 1360px)'
+
 /**
  * Hero - full Amplitude-inspired design system (see tailwind.config.js's
  * `amp-*` tokens): white canvas, near-black pill CTA, cobalt reserved
@@ -80,7 +106,15 @@ export default function Hero() {
         opacity: 0, y: 32, duration: 0.8, ease: 'power3.out',
         delay: D + 0.5,
       })
-      const chips = heroRef.current.querySelectorAll('.hero-chip')
+      /* Only the flanking chips are interactive. Below FLOAT_MQ they are
+         display:none and the inline strip is showing instead, so attaching
+         Draggable there would bind drag handlers and a mousemove listener to
+         invisible nodes - and Draggable measures bounds off a zero-size box,
+         which throws its inertia maths off if the viewport later widens. */
+      const chipsActive = window.matchMedia(FLOAT_MQ).matches
+      const chips = chipsActive
+        ? heroRef.current.querySelectorAll('.hero-chip')
+        : []
 
       /* Draggable + inertia - each chip can be grabbed and flicked, and
          keeps drifting on its own momentum after release (InertiaPlugin),
@@ -159,7 +193,7 @@ export default function Hero() {
           })
         })
       }
-      heroRef.current.addEventListener('mousemove', onHeroMove)
+      if (chipsActive) heroRef.current.addEventListener('mousemove', onHeroMove)
 
       gsap.to('.hero-headline', {
         yPercent: -16, ease: 'none',
@@ -290,77 +324,79 @@ export default function Hero() {
             Get In Touch
           </button>
         </div>
+
+        {/* The same four proof points, in normal flow, for every width that
+            cannot fit the flanking chips. In flow means it cannot collide
+            with the headline the way the absolutely-positioned chips were
+            doing on phones (three of four overlapped at 390px). Sits below
+            the CTAs rather than above the headline so it costs no
+            above-the-fold height on a phone. */}
+        <ul className="hero-tagline min-[1360px]:hidden mt-8 flex flex-wrap items-center justify-center gap-2 will-anim">
+          {CHIPS.map((c) => (
+            <li
+              key={c.id}
+              className="inline-flex items-center gap-1.5 rounded-full border border-amp-hairline bg-white/80 backdrop-blur-sm pl-1.5 pr-3 py-1.5 shadow-[0_4px_14px_-6px_rgba(26,31,35,0.2)]"
+            >
+              <span className="w-5 h-5 rounded-full bg-amp-violet/15 text-amp-violet flex items-center justify-center text-[9px] font-bold">
+                {c.badge}
+              </span>
+              <span className="text-[12px] font-semibold text-black whitespace-nowrap">
+                {c.short}
+              </span>
+            </li>
+          ))}
+        </ul>
       </div>
 
-      {/* Floating proof chips - fill the wide flanking gutters beside the
-          headline. Each carries its own float amplitude/duration/rotation
-          and parallax depth (data-float-*) so the cluster drifts as
-          layered, out-of-sync motion rather than one uniform bob - and
-          each is grab-and-throwable (Draggable + inertia, see the effect
-          above). They keep the same two-band arrangement on mobile as on
-          desktop - a pair flanking the first headline line, a pair
-          flanking the second/third - but a full text pill has nowhere to
-          go there: at mobile widths the headline itself runs edge to
-          edge, so there IS no side gutter, shortened label or not. Below
-          xl these shrink to just the icon badge (label hidden entirely)
-          and sit flush against the section's own edge instead, so they
-          read as small satellite marks beside the text rather than
-          something laid on top of it. Mouse parallax naturally does
-          nothing on touch, but the float and the drag-and-throw both
-          still work on mobile via touch. */}
-      <div
-        className="hero-chip select-none flex absolute top-[188px] left-2 xl:left-[15%] xl:top-[30%] items-center rounded-full bg-amp-navy xl:bg-white/55 xl:backdrop-blur-md border-0 xl:border xl:border-white/60 shadow-[0_4px_10px_-2px_rgba(0,26,79,0.4)] xl:shadow-[0_10px_30px_-8px_rgba(26,26,26,0.18)]"
-        data-float-amp="10" data-float-dur="3.1" data-float-rot="-2.5" data-float-depth="12"
-      >
-        <span className="flex xl:hidden items-center gap-1 pl-1.5 pr-2 py-1">
-          <span className="text-[9px] font-bold text-white">#1</span>
-          <span className="text-[7px] font-semibold text-white whitespace-nowrap">Top ranking</span>
-        </span>
-        <span className="hidden xl:flex items-center gap-2 pl-2 pr-3.5 py-2">
-          <span className="w-6 h-6 rounded-full bg-amp-navy/10 text-amp-navy flex items-center justify-center text-[10px] font-bold">#1</span>
-          <span className="text-[12px] font-semibold text-black whitespace-nowrap">Ranking for brand search</span>
-        </span>
-      </div>
-      <div
-        className="hero-chip select-none flex absolute top-[112px] right-2 xl:right-[6%] xl:top-[13%] xl:left-auto items-center rounded-full bg-amp-ink-pill xl:bg-amp-ink-pill/70 xl:backdrop-blur-md xl:border xl:border-white/10 shadow-[0_4px_10px_-2px_rgba(26,26,26,0.5)] xl:shadow-[0_10px_30px_-8px_rgba(26,26,26,0.35)]"
-        data-float-amp="7" data-float-dur="2.4" data-float-rot="2" data-float-depth="22"
-      >
-        <span className="flex xl:hidden items-center gap-1 pl-1.5 pr-2 py-1">
-          <span className="text-[9px] text-amp-periwinkle">&#10022;</span>
-          <span className="text-[7px] font-semibold text-white whitespace-nowrap">Cited by AI</span>
-        </span>
-        <span className="hidden xl:flex items-center gap-2 pl-2 pr-3.5 py-2">
-          <span className="w-6 h-6 rounded-full bg-amp-periwinkle/20 text-amp-periwinkle flex items-center justify-center text-[12px]">&#10022;</span>
-          <span className="text-[12px] font-semibold text-white whitespace-nowrap">Cited by ChatGPT</span>
-        </span>
-      </div>
-      <div
-        className="hero-chip select-none flex absolute top-[50px] left-2 xl:left-[15%] xl:top-[5%] items-center rounded-full bg-amp-violet xl:bg-white/55 xl:backdrop-blur-md border-0 xl:border xl:border-white/60 shadow-[0_4px_10px_-2px_rgba(162,115,255,0.5)] xl:shadow-[0_10px_30px_-8px_rgba(26,26,26,0.18)]"
-        data-float-amp="8" data-float-dur="2.9" data-float-rot="2.5" data-float-depth="9"
-      >
-        <span className="flex xl:hidden items-center gap-1 pl-1.5 pr-2 py-1">
-          <span className="text-[9px] text-black">&#9889;</span>
-          <span className="text-[7px] font-semibold text-black whitespace-nowrap">GenAI-assisted</span>
-        </span>
-        <span className="hidden xl:flex items-center gap-2 pl-2 pr-3.5 py-2">
-          <span className="w-6 h-6 rounded-full bg-amp-violet/15 text-amp-violet flex items-center justify-center text-[11px]">&#9889;</span>
-          <span className="text-[12px] font-semibold text-black whitespace-nowrap">GenAI-assisted, on-brand</span>
-        </span>
-      </div>
-      <div
-        className="hero-chip select-none flex absolute top-[188px] right-2 xl:right-[16%] xl:top-[30%] xl:left-auto items-center rounded-full bg-amp-navy xl:bg-white/55 xl:backdrop-blur-md border-0 xl:border xl:border-white/60 shadow-[0_4px_10px_-2px_rgba(0,26,79,0.4)] xl:shadow-[0_10px_30px_-8px_rgba(26,26,26,0.18)]"
-        data-float-amp="11" data-float-dur="3.4" data-float-rot="-2" data-float-depth="18"
-      >
-        <span className="flex xl:hidden items-center gap-1 pl-1.5 pr-2 py-1">
-          <span className="text-[9px] font-bold text-white">90%</span>
-          <span className="text-[7px] font-semibold text-white whitespace-nowrap">Clients return</span>
-        </span>
-        <span className="hidden xl:flex items-center gap-2 pl-2 pr-3.5 py-2">
-          <span className="w-6 h-6 rounded-full bg-amp-navy/10 text-amp-navy flex items-center justify-center text-[10px] font-bold">90%</span>
-          <span className="text-[12px] font-semibold text-black whitespace-nowrap">Clients return for more</span>
-        </span>
-      </div>
+      {/* Floating proof chips.
 
+          Positioned against the TEXT COLUMN, not the viewport. They used to
+          sit at viewport percentages (left-[15%]) while the headline is a
+          fixed 896px centred column - so as the window narrowed the chips
+          slid underneath the text instead of staying beside it. Measured: at
+          1440 two of four overlapped the headline, at 1280 three of four;
+          only 1920 ever looked right. FLANK_OFFSET pins each chip's inner
+          edge exactly 16px outside the column at every width, so overlap is
+          impossible by construction rather than by tuning.
+
+          They also need room to exist at all, hence FLOAT_MQ. Below it the
+          same four facts render as the inline strip up in the text column -
+          which is what closes the old 1024-1280 dead zone, where a wide
+          desktop window was being served tiny edge-pinned mobile chips. */}
+      {CHIPS.map((c) => (
+        <div
+          key={c.id}
+          className={`hero-chip select-none hidden min-[1360px]:flex absolute items-center rounded-full backdrop-blur-md ${
+            c.tone === 'dark'
+              ? 'bg-amp-ink-pill/85 border border-white/10 shadow-[0_10px_30px_-8px_rgba(26,31,35,0.35)]'
+              : 'bg-white/60 border border-white/70 shadow-[0_10px_30px_-8px_rgba(26,31,35,0.18)]'
+          }`}
+          style={{ top: c.top, [c.side === 'left' ? 'right' : 'left']: FLANK_OFFSET }}
+          data-float-amp={c.amp}
+          data-float-dur={c.dur}
+          data-float-rot={c.rot}
+          data-float-depth={c.depth}
+        >
+          <span className="flex items-center gap-2 pl-2 pr-3.5 py-2">
+            <span
+              className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold ${
+                c.tone === 'dark'
+                  ? 'bg-amp-periwinkle/20 text-amp-periwinkle'
+                  : 'bg-amp-violet/15 text-amp-violet'
+              }`}
+            >
+              {c.badge}
+            </span>
+            <span
+              className={`text-[12px] font-semibold whitespace-nowrap ${
+                c.tone === 'dark' ? 'text-white' : 'text-black'
+              }`}
+            >
+              {c.long}
+            </span>
+          </span>
+        </div>
+      ))}
       {/* Capability loop - the hero's proof, looping. Four small "screens"
           (SEO, AEO, GenAI, Automation) auto-scroll instead of one static
           mock, each showing a real mechanism the "get you found" claim
