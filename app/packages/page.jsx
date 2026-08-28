@@ -3,6 +3,10 @@ import PricingIllustration from '../../components/illustrations/PricingIllustrat
 import PortalMockup from '../../components/packages/PortalMockup.jsx'
 import Rule from '../../components/ui/Rule.jsx'
 import { SITE_URL } from '../../lib/seo.js'
+import {
+  MONTHLY_PLANS, SEARCH_PACKAGES, PROJECT_PACKAGES,
+  waLink, priceLabel, inr, minPriceOf,
+} from '../../lib/pricing.mjs'
 
 /**
  * /packages - pricing page. SSG, no revalidation (pricing changes are deploys).
@@ -10,17 +14,26 @@ import { SITE_URL } from '../../lib/seo.js'
  * Structure:
  *   1. Hero intro (eyebrow + headline + framing copy)
  *   2. Monthly plans (Plan A / B / C - bundled content + reputation tiers)
- *   3. Project-based packages (Food Photography, Brand Reel, Brand Film)
- *   4. Plan C portal differentiator (editorial mockup)
- *   5. Process - three-step "how we work"
- *   6. Dark ink CTA section ("Not sure which fits?")
+ *   3. Search & AI visibility (website build, search retainer, GenAI workflows)
+ *   4. Project-based packages (Food Photography, Brand Reel, Brand Film)
+ *   5. Plan C portal differentiator (editorial mockup)
+ *   6. Process - three-step "how we work"
+ *   7. Dark ink CTA section ("Not sure which fits?")
+ *
+ * All figures come from lib/pricing.mjs - see the note there on why the data
+ * is not defined in this file any more.
  *
  * Amp design system: white canvas painted on the page wrapper (the global
  * body ground is not the amp ground), IBM Plex Sans throughout, hairline
- * cards. Accents are rare - navy carries the Plan C thread (featured tier
- * card + the portal section that justifies it), periwinkle marks the
- * process numerals. Every other tier stays monochrome; that contrast IS
- * the hierarchy signal, so nothing else on the page may take a colour.
+ * cards. Accents are rare and each one is spoken for exactly once:
+ *   navy       the Plan C thread (featured tier card + the portal section
+ *              that justifies it)
+ *   violet     the search & AI visibility section, matching the homepage
+ *              proof chips that promise it - same claim, same colour
+ *   periwinkle the process numerals
+ * Nothing else may take a colour. Cards stay monochrome by default, and
+ * that contrast IS the hierarchy signal - spend an accent anywhere else
+ * and the featured tier stops reading as featured.
  *
  * Each package CTA opens WhatsApp with a *package-specific* prefilled
  * message - qualifies the inbound so the conversation starts on the
@@ -32,115 +45,6 @@ import { SITE_URL } from '../../lib/seo.js'
  */
 export const revalidate = false
 
-const WA_BASE = 'https://wa.me/917048824616?text='
-const waLink = (msg) => WA_BASE + encodeURIComponent(msg)
-
-const PROJECT_PACKAGES = [
-  {
-    category: 'Photography',
-    title: 'Food Photography',
-    price: 8000,
-    priceLabel: 'From ₹8,000',
-    cadence: '/ shoot',
-    blurb: 'Editorial-quality stills built for Zomato, Swiggy, and Instagram. The kind of photography that earns the order.',
-    bullets: [
-      'Up to 8 dishes / signature plates',
-      'Half-day shoot at your venue',
-      'Edit, colour, and delivery-ready files',
-      'Optimised crops for Zomato / Swiggy / Instagram',
-    ],
-    bestFor: 'Restaurants · Cafés · Cloud kitchens',
-    wa: 'Hi P2V Labs, I’d like to discuss the Food Photography package for my restaurant. When can we talk?',
-  },
-  {
-    category: 'Social Video',
-    title: 'Brand Reel',
-    price: 8000,
-    priceLabel: 'From ₹8,000',
-    cadence: '/ reel',
-    blurb: 'A single 15-30 second reel - scripted, shot, and cut to convert scroll into engagement.',
-    bullets: [
-      'Concept, script, and storyboard',
-      'Half-day shoot',
-      'Edit with sound design and captions',
-      'Instagram + YouTube Shorts ready',
-    ],
-    bestFor: 'New menu drops · Product launches · Campaigns',
-    wa: 'Hi P2V Labs, I’d like to discuss a Brand Reel for my brand. Could we get on a call?',
-  },
-  {
-    category: 'Video Production',
-    title: 'Brand Film',
-    price: 35000,
-    priceLabel: 'From ₹35,000',
-    cadence: '/ film',
-    blurb: 'A 1-2 minute hero film for your website, pitch deck, or ads. Cinematic, intentional, made to last.',
-    bullets: [
-      '1-2 min film, full concept development',
-      'Multi-day shoot with scripted scenes',
-      'Edit, colour grade, sound, motion',
-      'Master + cutdowns for socials',
-    ],
-    bestFor: 'Founder narratives · Brand launches · Anchor assets',
-    wa: 'Hi P2V Labs, I’d like to discuss a Brand Film for my business. Could you share the next steps?',
-  },
-]
-
-/* Bundled monthly plans - replace the two-tier retainer + à la carte add-on
-   pricing. Each plan stacks the previous one's deliverables (Plan B includes
-   Plan A, Plan C includes Plan B) so the buyer's decision is a clean A/B/C
-   ladder. Mirrors the same data in scripts/gen-pricing-pdf.mjs. */
-const MONTHLY_PLANS = [
-  {
-    category: 'Plan A',
-    title: 'Social Presence',
-    price: 20000,
-    priceLabel: 'From ₹20,000',
-    cadence: '/ month',
-    blurb: 'A reliable monthly cadence of content + community management for restaurants finding their voice.',
-    bullets: [
-      '9 photos + 3 reels per month',
-      '3-4 stories per week from shoot content',
-      'Daily comment & DM replies (business hours)',
-    ],
-    bestFor: 'Restaurants establishing a consistent feed',
-    wa: 'Hi P2V Labs, I’d like to discuss Plan A - Social Presence. Could we explore details?',
-  },
-  {
-    category: 'Plan B',
-    title: 'Social + Reputation',
-    price: 30000,
-    priceLabel: 'From ₹30,000',
-    cadence: '/ month',
-    blurb: 'Everything in Plan A, plus your Zomato / Swiggy footprint and Google Business presence - actively managed.',
-    bullets: [
-      'Everything in Plan A',
-      'Zomato / Swiggy profile shoot & optimisation',
-      'Google Business Profile management',
-      'Review responses (Google + Zomato + Swiggy)',
-    ],
-    bestFor: 'Established brands ready to own search + reviews',
-    wa: 'Hi P2V Labs, I’d like to discuss Plan B - Social + Reputation. When can we talk?',
-  },
-  {
-    category: 'Plan C',
-    title: 'Full Growth Retainer',
-    price: 40000,
-    priceLabel: 'From ₹40,000',
-    cadence: '/ month',
-    blurb: 'Everything in Plan B, plus strategy, content calendar, analytics, and priority turnaround - content as a growth channel.',
-    bullets: [
-      'Everything in Plan B',
-      'Strategy + content calendar + analytics',
-      '4+ reels per month with concepts',
-      'Priority turnaround on requests',
-      'Private client portal access',
-    ],
-    bestFor: 'Scaling brands treating content as a growth channel',
-    wa: 'Hi P2V Labs, I’d like to discuss Plan C - Full Growth Retainer. Could we plan a strategy call?',
-  },
-]
-
 const PROCESS = [
   { n: '01', title: 'Brief',   detail: 'A short call (or WhatsApp) to align on scope, deliverables, and timelines.' },
   { n: '02', title: 'Shoot',   detail: 'Production day at your venue - set up, capture, on-the-spot review. Tight, fast, deliberate.' },
@@ -150,13 +54,19 @@ const PROCESS = [
 export async function generateMetadata() {
   return {
     title: 'Packages & Pricing - P2V Labs Ahmedabad',
+    /* Figures interpolated from lib/pricing.mjs rather than typed out, so the
+       search snippet can never quote a price the page no longer charges.
+       Concrete numbers here are deliberate: they are what AI answers repeat
+       back when someone asks what an agency in Ahmedabad costs. */
     description:
-      'Transparent starting prices for food photography (from ₹8,000), brand reels (from ₹8,000), brand films (from ₹35,000), and monthly content + reputation plans (from ₹20,000). P2V Labs - content built to perform for Ahmedabad brands.',
+      `Transparent starting prices from P2V Labs, Ahmedabad. Monthly content plans from ${inr(minPriceOf(MONTHLY_PLANS))}, ` +
+      `website builds with SEO and AEO from ${inr(SEARCH_PACKAGES[0].price)}, search and AI visibility retainers from ${inr(SEARCH_PACKAGES[1].price)}, ` +
+      `and one-off shoots from ${inr(minPriceOf(PROJECT_PACKAGES))}.`,
     alternates: { canonical: '/packages' },
     openGraph: {
       title: 'Packages & Pricing - P2V Labs',
       description:
-        'Food photography, brand reels, brand films, monthly content + reputation plans - transparent starting prices for Ahmedabad brands.',
+        'Monthly content plans, website builds with SEO and AEO, search and AI visibility retainers, and one-off shoots - transparent starting prices for Ahmedabad brands.',
       url: '/packages',
     },
   }
@@ -164,26 +74,32 @@ export async function generateMetadata() {
 
 /* Service + Offer JSON-LD so Google can surface starting prices in
    rich results. minPrice signals "starting from" - using `price` alone
-   would imply a fixed cost. */
+   would imply a fixed cost.
+
+   Scoped-per-project entries (price === null) are filtered out rather than
+   emitted with a null minPrice, which would be invalid structured data and
+   risks Google discarding the whole Offer. */
 const buildOffersJsonLd = () => ({
   '@context': 'https://schema.org',
-  '@graph': [...PROJECT_PACKAGES, ...MONTHLY_PLANS].map((p) => ({
-    '@type': 'Service',
-    name: p.title,
-    serviceType: p.category,
-    provider: { '@id': `${SITE_URL}/#organization` },
-    areaServed: { '@type': 'City', name: 'Ahmedabad' },
-    offers: {
-      '@type': 'Offer',
-      url: `${SITE_URL}/packages`,
-      priceCurrency: 'INR',
-      priceSpecification: {
-        '@type': 'PriceSpecification',
-        minPrice: p.price,
+  '@graph': [...MONTHLY_PLANS, ...SEARCH_PACKAGES, ...PROJECT_PACKAGES]
+    .filter((p) => p.price !== null)
+    .map((p) => ({
+      '@type': 'Service',
+      name: p.title,
+      serviceType: p.category,
+      provider: { '@id': `${SITE_URL}/#organization` },
+      areaServed: { '@type': 'City', name: 'Ahmedabad' },
+      offers: {
+        '@type': 'Offer',
+        url: `${SITE_URL}/packages`,
         priceCurrency: 'INR',
+        priceSpecification: {
+          '@type': 'PriceSpecification',
+          minPrice: p.price,
+          priceCurrency: 'INR',
+        },
       },
-    },
-  })),
+    })),
 })
 
 /* `featured` is purely a styling flag - the recommended tier gets the
@@ -210,12 +126,23 @@ function PackageCard({ pkg, featured = false }) {
         {pkg.blurb}
       </p>
 
+      {/* A scoped engagement (price === null) carries no figure. Set at a size
+          close to a price so the card holds the grid's baseline and does not
+          read as a lesser tier for lacking a number. */}
       <div className="flex items-baseline gap-2 mb-6">
-        <span className="text-[10px] font-semibold tracking-[0.08em] uppercase text-amp-caption">From</span>
-        <span className={`font-plex text-3xl lg:text-4xl font-semibold leading-none tracking-[-0.01em] ${featured ? 'text-amp-navy' : 'text-black'}`}>
-          ₹{pkg.price.toLocaleString('en-IN')}
-        </span>
-        <span className="text-[11px] text-amp-caption">{pkg.cadence}</span>
+        {pkg.price === null ? (
+          <span className={`font-plex text-2xl lg:text-3xl font-semibold leading-none tracking-[-0.01em] ${featured ? 'text-amp-navy' : 'text-black'}`}>
+            {priceLabel(pkg)}
+          </span>
+        ) : (
+          <>
+            <span className="text-[10px] font-semibold tracking-[0.08em] uppercase text-amp-caption">From</span>
+            <span className={`font-plex text-3xl lg:text-4xl font-semibold leading-none tracking-[-0.01em] ${featured ? 'text-amp-navy' : 'text-black'}`}>
+              {inr(pkg.price)}
+            </span>
+            <span className="text-[11px] text-amp-caption">{pkg.cadence}</span>
+          </>
+        )}
       </div>
 
       <ul className="space-y-2.5 mb-7 flex-1">
@@ -289,6 +216,42 @@ export default function PackagesPage() {
                 exists to justify. */}
             {MONTHLY_PLANS.map((p) => (
               <PackageCard key={p.title} pkg={p} featured={p.category === 'Plan C'} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <Rule />
+
+      {/* Search, build & AI visibility.
+
+          This half of the business had no place on the pricing page at all,
+          while the homepage sold "built to get you found" and leads were
+          arriving citing an AI recommendation. A visitor who wanted a site,
+          SEO or AEO had nothing to point at and no idea what it cost.
+
+          Violet, used nowhere else on this page, because this is the section
+          the homepage's proof chips are promising - the two surfaces should
+          read as the same claim. Navy still belongs to the Plan C thread. */}
+      <section className="py-16 lg:py-24 px-5 md:px-10 lg:px-20">
+        <div className="max-w-7xl mx-auto">
+          <div className="mb-12">
+            <p className="flex items-center gap-2 text-[13px] font-semibold tracking-[0.08em] uppercase text-amp-caption mb-5">
+              <span className="w-1.5 h-1.5 rounded-full bg-amp-violet" />
+              Search &amp; AI visibility
+            </p>
+            <h2 className="font-plex text-3xl lg:text-4xl font-semibold text-black leading-[1.08] tracking-[-0.01em] max-w-2xl">
+              Content is half of it.
+            </h2>
+            <p className="mt-4 text-amp-body text-sm lg:text-base max-w-2xl leading-relaxed">
+              The other half is being findable - by Google, and by whatever
+              people ask instead of Google. We build the site, the structure,
+              and the answers that get you cited.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {SEARCH_PACKAGES.map((p) => (
+              <PackageCard key={p.title} pkg={p} />
             ))}
           </div>
         </div>

@@ -17,6 +17,11 @@
 
 import PDFDocument from 'pdfkit'
 import fs from 'node:fs'
+import {
+  PROJECT_PACKAGES as SRC_PROJECT,
+  MONTHLY_PLANS as SRC_PLANS,
+  inr,
+} from '../lib/pricing.mjs'
 
 const OUTPUT_PATH = 'D:/P2VLabs-Pricing.pdf'
 
@@ -51,98 +56,34 @@ const MARGIN = 50
    DATA - mirrors /packages page, plus add-ons.
 ───────────────────────────────────────────── */
 
-const PROJECT_PACKAGES = [
-  {
-    category: 'Photography',
-    title: 'Food Photography',
-    priceLabel: '₹8,000',
-    cadence: '/ shoot',
-    blurb: 'Editorial-quality stills built for Zomato, Swiggy, and Instagram. The kind of photography that earns the order.',
-    bullets: [
-      'Up to 8 dishes / signature plates',
-      'Half-day shoot at your venue',
-      'Edit, colour, and delivery-ready files',
-      'Optimised crops for Zomato / Swiggy / Instagram',
-    ],
-    bestFor: 'Restaurants · Cafés · Cloud kitchens',
-  },
-  {
-    category: 'Social Video',
-    title: 'Brand Reel',
-    priceLabel: '₹8,000',
-    cadence: '/ reel',
-    blurb: 'A single 15-30 second reel - scripted, shot, and cut to convert scroll into engagement.',
-    bullets: [
-      'Concept, script, and storyboard',
-      'Half-day shoot',
-      'Edit with sound design and captions',
-      'Instagram + YouTube Shorts ready',
-    ],
-    bestFor: 'New menu drops · Product launches · Campaigns',
-  },
-  {
-    category: 'Video Production',
-    title: 'Brand Film',
-    priceLabel: '₹35,000',
-    cadence: '/ film',
-    blurb: 'A 1-2 minute hero film for your website, pitch deck, or ads. Cinematic, intentional, made to last.',
-    bullets: [
-      '1-2 min film, full concept development',
-      'Multi-day shoot with scripted scenes',
-      'Edit, colour grade, sound, motion',
-      'Master + cutdowns for socials',
-    ],
-    bestFor: 'Founder narratives · Brand launches · Anchor assets',
-  },
-]
+/* Both lists are derived from lib/pricing.mjs, which is the single source of
+   truth the /packages page and the homepage FAQ also read. This script used to
+   keep its own hand-maintained copy, so an edit to the website silently left
+   the emailed PDF quoting last month's prices.
 
-/* Bundled monthly plans - replace the older "Retainers + à la carte add-ons"
-   pricing. Each plan stacks the previous one's deliverables, so the buyer's
-   decision becomes a clean A/B/C ladder instead of mix-and-match. */
-const MONTHLY_PLANS = [
-  {
-    letter: 'Plan A',
-    name: 'Social Presence',
-    priceLabel: '₹20,000',
-    cadence: '/ month',
-    tagline: 'A reliable monthly cadence of content + community.',
-    bullets: [
-      '9 photos + 3 reels per month',
-      '3-4 stories per week from shoot content',
-      'Daily comment & DM replies (business hours)',
-    ],
-    bestFor: 'Restaurants establishing a consistent feed',
-  },
-  {
-    letter: 'Plan B',
-    name: 'Social + Reputation',
-    priceLabel: '₹30,000',
-    cadence: '/ month',
-    tagline: 'Plan A, plus your aggregator + Google footprint.',
-    bullets: [
-      'Everything in Plan A',
-      'Zomato / Swiggy profile shoot & optimisation',
-      'Google Business Profile management',
-      'Review responses (Google + Zomato + Swiggy)',
-    ],
-    bestFor: 'Established brands ready to own search + reviews',
-  },
-  {
-    letter: 'Plan C',
-    name: 'Full Growth Retainer',
-    priceLabel: '₹40,000',
-    cadence: '/ month',
-    tagline: 'Plan B, plus strategy + premium turnaround.',
-    bullets: [
-      'Everything in Plan B',
-      'Strategy + content calendar + analytics',
-      '4+ reels per month with concepts',
-      'Priority turnaround on requests',
-      'Private client portal access',
-    ],
-    bestFor: 'Scaling brands treating content as a growth channel',
-  },
-]
+   The shapes differ - this layout was written against priceLabel/letter/name/
+   tagline - so the mapping happens here rather than by rewriting ~200 lines of
+   pdfkit positioning. `short` is the compact tagline the three-column plan
+   page needs; the web card uses the longer `blurb`. */
+const PROJECT_PACKAGES = SRC_PROJECT.map((p) => ({
+  category: p.category,
+  title:    p.title,
+  priceLabel: inr(p.price),
+  cadence:  p.cadence,
+  blurb:    p.blurb,
+  bullets:  p.bullets,
+  bestFor:  p.bestFor,
+}))
+
+const MONTHLY_PLANS = SRC_PLANS.map((p) => ({
+  letter:   p.category,
+  name:     p.title,
+  priceLabel: inr(p.price),
+  cadence:  p.cadence,
+  tagline:  p.short,
+  bullets:  p.bullets,
+  bestFor:  p.bestFor,
+}))
 
 /* ─────────────────────────────────────────────
    DOCUMENT

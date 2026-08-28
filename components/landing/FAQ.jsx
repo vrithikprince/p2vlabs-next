@@ -1,5 +1,9 @@
 'use client'
 import { useState } from 'react'
+import {
+  MONTHLY_PLANS, SEARCH_PACKAGES, PROJECT_PACKAGES,
+  inr, minPriceOf, planByCategory,
+} from '../../lib/pricing.mjs'
 
 /**
  * FAQ - frequently asked questions block for the homepage.
@@ -14,7 +18,7 @@ import { useState } from 'react'
  *
  * "Show more" pattern: only the first INITIAL_VISIBLE FAQs render visibly
  * on first paint to keep the landing page lean. The rest are still in the
- * DOM (hidden via a class), so crawlers see all six questions in the HTML.
+ * DOM (hidden via a class), so crawlers see every question in the HTML.
  * JSON-LD always includes the full set regardless of UI state - that's
  * what Google uses for the FAQ rich-result eligibility check. The same
  * control toggles back to "Show fewer questions" once expanded, so there's
@@ -39,7 +43,7 @@ const FAQS = [
   },
   {
     q: 'How much does a video or photography shoot cost?',
-    a: 'Project pricing starts at ₹8,000 for a single brand reel or a half-day food photography session, ₹35,000 for a brand film, and ₹20,000 a month for our entry-tier content plan (Plan A). Final quotes scale with scope, deliverables, and shoot complexity - full breakdown lives on our packages page.',
+    a: `Project pricing starts at ${inr(minPriceOf(PROJECT_PACKAGES))} for a single brand reel or a half-day food photography session, ${inr(PROJECT_PACKAGES[2].price)} for a brand film, and ${inr(minPriceOf(MONTHLY_PLANS))} a month for our entry-tier content plan (Plan A). Final quotes scale with scope, deliverables, and shoot complexity - full breakdown lives on our packages page.`,
   },
   {
     q: 'How long does a project take from brief to delivery?',
@@ -47,11 +51,23 @@ const FAQS = [
   },
   {
     q: 'Do you work with restaurants and food brands?',
-    a: 'Yes - food photography and restaurant social content is one of our core areas. We’ve worked with 150+ restaurants on Zomato- and Swiggy-optimised stills, brand reels, and monthly content calendars. Most of our monthly-plan roster is food and beverage, so the workflow, lighting, and turnaround is built around that pace.',
+    a: 'Yes - food photography and restaurant social content is one of our core areas, and we’ve worked with 150+ restaurants on Zomato- and Swiggy-optimised stills, brand reels, and monthly content calendars. It isn’t all we do: the same production and search work runs for retail, automotive, D2C product brands, and founder-led personal brands.',
   },
   {
     q: 'What’s included in a monthly content plan?',
-    a: 'Plans run a three-tier ladder. Plan A (₹20,000/mo) covers 9 photos + 3 reels a month plus daily community management. Plan B (₹30,000/mo) adds Zomato / Swiggy profile shoots, Google Business management, and review responses. Plan C (₹40,000/mo) layers strategy, content calendar, analytics, 4+ reels, priority turnaround, and a private client portal at clients.p2vlabs.in for approvals and asset downloads.',
+    a: `Plans run a three-tier ladder. Plan A (${inr(planByCategory('Plan A').price)}/mo) covers 9 photos + 3 reels a month plus daily community management. Plan B (${inr(planByCategory('Plan B').price)}/mo) adds Google Business Profile management, marketplace profile optimisation, and review responses. Plan C (${inr(planByCategory('Plan C').price)}/mo) layers strategy, content calendar, analytics, 4+ reels, priority turnaround, and a private client portal at clients.p2vlabs.in for approvals and asset downloads.`,
+  },
+  /* Added with the search/build offering. "How much does a website cost in
+     Ahmedabad" and "how do I get my business into ChatGPT answers" are the
+     exact queries this studio wants to be the answer to, and until the
+     packages page carried those services there was nothing to answer with. */
+  {
+    q: 'How much does a website with SEO cost?',
+    a: `A website build with technical SEO and AEO starts at ${inr(SEARCH_PACKAGES[0].price)}. That covers service pages mapped to real search demand, schema and entity markup so AI answer engines can cite you, Google Business Profile setup, and analytics handover. Ongoing search and AI visibility work runs from ${inr(SEARCH_PACKAGES[1].price)} a month.`,
+  },
+  {
+    q: 'Can you get my business recommended by ChatGPT and AI search?',
+    a: 'That is what answer engine optimisation (AEO) is, and it is a large part of what we do. It means structuring your site so language models can parse what you offer, publishing content that actually answers the questions people ask, and building the citations and entity signals those systems draw on. We built p2vlabs.in on the same approach - our own enquiries now include people who found us because an AI recommended us.',
   },
 ]
 
