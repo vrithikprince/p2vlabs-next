@@ -4,6 +4,7 @@ import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Icon from '../ui/Icon.jsx'
 import { SERVICE_MARKS } from '../illustrations/ServiceMarks.jsx'
+import { waLink } from '../../lib/pricing.mjs'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -13,19 +14,19 @@ gsap.registerPlugin(ScrollTrigger)
    the same colour again, passed to the SVG mark which needs a real value
    rather than a class. `mark` keys into SERVICE_MARKS. */
 const SERVICES = [
-  { n: '01', title: 'Video Production', mark: 'video',
+  { n: '01', title: 'Video Production', wa: 'Hi P2V Labs, I’d like to discuss Video Production for my brand. When can we talk?', mark: 'video',
     desc: 'Brand films, product launches, founder narratives, and corporate documentaries. Cinematic quality, story-first approach.',
     railBg: 'bg-amp-navy/10', linkBg: 'bg-amp-navy', linkText: 'text-amp-navy', accentHex: '#001a4f' },
-  { n: '02', title: 'Photography', mark: 'photography',
+  { n: '02', title: 'Photography', wa: 'Hi P2V Labs, I’d like to discuss Photography for my brand. When can we talk?', mark: 'photography',
     desc: 'Product photography, editorial portraits, food and beverage, event coverage. Every image built for the brand.',
     railBg: 'bg-amp-violet/15', linkBg: 'bg-amp-violet', linkText: 'text-amp-violet', accentHex: '#a273ff' },
-  { n: '03', title: 'Social Content', mark: 'social',
+  { n: '03', title: 'Social Content', wa: 'Hi P2V Labs, I’d like to discuss Social Content for my brand. When can we talk?', mark: 'social',
     desc: 'Instagram Reels, YouTube Shorts, LinkedIn videos. Platform-native content that converts scroll to engagement.',
     railBg: 'bg-amp-periwinkle/15', linkBg: 'bg-amp-periwinkle', linkText: 'text-amp-periwinkle', accentHex: '#6980ff' },
-  { n: '04', title: 'Brand Visuals', mark: 'brand',
+  { n: '04', title: 'Brand Visuals', wa: 'Hi P2V Labs, I’d like to discuss Brand Visuals for my brand. When can we talk?', mark: 'brand',
     desc: 'Full visual identity systems, pitch deck design, presentation templates, and brand guidelines.',
     railBg: 'bg-amp-navy/10', linkBg: 'bg-amp-navy', linkText: 'text-amp-navy', accentHex: '#001a4f' },
-  { n: '05', title: 'GenAI Development', mark: 'genai',
+  { n: '05', title: 'GenAI Development', wa: 'Hi P2V Labs, I’d like to discuss GenAI workflows for my business. When can we talk?', mark: 'genai',
     desc: 'Custom GenAI workflows and automations for your business - content pipelines, lead-response bots, and internal tools that take the repetitive work off your team.',
     railBg: 'bg-amp-violet/15', linkBg: 'bg-amp-violet', linkText: 'text-amp-violet', accentHex: '#a273ff' },
 ]
@@ -161,11 +162,25 @@ export default function Services() {
                        style={{ fontSize: 'clamp(0.875rem,1.4vw,0.975rem)' }}>
                       {s.desc}
                     </p>
-                    <div className="flex items-center gap-3 mt-6 relative z-10">
-                      <div className={`w-8 h-px ${s.linkBg}`} />
+                    {/* This was a <span> - styled exactly like a call to
+                        action, rule and arrow included, and completely inert.
+                        It now opens WhatsApp with a message naming the service,
+                        the same way the /packages cards do, so the enquiry
+                        arrives already qualified instead of as "hi".
+                        `group/cta` (not bare `group`) because the card itself
+                        already owns a `group` for its hover state. */}
+                    <a
+                      href={waLink(s.wa)}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`Get in touch about ${s.title} on WhatsApp`}
+                      className="group/cta inline-flex w-fit self-start items-center gap-3 mt-6 relative z-10 -ml-2 py-2 px-2 rounded-full"
+                    >
+                      <div className={`w-8 h-px ${s.linkBg} transition-all duration-300 group-hover/cta:w-12`} />
                       <span className={`text-[10px] font-semibold tracking-wide uppercase ${s.linkText}`}>Get in Touch</span>
-                      <Icon n="aur" s={13} c={s.accentHex} />
-                    </div>
+                      <Icon n="aur" s={13} c={s.accentHex}
+                            className="transition-transform duration-300 group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5" />
+                    </a>
                   </div>
 
                 </div>
