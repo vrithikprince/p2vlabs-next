@@ -36,13 +36,19 @@ export const metadata = {
    * this. Non-www, https - matches the redirect direction in vercel.json
    * + the SITE_URL constant in lib/seo.js. Change one, change all. */
   metadataBase: new URL(SITE_URL),
+  /* A SUPERSET, not a swap. The site sells website builds, SEO and AI
+     search visibility on /packages, but every machine-readable surface
+     still said "visual content agency" - so the two halves of the site
+     described two different companies, and anything summarising the page
+     could only output the older one. The content services are still named
+     first; the search half is now named at all. */
   title: {
-    default: 'P2V Labs - Visual Content Agency Ahmedabad',
+    default: 'P2V Labs - Content & Search Visibility Studio, Ahmedabad',
     template: '%s | P2V Labs',
   },
   alternates: { canonical: '/' },
   description:
-    'P2V Labs is a visual content agency based in Ahmedabad, Gujarat specialising in video production, product photography, food photography, corporate films, and social media content.',
+    'P2V Labs is a content and search visibility studio in Ahmedabad, Gujarat. Video production, product and food photography, and social content - plus website builds, SEO and AI search visibility that get brands found on Google and cited by AI answer engines.',
   keywords: [
     'content agency Ahmedabad',
     'video production Ahmedabad',
@@ -51,6 +57,13 @@ export const metadata = {
     'corporate video Ahmedabad',
     'reels agency Gujarat',
     'photography studio Ahmedabad',
+    /* The search half. Note "AI search optimization" rather than "AEO":
+       only ~3% of buyers search the acronym, ~46% search this phrasing. */
+    'SEO services Ahmedabad',
+    'website development Ahmedabad',
+    'AI search optimization India',
+    'answer engine optimisation India',
+    'GenAI automation Ahmedabad',
   ],
   authors: [{ name: 'P2V Labs' }],
   creator: 'P2V Labs',
@@ -59,20 +72,20 @@ export const metadata = {
     locale: SITE_LOCALE,
     url: '/',                  /* resolved against metadataBase → SITE_URL */
     siteName: SITE_NAME,
-    title: 'P2V Labs - Visual Content Agency Ahmedabad',
+    title: 'P2V Labs - Content & Search Visibility Studio, Ahmedabad',
     description:
-      'Pixels · Purpose · Visuals - Data-driven visual content for businesses across Gujarat.',
+      'Content, websites and search visibility for brands across Gujarat - built to be found on Google and cited by AI.',
     images: [{
       url: '/og-image.jpg',    /* resolved → https://p2vlabs.in/og-image.jpg */
       width: 1200,
       height: 630,
-      alt: 'P2V Labs - Visual Content Agency Ahmedabad',
+      alt: 'P2V Labs - Content & Search Visibility Studio, Ahmedabad',
     }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'P2V Labs - Visual Content Agency Ahmedabad',
-    description: 'Pixels · Purpose · Visuals',
+    title: 'P2V Labs - Content & Search Visibility Studio, Ahmedabad',
+    description: 'Content, websites and search visibility. Ahmedabad.',
     images: ['/og-image.jpg'],
   },
   robots: {

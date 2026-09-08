@@ -16,14 +16,31 @@ export const revalidate = 60
 export default async function sitemap() {
   const now = new Date()
 
+  /* Real edit dates, hand-maintained - NOT `now`.
+     Every static route used to be stamped with the build timestamp, so a
+     deploy that touched nothing claimed all seven pages had just changed.
+     Google discounts auto-stamped freshness, and it costs you the signal on
+     the page that genuinely did change. Update the date here when you
+     meaningfully edit a page; leave it alone for a copy tweak. The index
+     routes below still take `now`, because their content really does change
+     whenever a post is published. */
+  const EDITED = {
+    home:     '2026-09-07',   // identity + entity graph rework
+    reel:     '2026-08-24',
+    packages: '2026-08-29',   // search & AI visibility section added
+    about:    '2026-08-24',
+    contact:  '2026-08-24',
+  }
+  const d = (iso) => new Date(`${iso}T00:00:00Z`)
+
   const staticRoutes = [
-    { url: `${SITE}`,          lastModified: now, changeFrequency: 'weekly',  priority: 1.0 },
-    { url: `${SITE}/reel`,     lastModified: now, changeFrequency: 'weekly',  priority: 0.9 },
-    { url: `${SITE}/blog`,     lastModified: now, changeFrequency: 'daily',   priority: 0.9 },
-    { url: `${SITE}/vlog`,     lastModified: now, changeFrequency: 'daily',   priority: 0.9 },
-    { url: `${SITE}/packages`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
-    { url: `${SITE}/about`,    lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
-    { url: `${SITE}/contact`,  lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${SITE}`,          lastModified: d(EDITED.home),     changeFrequency: 'weekly',  priority: 1.0 },
+    { url: `${SITE}/reel`,     lastModified: d(EDITED.reel),     changeFrequency: 'weekly',  priority: 0.9 },
+    { url: `${SITE}/blog`,     lastModified: now,                changeFrequency: 'daily',   priority: 0.9 },
+    { url: `${SITE}/vlog`,     lastModified: now,                changeFrequency: 'daily',   priority: 0.9 },
+    { url: `${SITE}/packages`, lastModified: d(EDITED.packages), changeFrequency: 'monthly', priority: 0.8 },
+    { url: `${SITE}/about`,    lastModified: d(EDITED.about),    changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${SITE}/contact`,  lastModified: d(EDITED.contact),  changeFrequency: 'monthly', priority: 0.7 },
   ]
 
   /* Fetch published posts in parallel. If Supabase is unreachable

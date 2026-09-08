@@ -2,7 +2,7 @@ import PageHeader from '../../components/layout/PageHeader.jsx'
 import PricingIllustration from '../../components/illustrations/PricingIllustration.jsx'
 import PortalMockup from '../../components/packages/PortalMockup.jsx'
 import Rule from '../../components/ui/Rule.jsx'
-import { SITE_URL } from '../../lib/seo.js'
+import { SITE_URL, buildPageMetadata } from '../../lib/seo.js'
 import {
   MONTHLY_PLANS, SEARCH_PACKAGES, PROJECT_PACKAGES,
   waLink, priceLabel, inr, minPriceOf,
@@ -52,7 +52,11 @@ const PROCESS = [
 ]
 
 export async function generateMetadata() {
-  return {
+  /* buildPageMetadata rather than a literal: a page-level `openGraph` block
+     REPLACES the root layout's entire openGraph object, so declaring a
+     partial one here shipped the commercial page with no share card at all.
+     The helper spreads the defaults. */
+  return buildPageMetadata({
     title: 'Packages & Pricing - P2V Labs Ahmedabad',
     /* Figures interpolated from lib/pricing.mjs rather than typed out, so the
        search snippet can never quote a price the page no longer charges.
@@ -62,14 +66,8 @@ export async function generateMetadata() {
       `Transparent starting prices from P2V Labs, Ahmedabad. Monthly content plans from ${inr(minPriceOf(MONTHLY_PLANS))}, ` +
       `website builds with SEO and AEO from ${inr(SEARCH_PACKAGES[0].price)}, search and AI visibility retainers from ${inr(SEARCH_PACKAGES[1].price)}, ` +
       `and one-off shoots from ${inr(minPriceOf(PROJECT_PACKAGES))}.`,
-    alternates: { canonical: '/packages' },
-    openGraph: {
-      title: 'Packages & Pricing - P2V Labs',
-      description:
-        'Monthly content plans, website builds with SEO and AEO, search and AI visibility retainers, and one-off shoots - transparent starting prices for Ahmedabad brands.',
-      url: '/packages',
-    },
-  }
+    path: '/packages',
+  })
 }
 
 /* Service + Offer JSON-LD so Google can surface starting prices in

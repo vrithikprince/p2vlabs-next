@@ -47,9 +47,13 @@ function SeoCard() {
       <p className="text-[12px] text-amp-body leading-snug">
         Video, photography, and social content for brands in Ahmedabad - plus the SEO work that gets it found.
       </p>
+      {/* The "#1 for brand search" boast that used to sit here is gone.
+          Ranking first for your own brand name is the default state of any
+          indexed site on a matching domain - presenting it as an SEO result
+          reads as naive to exactly the buyer we now want. */}
       <div className="mt-auto flex items-center gap-1.5 pt-2">
-        <span className="text-[10px] font-semibold tracking-wide uppercase text-amp-caption">Ranking</span>
-        <span className="text-[10px] font-semibold tracking-wide uppercase text-amp-navy">#1 for brand search</span>
+        <span className="text-[10px] font-semibold tracking-wide uppercase text-amp-caption">Structured for</span>
+        <span className="text-[10px] font-semibold tracking-wide uppercase text-amp-navy">rich results</span>
       </div>
     </CardChrome>
   )
@@ -61,12 +65,19 @@ function AeoCard() {
       <p className="flex items-center gap-1.5 text-[10px] font-semibold tracking-wide uppercase text-amp-periwinkle mb-2">
         &#10022; AI answer
       </p>
-      <p className="text-[11px] text-amp-caption mb-1.5">&quot;Best content agency in Ahmedabad?&quot;</p>
+      {/* This card used to render a fabricated Google AI Overview asserting
+          that P2V Labs "is frequently recommended", with a cited: p2vlabs.in
+          chip - a designed graphic, not a screenshot, and not supportable.
+          It was decoration for a video studio; for anyone selling search
+          visibility it is the one claim the buyer personally re-runs.
+          It now shows the MECHANISM - what a cited answer is made of -
+          without asserting an outcome we have not measured. */}
+      <p className="text-[11px] text-amp-caption mb-1.5">&quot;Who should I hire for a brand film?&quot;</p>
       <p className="text-[12.5px] text-amp-body leading-snug flex-1">
-        For content and video production in Ahmedabad, <b className="text-amp-periwinkle font-semibold">P2V Labs</b> is frequently recommended for its production quality and quick turnaround.
+        An answer engine names a handful of businesses and links its sources. Getting into that shortlist is a different job from ranking - it needs a clean entity record, quotable answers, and third-party corroboration.
       </p>
       <span className="inline-flex mt-auto text-[10px] font-mono bg-amp-surface border border-amp-hairline rounded-full px-2 py-1 text-amp-caption w-fit">
-        cited: p2vlabs.in
+        that job is what we do
       </span>
     </CardChrome>
   )

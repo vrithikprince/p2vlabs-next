@@ -8,7 +8,7 @@ import AboutSection from '../components/landing/AboutSection.jsx'
 import FAQ from '../components/landing/FAQ.jsx'
 import LeadCapture from '../components/landing/LeadCapture.jsx'
 import Rule from '../components/ui/Rule.jsx'
-import { websiteJsonLd, SOCIAL_LINKS } from '../lib/seo.js'
+import { websiteJsonLd } from '../lib/seo.js'
 
 /**
  * Landing - Static Site Generation. Rebuilt on deploy and re-validated hourly.
@@ -19,52 +19,6 @@ import { websiteJsonLd, SOCIAL_LINKS } from '../lib/seo.js'
  */
 export const revalidate = 3600
 
-const structuredData = {
-  '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  name: 'P2V Labs',
-  /* See Organization schema in lib/seo.js for the rationale -
-     same alternates so Google fuses the LocalBusiness (homepage),
-     Organization (site-wide), GBP, and IG handle into one entity.
-     One-word 'p2vlabs' / 'P2Vlabs' aliases resolve the joined-spelling
-     brand query (which otherwise collides with "Physical-to-Virtual"). */
-  alternateName: ['p2vlabs', 'P2Vlabs', 'p2v_labs', 'Pixels · Purpose · Visuals'],
-  description: 'Visual content agency specialising in video production, product photography, food photography, and social media content.',
-  url: 'https://p2vlabs.in',
-  telephone: '+917048824616',
-  email: 'hello@p2vlabs.in',
-  address: {
-    '@type': 'PostalAddress',
-    addressLocality: 'Ahmedabad',
-    addressRegion: 'Gujarat',
-    addressCountry: 'IN',
-  },
-  geo: {
-    '@type': 'GeoCoordinates',
-    latitude: 23.0225,
-    longitude: 72.5714,
-  },
-  areaServed: ['Ahmedabad', 'Gujarat', 'India'],
-  serviceType: [
-    'Video Production',
-    'Product Photography',
-    'Food Photography',
-    'Corporate Films',
-    'Brand Reels',
-    'Social Media Content',
-    'Photography Workshops',
-  ],
-  priceRange: '₹₹',
-  openingHours: 'Mo-Sa 09:00-19:00',
-  /* sameAs is shared with the Organization schema in lib/seo.js - single
-     source of truth so adding a Facebook/LinkedIn link later only needs
-     one edit. */
-  sameAs: SOCIAL_LINKS,
-  founder: [
-    { '@type': 'Person', name: 'Vrithik Prince' },
-    { '@type': 'Person', name: 'Payal Chetwani' },
-  ],
-}
 
 /* WebSite JSON-LD - home page only (per Google's docs). The
    SearchAction tells Google where the site search lives so the
@@ -75,10 +29,10 @@ const websiteData = websiteJsonLd({ withSearch: true })
 export default function HomePage() {
   return (
     <div className="pt-16">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
-      />
+      {/* Only WebSite here. The Organization/ProfessionalService node - which
+          used to be duplicated on this page as an un-@id'd LocalBusiness -
+          is emitted once from the root layout and referenced by @id from
+          everywhere else. See lib/seo.js organizationJsonLd(). */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteData) }}

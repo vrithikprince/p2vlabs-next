@@ -3,7 +3,7 @@ import DroppingSoon from '../../components/blog/DroppingSoon.jsx'
 import PageHeader from '../../components/layout/PageHeader.jsx'
 import FilmsIllustration from '../../components/illustrations/FilmsIllustration.jsx'
 import { getPublishedVlogPosts } from '../../lib/cms.js'
-import { breadcrumbsJsonLd } from '../../lib/seo.js'
+import { breadcrumbsJsonLd, buildPageMetadata } from '../../lib/seo.js'
 
 const breadcrumbs = breadcrumbsJsonLd([
   { name: 'Home',  path: '/' },
@@ -14,17 +14,12 @@ const breadcrumbs = breadcrumbsJsonLd([
 export const revalidate = 60
 
 export async function generateMetadata() {
-  return {
+  return buildPageMetadata({
     title: 'The Reel Diary',
     description:
       'Behind-the-scenes films, director cuts, and founder commentary from P2V Labs.',
-    alternates: { canonical: '/vlog' },
-    openGraph: {
-      title: 'The Reel Diary - P2V Labs',
-      url:   '/vlog',
-      type:  'website',
-    },
-  }
+    path: '/vlog',
+  })
 }
 
 export default async function VlogIndex() {

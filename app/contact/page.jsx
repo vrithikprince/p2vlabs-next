@@ -1,20 +1,17 @@
 import ContactSection from '../../components/landing/ContactSection.jsx'
 import LeadForm from '../../components/ui/LeadForm.jsx'
+import { buildPageMetadata } from '../../lib/seo.js'
 
 /** /contact - SSG. Only rebuilds on deploy. */
 export const revalidate = false
 
 export async function generateMetadata() {
-  return {
+  return buildPageMetadata({
     title: 'Contact P2V Labs',
     description:
-      'Get in touch with P2V Labs - a visual content agency based in Ahmedabad. Send a project brief, WhatsApp us, or drop an email. We reply within 24 hours.',
-    alternates: { canonical: '/contact' },
-    openGraph: {
-      title: 'Contact P2V Labs',
-      url:   '/contact',
-    },
-  }
+      'Get in touch with P2V Labs - a content and search visibility studio in Ahmedabad. Send a project brief, WhatsApp us, or drop an email. We reply within 24 hours.',
+    path: '/contact',
+  })
 }
 
 export default function ContactPage() {

@@ -3,7 +3,7 @@ import DroppingSoon from '../../components/blog/DroppingSoon.jsx'
 import PageHeader from '../../components/layout/PageHeader.jsx'
 import JournalIllustration from '../../components/illustrations/JournalIllustration.jsx'
 import { getPublishedBlogPosts } from '../../lib/cms.js'
-import { breadcrumbsJsonLd } from '../../lib/seo.js'
+import { breadcrumbsJsonLd, buildPageMetadata } from '../../lib/seo.js'
 
 /* BreadcrumbList - even on the index page, gives Google the trail so
    the SERP can render "p2vlabs.in › Journal" instead of the raw URL. */
@@ -21,17 +21,12 @@ const breadcrumbs = breadcrumbsJsonLd([
 export const revalidate = 60
 
 export async function generateMetadata() {
-  return {
+  return buildPageMetadata({
     title: 'The Journal',
     description:
       'Essays, production notes, and behind-the-frame breakdowns from the P2V Labs studio in Ahmedabad.',
-    alternates: { canonical: '/blog' },
-    openGraph: {
-      title: 'The Journal - P2V Labs',
-      url:   '/blog',
-      type:  'website',
-    },
-  }
+    path: '/blog',
+  })
 }
 
 export default async function BlogIndex() {

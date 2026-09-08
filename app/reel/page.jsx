@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { createServerClient, SB_PUBLIC } from '../../lib/supabase.js'
 import { VIDEO_ITEMS, PHOTO_ITEMS } from '../../data/reelItems.js'
 import ReelClient from '../../components/reel/ReelClient.jsx'
+import { buildPageMetadata } from '../../lib/seo.js'
 
 const WA_REEL = 'https://wa.me/917048824616?text=' + encodeURIComponent(
   'Hi P2V Labs, I just saw your reel. I’d like to discuss creating something similar for my brand - could you share the next steps?'
@@ -18,16 +19,12 @@ const WA_REEL = 'https://wa.me/917048824616?text=' + encodeURIComponent(
 export const revalidate = 3600
 
 export async function generateMetadata() {
-  return {
+  return buildPageMetadata({
     title: 'Our Work - The Reel',
     description:
       'Explore P2V Labs portfolio - cinematic brand reels, product photography, food photography, and corporate films created for businesses across Ahmedabad and Gujarat.',
-    alternates: { canonical: '/reel' },
-    openGraph: {
-      title: 'The Reel - P2V Labs Portfolio',
-      url: '/reel',
-    },
-  }
+    path: '/reel',
+  })
 }
 
 async function loadReelItems() {

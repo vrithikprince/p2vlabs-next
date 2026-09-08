@@ -35,7 +35,7 @@ const FAQS = [
   },
   {
     q: 'What does P2V Labs do?',
-    a: 'P2V Labs is a visual content agency based in Ahmedabad. We produce brand films, food and product photography, social reels, and corporate video for businesses across Gujarat and India. Most of our work sits in restaurants, D2C brands, and founder-led businesses that need a steady supply of content that actually moves the needle on Instagram, Zomato, and YouTube.',
+    a: 'P2V Labs is a content and search visibility studio based in Ahmedabad. We produce brand films, food and product photography, social reels and corporate video - and we build websites with SEO and AI search visibility, so the work is actually found. Most of our clients are restaurants, D2C brands and founder-led businesses across Gujarat and India who need both: a steady supply of content, and to show up when someone searches or asks an AI for a recommendation.',
   },
   {
     q: 'Where are you based, and do you travel for shoots?',
@@ -51,7 +51,7 @@ const FAQS = [
   },
   {
     q: 'Do you work with restaurants and food brands?',
-    a: 'Yes - food photography and restaurant social content is one of our core areas, and we’ve worked with 150+ restaurants on Zomato- and Swiggy-optimised stills, brand reels, and monthly content calendars. It isn’t all we do: the same production and search work runs for retail, automotive, D2C product brands, and founder-led personal brands.',
+    a: 'Yes - food and restaurant work is one of our core areas. Our founders come from a Surat studio that shot 150+ restaurants and cafés, and that experience is why the workflow, lighting and turnaround here are built around that pace. It isn’t all we do: the same production and search work runs for retail, automotive, D2C product brands and founder-led personal brands.',
   },
   {
     q: 'What’s included in a monthly content plan?',

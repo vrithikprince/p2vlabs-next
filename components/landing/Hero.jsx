@@ -18,14 +18,20 @@ const ROTATOR_WORDS = ['found.', 'recommended by AI.', 'booked.', 'retained.']
    headline on wide screens, an inline strip everywhere else. Sharing one
    source stops the two from drifting apart.
 
+   Two of these used to assert results rather than capability: "Cited by
+   ChatGPT" (true once, from one lead who said so - not a standing state) and
+   "Ranking for brand search" (ranking first for your own brand name is the
+   default for any indexed site). Both are now claims about how the site is
+   built, which is defensible and still differentiating.
+
    `side` picks which flank a chip sits on (see the FLOAT_MQ block for how that
    resolves to a position at each width), `top` is its vertical slot, and the
    float/depth values give each one its own drift so the cluster never bobs
    in lockstep. */
 const CHIPS = [
   { id: 'genai', side: 'left',  top: '5%',  tone: 'light', badge: '⚡', short: 'GenAI-assisted', long: 'GenAI-assisted, on-brand', amp: 8,  dur: 2.9, rot: 2.5,  depth: 9  },
-  { id: 'ai',    side: 'right', top: '13%', tone: 'dark',  badge: '✦', short: 'Cited by AI',    long: 'Cited by ChatGPT',         amp: 7,  dur: 2.4, rot: 2,    depth: 22 },
-  { id: 'rank',  side: 'left',  top: '30%', tone: 'light', badge: '#1',     short: 'Top ranking',    long: 'Ranking for brand search', amp: 10, dur: 3.1, rot: -2.5, depth: 12 },
+  { id: 'ai',    side: 'right', top: '13%', tone: 'dark',  badge: '✦', short: 'Built to be cited', long: 'Built to be cited by AI',  amp: 7,  dur: 2.4, rot: 2,    depth: 22 },
+  { id: 'rank',  side: 'left',  top: '30%', tone: 'light', badge: '{ }',    short: 'Entity markup',  long: 'Structured for search',    amp: 10, dur: 3.1, rot: -2.5, depth: 12 },
   { id: 'ret',   side: 'right', top: '30%', tone: 'light', badge: '90%',    short: 'Clients return', long: 'Clients return for more',  amp: 11, dur: 3.4, rot: -2,   depth: 18 },
 ]
 
@@ -424,6 +430,9 @@ export default function Hero() {
         <p className="flex items-center justify-center gap-2 text-[11px] font-semibold tracking-[0.12em] uppercase text-amp-caption mb-5">
           <span className="w-1.5 h-1.5 rounded-full bg-black" />
           What actually runs behind that claim
+          <span className="font-normal normal-case tracking-normal text-amp-caption/70">
+            &nbsp;· illustrative
+          </span>
         </p>
         <CapabilityLoop />
       </div>
