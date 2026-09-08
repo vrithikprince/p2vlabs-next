@@ -1,21 +1,25 @@
 import Link from 'next/link'
-import PageHeader from '../../components/layout/PageHeader.jsx'
 import Rule from '../../components/ui/Rule.jsx'
+import { SERVICE_MARKS } from '../../components/illustrations/ServiceMarks.jsx'
 import { SITE_URL, buildPageMetadata, breadcrumbsJsonLd } from '../../lib/seo.js'
 import { SERVICES, SERVICE_GROUPS, ACCENT } from '../../lib/services.mjs'
 import { inr } from '../../lib/pricing.mjs'
 
 /**
- * /services — the hub.
+ * /services — the hub, as an editorial index rather than a card grid.
  *
- * Exists because the site previously had no services route at all: website,
- * SEO and AI-visibility work appeared only as cards on /packages, and the
- * homepage list did not mention them. There was nothing to rank, and nothing
- * for an internal link to point at.
+ * The first version of this page was three columns of identical rounded
+ * cards. It ranked fine and looked like every Tailwind template ever
+ * shipped, which is a real cost for a studio selling design.
  *
- * The hub's job is two-fold — give each cluster a parent to link up to, and
- * state in one place that this studio does both halves of the work. Both are
- * as much for a crawler as for a reader.
+ * This uses the vocabulary the homepage already established and this page
+ * had ignored: index numerals, the drawn service marks, hairline rules
+ * doing the structural work, and a giant ghost numeral bleeding off the
+ * edge. Seven equal cards give a reader no hierarchy and no rhythm; seven
+ * full-bleed numbered rows read as an index, scan faster, and let the
+ * typography carry weight a 320px card never can.
+ *
+ * Nothing about the SEO changed - same schema, same copy, same URLs.
  */
 export const revalidate = 3600
 
@@ -28,15 +32,69 @@ export async function generateMetadata() {
   })
 }
 
-export default function ServicesPage() {
-  const crumbs = breadcrumbsJsonLd([
-    { name: 'Home', path: '/' },
-    { name: 'Services' },
-  ])
+function IndexRow({ s, last }) {
+  const a = ACCENT[s.accent]
+  const Mark = SERVICE_MARKS[s.mark]
 
-  /* ItemList rather than a bare page: it tells a crawler this URL is the
-     parent of a set, and names every child with its own URL. That is the
-     cheapest way to make a hub legible as a hub. */
+  return (
+    <Link
+      href={`/services/${s.slug}`}
+      className={`group relative block ${last ? '' : 'border-b border-amp-hairline'}`}
+    >
+      {/* The accent creeps in from the left on hover rather than the whole row
+          filling - a 96px-tall block of navy would shout, and the point is
+          that the index stays calm until you address one line of it. */}
+      <span
+        className={`absolute left-0 top-0 bottom-0 w-0 ${a.bg} transition-all duration-500 ease-out group-hover:w-[3px]`}
+        aria-hidden="true"
+      />
+
+      <div className="flex items-center gap-6 md:gap-10 py-7 md:py-9 pl-0 md:pl-6 transition-[padding] duration-500 ease-out group-hover:pl-4 md:group-hover:pl-10">
+        <span className="font-plex text-[11px] font-semibold tracking-[0.2em] text-amp-caption/60 w-8 shrink-0 pt-1">
+          {s.n}
+        </span>
+
+        <div className="min-w-0 flex-1">
+          <h3
+            className="font-plex font-semibold text-black leading-[1.05] tracking-[-0.02em]"
+            style={{ fontSize: 'clamp(1.6rem,3.6vw,2.9rem)' }}
+          >
+            {s.name}
+          </h3>
+          <p className="text-[14px] md:text-[15px] text-amp-body leading-relaxed mt-2 max-w-xl">
+            {s.tagline}
+          </p>
+        </div>
+
+        {/* The drawn mark, held back until hover on desktop so the index reads
+            as type first. Always visible on touch, where there is no hover. */}
+        <div className="hidden lg:block shrink-0 w-[76px] opacity-0 translate-x-2 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:translate-x-0">
+          {Mark && <Mark accent={a.hex} className="w-full h-auto" />}
+        </div>
+
+        <div className="shrink-0 text-right w-[104px] md:w-[132px]">
+          <span className="block text-[11px] uppercase tracking-[0.14em] text-amp-caption/70">
+            {s.priceFrom === null ? 'Scoped' : 'From'}
+          </span>
+          <span className={`block font-plex text-[15px] md:text-[17px] font-semibold ${a.text} mt-1`}>
+            {s.priceFrom === null ? 'per project' : inr(s.priceFrom)}
+          </span>
+        </div>
+
+        <span
+          className={`shrink-0 hidden md:block text-[20px] ${a.text} opacity-0 -translate-x-2 transition-all duration-500 ease-out group-hover:opacity-100 group-hover:translate-x-0`}
+          aria-hidden="true"
+        >
+          →
+        </span>
+      </div>
+    </Link>
+  )
+}
+
+export default function ServicesPage() {
+  const crumbs = breadcrumbsJsonLd([{ name: 'Home', path: '/' }, { name: 'Services' }])
+
   const itemList = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
@@ -51,59 +109,55 @@ export default function ServicesPage() {
 
   return (
     <div className="pt-16 bg-white">
-      <script type="application/ld+json"
-              dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbs) }} />
-      <script type="application/ld+json"
-              dangerouslySetInnerHTML={{ __html: JSON.stringify(itemList) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbs) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemList) }} />
 
-      <PageHeader
-        kicker="Services"
-        title="Two halves of the same job."
-        italic="Make the work. Make it findable."
-      />
+      {/* ── masthead: type at a scale the old PageHeader would not allow ── */}
+      <section className="relative px-5 md:px-10 lg:px-20 pt-10 lg:pt-16 pb-10 lg:pb-14 overflow-hidden">
+        <div className="max-w-7xl mx-auto relative">
+          <p className="flex items-center gap-2 text-[13px] font-semibold tracking-[0.08em] uppercase text-amp-caption mb-7">
+            <span className="w-1.5 h-1.5 rounded-full bg-amp-violet" />
+            Services
+          </p>
+          <h1
+            className="font-plex font-semibold text-black leading-[0.94] tracking-[-0.035em] max-w-[16ch]"
+            style={{ fontSize: 'clamp(2.6rem,8vw,6.2rem)' }}
+          >
+            Make the work.
+            <br />
+            <span className="text-amp-violet">Make it findable.</span>
+          </h1>
+          <p className="mt-8 text-[16px] lg:text-[18px] text-amp-body leading-relaxed max-w-xl">
+            Seven things, in two halves. One half puts something worth finding
+            into the world. The other makes sure a search engine — and whatever
+            people ask instead of one — can actually see it.
+          </p>
 
-      {SERVICE_GROUPS.map((group, gi) => {
+          <span
+            className="pointer-events-none select-none absolute -right-4 -bottom-14 font-plex font-semibold text-black/[0.035] leading-none"
+            style={{ fontSize: 'clamp(9rem,22vw,20rem)' }}
+            aria-hidden="true"
+          >
+            07
+          </span>
+        </div>
+      </section>
+
+      {/* ── the index ── */}
+      {SERVICE_GROUPS.map((group) => {
         const items = SERVICES.filter((s) => s.kicker === group.kicker)
         return (
-          <section key={group.kicker} className="px-5 md:px-10 lg:px-20 py-12 lg:py-16">
+          <section key={group.kicker} className="px-5 md:px-10 lg:px-20 pb-4">
             <div className="max-w-7xl mx-auto">
-              <div className="mb-10">
-                <p className="flex items-center gap-2 text-[13px] font-semibold tracking-[0.08em] uppercase text-amp-caption mb-3">
-                  <span className={`w-1.5 h-1.5 rounded-full ${gi === 0 ? 'bg-black' : 'bg-amp-violet'}`} />
+              <div className="flex items-baseline justify-between gap-6 pt-10 pb-5 border-b-2 border-black">
+                <h2 className="font-plex text-[13px] font-semibold tracking-[0.16em] uppercase text-black">
                   {group.kicker}
-                </p>
-                <p className="font-plex text-2xl lg:text-3xl font-semibold text-black leading-tight tracking-[-0.01em] max-w-xl">
-                  {group.blurb}
-                </p>
+                </h2>
+                <p className="text-[13px] text-amp-caption text-right">{group.blurb}</p>
               </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {items.map((s) => {
-                  const a = ACCENT[s.accent]
-                  return (
-                    <Link
-                      key={s.slug}
-                      href={`/services/${s.slug}`}
-                      className="group flex flex-col h-full p-7 rounded-[16px] bg-white border border-amp-hairline hover:border-amp-hairline-strong transition-colors"
-                    >
-                      <h2 className="font-plex text-xl lg:text-2xl font-semibold text-black leading-tight tracking-[-0.01em] mb-3">
-                        {s.name}
-                      </h2>
-                      <p className="text-[14px] text-amp-body leading-relaxed mb-6 flex-1">
-                        {s.tagline}
-                      </p>
-                      <div className="pt-4 border-t border-amp-hairline flex items-baseline justify-between gap-3">
-                        <span className="text-[12px] text-amp-caption">
-                          {s.priceFrom === null ? 'Scoped per project' : `From ${inr(s.priceFrom)}`}
-                        </span>
-                        <span className={`text-[10px] font-semibold tracking-[0.12em] uppercase ${a.text}`}>
-                          Detail →
-                        </span>
-                      </div>
-                    </Link>
-                  )
-                })}
-              </div>
+              {items.map((s, i) => (
+                <IndexRow key={s.slug} s={s} last={i === items.length - 1} />
+              ))}
             </div>
           </section>
         )
@@ -111,21 +165,29 @@ export default function ServicesPage() {
 
       <Rule />
 
-      <section className="px-5 md:px-10 lg:px-20 py-14 lg:py-20">
-        <div className="max-w-3xl mx-auto text-center">
-          <h2 className="font-plex text-2xl lg:text-3xl font-semibold text-black leading-tight tracking-[-0.01em] mb-4">
-            Every price on one page.
-          </h2>
-          <p className="text-amp-body leading-relaxed mb-7">
-            Monthly plans, project work and search retainers, with the starting
-            figure for each. No form to fill in first.
-          </p>
-          <Link
-            href="/packages"
-            className="inline-flex items-center gap-2 rounded-full bg-amp-ink-pill text-white px-6 py-3 text-[13px] font-semibold hover:bg-black transition-colors"
-          >
-            See packages &amp; pricing
-          </Link>
+      <section className="px-5 md:px-10 lg:px-20 py-16 lg:py-24">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-end">
+          <div className="lg:col-span-7">
+            <h2
+              className="font-plex font-semibold text-black leading-[1.02] tracking-[-0.025em]"
+              style={{ fontSize: 'clamp(1.9rem,4.4vw,3.2rem)' }}
+            >
+              Every price on one page.
+            </h2>
+            <p className="mt-4 text-amp-body leading-relaxed max-w-lg">
+              Monthly plans, project work and search retainers, with the
+              starting figure for each. No form to fill in first.
+            </p>
+          </div>
+          <div className="lg:col-span-5 lg:text-right">
+            <Link
+              href="/packages"
+              className="inline-flex items-center gap-2 rounded-full bg-amp-ink-pill text-white px-7 py-3.5 text-[13px] font-semibold hover:bg-black transition-colors"
+            >
+              Packages &amp; pricing
+              <span aria-hidden="true">→</span>
+            </Link>
+          </div>
         </div>
       </section>
     </div>

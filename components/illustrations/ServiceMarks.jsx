@@ -155,10 +155,69 @@ export function GenAiMark({ accent, className }) {
   )
 }
 
+/* Website Development - a browser frame whose page structure is the drawing.
+   The accent is the one block that matters: the served content, not chrome. */
+export function WebMark({ accent, className }) {
+  return (
+    <Frame className={className}>
+      <rect x="10" y="20" width="100" height="80" rx="9" fill="#fff" stroke={INK} strokeWidth={SW} />
+      <path d="M10 38 H110" stroke={INK} strokeWidth={SW} />
+      <circle cx="21" cy="29" r="2.6" fill={INK} />
+      <circle cx="30" cy="29" r="2.6" fill={INK} />
+      <circle cx="39" cy="29" r="2.6" fill={INK} />
+      <rect x="50" y="25" width="50" height="8" rx="4" fill={PANEL} stroke={INK} strokeWidth="1.6" />
+      {/* the page: a hero block in accent, then structured rows beneath */}
+      <rect x="20" y="48" width="80" height="18" rx="5" fill={accent} stroke={INK} strokeWidth={SW} />
+      <rect x="20" y="72" width="34" height="18" rx="5" fill={PANEL} stroke={INK} strokeWidth="1.6" />
+      <rect x="60" y="72" width="40" height="6" rx="3" fill={PANEL} stroke={INK} strokeWidth="1.6" />
+      <rect x="60" y="84" width="26" height="6" rx="3" fill={PANEL} stroke={INK} strokeWidth="1.6" />
+    </Frame>
+  )
+}
+
+/* SEO - a ranked list where the top result is the accent, read through a lens.
+   The lens is deliberately small: the ranking is the subject, not the search. */
+export function SearchMark({ accent, className }) {
+  return (
+    <Frame className={className}>
+      <rect x="14" y="18" width="92" height="70" rx="9" fill="#fff" stroke={INK} strokeWidth={SW} />
+      {/* position one, in accent */}
+      <rect x="24" y="29" width="72" height="14" rx="5" fill={accent} stroke={INK} strokeWidth={SW} />
+      <rect x="24" y="51" width="56" height="8" rx="4" fill={PANEL} stroke={INK} strokeWidth="1.6" />
+      <rect x="24" y="66" width="44" height="8" rx="4" fill={PANEL} stroke={INK} strokeWidth="1.6" />
+      {/* lens, overlapping the frame's lower-right corner */}
+      <circle cx="86" cy="82" r="17" fill="#fff" stroke={INK} strokeWidth={SW} />
+      <path d="M98 94 L110 106" stroke={INK} strokeWidth={SW} />
+    </Frame>
+  )
+}
+
+/* AI Search Visibility - a generated answer with one cited source. The accent
+   IS the citation chip, because being named is the entire product. */
+export function AeoMark({ accent, className }) {
+  return (
+    <Frame className={className}>
+      <path
+        d="M14 26 h92 a8 8 0 0 1 8 8 v40 a8 8 0 0 1 -8 8 H44 L28 96 V82 H14 a8 8 0 0 1 -8 -8 V34 a8 8 0 0 1 8 -8 Z"
+        fill="#fff" stroke={INK} strokeWidth={SW}
+      />
+      <rect x="22" y="40" width="72" height="7" rx="3.5" fill={PANEL} stroke={INK} strokeWidth="1.6" />
+      <rect x="22" y="54" width="52" height="7" rx="3.5" fill={PANEL} stroke={INK} strokeWidth="1.6" />
+      {/* the citation - the point of the whole drawing */}
+      <rect x="22" y="67" width="40" height="11" rx="5.5" fill={accent} stroke={INK} strokeWidth={SW} />
+      {/* the spark, marking it as generated rather than retrieved */}
+      <path d="M100 16 l3 6.4 6.4 3 -6.4 3 -3 6.4 -3 -6.4 -6.4 -3 6.4 -3 Z" fill={accent} stroke={INK} strokeWidth="1.6" />
+    </Frame>
+  )
+}
+
 export const SERVICE_MARKS = {
   video: VideoMark,
   photography: PhotographyMark,
   social: SocialMark,
   brand: BrandMark,
   genai: GenAiMark,
+  web: WebMark,
+  search: SearchMark,
+  aeo: AeoMark,
 }
