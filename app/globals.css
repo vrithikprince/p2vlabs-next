@@ -426,3 +426,80 @@ nav.glass-nav {
    at 700 inside 400 prose was heavier than any heading on the page. */
 .blog-article strong { font-weight: 600; color: #000000; }
 .blog-article em     { font-style: italic; }
+
+/* ─────────────────────────────────────────────
+   SERVICES CLUSTER (app/services/*)
+
+   These pages are built around drawn technical marks, so the surfaces
+   under them are drafted like technical paper: a hairline field,
+   registration crosses where a printer would put them, and colour
+   arriving as light across the page rather than as a flat fill.
+
+   The accent gradients are the same technique as the hero wash - a
+   blurred radial at low alpha - not the corner-to-corner mesh that
+   makes a page look like a template. Everything here is decorative and
+   sits behind `aria-hidden` wrappers.
+───────────────────────────────────────────── */
+
+/* Drafting field. Two repeating gradients rather than an image, so it
+   stays crisp at any zoom and costs no request. The radial mask matters
+   as much as the grid: a field that runs hard into the section edge
+   reads as a data table, whereas one that fades reads as paper. */
+.svc-field {
+  --svc-line: rgba(0, 26, 79, 0.06);
+  --svc-cell: 68px;
+  background-image:
+    repeating-linear-gradient(to right,  var(--svc-line) 0 1px, transparent 1px var(--svc-cell)),
+    repeating-linear-gradient(to bottom, var(--svc-line) 0 1px, transparent 1px var(--svc-cell));
+  -webkit-mask-image: radial-gradient(ellipse 76% 70% at 50% 34%, #000 26%, transparent 100%);
+          mask-image: radial-gradient(ellipse 76% 70% at 50% 34%, #000 26%, transparent 100%);
+}
+.svc-field-dark  { --svc-line: rgba(255, 255, 255, 0.075); }
+.svc-field-tight { --svc-cell: 44px; }
+/* Edge-to-edge variant for full-bleed bands, faded top and bottom only. */
+.svc-field-band {
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 22%, #000 78%, transparent);
+          mask-image: linear-gradient(to bottom, transparent, #000 22%, #000 78%, transparent);
+}
+
+/* Grain. Only ever used over the dark bands, where it does real work:
+   a large low-alpha gradient on a near-black ground bands visibly on
+   8-bit displays, and noise is the standard fix. On white it would just
+   read as a dirty screen, so it is not applied there. */
+.svc-grain::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.22;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* Accent sweep behind an index row. Consumes --svc-accent as an
+   unbracketed "R G B" triple so one variable drives fills, rules and
+   this gradient without three near-duplicate colour strings. */
+.svc-sweep {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  background-image: linear-gradient(
+    90deg,
+    rgb(var(--svc-accent) / 0.10) 0%,
+    rgb(var(--svc-accent) / 0.03) 34%,
+    rgb(var(--svc-accent) / 0) 62%
+  );
+}
+.group:hover > .svc-sweep,
+.group:focus-visible > .svc-sweep { opacity: 1; }
+
+/* Query tag inside a row - the search the page is built to win. Hidden
+   until hover so the index reads as type first. */
+.svc-query { font-family: 'SF Mono', Menlo, Consolas, monospace; }
+
+@media (prefers-reduced-motion: reduce) {
+  .svc-sweep { transition: none; }
+  .marquee-track { animation: none; }
+}
