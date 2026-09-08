@@ -190,6 +190,20 @@ export default function Services() {
         </div>
 
       </div>
+
+      {/* Sends homepage traffic - and crawl - into the /services cluster.
+          The cards above open WhatsApp, which converts but passes no link
+          equity anywhere; this is the internal link that makes the hub a
+          hub. */}
+      <div className="max-w-7xl mx-auto px-5 md:px-10 lg:px-20 mt-14 text-center">
+        <a
+          href="/services"
+          className="inline-flex items-center gap-2 rounded-full border border-amp-hairline px-6 py-3 text-[13px] font-semibold text-black hover:border-black/40 transition-colors"
+        >
+          All services in detail
+          <span aria-hidden="true">→</span>
+        </a>
+      </div>
     </section>
   )
 }

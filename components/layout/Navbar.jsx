@@ -20,6 +20,9 @@ import Icon from '../ui/Icon.jsx'
  *      label changed for lead-gen clarity / pricing intent.)
  */
 const PRIMARY = [
+  /* Services sits first: it is the hub the whole /services cluster links
+     up to, and a cluster nothing links into does not get crawled as one. */
+  { id: 'services', label: 'Services', path: '/services' },
   { id: 'reel',     label: 'The Reel', path: '/reel' },
   { id: 'blog',     label: 'Journal',  path: '/blog' },
   { id: 'vlog',     label: 'Films',    path: '/vlog' },

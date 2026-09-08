@@ -1,4 +1,5 @@
 import { getPublishedBlogPosts, getPublishedVlogPosts } from '../lib/cms.js'
+import { SERVICES } from '../lib/services.mjs'
 
 const SITE = 'https://p2vlabs.in'
 
@@ -30,6 +31,7 @@ export default async function sitemap() {
     packages: '2026-08-29',   // search & AI visibility section added
     about:    '2026-08-24',
     contact:  '2026-08-24',
+    services: '2026-09-08',   // service cluster introduced
   }
   const d = (iso) => new Date(`${iso}T00:00:00Z`)
 
@@ -41,6 +43,15 @@ export default async function sitemap() {
     { url: `${SITE}/packages`, lastModified: d(EDITED.packages), changeFrequency: 'monthly', priority: 0.8 },
     { url: `${SITE}/about`,    lastModified: d(EDITED.about),    changeFrequency: 'monthly', priority: 0.7 },
     { url: `${SITE}/contact`,  lastModified: d(EDITED.contact),  changeFrequency: 'monthly', priority: 0.7 },
+    { url: `${SITE}/services`, lastModified: d(EDITED.services), changeFrequency: 'monthly', priority: 0.9 },
+    /* One entry per service cluster, generated from lib/services.mjs so a new
+       service is one edit there rather than a route AND a sitemap line. */
+    ...SERVICES.map((svc) => ({
+      url:             `${SITE}/services/${svc.slug}`,
+      lastModified:    d(EDITED.services),
+      changeFrequency: 'monthly',
+      priority:        0.8,
+    })),
   ]
 
   /* Fetch published posts in parallel. If Supabase is unreachable
