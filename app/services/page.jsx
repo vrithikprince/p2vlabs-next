@@ -1,6 +1,9 @@
 import Link from 'next/link'
 import { SERVICE_MARKS } from '../../components/illustrations/ServiceMarks.jsx'
 import { GridField, Wash, RegMarks } from '../../components/services/Decor.jsx'
+import ShaderField from '../../components/services/ShaderField.jsx'
+import ServicesMotion from '../../components/services/ServicesMotion.jsx'
+import MarkConstellation from '../../components/services/MarkConstellation.jsx'
 import { SITE_URL, buildPageMetadata, breadcrumbsJsonLd } from '../../lib/seo.js'
 import { SERVICES, SERVICE_GROUPS, ACCENT } from '../../lib/services.mjs'
 import { inr } from '../../lib/pricing.mjs'
@@ -46,6 +49,7 @@ function IndexRow({ s, last }) {
   return (
     <Link
       href={`/services/${s.slug}`}
+      data-anim="row"
       style={{ '--svc-accent': a.rgb }}
       className={`group relative block ${last ? '' : 'border-b border-amp-hairline'}`}
     >
@@ -128,44 +132,64 @@ export default function ServicesPage() {
   }
 
   return (
+    <ServicesMotion>
     <div className="pt-16 bg-white">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(crumbs) }} />
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemList) }} />
 
-      {/* ── masthead ─────────────────────────────────────────────────── */}
-      <section className="relative px-5 md:px-10 lg:px-20 pt-10 lg:pt-16 pb-10 lg:pb-14 overflow-hidden">
+      {/* ── masthead ──────────────────────────────────────────────────────
+          Layered back to front: the static CSS washes (which are also the
+          no-WebGL fallback, so they are tuned to stand on their own), then
+          the shader, then the drafting grid, then type. The washes sit
+          lower than they would alone - with the shader over them the two
+          colour layers otherwise compound into mud.                       */}
+      <section className="relative px-5 md:px-10 lg:px-20 pt-12 lg:pt-16 pb-12 lg:pb-14 overflow-hidden flex flex-col justify-center min-h-[62vh] lg:min-h-[74vh]">
+        <Wash rgb="0 26 79" alpha={0.1} style={{ top: '-16%', left: '2%' }} />
+        <Wash rgb="162 115 255" alpha={0.11} size="clamp(260px,30vw,480px)" style={{ top: '-8%', right: '4%' }} />
+        <ShaderField />
         <GridField />
-        <Wash rgb="0 26 79" alpha={0.13} style={{ top: '-16%', left: '2%' }} />
-        <Wash rgb="162 115 255" alpha={0.15} size="clamp(260px,30vw,480px)" style={{ top: '-8%', right: '4%' }} />
-        <Wash rgb="105 128 255" alpha={0.11} size="clamp(240px,26vw,420px)" style={{ bottom: '-30%', left: '42%' }} />
         <RegMarks />
 
-        <div className="max-w-7xl mx-auto relative">
-          <p className="flex items-center gap-2 text-[13px] font-semibold tracking-[0.08em] uppercase text-amp-caption mb-7">
-            <span className="w-1.5 h-1.5 rounded-full bg-amp-violet" />
-            Services
-          </p>
-          <h1
-            className="font-plex font-semibold text-black leading-[0.94] tracking-[-0.035em] max-w-[16ch]"
-            style={{ fontSize: 'clamp(2.6rem,8vw,6.2rem)' }}
-          >
-            Make the work.
-            <br />
-            <span className="text-amp-violet">Make it findable.</span>
-          </h1>
-          <p className="mt-8 text-[16px] lg:text-[18px] text-amp-body leading-relaxed max-w-xl">
-            Seven things, in two halves. One half puts something worth finding
-            into the world. The other makes sure a search engine &mdash; and whatever
-            people ask instead of one &mdash; can actually see it.
-          </p>
+        <div className="max-w-7xl mx-auto relative w-full grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+          <div className="lg:col-span-7">
+            <p
+              data-anim="eyebrow"
+              className="flex items-center gap-2 text-[13px] font-semibold tracking-[0.08em] uppercase text-amp-caption mb-7"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-amp-violet" />
+              Services
+            </p>
+            {/* Each line gets its own clip box so the reveal wipes rather than
+                fades. .clip-wrap is the site's existing idiom for this - it
+                carries the descender padding that stops "y" being sliced. */}
+            <h1
+              className="font-plex font-semibold text-black leading-[0.94] tracking-[-0.035em]"
+              style={{ fontSize: 'clamp(2.5rem,6.4vw,5.4rem)' }}
+            >
+              <span data-anim="line" className="clip-wrap">
+                <span className="block">Make the work.</span>
+              </span>
+              <span data-anim="line" className="clip-wrap">
+                <span className="block text-amp-violet">Make it findable.</span>
+              </span>
+            </h1>
+            <p
+              data-anim="lede"
+              className="mt-7 text-[16px] lg:text-[18px] text-amp-body leading-relaxed max-w-xl"
+            >
+              Seven things, in two halves. One half puts something worth finding
+              into the world. The other makes sure a search engine &mdash; and whatever
+              people ask instead of one &mdash; can actually see it.
+            </p>
+          </div>
 
-          <span
-            className="pointer-events-none select-none absolute -right-4 -bottom-14 font-plex font-semibold text-black/[0.035] leading-none"
-            style={{ fontSize: 'clamp(9rem,22vw,20rem)' }}
-            aria-hidden="true"
-          >
-            07
-          </span>
+          {/* The subject. Below lg it is dropped rather than shrunk - at
+              phone width seven nodes and their labels collapse into an
+              unreadable tangle, and the index immediately below already
+              lists all seven properly. */}
+          <div className="hidden lg:block lg:col-span-5">
+            <MarkConstellation className="max-w-[520px] ml-auto" />
+          </div>
         </div>
       </section>
 
@@ -179,7 +203,7 @@ export default function ServicesPage() {
               -50% of its own very wide width, so with only the band clipping
               it, it slides out from under the label and prints over it. */}
           <div className="relative flex-1 min-w-0 overflow-hidden">
-            <div className="marquee-track">
+            <div className="marquee-track" data-anim="marquee">
               {/* Duplicated exactly once - the keyframe travels -50%, so any
                   other multiple makes the loop visibly jump. The copy is
                   aria-hidden so a screen reader hears the list a single time. */}
@@ -221,9 +245,11 @@ export default function ServicesPage() {
                 </h2>
                 <p className="text-[13px] text-amp-caption text-right">{group.blurb}</p>
               </div>
-              {items.map((s, i) => (
-                <IndexRow key={s.slug} s={s} last={i === items.length - 1} />
-              ))}
+              <div data-anim="rows">
+                {items.map((s, i) => (
+                  <IndexRow key={s.slug} s={s} last={i === items.length - 1} />
+                ))}
+              </div>
             </div>
           </section>
         )
@@ -261,7 +287,16 @@ export default function ServicesPage() {
               Dividers are a left border on each cell after the first in its
               row, so adjacent cells never stack two hairlines into one 2px
               rule that reads heavier than the others. */}
-          <ol className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 border-t border-white/30">
+          <div className="relative">
+            {/* The rule is its own element rather than a border so it can be
+                drawn in. The step nodes still sit on it: they are pinned to
+                each cell's top edge, which is this line. */}
+            <span
+              data-anim="rule"
+              className="absolute left-0 right-0 top-0 h-px bg-white/30"
+              aria-hidden="true"
+            />
+            <ol className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
             {STEPS.map((st, i) => {
               /* Which cells start a new column depends on the breakpoint, and
                  the node has to travel with the padding or it detaches from
@@ -275,6 +310,7 @@ export default function ServicesPage() {
               return (
                 <li
                   key={st.n}
+                  data-anim="step"
                   className={[
                     'relative pt-8 pb-8 pr-0 sm:pr-8',
                     dividesAtSm ? 'sm:border-l sm:border-white/15 sm:pl-8' : '',
@@ -311,7 +347,8 @@ export default function ServicesPage() {
                 </li>
               )
             })}
-          </ol>
+            </ol>
+          </div>
         </div>
       </section>
 
@@ -360,5 +397,6 @@ export default function ServicesPage() {
         </div>
       </section>
     </div>
+    </ServicesMotion>
   )
 }

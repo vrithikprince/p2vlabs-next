@@ -503,3 +503,13 @@ nav.glass-nav {
   .svc-sweep { transition: none; }
   .marquee-track { animation: none; }
 }
+
+/* The masthead's drafting grid is drawn by the shader once WebGL is live, so
+   the CSS sheet - which is the no-WebGL fallback - stands down rather than
+   double-printing at a different phase. ShaderField sets the attribute only
+   after the context and program have actually linked, so a failed init keeps
+   the static grid. */
+[data-shader='on'] > .svc-field {
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
