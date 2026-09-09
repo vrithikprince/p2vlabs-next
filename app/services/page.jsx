@@ -4,6 +4,7 @@ import { GridField, Wash, RegMarks } from '../../components/services/Decor.jsx'
 import ShaderField from '../../components/services/ShaderField.jsx'
 import ServicesMotion from '../../components/services/ServicesMotion.jsx'
 import MarkConstellation from '../../components/services/MarkConstellation.jsx'
+import FluidBand from '../../components/services/FluidBand.jsx'
 import { SITE_URL, buildPageMetadata, breadcrumbsJsonLd } from '../../lib/seo.js'
 import { SERVICES, SERVICE_GROUPS, ACCENT } from '../../lib/services.mjs'
 import { inr } from '../../lib/pricing.mjs'
@@ -271,6 +272,11 @@ export default function ServicesPage() {
         <GridField dark band tight />
         <Wash rgb="105 128 255" alpha={0.26} blur={60} size="clamp(300px,36vw,560px)" style={{ top: '-24%', right: '4%' }} />
         <Wash rgb="162 115 255" alpha={0.2} blur={60} size="clamp(260px,30vw,460px)" style={{ bottom: '-30%', left: '-4%' }} />
+        {/* Sits above the wash and below the type, screen-blended so it adds
+            light to the band rather than replacing it. Self-gating: renders
+            nothing without WebGPU, a fine pointer and motion consent, in which
+            case the band is exactly what it was. */}
+        <FluidBand />
         <RegMarks dark />
 
         <div className="relative max-w-7xl mx-auto px-5 md:px-10 lg:px-20 py-16 lg:py-24">
@@ -343,7 +349,7 @@ export default function ServicesPage() {
                   <h3 className="font-plex text-[20px] lg:text-[22px] font-semibold text-white mt-3 tracking-[-0.015em]">
                     {st.t}
                   </h3>
-                  <p className="text-[14px] text-white/60 leading-relaxed mt-2.5 max-w-[30ch]">{st.d}</p>
+                  <p className="text-[14px] text-white/70 leading-relaxed mt-2.5 max-w-[30ch]">{st.d}</p>
                 </li>
               )
             })}
