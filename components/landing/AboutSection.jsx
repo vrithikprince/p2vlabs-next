@@ -2,15 +2,29 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import dynamic from 'next/dynamic'
 
 gsap.registerPlugin(ScrollTrigger)
+
+/* Dynamic, not a static import: this section also renders on the homepage
+   with withGlobe off, and a static import would put d3-geo, d3-timer and the
+   globe in the homepage bundle for a feature that page never shows. ssr:false
+   because the canvas has nothing to render on the server anyway. */
+const WireframeDottedGlobe = dynamic(() => import('../ui/WireframeDottedGlobe.jsx'), {
+  ssr: false,
+})
 
 const FOUNDERS = [
   { name: 'Vrithik',                role: 'Founder',     detail: 'Creative direction, cinematography, and visual strategy. The eye behind every frame.' },
   { name: 'Payal Chetwani',         role: 'Co-Founder',  detail: 'Production operations, client relations, and project management. The backbone of every shoot.' },
 ]
 
-export default function AboutSection() {
+/**
+ * `withGlobe` is opt-in rather than always-on because this section renders on
+ * both / and /about. Only /about asked for it; defaulting it true would have
+ * put a rotating globe on the homepage as a side effect.
+ */
+export default function AboutSection({ withGlobe = false }) {
   const sectionRef = useRef(null)
 
   useEffect(() => {
@@ -66,12 +80,41 @@ export default function AboutSection() {
             </p>
           </div>
 
-          <div className="lg:col-span-7">
-            <p className="flex items-center gap-2 text-[13px] font-semibold tracking-[0.08em] uppercase text-amp-caption mb-8">
+          <div className="lg:col-span-7 relative">
+            {/* Backdrop for this column. Bottom-anchored rather than centred
+                so the dense founder copy sits mostly above it and keeps its
+                contrast; the grid stretches this column to the (taller) left
+                column's height, which is the empty space the globe fills.
+                The wrapper is pointer-events-none and only the canvas takes
+                events back, so the globe is draggable in the open area while
+                the text above it stays selectable. */}
+            {withGlobe && (
+              <div
+                className="pointer-events-none absolute inset-0 hidden lg:flex items-end justify-center"
+                aria-hidden="true"
+                style={{
+                  /* Fades the globe's top so the founder rows - and in
+                     particular the 10px role tags - sit on clean white
+                     rather than on dots. Bottom-anchored at 340px it mostly
+                     clears them already; the fade covers the case where a
+                     shorter left column pulls this row's height in. */
+                  WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, #000 26%)',
+                  maskImage: 'linear-gradient(to bottom, transparent 0%, #000 26%)',
+                }}
+              >
+                <WireframeDottedGlobe
+                  tone="light"
+                  spin={0.1}
+                  className="pointer-events-auto w-[340px] aspect-square opacity-[0.5]"
+                />
+              </div>
+            )}
+
+            <p className="relative flex items-center gap-2 text-[13px] font-semibold tracking-[0.08em] uppercase text-amp-caption mb-8">
               <span className="w-1.5 h-1.5 rounded-full bg-black" />
               Founded By
             </p>
-            <div className="founders-list">
+            <div className="founders-list relative">
               {FOUNDERS.map((f, i) => (
                 <div key={f.name} className="founder-row py-7 border-b border-amp-hairline first:border-t will-anim">
                   <div className="grid grid-cols-12 gap-4">
