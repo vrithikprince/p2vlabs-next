@@ -36,11 +36,18 @@ gsap.registerPlugin(ScrollTrigger)
  */
 
 /* Three columns, round-robin, so video and photo work interleave instead of
-   the first column being all video. Capped at 12: past four rows a column is
-   taller than the sticky viewport and the extra tiles never come into view. */
-function toColumns(items, perCol = 4) {
+   the first column being all video.
+   Seven rows deep, and the list cycles rather than truncating. At four rows
+   the wall only filled the middle band of the pinned viewport and the top of
+   the screen sat empty - laid back at 75 degrees a column loses most of its
+   apparent height, so it needs far more rows than a flat grid would. With 18
+   real items across 21 slots a few repeat, which is fine: at this angle and
+   scale the wall reads as texture, and every piece is still listed exactly
+   once in the indexable grid below. */
+function toColumns(items, perCol = 7) {
   const cols = [[], [], []]
-  items.slice(0, perCol * 3).forEach((item, i) => cols[i % 3].push(item))
+  if (!items.length) return cols
+  for (let i = 0; i < perCol * 3; i++) cols[i % 3].push(items[i % items.length])
   return cols
 }
 
@@ -157,12 +164,19 @@ export default function ReelShowcase({ videos = [], photos = [], onVideoClick, o
   return (
     <div ref={scrollRef} className="relative h-[200vh] md:h-[350vh]">
       <div
-        className="sticky top-0 h-svh min-h-[30rem] w-full overflow-hidden"
+        className="sticky top-0 h-svh min-h-[30rem] w-full overflow-hidden flex items-center"
         style={{ perspective: '1000px', perspectiveOrigin: 'center top' }}
       >
         <div
           ref={gridRef}
-          className="grid size-full grid-cols-3 gap-2"
+          /* Taller than the viewport on purpose. Laid back at 75 degrees a
+             surface keeps only cos(75) - about 26% - of its apparent height,
+             so a viewport-height grid projects to a ~230px band sitting low
+             on screen with everything above it empty. At 210% the compressed
+             band actually fills the frame. Centred by flex on the parent
+             rather than a translate, because GSAP owns this element's
+             transform and a Tailwind translate would be overwritten. */
+          className="grid h-[210%] w-full grid-cols-3 gap-2"
           /* Origin stays centred. Pinning it to the top edge swung the lower
              rows toward the viewer and ballooned them off-screen at the start
              of the reveal; centred, the foreshortening is symmetric and the
@@ -178,9 +192,11 @@ export default function ReelShowcase({ videos = [], photos = [], onVideoClick, o
                  deep offset is most of what gives it depth. */
               className={`flex w-full flex-col gap-2 ${ci === 1 ? 'mt-[-50%]' : ''}`}
             >
-              {col.map((item) => (
+              {col.map((item, ri) => (
                 <Tile
-                  key={`${item.category}-${item.id}`}
+                  /* Index is part of the key because the list cycles - the
+                     same item can legitimately appear twice. */
+                  key={`${item.category}-${item.id}-${ri}`}
                   item={item}
                   onOpen={() =>
                     item.category === 'video'

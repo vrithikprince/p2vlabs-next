@@ -1,5 +1,6 @@
 'use client'
 import { useEffect } from 'react'
+import { createPortal } from 'react-dom'
 import useLockScroll from '../ui/useLockScroll.js'
 import Icon from '../ui/Icon.jsx'
 import Tag from '../ui/Tag.jsx'
@@ -32,12 +33,22 @@ export default function PhotoLightbox({ items, index, onClose, onChange }) {
 
   if (!item) return null
 
-  return (
-    <div className="fixed inset-0 z-50 bg-amp-ink-pill/35 backdrop-blur-xl flex flex-col md:flex-row">
+  if (typeof document === 'undefined') return null
+
+  /* Portaled to <body>. RootClient renders <main className="relative z-10">,
+   which is a positioned element with a z-index and therefore its own
+   stacking context - so every z-index inside it, including this overlay's,
+   is scoped to that z-10 layer. The navbar and the mobile bottom nav live
+   OUTSIDE main at z-50, so they painted over the whole overlay and, fatally,
+   over the close button sitting in the top-right corner: there was no
+   visible way out of the modal. Escaping main is the fix; z-100 then clears
+   the fixed chrome for real. */
+  return createPortal(
+    <div className="fixed inset-0 z-[100] bg-amp-ink-pill/35 backdrop-blur-xl flex flex-col md:flex-row">
       {/* Floating close - top-right of the viewport, above everything. */}
       <button
         onClick={onClose}
-        className="fixed top-5 right-5 md:top-7 md:right-7 z-[60] w-11 h-11 rounded-md flex items-center justify-center bg-white/95 text-black hover:bg-amp-ink-pill hover:text-white border border-amp-hairline backdrop-blur-sm transition-colors shadow-lg"
+        className="fixed top-5 right-5 md:top-7 md:right-7 z-[110] w-11 h-11 rounded-md flex items-center justify-center bg-white/95 text-black hover:bg-amp-ink-pill hover:text-white border border-amp-hairline backdrop-blur-sm transition-colors shadow-lg"
         aria-label="Close"
       >
         <Icon n="x" s={20} />
@@ -96,6 +107,7 @@ export default function PhotoLightbox({ items, index, onClose, onChange }) {
           {item.tags.map((t) => <Tag key={t}>{t}</Tag>)}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   )
 }
