@@ -90,23 +90,34 @@ export default function AboutSection({ withGlobe = false }) {
                 the text above it stays selectable. */}
             {withGlobe && (
               <div
-                className="pointer-events-none absolute inset-0 hidden lg:block overflow-hidden"
+                className="pointer-events-none absolute inset-y-0 left-0 hidden lg:block overflow-hidden"
                 aria-hidden="true"
                 style={{
+                  /* Break out of max-w-7xl so the sphere reaches the actual
+                     screen edge. Cut flush with the column it left a white
+                     gutter beside it, which read as an accidental crop rather
+                     than a bleed.
+
+                     The gutter between this column's right edge and the
+                     viewport is (100vw - 1280px) / 2 once the container has
+                     hit its 80rem cap, and the section's own 80px padding
+                     below that. A negative right offset of exactly that
+                     distance puts this wrapper's right edge on the viewport
+                     edge, and its overflow-hidden then does the cutting
+                     there instead. html/body carry overflow-x: clip, so the
+                     few px that 100vw counts for the scrollbar cannot open a
+                     horizontal scroll. */
+                  right: 'calc(-1 * max(80px, (100vw - 1280px) / 2))',
                   /* A short fade keeps the eyebrow and the first role tag off
-                     the dots. Lighter than the bottom-anchored version needed,
-                     because the sphere now sits centred on the column's
-                     vertical axis rather than rising into the copy. */
+                     the dots. */
                   WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, #000 15%)',
                   maskImage: 'linear-gradient(to bottom, transparent 0%, #000 15%)',
                 }}
               >
-                {/* right-0 aligns the sphere's right edge to the column edge;
-                    translate-x-1/2 then pushes it out by half its own width,
-                    so its centre lands exactly on that edge. The parent's
-                    overflow-hidden does the cutting, which is why the crop is
-                    a clean vertical line rather than the globe spilling into
-                    the page gutter — the section has no clipping of its own.
+                {/* right-0 aligns the sphere's right edge to this wrapper's
+                    edge — now the screen edge — and translate-x-1/2 pushes it
+                    out by half its own width, so its centre lands exactly on
+                    that edge and precisely half the sphere shows.
                     Clipping on this wrapper and not on the column matters:
                     the founder rows animate in from x:45, and clipping the
                     column would chop them mid-entrance. */}
@@ -114,7 +125,10 @@ export default function AboutSection({ withGlobe = false }) {
                   <WireframeDottedGlobe
                     tone="light"
                     spin={0.1}
-                    className="pointer-events-auto w-[460px] aspect-square opacity-[0.45]"
+                    /* Scales with the viewport so the visible hemisphere keeps
+                       filling the right side rather than shrinking into a
+                       corner on a wide screen. */
+                    className="pointer-events-auto w-[clamp(460px,38vw,780px)] aspect-square opacity-[0.45]"
                   />
                 </div>
               </div>
