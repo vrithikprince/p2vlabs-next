@@ -103,7 +103,7 @@ export default function ReelClient({ videoItems, photoItems }) {
         />
       )}
 
-      <div className="px-5 md:px-10 lg:px-20 pt-16 max-w-7xl mx-auto">
+      <div className="px-5 md:px-10 lg:px-20 pt-16 pb-12 max-w-7xl mx-auto">
         {/* amp eyebrow - dot + 13px semibold caption, same as the homepage
             section heads. Navy is this page's one accent (it's what the
             homepage reel preview already hovers to), so it leads here. */}

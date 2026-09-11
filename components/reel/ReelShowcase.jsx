@@ -99,19 +99,22 @@ export default function ReelShowcase({ videos = [], photos = [], onVideoClick, o
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
     const ctx = gsap.context(() => {
-      /* 'top bottom' -> 'bottom top' is the exact equivalent of framer's
-         useScroll default offset, ["start end", "end start"]: progress 0 when
-         the container's top meets the viewport bottom, 1 when its bottom
-         meets the viewport top. Total travel is therefore container height
-         plus one viewport - 450vh - and the reveal begins as the wall scrolls
-         into view rather than waiting for it to pin. Getting this wrong is
-         what made the first version snap: it ran the whole rotation across
-         110vh instead of 225vh. */
+      /* Pinned reveal: progress 0 when the wall's top reaches the viewport
+         top, 1 when its bottom reaches the viewport bottom - 250vh of travel
+         with the sticky child held in place throughout.
+         The source maps progress off framer's useScroll default, which starts
+         counting the moment the container crosses the viewport bottom. On
+         that page the gallery sits under a tall header so it barely matters;
+         here the wall sits ~250px down, so a third of the rotation was spent
+         before the first scroll and it read as already flat. Clamping to 0
+         until the pin means it holds at the full 75 degrees while it scrolls
+         up into view, then lifts - which is the arc you actually want to
+         see, and it no longer depends on how tall the header happens to be. */
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: scroller,
-          start: 'top bottom',
-          end: 'bottom top',
+          start: 'top top',
+          end: 'bottom bottom',
           scrub: 0.6,
         },
         defaults: { ease: 'none' },
@@ -148,8 +151,11 @@ export default function ReelShowcase({ videos = [], photos = [], onVideoClick, o
 
   if (!items.length) return null
 
+  /* 350vh is the source height, and with the pin that is 250vh of held
+     scrolling - fine on a desktop, five swipes of nothing but the wall
+     lifting on a phone. Halved below md. */
   return (
-    <div ref={scrollRef} className="relative h-[350vh]">
+    <div ref={scrollRef} className="relative h-[200vh] md:h-[350vh]">
       <div
         className="sticky top-0 h-svh min-h-[30rem] w-full overflow-hidden"
         style={{ perspective: '1000px', perspectiveOrigin: 'center top' }}
