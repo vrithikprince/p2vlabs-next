@@ -90,23 +90,33 @@ export default function AboutSection({ withGlobe = false }) {
                 the text above it stays selectable. */}
             {withGlobe && (
               <div
-                className="pointer-events-none absolute inset-0 hidden lg:flex items-end justify-center"
+                className="pointer-events-none absolute inset-0 hidden lg:block overflow-hidden"
                 aria-hidden="true"
                 style={{
-                  /* Fades the globe's top so the founder rows - and in
-                     particular the 10px role tags - sit on clean white
-                     rather than on dots. Bottom-anchored at 340px it mostly
-                     clears them already; the fade covers the case where a
-                     shorter left column pulls this row's height in. */
-                  WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, #000 26%)',
-                  maskImage: 'linear-gradient(to bottom, transparent 0%, #000 26%)',
+                  /* A short fade keeps the eyebrow and the first role tag off
+                     the dots. Lighter than the bottom-anchored version needed,
+                     because the sphere now sits centred on the column's
+                     vertical axis rather than rising into the copy. */
+                  WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, #000 15%)',
+                  maskImage: 'linear-gradient(to bottom, transparent 0%, #000 15%)',
                 }}
               >
-                <WireframeDottedGlobe
-                  tone="light"
-                  spin={0.1}
-                  className="pointer-events-auto w-[340px] aspect-square opacity-[0.5]"
-                />
+                {/* right-0 aligns the sphere's right edge to the column edge;
+                    translate-x-1/2 then pushes it out by half its own width,
+                    so its centre lands exactly on that edge. The parent's
+                    overflow-hidden does the cutting, which is why the crop is
+                    a clean vertical line rather than the globe spilling into
+                    the page gutter — the section has no clipping of its own.
+                    Clipping on this wrapper and not on the column matters:
+                    the founder rows animate in from x:45, and clipping the
+                    column would chop them mid-entrance. */}
+                <div className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/2">
+                  <WireframeDottedGlobe
+                    tone="light"
+                    spin={0.1}
+                    className="pointer-events-auto w-[460px] aspect-square opacity-[0.45]"
+                  />
+                </div>
               </div>
             )}
 
