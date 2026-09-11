@@ -6,6 +6,7 @@ import VideoModal from './VideoModal.jsx'
 import PhotoLightbox from './PhotoLightbox.jsx'
 import ReelFilters from './ReelFilters.jsx'
 import ReelGrid from './ReelGrid.jsx'
+import ReelShowcase from './ReelShowcase.jsx'
 import EmptyState from '../ui/EmptyState.jsx'
 import Rule from '../ui/Rule.jsx'
 
@@ -93,27 +94,40 @@ export default function ReelClient({ videoItems, photoItems }) {
         />
       )}
 
-      <div className="px-5 md:px-10 lg:px-20 py-16 max-w-7xl mx-auto">
-        <div className="mb-12">
-          {/* amp eyebrow - dot + 13px semibold caption, same as the homepage
-              section heads. Navy is this page's one accent (it's what the
-              homepage reel preview already hovers to), so it leads here. */}
-          <p className="flex items-center gap-2 text-[13px] font-semibold tracking-[0.08em] uppercase text-amp-caption mb-5">
-            <span className="w-1.5 h-1.5 rounded-full bg-amp-navy" />
-            Selected Work
+      <div className="px-5 md:px-10 lg:px-20 pt-16 max-w-7xl mx-auto">
+        {/* amp eyebrow - dot + 13px semibold caption, same as the homepage
+            section heads. Navy is this page's one accent (it's what the
+            homepage reel preview already hovers to), so it leads here. */}
+        <p className="flex items-center gap-2 text-[13px] font-semibold tracking-[0.08em] uppercase text-amp-caption mb-5">
+          <span className="w-1.5 h-1.5 rounded-full bg-amp-navy" />
+          Selected Work
+        </p>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <h1 className="font-plex text-5xl md:text-6xl font-semibold text-black leading-tight tracking-[-0.01em] clip-wrap">
+            <span className="reel-page-title block">The Reel</span>
+          </h1>
+          <p className="reel-page-desc text-amp-body leading-relaxed self-end text-lg">
+            A curated selection of work across video, photography, and social content -
+            each piece built for a specific brand, platform, and purpose.
           </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
-            <h1 className="font-plex text-5xl md:text-6xl font-semibold text-black leading-tight tracking-[-0.01em] clip-wrap">
-              <span className="reel-page-title block">The Reel</span>
-            </h1>
-            <p className="reel-page-desc text-amp-body leading-relaxed self-end text-lg">
-              A curated selection of work across video, photography, and social content -
-              each piece built for a specific brand, platform, and purpose.
-            </p>
-          </div>
+        </div>
+      </div>
 
-          <Rule className="mb-8" />
+      {/* Full bleed on purpose: constrained to max-w-7xl the wall reads as a
+          widget sitting on the page rather than the page itself tilting. It
+          sits between the masthead and the filters so you scroll through the
+          work before being asked to narrow it down. */}
+      <ReelShowcase
+        videos={videoItems}
+        photos={photoItems}
+        onVideoClick={setVideoModal}
+        onPhotoClick={openLightbox}
+      />
 
+      <div className="px-5 md:px-10 lg:px-20 pb-16 max-w-7xl mx-auto">
+        <Rule className="mb-8" />
+
+        <div className="mb-12">
           <ReelFilters active={filter} onChange={setFilter} />
         </div>
 
