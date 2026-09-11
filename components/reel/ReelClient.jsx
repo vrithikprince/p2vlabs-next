@@ -6,7 +6,6 @@ import VideoModal from './VideoModal.jsx'
 import PhotoLightbox from './PhotoLightbox.jsx'
 import ReelFilters from './ReelFilters.jsx'
 import ReelGrid from './ReelGrid.jsx'
-import ReelShowcase from './ReelShowcase.jsx'
 import EmptyState from '../ui/EmptyState.jsx'
 import Rule from '../ui/Rule.jsx'
 
@@ -27,20 +26,11 @@ export default function ReelClient({ videoItems, photoItems }) {
   /* Header entrance animation */
   useEffect(() => {
     const ctx = gsap.context(() => {
-      /* Blur-in stagger, matching the gallery block this page's showcase is
-         adapted from - it pairs a filter: blur(10px) -> blur(0) fade with a
-         0.2s stagger, which is a softer entrance than the clip reveal that
-         was here and reads as one piece with the wall below.
-         Its spring (stiffness 100, damping 16, mass 0.75) works out to a
-         damping ratio of ~0.92 - near-critical, so barely any overshoot -
-         and power3.out over 0.7s is indistinguishable from it without
-         pulling in a Club plugin for a real spring ease. */
-      gsap.from(['.reel-page-eyebrow', '.reel-page-title', '.reel-page-desc'], {
-        filter: 'blur(10px)',
-        opacity: 0,
-        duration: 0.7,
-        ease: 'power3.out',
-        stagger: 0.2,
+      gsap.from('.reel-page-title', {
+        yPercent: 105, duration: 0.9, ease: 'power4.out',
+      })
+      gsap.from('.reel-page-desc', {
+        opacity: 0, y: 22, duration: 0.7, ease: 'power3.out', delay: 0.2,
       })
       gsap.from('.reel-filter-btn', {
         opacity: 0, y: 16, stagger: 0.06, duration: 0.5, ease: 'power3.out', delay: 0.3,
@@ -103,40 +93,27 @@ export default function ReelClient({ videoItems, photoItems }) {
         />
       )}
 
-      <div className="px-5 md:px-10 lg:px-20 pt-16 pb-12 max-w-7xl mx-auto">
-        {/* amp eyebrow - dot + 13px semibold caption, same as the homepage
-            section heads. Navy is this page's one accent (it's what the
-            homepage reel preview already hovers to), so it leads here. */}
-        <p className="reel-page-eyebrow flex items-center gap-2 text-[13px] font-semibold tracking-[0.08em] uppercase text-amp-caption mb-5">
-          <span className="w-1.5 h-1.5 rounded-full bg-amp-navy" />
-          Selected Work
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <h1 className="font-plex text-5xl md:text-6xl font-semibold text-black leading-tight tracking-[-0.01em]">
-            <span className="reel-page-title block">The Reel</span>
-          </h1>
-          <p className="reel-page-desc text-amp-body leading-relaxed self-end text-lg">
-            A curated selection of work across video, photography, and social content -
-            each piece built for a specific brand, platform, and purpose.
-          </p>
-        </div>
-      </div>
-
-      {/* Full bleed on purpose: constrained to max-w-7xl the wall reads as a
-          widget sitting on the page rather than the page itself tilting. It
-          sits between the masthead and the filters so you scroll through the
-          work before being asked to narrow it down. */}
-      <ReelShowcase
-        videos={videoItems}
-        photos={photoItems}
-        onVideoClick={setVideoModal}
-        onPhotoClick={openLightbox}
-      />
-
-      <div className="px-5 md:px-10 lg:px-20 pb-16 max-w-7xl mx-auto">
-        <Rule className="mb-8" />
-
+      <div className="px-5 md:px-10 lg:px-20 py-16 max-w-7xl mx-auto">
         <div className="mb-12">
+          {/* amp eyebrow - dot + 13px semibold caption, same as the homepage
+              section heads. Navy is this page's one accent (it's what the
+              homepage reel preview already hovers to), so it leads here. */}
+          <p className="flex items-center gap-2 text-[13px] font-semibold tracking-[0.08em] uppercase text-amp-caption mb-5">
+            <span className="w-1.5 h-1.5 rounded-full bg-amp-navy" />
+            Selected Work
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+            <h1 className="font-plex text-5xl md:text-6xl font-semibold text-black leading-tight tracking-[-0.01em] clip-wrap">
+              <span className="reel-page-title block">The Reel</span>
+            </h1>
+            <p className="reel-page-desc text-amp-body leading-relaxed self-end text-lg">
+              A curated selection of work across video, photography, and social content -
+              each piece built for a specific brand, platform, and purpose.
+            </p>
+          </div>
+
+          <Rule className="mb-8" />
+
           <ReelFilters active={filter} onChange={setFilter} />
         </div>
 

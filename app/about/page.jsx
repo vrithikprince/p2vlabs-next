@@ -15,13 +15,8 @@ export async function generateMetadata() {
 
 export default function AboutPage() {
   return (
-    <div className="pt-16 bg-white">
-      {/* The globe now sits behind the Founded By column rather than in a
-          section of its own. It still carries no reach copy: areaServed in
-          the entity graph is Ahmedabad, Gujarat and India, and a world globe
-          captioned as reach would quietly contradict the schema the AEO work
-          leans on. As a backdrop it makes no claim at all. */}
-      <AboutSection withGlobe />
+    <div className="pt-16">
+      <AboutSection />
     </div>
   )
 }

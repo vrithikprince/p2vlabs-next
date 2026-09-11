@@ -2,29 +2,15 @@
 import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import dynamic from 'next/dynamic'
 
 gsap.registerPlugin(ScrollTrigger)
-
-/* Dynamic, not a static import: this section also renders on the homepage
-   with withGlobe off, and a static import would put d3-geo, d3-timer and the
-   globe in the homepage bundle for a feature that page never shows. ssr:false
-   because the canvas has nothing to render on the server anyway. */
-const WireframeDottedGlobe = dynamic(() => import('../ui/WireframeDottedGlobe.jsx'), {
-  ssr: false,
-})
 
 const FOUNDERS = [
   { name: 'Vrithik',                role: 'Founder',     detail: 'Creative direction, cinematography, and visual strategy. The eye behind every frame.' },
   { name: 'Payal Chetwani',         role: 'Co-Founder',  detail: 'Production operations, client relations, and project management. The backbone of every shoot.' },
 ]
 
-/**
- * `withGlobe` is opt-in rather than always-on because this section renders on
- * both / and /about. Only /about asked for it; defaulting it true would have
- * put a rotating globe on the homepage as a side effect.
- */
-export default function AboutSection({ withGlobe = false }) {
+export default function AboutSection() {
   const sectionRef = useRef(null)
 
   useEffect(() => {
@@ -80,65 +66,12 @@ export default function AboutSection({ withGlobe = false }) {
             </p>
           </div>
 
-          <div className="lg:col-span-7 relative">
-            {/* Backdrop for this column. Bottom-anchored rather than centred
-                so the dense founder copy sits mostly above it and keeps its
-                contrast; the grid stretches this column to the (taller) left
-                column's height, which is the empty space the globe fills.
-                The wrapper is pointer-events-none and only the canvas takes
-                events back, so the globe is draggable in the open area while
-                the text above it stays selectable. */}
-            {withGlobe && (
-              <div
-                className="pointer-events-none absolute inset-y-0 left-0 hidden lg:block overflow-hidden"
-                aria-hidden="true"
-                style={{
-                  /* Break out of max-w-7xl so the sphere reaches the actual
-                     screen edge. Cut flush with the column it left a white
-                     gutter beside it, which read as an accidental crop rather
-                     than a bleed.
-
-                     The gutter between this column's right edge and the
-                     viewport is (100vw - 1280px) / 2 once the container has
-                     hit its 80rem cap, and the section's own 80px padding
-                     below that. A negative right offset of exactly that
-                     distance puts this wrapper's right edge on the viewport
-                     edge, and its overflow-hidden then does the cutting
-                     there instead. html/body carry overflow-x: clip, so the
-                     few px that 100vw counts for the scrollbar cannot open a
-                     horizontal scroll. */
-                  right: 'calc(-1 * max(80px, (100vw - 1280px) / 2))',
-                  /* A short fade keeps the eyebrow and the first role tag off
-                     the dots. */
-                  WebkitMaskImage: 'linear-gradient(to bottom, transparent 0%, #000 15%)',
-                  maskImage: 'linear-gradient(to bottom, transparent 0%, #000 15%)',
-                }}
-              >
-                {/* right-0 aligns the sphere's right edge to this wrapper's
-                    edge — now the screen edge — and translate-x-1/2 pushes it
-                    out by half its own width, so its centre lands exactly on
-                    that edge and precisely half the sphere shows.
-                    Clipping on this wrapper and not on the column matters:
-                    the founder rows animate in from x:45, and clipping the
-                    column would chop them mid-entrance. */}
-                <div className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/2">
-                  <WireframeDottedGlobe
-                    tone="light"
-                    spin={0.1}
-                    /* Scales with the viewport so the visible hemisphere keeps
-                       filling the right side rather than shrinking into a
-                       corner on a wide screen. */
-                    className="pointer-events-auto w-[clamp(460px,38vw,780px)] aspect-square opacity-[0.45]"
-                  />
-                </div>
-              </div>
-            )}
-
-            <p className="relative flex items-center gap-2 text-[13px] font-semibold tracking-[0.08em] uppercase text-amp-caption mb-8">
+          <div className="lg:col-span-7">
+            <p className="flex items-center gap-2 text-[13px] font-semibold tracking-[0.08em] uppercase text-amp-caption mb-8">
               <span className="w-1.5 h-1.5 rounded-full bg-black" />
               Founded By
             </p>
-            <div className="founders-list relative">
+            <div className="founders-list">
               {FOUNDERS.map((f, i) => (
                 <div key={f.name} className="founder-row py-7 border-b border-amp-hairline first:border-t will-anim">
                   <div className="grid grid-cols-12 gap-4">
