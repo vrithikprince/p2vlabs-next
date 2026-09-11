@@ -99,21 +99,25 @@ export default function ReelShowcase({ videos = [], photos = [], onVideoClick, o
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
     const ctx = gsap.context(() => {
-      /* start/end are top-top to bottom-bottom, not the default top-bottom to
-         bottom-top. The showcase sits near the top of the page, so the
-         default would already be part-way through its range on first paint
-         and the wall would never be seen lying back. */
+      /* 'top bottom' -> 'bottom top' is the exact equivalent of framer's
+         useScroll default offset, ["start end", "end start"]: progress 0 when
+         the container's top meets the viewport bottom, 1 when its bottom
+         meets the viewport top. Total travel is therefore container height
+         plus one viewport - 450vh - and the reveal begins as the wall scrolls
+         into view rather than waiting for it to pin. Getting this wrong is
+         what made the first version snap: it ran the whole rotation across
+         110vh instead of 225vh. */
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: scroller,
-          start: 'top top',
-          end: 'bottom bottom',
+          start: 'top bottom',
+          end: 'bottom top',
           scrub: 0.6,
         },
         defaults: { ease: 'none' },
       })
 
-      tl.fromTo(grid, { rotateX: 62 }, { rotateX: 0, duration: 0.5 }, 0)
+      tl.fromTo(grid, { rotateX: 75 }, { rotateX: 0, duration: 0.5 }, 0)
       tl.fromTo(grid, { scale: 1.18 }, { scale: 1, duration: 0.4 }, 0.5)
 
       /* Middle column drifts against the outer two - the offset is what makes
@@ -145,14 +149,14 @@ export default function ReelShowcase({ videos = [], photos = [], onVideoClick, o
   if (!items.length) return null
 
   return (
-    <div ref={scrollRef} className="relative h-[210vh]">
+    <div ref={scrollRef} className="relative h-[350vh]">
       <div
-        className="sticky top-0 h-svh w-full overflow-hidden flex items-center"
+        className="sticky top-0 h-svh min-h-[30rem] w-full overflow-hidden"
         style={{ perspective: '1000px', perspectiveOrigin: 'center top' }}
       >
         <div
           ref={gridRef}
-          className="grid w-full grid-cols-3 gap-2 md:gap-3"
+          className="grid size-full grid-cols-3 gap-2"
           /* Origin stays centred. Pinning it to the top edge swung the lower
              rows toward the viewer and ballooned them off-screen at the start
              of the reveal; centred, the foreshortening is symmetric and the
@@ -163,7 +167,10 @@ export default function ReelShowcase({ videos = [], photos = [], onVideoClick, o
             <div
               key={ci}
               data-col={ci}
-              className={`flex w-full flex-col gap-2 md:gap-3 ${ci === 1 ? '-mt-[18%]' : ''}`}
+              /* -50% is the source value. At -18% the middle column barely
+                 broke the grid line and the wall read as one flat plane; the
+                 deep offset is most of what gives it depth. */
+              className={`flex w-full flex-col gap-2 ${ci === 1 ? 'mt-[-50%]' : ''}`}
             >
               {col.map((item) => (
                 <Tile
