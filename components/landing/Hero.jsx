@@ -319,7 +319,7 @@ export default function Hero() {
         </p>
 
         <h1 className="hero-headline font-bold text-[clamp(2.5rem,5.4vw+1rem,4.5rem)] leading-[1.08] tracking-[-0.02em] text-black will-anim">
-          <span className="clip-wrap"><span className="hero-word block">The content studio</span></span>
+          <span className="clip-wrap"><span className="hero-word block">The AEO & SEO studio</span></span>
           <span className="clip-wrap"><span className="hero-word block">built to get you</span></span>
           <span className="clip-wrap">
             {/* The one reserved moment for cobalt - everywhere else on the
@@ -333,7 +333,7 @@ export default function Hero() {
         </h1>
 
         <p className="hero-tagline mt-7 text-lg text-amp-body max-w-xl mx-auto leading-relaxed will-anim">
-          P2V Labs shoots the video and photography, then makes sure Google and AI answers point straight back at it - production and growth, run by the same two-person studio.
+          P2V Labs specializes in answer engine optimization (AEO) and SEO from Ahmedabad. We build crawlable websites, clear answers and consistent brand information to help customers discover you through search and AI answers, backed by video and photography.
         </p>
 
         <div className="hero-tagline mt-9 flex flex-wrap items-center justify-center gap-3 will-anim">

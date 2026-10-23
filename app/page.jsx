@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import Hero from '../components/landing/Hero.jsx'
 import Marquee from '../components/layout/Marquee.jsx'
 import ProofBar from '../components/landing/ProofBar.jsx'
@@ -42,6 +43,20 @@ export default function HomePage() {
       <ProofBar />
       <Rule />
       <Positioning />
+      <section aria-labelledby="aeo-specialty" className="px-5 md:px-10 lg:px-20 py-16 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <p className="text-sm uppercase tracking-widest text-amp-caption mb-4">Our specialty</p>
+          <h2 id="aeo-specialty" className="font-plex text-3xl md:text-4xl font-semibold mb-6">Answer engine optimization, built on strong SEO.</h2>
+          <p className="max-w-3xl text-amp-body leading-relaxed mb-8">Answer engine optimization (AEO) helps businesses make their expertise easier to discover and understand in AI search. P2V Labs specializes in AEO and SEO from Ahmedabad, combining technical website improvements, clear answers to customer questions and consistent business information.</p>
+          <div className="grid md:grid-cols-3 gap-8 mb-8">
+            <div><h3 className="font-semibold mb-3">Make your site discoverable</h3><p className="text-amp-body leading-relaxed">Review crawlability, indexability, canonical URLs and internal links so search engines can find your important pages.</p></div>
+            <div><h3 className="font-semibold mb-3">Publish useful answers</h3><p className="text-amp-body leading-relaxed">Explain your services, process and pricing in clear language. Support claims with evidence and keep structured data consistent with visible content.</p></div>
+            <div><h3 className="font-semibold mb-3">Measure what changes</h3><p className="text-amp-body leading-relaxed">Track search performance and enquiries alongside repeated checks of relevant AI questions. AI answers vary; rankings and citations are never guaranteed.</p></div>
+          </div>
+          <Link href="/services/ai-search-visibility" className="inline-block underline underline-offset-4 font-semibold mr-6">Explore our AEO services</Link>
+          <Link href="/services/seo" className="inline-block underline underline-offset-4 font-semibold">Explore our SEO services</Link>
+        </div>
+      </section>
       <Rule />
       <Services />
       <Rule />

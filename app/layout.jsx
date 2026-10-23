@@ -43,12 +43,12 @@ export const metadata = {
      could only output the older one. The content services are still named
      first; the search half is now named at all. */
   title: {
-    default: 'P2V Labs - Content & Search Visibility Studio, Ahmedabad',
+    default: 'P2V Labs - AEO & SEO Studio in Ahmedabad',
     template: '%s | P2V Labs',
   },
   alternates: { canonical: '/' },
   description:
-    'P2V Labs is a content and search visibility studio in Ahmedabad, Gujarat. Video production, product and food photography, and social content - plus website builds, SEO and AI search visibility that get brands found on Google and cited by AI answer engines.',
+    'P2V Labs specializes in answer engine optimization (AEO) and SEO in Ahmedabad. Technical audits, answer-led content and structured data for search visibility.',
   keywords: [
     'content agency Ahmedabad',
     'video production Ahmedabad',
@@ -72,19 +72,19 @@ export const metadata = {
     locale: SITE_LOCALE,
     url: '/',                  /* resolved against metadataBase → SITE_URL */
     siteName: SITE_NAME,
-    title: 'P2V Labs - Content & Search Visibility Studio, Ahmedabad',
+    title: 'P2V Labs - AEO & SEO Studio in Ahmedabad',
     description:
       'Content, websites and search visibility for brands across Gujarat - built to be found on Google and cited by AI.',
     images: [{
       url: '/og-image.jpg',    /* resolved → https://p2vlabs.in/og-image.jpg */
       width: 1200,
       height: 630,
-      alt: 'P2V Labs - Content & Search Visibility Studio, Ahmedabad',
+      alt: 'P2V Labs - AEO & SEO Studio in Ahmedabad',
     }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'P2V Labs - Content & Search Visibility Studio, Ahmedabad',
+    title: 'P2V Labs - AEO & SEO Studio in Ahmedabad',
     description: 'Content, websites and search visibility. Ahmedabad.',
     images: ['/og-image.jpg'],
   },

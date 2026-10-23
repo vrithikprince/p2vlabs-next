@@ -26,12 +26,12 @@ export default async function sitemap() {
      routes below still take `now`, because their content really does change
      whenever a post is published. */
   const EDITED = {
-    home:     '2026-09-07',   // identity + entity graph rework
+    home:     '2026-10-23',   // identity + entity graph rework
     reel:     '2026-08-24',
     packages: '2026-08-29',   // search & AI visibility section added
     about:    '2026-08-24',
     contact:  '2026-08-24',
-    services: '2026-09-08',   // service cluster introduced
+    services: '2026-10-23',   // service cluster introduced
   }
   const d = (iso) => new Date(`${iso}T00:00:00Z`)
 
