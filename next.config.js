@@ -6,6 +6,7 @@ const nextConfig = {
   trailingSlash: false,
   images: {
     remotePatterns: [
+      { protocol: 'https', hostname: 'p2vlabs.in', pathname: '/editorial/**' },
       { protocol: 'https', hostname: '*.supabase.co' },
       { protocol: 'https', hostname: '*.r2.dev' },
       { protocol: 'https', hostname: 'picsum.photos' },

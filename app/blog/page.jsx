@@ -22,9 +22,9 @@ export const revalidate = 60
 
 export async function generateMetadata() {
   return buildPageMetadata({
-    title: 'The Journal',
+    title: 'AEO, SEO & Creative Business Guides - The Journal',
     description:
-      'Essays, production notes, and behind-the-frame breakdowns from the P2V Labs studio in Ahmedabad.',
+      'Practical AEO, SEO, website and content guides for Indian and international businesses, from the Ahmedabad-based P2V Labs studio.',
     path: '/blog',
   })
 }
