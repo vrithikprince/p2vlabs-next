@@ -3,32 +3,28 @@ import { useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Icon from '../ui/Icon.jsx'
-import { SERVICE_MARKS } from '../illustrations/ServiceMarks.jsx'
+import Image from 'next/image'
 import { waLink } from '../../lib/pricing.mjs'
 
 gsap.registerPlugin(ScrollTrigger)
 
-/* Each card cycles through the secondary-accent trio (navy/violet/
-   periwinkle) - Tailwind classes are literal strings here (not built from
-   `accentHex`) so the JIT scanner actually generates them. `accentHex` is
-   the same colour again, passed to the SVG mark which needs a real value
-   rather than a class. `mark` keys into SERVICE_MARKS. */
+/* Editorial service scenes, generated for this site; source prompts live in docs/service-imagery.md. */
 const SERVICES = [
-  { n: '01', title: 'Video Production', wa: 'Hi P2V Labs, I’d like to discuss Video Production for my brand. When can we talk?', mark: 'video',
+  { n: '01', title: 'Video Production', wa: 'Hi P2V Labs, I’d like to discuss Video Production for my brand. When can we talk?', image: '/services/video.webp', alt: 'Cinema camera rig in a naturally lit production studio',
     desc: 'Brand films, product launches, founder narratives, and corporate documentaries. Cinematic quality, story-first approach.',
-    railBg: 'bg-amp-navy/10', linkBg: 'bg-amp-navy', linkText: 'text-amp-navy', accentHex: '#001a4f' },
-  { n: '02', title: 'Photography', wa: 'Hi P2V Labs, I’d like to discuss Photography for my brand. When can we talk?', mark: 'photography',
+    linkBg: 'bg-amp-navy', linkText: 'text-amp-navy', accentHex: '#001a4f' },
+  { n: '02', title: 'Photography', wa: 'Hi P2V Labs, I’d like to discuss Photography for my brand. When can we talk?', image: '/services/photography.webp', alt: 'Cheesecake arranged on a food photography set',
     desc: 'Product photography, editorial portraits, food and beverage, event coverage. Every image built for the brand.',
-    railBg: 'bg-amp-violet/15', linkBg: 'bg-amp-violet', linkText: 'text-amp-violet', accentHex: '#a273ff' },
-  { n: '03', title: 'Social Content', wa: 'Hi P2V Labs, I’d like to discuss Social Content for my brand. When can we talk?', mark: 'social',
+    linkBg: 'bg-amp-violet', linkText: 'text-amp-violet', accentHex: '#a273ff' },
+  { n: '03', title: 'Social Content', wa: 'Hi P2V Labs, I’d like to discuss Social Content for my brand. When can we talk?', image: '/services/social.webp', alt: 'Smartphone recording coffee content at a cafe table',
     desc: 'Instagram Reels, YouTube Shorts, LinkedIn videos. Platform-native content that converts scroll to engagement.',
-    railBg: 'bg-amp-periwinkle/15', linkBg: 'bg-amp-periwinkle', linkText: 'text-amp-periwinkle', accentHex: '#6980ff' },
-  { n: '04', title: 'Brand Visuals', wa: 'Hi P2V Labs, I’d like to discuss Brand Visuals for my brand. When can we talk?', mark: 'brand',
+    linkBg: 'bg-amp-periwinkle', linkText: 'text-amp-periwinkle', accentHex: '#6980ff' },
+  { n: '04', title: 'Brand Visuals', wa: 'Hi P2V Labs, I’d like to discuss Brand Visuals for my brand. When can we talk?', image: '/services/brand.webp', alt: 'Paper samples and color swatches on a brand design desk',
     desc: 'Full visual identity systems, pitch deck design, presentation templates, and brand guidelines.',
-    railBg: 'bg-amp-navy/10', linkBg: 'bg-amp-navy', linkText: 'text-amp-navy', accentHex: '#001a4f' },
-  { n: '05', title: 'GenAI Development', wa: 'Hi P2V Labs, I’d like to discuss GenAI workflows for my business. When can we talk?', mark: 'genai',
+    linkBg: 'bg-amp-navy', linkText: 'text-amp-navy', accentHex: '#001a4f' },
+  { n: '05', title: 'GenAI Development', wa: 'Hi P2V Labs, I’d like to discuss GenAI workflows for my business. When can we talk?', image: '/services/genai.webp', alt: 'Laptop and notebook on a development workspace',
     desc: 'Custom GenAI workflows and automations for your business - content pipelines, lead-response bots, and internal tools that take the repetitive work off your team.',
-    railBg: 'bg-amp-violet/15', linkBg: 'bg-amp-violet', linkText: 'text-amp-violet', accentHex: '#a273ff' },
+    linkBg: 'bg-amp-violet', linkText: 'text-amp-violet', accentHex: '#a273ff' },
 ]
 
 export default function Services() {
@@ -134,13 +130,8 @@ export default function Services() {
               >
                 <div className="flex flex-col md:flex-row" style={{ minHeight: 'clamp(240px,32vh,340px)' }}>
 
-                  <div className={`flex-shrink-0 flex flex-col items-center justify-center w-full md:w-52 lg:w-60 py-8 md:py-0 border-b md:border-b-0 md:border-r border-amp-hairline ${s.railBg}`}>
-                    {(() => {
-                      const Mark = SERVICE_MARKS[s.mark]
-                      return Mark ? <Mark accent={s.accentHex} className="w-24 lg:w-28 h-auto" /> : null
-                    })()}
-                    <div className="w-6 h-px bg-black/15 my-3" />
-                    <span className="text-[10px] font-semibold tracking-wide uppercase text-amp-caption">{s.n}</span>
+                  <div className="relative flex-shrink-0 w-full md:w-[38%] h-56 md:h-auto min-h-[240px] overflow-hidden bg-neutral-100">
+                    <Image src={s.image} alt={s.alt} fill sizes="(max-width: 767px) 100vw, 40vw" className="object-cover" quality={80} />
                   </div>
 
                   <div className="relative flex-1 overflow-hidden flex flex-col justify-center px-8 py-10 md:px-12 lg:px-16">
